@@ -1,0 +1,73 @@
+export const dynamic = "force-static";
+
+/**
+ * Clean final layout:
+ * - Smaller, centered shared card images
+ * - Packs aligned with Booking design scale
+ */
+
+type Pack = {
+  name: string;
+  bgn: number;
+  fun: string;
+  daytime?: boolean;
+};
+
+const BGN_PER_EUR = 1.95583;
+const toEUR = (bgn: number) => (bgn > 0 ? Math.round(bgn / BGN_PER_EUR) : 0);
+
+const CARD_FRONT = "/cards/front.png";
+const CARD_BACK = "/cards/back.png";
+
+const PACKS: Pack[] = [
+  {
+    name: "Monthly 4 Pack",
+    bgn: 70.41,
+    fun: "One match a week to keep the rust away. Stretch, swing, repeat — progress without the burnout.",
+  },
+  {
+    name: "Monthly 8 Pack",
+    bgn: 129.08,
+    fun: "Your twice-a-week rhythm: sweat, smile, and brag about that one perfect nick for days.",
+  },
+  {
+    name: "Monthly 12 Pack",
+    bgn: 189.72,
+    fun: "Three sessions a week — for people who call the court their second living room (we approve).",
+  },
+  {
+    name: "Daytime Pass",
+    bgn: 205.36,
+    fun: "The lunchtime legend bundle. Sneak in a session, return a happier human.",
+    daytime: true,
+  },
+];
+
+export default function MembershipPage() {
+  return (
+    <section className="container">
+      <div className="membership-header">
+        <h1 className="membership-title">Membership Packs</h1>
+        <div className="membership-sub">Valid 30 days from purchase</div>
+      </div>
+
+      {/* Shared card preview */}
+      <div className="card-row global-cards">
+        <img className="card-img small" src={CARD_FRONT} alt="Card Front" />
+        <img className="card-img small" src={CARD_BACK} alt="Card Back" />
+      </div>
+
+      <div className="price-grid">
+        {PACKS.map((p) => (
+          <article key={p.name} className="price-card">
+            <h3>{p.name}</h3>
+            <div className="price price-bgn">{p.bgn.toFixed(2)} BGN</div>
+            <div className="price-eur">{toEUR(p.bgn)} EUR</div>
+            <div>{p.fun}</div>
+            {p.daytime && <div className="badge">Once per day until 17:00</div>}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
