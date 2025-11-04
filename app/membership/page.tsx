@@ -51,11 +51,39 @@ export default function MembershipPage() {
         <div className="membership-sub">Valid 30 days from purchase</div>
       </div>
 
-      {/* Shared card preview */}
-      <div className="card-row global-cards">
-        <img className="card-img small" src={CARD_FRONT} alt="Card Front" />
-        <img className="card-img small" src={CARD_BACK} alt="Card Back" />
-      </div>
+{/* Shared card preview */}
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "40px",
+    margin: "40px 0",
+    flexWrap: "wrap",
+  }}
+>
+  <img
+    src={CARD_FRONT}
+    alt="Card Front"
+    style={{
+      width: "320px",
+      height: "auto",
+      borderRadius: "12px",
+      boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+    }}
+  />
+  <img
+    src={CARD_BACK}
+    alt="Card Back"
+    style={{
+      width: "320px",
+      height: "auto",
+      borderRadius: "12px",
+      boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+    }}
+  />
+</div>
+
 
       <div className="price-grid">
         {PACKS.map((p) => (

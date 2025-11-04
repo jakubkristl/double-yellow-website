@@ -1,0 +1,35 @@
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+  color: #eee;
+}
+
+.title {
+  font-size: 64px;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.lead {
+  font-size: 22px;
+  color: #cfcfcf;
+  margin-bottom: 28px;
+}
+
+.placeholder {
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  color: #aaa;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 720px) {
+  .title {
+    font-size: 42px;
+  }
+  .lead {
+    font-size: 18px;
+  }
+}
