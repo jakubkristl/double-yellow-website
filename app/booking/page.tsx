@@ -1,26 +1,45 @@
-export const dynamic = "force-static";
+// app/booking/page.tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Booking — Double Yellow Squash Club",
+  description:
+    "Reserve a squash court at Double Yellow Squash Club. Fast, simple booking via BookingGood.",
+  alternates: { canonical: "/booking" },
+};
 
 export default function BookingPage() {
+  const embedSrc =
+    "https://sport.bookinggood.net/bg/embed/facility/44/72";
+
   return (
-    <section className="container">
-      <h1 className="page-title">Booking</h1>
-      <p>
-        Reserve a court in seconds. We use <strong>BookingGood</strong> for secure reservations.
-      </p>
+    <main className="container">
+      <section className="page-hero">
+        <h1 className="page-title">Booking</h1>
+        <p className="muted">
+          If the embed doesn’t load,{" "}
+          <a
+            href={embedSrc}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            open the booking page in a new tab
+          </a>
+          .
+        </p>
+      </section>
 
-      <p>
-        <a
-          href="https://www.bookinggood.net/places/double-yellow-squash-club-44/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Book a court on BookingGood →
-        </a>
-      </p>
-
-      <p className="muted">
-        Opens in a new tab. (We keep this page light for speed and clarity.)
-      </p>
-    </section>
+      {/* Card wrapper just to match your site styling */}
+      <div className="card" style={{ padding: 0 }}>
+        <iframe
+          title="Double Yellow Squash — Booking"
+          src={embedSrc}
+          width="100%"
+          height={780}
+          style={{ borderWidth: 0, display: "block", width: "100%" }}
+          loading="lazy"
+        />
+      </div>
+    </main>
   );
 }
