@@ -3,12 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { Route } from "next"; // 👈 strict typed routes
 
-const nav = [
+type NavItem = {
+  href: Route;   // 👈 internal app routes only (must start with "/")
+  label: string;
+};
+
+const nav: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/booking", label: "Booking" },
   { href: "/membership", label: "Membership" },
-  // 👇 New tab appears right after Membership
   { href: "/activities", label: "Activities" },
   { href: "/team", label: "Team" },
   { href: "/events", label: "Events" },
@@ -23,7 +28,7 @@ export default function Navbar() {
   return (
     <header className="navbar-wrap">
       <nav className="container navbar">
-        <Link href="/" className="brand" aria-label="Double Yellow Squash Club | Home">
+        <Link href={"/" as Route} className="brand" aria-label="Double Yellow Squash Club | Home">
           <Image
             src="/logo.png"
             alt="Double Yellow logo"
@@ -43,8 +48,7 @@ export default function Navbar() {
 
             return (
               <li key={item.href}>
-                {/* TS fix: href expects Route/UrlObject; our data is string */}
-                <Link href={item.href as string} className={`link ${active ? "active" : ""}`}>
+                <Link href={item.href} className={`link ${active ? "active" : ""}`}>
                   {item.label}
                 </Link>
               </li>
@@ -88,7 +92,7 @@ export default function Navbar() {
           padding: 0;
         }
         .link {
-          color: #ffcc00; /* mustard */
+          color: #ffcc00;
           font-weight: 800;
           font-size: 26px;
           text-decoration: none;
