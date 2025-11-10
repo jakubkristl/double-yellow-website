@@ -1,5 +1,25 @@
 export const dynamic = "force-static";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Team | Meet the People Behind Double Yellow",
+  description:
+    "Meet Jakub Kristl and the team behind Double Yellow Squash Club — passionate about renovating and growing squash in Sofia.",
+  openGraph: {
+    title: "Team | Meet the People Behind Double Yellow",
+    description:
+      "Meet Jakub Kristl and the team behind Double Yellow Squash Club — passionate about renovating and growing squash in Sofia.",
+    url: "https://doubleyellow.bg/team",
+    images: [
+      {
+        url: "https://doubleyellow.bg/team/jakub.jpg",
+        alt: "Jakub Kristl, founder of Double Yellow",
+      },
+    ],
+  },
+};
+
 type Member = {
   name: string;
   role?: string;

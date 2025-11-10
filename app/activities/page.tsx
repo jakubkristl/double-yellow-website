@@ -1,9 +1,22 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Activities | Double Yellow Squash Club",
+export const metadata: Metadata = {
+  title: "Weekly Squash Activities & Programs | Double Yellow",
   description:
-    "Regular programs at Double Yellow Squash Club — join our weekly sessions and challenges.",
+    "Join weekly squash sessions for beginners, women, kids, and experienced players. Come-and-Play, Mini Squash, Time for Ladies, and more at Double Yellow Club.",
+  openGraph: {
+    title: "Weekly Squash Activities & Programs | Double Yellow",
+    description:
+      "Join weekly squash sessions for beginners, women, kids, and experienced players. Come-and-Play, Mini Squash, Time for Ladies, and more at Double Yellow Club.",
+    url: "https://doubleyellow.bg/activities",
+    images: [
+      {
+        url: "https://doubleyellow.bg/activities/beginners.jpg",
+        alt: "Squash beginners session at Double Yellow",
+      },
+    ],
+  },
 };
 
 export default function ActivitiesPage() {

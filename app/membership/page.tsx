@@ -1,5 +1,25 @@
 export const dynamic = "force-static";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Membership Packs | Affordable Squash Access | Double Yellow",
+  description:
+    "Choose a membership pack (4, 8, or 12 courts per month) or a daytime pass. Flexible, affordable, valid 30 days. MultiSport and CoolFit accepted.",
+  openGraph: {
+    title: "Membership Packs | Affordable Squash Access | Double Yellow",
+    description:
+      "Choose a membership pack (4, 8, or 12 courts per month) or a daytime pass. Flexible, affordable, valid 30 days. MultiSport and CoolFit accepted.",
+    url: "https://doubleyellow.bg/membership",
+    images: [
+      {
+        url: "https://doubleyellow.bg/cards/front.png",
+        alt: "Double Yellow membership card",
+      },
+    ],
+  },
+};
+
 /**
  * Clean final layout:
  * - Smaller, centered shared card images

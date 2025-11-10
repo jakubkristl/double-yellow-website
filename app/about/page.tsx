@@ -1,5 +1,24 @@
 // app/about/page.tsx
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Double Yellow — Renovation & History",
+  description:
+    "Learn the story of Double Yellow Squash Club's renovation from a forgotten venue to a thriving modern squash home in Sofia.",
+  openGraph: {
+    title: "About Double Yellow — Renovation & History",
+    description:
+      "Learn the story of Double Yellow Squash Club's renovation from a forgotten venue to a thriving modern squash home in Sofia.",
+    url: "https://doubleyellow.bg/about",
+    images: [
+      {
+        url: "https://doubleyellow.bg/about/after1.jpg",
+        alt: "Double Yellow Squash Club after renovation",
+      },
+    ],
+  },
+};
 
 export default function AboutPage() {
   return (
