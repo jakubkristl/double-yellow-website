@@ -116,6 +116,20 @@ export default function MembershipPage() {
           </article>
         ))}
       </div>
+
+      {/* Note about cards at reception */}
+      <div style={{
+        marginTop: "40px",
+        padding: "20px",
+        backgroundColor: "rgba(255, 204, 0, 0.08)",
+        borderLeft: "4px solid var(--accent)",
+        borderRadius: "8px",
+        color: "#ddd",
+      }}>
+        <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
+          <strong style={{ color: "var(--accent)" }}>💳 Physical Cards:</strong> All membership cards are available at the reception desk when you purchase your pack. Bring your ID and come ready to play!
+        </p>
+      </div>
     </section>
   );
 }
