@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Double Yellow Squash Club — Sofia",
@@ -132,6 +133,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }}
         />
+
+        {/* Breadcrumb schema */}
+        <Breadcrumbs />
 
         <Navbar />
         <main className="container">{children}</main>
