@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 
 type Props = {
   images: string[];
+  alts?: string[];
   intervalMs?: number;
 };
 
-export default function Carousel({ images, intervalMs = 4500 }: Props) {
+export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props) {
   const [i, setI] = useState(0);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Carousel({ images, intervalMs = 4500 }: Props) {
         >
           <Image
             src={src}
-            alt="Club photo"
+            alt={alts[idx] || "Club photo"}
             fill
             sizes="(max-width: 1200px) 100vw, 1200px"
             priority={idx === 0}
