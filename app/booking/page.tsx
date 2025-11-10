@@ -27,33 +27,21 @@ export default function BookingPage() {
     },
     {
       number: 2,
-      title: "Select Your Court",
+      title: "Enter Your Contact Info",
       description:
-        "Pick from our renovated WSF-standard courts. All courts are equally premium with modern lighting and equipment.",
+        "Provide your name, email, and phone number so we can confirm your reservation.",
     },
     {
       number: 3,
-      title: "Enter Your Details",
+      title: "Confirm Your Booking",
       description:
-        "Provide your contact information. If you have a membership, make sure to use your registered email.",
+        "Review your details and confirm. Your booking is reserved once you submit.",
     },
     {
       number: 4,
-      title: "Choose Your Option",
+      title: "Pay at Reception",
       description:
-        "Book as a Single (1 person) or as a Pair (2 people). Perfect for solo practice or competitive matches.",
-    },
-    {
-      number: 5,
-      title: "Confirm & Pay",
-      description:
-        "Review your booking and proceed to payment. We accept card payments and MultiSport/CoolFit cards.",
-    },
-    {
-      number: 6,
-      title: "You're All Set!",
-      description:
-        "Receive your confirmation email with all details. Arrive 5-10 minutes early to warm up.",
+        "When you arrive, pay at our reception desk. We accept cash, card, MultiSport, and CoolFit.",
     },
   ];
 
@@ -69,7 +57,7 @@ export default function BookingPage() {
       {/* How to Book Guide */}
       <section className="booking-guide">
         <h2 className="h2" style={{ marginBottom: "24px", textAlign: "center", color: "var(--accent)" }}>
-          How to Book in 6 Steps
+          How to Book in 4 Steps
         </h2>
 
         <div className="steps-grid">
