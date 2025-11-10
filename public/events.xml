@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Double Yellow Squash Club Events</title>
+    <link>https://doubleyellow.bg/activities</link>
+    <description>Upcoming events and activities at Double Yellow Squash Club</description>
+    <language>en-us</language>
+    <item>
+      <title>Time for Ladies</title>
+      <link>https://doubleyellow.bg/activities#time-for-ladies</link>
+      <description>Women-only session: friendly pace, great vibes, quick progress.</description>
+      <pubDate>Wed, 12 Nov 2025 18:00:00 +0200</pubDate>
+      <guid>https://doubleyellow.bg/activities#time-for-ladies</guid>
+    </item>
+    <item>
+      <title>Magnificent 7</title>
+      <link>https://doubleyellow.bg/activities#magnificent-7</link>
+      <description>Round-robin for seven players — tight matches, quick rotations.</description>
+      <pubDate>Thu, 13 Nov 2025 18:00:00 +0200</pubDate>
+      <guid>https://doubleyellow.bg/activities#magnificent-7</guid>
+    </item>
+    <item>
+      <title>Mini Squash (Kids)</title>
+      <link>https://doubleyellow.bg/activities#mini-squash</link>
+      <description>Fun skills &amp; games for kids to fall in love with squash.</description>
+      <pubDate>Sat, 15 Nov 2025 10:00:00 +0200</pubDate>
+      <guid>https://doubleyellow.bg/activities#mini-squash</guid>
+    </item>
+  </channel>
+</rss>
