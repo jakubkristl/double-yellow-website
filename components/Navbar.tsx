@@ -141,6 +141,18 @@ export default function Navbar() {
             font-size: 18px;
           }
         }
+
+        @media (max-width: 480px) {
+          .brand-text {
+            font-size: 18px;
+          }
+          .menu {
+            gap: 10px 14px;
+          }
+          .link {
+            font-size: 14px;
+          }
+        }
       `}</style>
     </header>
   );

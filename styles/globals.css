@@ -408,6 +408,39 @@ a:hover { color: var(--accent); }
   line-height: 1.5;
 }
 
+/* Extra small mobile devices (375px) */
+@media (max-width: 480px) {
+  .carousel {
+    max-height: 320px;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .step-card {
+    padding: 18px;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .step-title {
+    font-size: 16px;
+  }
+
+  .step-description {
+    font-size: 14px;
+  }
+
+  .navbar-wrap {
+    padding: 8px 0;
+  }
+}
+
 /* ---------- Membership ---------- */
 .membership-header {
   margin: 24px 0 18px 0;
