@@ -254,6 +254,8 @@ li {
   height: 48px;
   width: auto;
   object-fit: contain;
+  mix-blend-mode: lighten;
+  filter: brightness(1.1) contrast(1.1);
 }
 .payment-logos img[alt*="CoolFit"],
 .payment-logos img[alt*="Coolfit"],
