@@ -61,10 +61,23 @@ export default function ActivitiesPage() {
             <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
               Wednesdays • 18:00
             </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5 }}>
+            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
               Women-only session: friendly pace, great vibes, quick progress.
-              Bring a friend or come solo — we’ll pair you up.
+              Bring a friend or come solo — we'll pair you up.
             </p>
+            <a
+              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=3&time=18:00"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+              style={{
+                display: "inline-block",
+                textAlign: "center",
+                textDecoration: "none",
+              }}
+            >
+              Book This Activity
+            </a>
           </div>
         </div>
 
@@ -93,10 +106,23 @@ export default function ActivitiesPage() {
             <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
               Saturday & Sunday • 10:00
             </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5 }}>
+            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
               Fun skills & games for kids to fall in love with squash. Small
               groups — up to 6 kids per coach. Equipment included.
             </p>
+            <a
+              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=6&time=10:00"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+              style={{
+                display: "inline-block",
+                textAlign: "center",
+                textDecoration: "none",
+              }}
+            >
+              Book This Activity
+            </a>
           </div>
         </div>
 
@@ -125,10 +151,23 @@ export default function ActivitiesPage() {
             <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
               Thursdays • 18:00–20:30
             </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5 }}>
+            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
               Round-robin for seven players — tight matches, quick rotations,
               scoreboard thrills. Ranking and registration available on RankedIn.
             </p>
+            <a
+              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=4&time=18:00"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+              style={{
+                display: "inline-block",
+                textAlign: "center",
+                textDecoration: "none",
+              }}
+            >
+              Book This Activity
+            </a>
           </div>
         </div>
 
@@ -157,10 +196,23 @@ export default function ActivitiesPage() {
             <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
               Tuesdays • 18:00 | Saturdays • 11:00–13:00
             </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5 }}>
+            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
               Open community session — rotate courts, meet partners, find your
               level. The most social way to play.
             </p>
+            <a
+              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=2&time=18:00"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+              style={{
+                display: "inline-block",
+                textAlign: "center",
+                textDecoration: "none",
+              }}
+            >
+              Book This Activity
+            </a>
           </div>
         </div>
 
@@ -189,10 +241,23 @@ export default function ActivitiesPage() {
             <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
               Mondays • 18:00 | Fridays • 18:00
             </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5 }}>
+            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
               Start from zero: movement basics, swing shape and simple drills so
               you can start rallying fast.
             </p>
+            <a
+              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=1&time=18:00"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+              style={{
+                display: "inline-block",
+                textAlign: "center",
+                textDecoration: "none",
+              }}
+            >
+              Book This Activity
+            </a>
           </div>
         </div>
 
@@ -219,10 +284,13 @@ export default function ActivitiesPage() {
               Challenges — Glass Challenge
             </h2>
             <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>Ongoing</p>
-            <p style={{ color: "#ddd", lineHeight: 1.5 }}>
+            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
               Beat the Glass! Ongoing challenge on our back-wall courts. Log
               attempts at the desk; monthly leaderboard and bragging rights.
             </p>
+            <div style={{ padding: "12px 24px", textAlign: "center", color: "#999", fontSize: "14px" }}>
+              Visit reception to participate
+            </div>
           </div>
         </div>
       </div>
