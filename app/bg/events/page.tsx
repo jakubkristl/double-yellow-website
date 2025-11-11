@@ -1,31 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { bg } from "@/lib/translations";
 
-export const metadata: Metadata = {
-  title: "Special Events & Coaching Visits | Double Yellow Squash",
+export const metadata = {
+  title: "Events | Double Yellow Squash Club",
   description:
-    "Attend guest coaching visits, workshops, and special tournaments at Double Yellow Squash Club. Meet expert coaches and challenge opponents.",
-  openGraph: {
-    title: "Special Events & Coaching Visits | Double Yellow Squash",
-    description:
-      "Attend guest coaching visits, workshops, and special tournaments at Double Yellow Squash Club. Meet expert coaches and challenge opponents.",
-    url: "https://doubleyellow.bg/events",
-    images: [
-      {
-        url: "https://doubleyellow.bg/events/tomas.jpg",
-        alt: "Special coaching visit at Double Yellow",
-      },
-    ],
-  },
+    "Special events, workshops and guest visits at Double Yellow Squash Club.",
 };
 
 export default function EventsPage() {
   return (
     <main>
       <section className="container container--narrow">
-        <h1 className="page-title">Events</h1>
-        <p className="subtitle">One-off events, workshops & guest visits.</p>
+        <h1 className="title-xl">{(bg as any).eventsPage.title}</h1>
+        <p className="subtitle">{(bg as any).eventsPage.subtitle}</p>
 
         <article className="event-card">
           <div className="event-card__image">

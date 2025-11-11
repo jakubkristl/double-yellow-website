@@ -447,6 +447,7 @@ a:hover { color: var(--accent); }
   gap: 14px;
 }
 .membership-title {
+  margin: 16px 0 0;
   font-size: clamp(30px, 4vw, 46px);
   font-weight: 800;
   line-height: 1.1;

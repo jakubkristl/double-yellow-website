@@ -1,33 +1,89 @@
-import Image from "next/image";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Weekly Squash Activities & Programs | Double Yellow",
-  description:
-    "Join weekly squash sessions for beginners, women, kids, and experienced players. Come-and-Play, Mini Squash, Time for Ladies, and more at Double Yellow Club.",
+  title: "Squash Activities & Programs | Double Yellow Squash Club",
+  description: "Join our diverse squash programs in Sofia - ladies' sessions, kids' mini squash, beginner classes, and community events. Weekly sessions and challenges for all levels.",
   openGraph: {
-    title: "Weekly Squash Activities & Programs | Double Yellow",
-    description:
-      "Join weekly squash sessions for beginners, women, kids, and experienced players. Come-and-Play, Mini Squash, Time for Ladies, and more at Double Yellow Club.",
-    url: "https://doubleyellow.bg/activities",
+    title: "Squash Programs & Activities at Double Yellow Club Sofia",
+    description: "Discover our weekly squash activities - from beginner lessons to community events. Ladies' sessions, kids' programs, and competitive challenges available.",
     images: [
       {
-        url: "https://doubleyellow.bg/activities/beginners.jpg",
-        alt: "Squash beginners session at Double Yellow",
-      },
-    ],
+        url: "/activities/timeforladies.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Squash activities at Double Yellow Club"
+      }
+    ]
   },
+  keywords: ["squash sofia", "squash lessons", "squash for beginners", "ladies squash", "kids squash", "squash club sofia", "squash activities"]
 };
 
+import { bg } from "@/lib/translations";
+
 export default function ActivitiesPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SportsClub",
+    "name": "Double Yellow Squash Club",
+    "event": [
+      {
+        "@type": "SportsEvent",
+        "name": "Time for Ladies",
+        "description": "Women-only squash session: friendly pace, great vibes, quick progress.",
+        "startDate": "2025-01-01T18:00",
+        "endDate": "2025-12-31T19:30",
+        "eventStatus": "EventScheduled",
+        "eventAttendanceMode": "OfflineEventAttendanceMode",
+        "recurringEvent": {
+          "@type": "Schedule",
+          "byDay": "https://schema.org/Wednesday",
+          "startTime": "18:00",
+          "endTime": "19:30"
+        }
+      },
+      {
+        "@type": "SportsEvent",
+        "name": "Mini Squash (Kids)",
+        "description": "Fun skills & games for kids to fall in love with squash.",
+        "startDate": "2025-01-01T10:00",
+        "endDate": "2025-12-31T11:30",
+        "eventStatus": "EventScheduled",
+        "eventAttendanceMode": "OfflineEventAttendanceMode",
+        "recurringEvent": {
+          "@type": "Schedule",
+          "byDay": ["https://schema.org/Saturday", "https://schema.org/Sunday"],
+          "startTime": "10:00",
+          "endTime": "11:30"
+        }
+      },
+      {
+        "@type": "SportsEvent",
+        "name": "Squash for Beginners",
+        "description": "Start from zero: movement basics, swing shape and simple drills.",
+        "startDate": "2025-01-01T18:00",
+        "endDate": "2025-12-31T19:30",
+        "eventStatus": "EventScheduled",
+        "eventAttendanceMode": "OfflineEventAttendanceMode",
+        "recurringEvent": {
+          "@type": "Schedule",
+          "byDay": ["https://schema.org/Monday", "https://schema.org/Friday"],
+          "startTime": "18:00",
+          "endTime": "19:30"
+        }
+      }
+    ]
+  };
+
   return (
-    <main style={{ padding: "40px 20px", maxWidth: "1200px", margin: "0 auto" }}>
-      <h1 className="page-title">Activities</h1>
-      <p style={{ color: "#ccc", fontSize: "22px", marginBottom: "40px" }}>
-        All recurring programs live here.{" "}
-        <strong style={{ color: "#ffcc00" }}>Events</strong> is now for{" "}
-        <em>one-off</em> tournaments, workshops & special visits.
-      </p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main style={{ padding: "40px 20px", maxWidth: "1200px", margin: "0 auto" }}>
+      <h1 style={{ fontSize: "64px", marginBottom: "16px", fontWeight: 800, lineHeight: 1.1 }}>{(bg as any).activitiesPage.title}</h1>
+      <p style={{ color: "#ccc", fontSize: "22px", marginBottom: "40px" }}>{(bg as any).activitiesPage.subtitle}</p>
 
       <div
         style={{
@@ -227,5 +283,6 @@ export default function ActivitiesPage() {
         </div>
       </div>
     </main>
+    </>
   );
 }

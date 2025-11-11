@@ -1,33 +1,60 @@
-// app/about/page.tsx
-import React from "react";
 import type { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
-  title: "About Double Yellow — Renovation & History",
-  description:
-    "Learn the story of Double Yellow Squash Club's renovation from a forgotten venue to a thriving modern squash home in Sofia.",
+  title: "About Us - Our Story and Mission",
+  description: "Discover the story of Double Yellow Squash Club in Sofia - from renovation to revival. Learn about our mission to bring life back to Bulgarian squash through modern facilities and community focus.",
   openGraph: {
-    title: "About Double Yellow — Renovation & History",
-    description:
-      "Learn the story of Double Yellow Squash Club's renovation from a forgotten venue to a thriving modern squash home in Sofia.",
-    url: "https://doubleyellow.bg/about",
+    title: "About Double Yellow Squash Club Sofia",
+    description: "From dusty courts to a thriving squash community - discover our journey of renovating and reviving squash in Sofia.",
     images: [
       {
-        url: "https://doubleyellow.bg/about/after1.jpg",
-        alt: "Double Yellow Squash Club after renovation",
-      },
-    ],
-  },
+        url: "/about/after1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Renovated squash courts at Double Yellow Club"
+      }
+    ]
+  }
 };
+import { bg } from "@/lib/translations";
 
 export default function AboutPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SportsClub",
+    "name": "Double Yellow Squash Club",
+    "description": "Modern squash facility in Sofia offering professional courts, coaching, and community events.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Sofia",
+      "addressCountry": "BG"
+    },
+    "image": [
+      "/about/after1.jpg",
+      "/about/after2.jpg"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Jakub Kristl"
+    },
+    "url": "https://doubleyellow.bg",
+    "sameAs": [
+      "https://facebook.com/doubleyellowsquash",
+      "https://instagram.com/doubleyellowsquash"
+    ]
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <section className="container about-section">
       <div className="membership-header">
-        <h1 className="page-title">About Double Yellow</h1>
-        <div className="membership-sub">
-          Passion, renovation, and a bit of squash dust.
-        </div>
+        <h1 className="membership-title">{(bg as any).about.title}</h1>
+        <div className="membership-sub">{(bg as any).about.subtitle}</div>
       </div>
 
       <div className="about-content">
@@ -102,5 +129,6 @@ export default function AboutPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

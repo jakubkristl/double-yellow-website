@@ -1,27 +1,13 @@
 // app/contact/page.tsx
 import React from "react";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Contact Double Yellow | Phone, Email & Location",
-  description:
-    "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
-  openGraph: {
-    title: "Contact Double Yellow | Phone, Email & Location",
-    description:
-      "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
-    url: "https://doubleyellow.bg/contact",
-  },
-};
+import { bg } from "@/lib/translations";
 
 export default function ContactPage() {
   return (
     <section className="container contact-section">
       <div className="membership-header">
-        <h1 className="page-title">Contact</h1>
-        <div className="membership-sub">
-          Book a court, ask a question, or just say hi — we’re always nearby.
-        </div>
+        <h1 className="membership-title">{(bg as any).contactPage.title}</h1>
+        <div className="membership-sub">{(bg as any).contactPage.subtitle}</div>
       </div>
 
       {/* Quick contacts */}
@@ -47,17 +33,6 @@ export default function ContactPage() {
           <div className="contact-title">Website</div>
           <div className="contact-data">doubleyellowsquash.com</div>
           <div className="contact-note">News • Memberships • Schedules</div>
-        </a>
-
-        <a
-          className="contact-card"
-          href="https://maps.app.goo.gl/UDAAByWq8sRQgraM9"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="contact-title">Location</div>
-          <div className="contact-data">View on Maps</div>
-          <div className="contact-note">NSA Campus, Sofia</div>
         </a>
 
         <a
@@ -116,26 +91,11 @@ export default function ContactPage() {
               <div className="dir-title">Directions</div>
               <ul>
                 <li>
-                  We're in the <em>Multifunctional Hall</em> at NSA — squash
+                  We’re in the <em>Multifunctional Hall</em> at NSA — squash
                   courts are on <strong>floor –1</strong>.
                 </li>
                 <li>
                   <strong>Parking:</strong> available inside the NSA campus.
-                </li>
-              </ul>
-            </div>
-
-            <div className="dir-block">
-              <div className="dir-title">Public Transport</div>
-              <ul>
-                <li>
-                  <strong>Metro (Метро):</strong> Line M1 to "Stadion Vasil Levski" station (5 min walk).
-                </li>
-                <li>
-                  <strong>Tram:</strong> Tram lines 1, 3, 5, 6 or 11 to "Vasil Levski Stadium" stop (5–10 min walk).
-                </li>
-                <li>
-                  <strong>Bus:</strong> Multiple bus lines serve NSA. Check Google Maps or Citymapper for real-time routes.
                 </li>
               </ul>
             </div>
@@ -156,7 +116,8 @@ export default function ContactPage() {
             />
           </div>
           <div className="map-note">
-            Located at the National Sports Academy campus. Squash courts on level –1 of the Multifunctional Hall.
+            Inside the NSA campus — look for the Multifunctional Hall with the
+            glass-back courts (level –1).
           </div>
         </div>
       </div>

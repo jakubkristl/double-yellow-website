@@ -1,25 +1,5 @@
 export const dynamic = "force-static";
 
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Membership Packs | Affordable Squash Access | Double Yellow",
-  description:
-    "Choose a membership pack (4, 8, or 12 courts per month) or a daytime pass. Flexible, affordable, valid 30 days. MultiSport and CoolFit accepted.",
-  openGraph: {
-    title: "Membership Packs | Affordable Squash Access | Double Yellow",
-    description:
-      "Choose a membership pack (4, 8, or 12 courts per month) or a daytime pass. Flexible, affordable, valid 30 days. MultiSport and CoolFit accepted.",
-    url: "https://doubleyellow.bg/membership",
-    images: [
-      {
-        url: "https://doubleyellow.bg/cards/front.png",
-        alt: "Double Yellow membership card",
-      },
-    ],
-  },
-};
-
 /**
  * Clean final layout:
  * - Smaller, centered shared card images
@@ -63,12 +43,14 @@ const PACKS: Pack[] = [
   },
 ];
 
+import { bg } from "@/lib/translations";
+
 export default function MembershipPage() {
   return (
     <section className="container">
       <div className="membership-header">
-        <h1 className="page-title">Membership Packs</h1>
-        <div className="membership-sub">Valid 30 days from purchase</div>
+        <h1 className="membership-title">{(bg as any).membershipPage.title}</h1>
+        <div className="membership-sub">{(bg as any).membershipPage.subtitle}</div>
       </div>
 
 {/* Shared card preview */}
@@ -115,20 +97,6 @@ export default function MembershipPage() {
             {p.daytime && <div className="badge">Once per day until 17:00</div>}
           </article>
         ))}
-      </div>
-
-      {/* Note about cards at reception */}
-      <div style={{
-        marginTop: "40px",
-        padding: "20px",
-        backgroundColor: "rgba(255, 204, 0, 0.08)",
-        borderLeft: "4px solid var(--accent)",
-        borderRadius: "8px",
-        color: "#ddd",
-      }}>
-        <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
-          <strong style={{ color: "var(--accent)" }}>💳 Physical Cards:</strong> All membership cards are available at the reception desk when you purchase your pack. Bring your ID and come ready to play!
-        </p>
       </div>
     </section>
   );

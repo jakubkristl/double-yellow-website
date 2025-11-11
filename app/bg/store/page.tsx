@@ -5,6 +5,8 @@ import { CATEGORIES } from "@/data/storeItems";
 
 type OpenMap = Record<string, boolean>;
 
+import { bg } from "@/lib/translations";
+
 export default function StorePage() {
   // Track which sections are open
   const [open, setOpen] = useState<OpenMap>(() =>
@@ -33,10 +35,8 @@ export default function StorePage() {
   return (
     <section className="container store-section">
       <div className="membership-header">
-        <h1 className="page-title">Store</h1>
-        <div className="membership-sub">
-          Official Double Yellow gear and on-court essentials.
-          <br />
+        <h1 className="membership-title">{(bg as any).storePage.title}</h1>
+        <div className="membership-sub">{(bg as any).storePage.subtitle}<br />
           <strong>Available only at the club</strong> — see it, feel it, play it.
         </div>
       </div>
