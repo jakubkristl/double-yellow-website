@@ -49,10 +49,18 @@ export default function Navbar() {
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span className={mobileMenuOpen ? "open" : ""}></span>
+          <span className={mobileMenuOpen ? "open" : ""}></span>
+          <span className={mobileMenuOpen ? "open" : ""}></span>
         </button>
+
+        {/* Overlay */}
+        {mobileMenuOpen && (
+          <div 
+            className="menu-overlay"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
 
         <ul className={`menu ${mobileMenuOpen ? "menu-open" : ""}`}>
           {nav.map((item) => {
@@ -125,6 +133,20 @@ export default function Navbar() {
           border-radius: 2px;
           transition: all 0.3s ease;
         }
+        .hamburger span.open:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger span.open:nth-child(2) {
+          opacity: 0;
+        }
+        .hamburger span.open:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Overlay */
+        .menu-overlay {
+          display: none;
+        }
         
         .menu {
           display: flex;
@@ -176,20 +198,33 @@ export default function Navbar() {
             display: flex;
           }
           
+          .menu-overlay {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+            animation: fadeIn 0.3s ease;
+          }
+          
           .menu {
             position: fixed;
             top: 0;
             right: -100%;
             width: 280px;
             height: 100vh;
-            background: #0a0a0a;
+            background: #0d0d0d;
             flex-direction: column;
             padding: 100px 30px 30px;
             gap: 20px;
-            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.8);
             transition: right 0.3s ease;
             z-index: 100;
             overflow-y: auto;
+            border-left: 2px solid var(--accent);
           }
           
           .menu-open {
@@ -199,11 +234,12 @@ export default function Navbar() {
           .link {
             font-size: 22px;
             display: block;
-            padding: 8px 0;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 204, 0, 0.1);
           }
           
           .link.active::after {
-            bottom: 0;
+            bottom: 8px;
             left: 0;
             right: auto;
             width: 40px;
