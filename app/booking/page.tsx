@@ -82,7 +82,7 @@ export default function BookingPage() {
       </div>
 
       {/* Card wrapper just to match your site styling */}
-      <div className="card" style={{ padding: 0, position: "relative", minHeight: "780px" }}>
+      <div className="card" style={{ padding: 0, position: "relative", minHeight: "780px", background: "#ffffff" }}>
         {isLoading && (
           <div style={{
             position: "absolute",
@@ -94,7 +94,7 @@ export default function BookingPage() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: "#1a1a1a",
+            background: "#ffffff",
             zIndex: 10,
           }}>
             <div style={{
@@ -105,7 +105,7 @@ export default function BookingPage() {
               borderRadius: "50%",
               animation: "spin 1s linear infinite",
             }} />
-            <p style={{ color: "#999", marginTop: "16px", fontSize: "14px" }}>
+            <p style={{ color: "#666", marginTop: "16px", fontSize: "14px" }}>
               Loading booking system...
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function BookingPage() {
           src={embedSrc}
           width="100%"
           height={780}
-          style={{ borderWidth: 0, display: "block", width: "100%" }}
+          style={{ borderWidth: 0, display: "block", width: "100%", background: "#ffffff" }}
           loading="lazy"
           onLoad={() => setIsLoading(false)}
         />
