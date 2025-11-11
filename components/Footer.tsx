@@ -27,6 +27,9 @@ export default function Footer() {
             <li>
               <Link href="/events">Events &amp; programs</Link>
             </li>
+            <li>
+              <Link href="/gallery">Photo gallery</Link>
+            </li>
           </ul>
         </div>
 

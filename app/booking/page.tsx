@@ -1,20 +1,10 @@
 // app/booking/page.tsx
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Book a Squash Court | Fast & Easy Reservations | Double Yellow",
-  description:
-    "Reserve a squash court at Double Yellow Squash Club in Sofia. Instant booking, flexible times, premium courts.",
-  openGraph: {
-    title: "Book a Squash Court | Fast & Easy Reservations | Double Yellow",
-    description:
-      "Reserve a squash court at Double Yellow Squash Club in Sofia. Instant booking, flexible times, premium courts.",
-    url: "https://doubleyellow.bg/booking",
-  },
-  alternates: { canonical: "/booking" },
-};
+import { useState } from "react";
 
 export default function BookingPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const embedSrc =
     "https://sport.bookinggood.net/bg/embed/facility/44/72";
 
@@ -92,7 +82,34 @@ export default function BookingPage() {
       </div>
 
       {/* Card wrapper just to match your site styling */}
-      <div className="card" style={{ padding: 0 }}>
+      <div className="card" style={{ padding: 0, position: "relative", minHeight: "780px" }}>
+        {isLoading && (
+          <div style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#1a1a1a",
+            zIndex: 10,
+          }}>
+            <div style={{
+              width: "50px",
+              height: "50px",
+              border: "4px solid rgba(255, 204, 0, 0.2)",
+              borderTop: "4px solid var(--accent)",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }} />
+            <p style={{ color: "#999", marginTop: "16px", fontSize: "14px" }}>
+              Loading booking system...
+            </p>
+          </div>
+        )}
         <iframe
           title="Double Yellow Squash — Booking"
           src={embedSrc}
@@ -100,6 +117,7 @@ export default function BookingPage() {
           height={780}
           style={{ borderWidth: 0, display: "block", width: "100%" }}
           loading="lazy"
+          onLoad={() => setIsLoading(false)}
         />
       </div>
     </main>
