@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import type { Route } from "next"; // 👈 strict typed routes
 
 type NavItem = {
@@ -25,6 +26,7 @@ const nav: NavItem[] = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="navbar-wrap">
@@ -40,7 +42,19 @@ export default function Navbar() {
           <span className="brand-text">Double Yellow Squash Club</span>
         </Link>
 
-        <ul className="menu">
+        {/* Hamburger Button */}
+        <button
+          className="hamburger"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul className={`menu ${mobileMenuOpen ? "menu-open" : ""}`}>
           {nav.map((item) => {
             const active =
               item.href === "/"
@@ -49,7 +63,11 @@ export default function Navbar() {
 
             return (
               <li key={item.href}>
-                <Link href={item.href} className={`link ${active ? "active" : ""}`}>
+                <Link 
+                  href={item.href} 
+                  className={`link ${active ? "active" : ""}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {item.label}
                 </Link>
               </li>
@@ -71,12 +89,14 @@ export default function Navbar() {
           align-items: center;
           justify-content: space-between;
           gap: 24px;
+          position: relative;
         }
         .brand {
           display: inline-flex;
           align-items: center;
           gap: 14px;
           text-decoration: none;
+          z-index: 101;
         }
         .brand-text {
           font-weight: 800;
@@ -85,6 +105,27 @@ export default function Navbar() {
           color: #fff;
           white-space: nowrap;
         }
+        
+        /* Hamburger Button */
+        .hamburger {
+          display: none;
+          flex-direction: column;
+          gap: 6px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 10px;
+          z-index: 101;
+        }
+        .hamburger span {
+          display: block;
+          width: 28px;
+          height: 3px;
+          background: var(--accent);
+          border-radius: 2px;
+          transition: all 0.3s ease;
+        }
+        
         .menu {
           display: flex;
           gap: 28px;
@@ -131,20 +172,41 @@ export default function Navbar() {
         }
 
         @media (max-width: 720px) {
-          .container {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
+          .hamburger {
+            display: flex;
           }
-          .brand-text {
-            font-size: 22px;
-          }
+          
           .menu {
-            flex-wrap: wrap;
-            gap: 14px 20px;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: #0a0a0a;
+            flex-direction: column;
+            padding: 100px 30px 30px;
+            gap: 20px;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            z-index: 100;
+            overflow-y: auto;
           }
+          
+          .menu-open {
+            right: 0;
+          }
+          
           .link {
-            font-size: 18px;
+            font-size: 22px;
+            display: block;
+            padding: 8px 0;
+          }
+          
+          .link.active::after {
+            bottom: 0;
+            left: 0;
+            right: auto;
+            width: 40px;
           }
         }
 
@@ -153,12 +215,10 @@ export default function Navbar() {
             font-size: 18px;
           }
           .menu {
-            gap: 10px 14px;
+            width: 240px;
           }
           .link {
-            font-size: 14px;
-            font-weight: 900;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+            font-size: 18px;
           }
         }
       `}</style>
