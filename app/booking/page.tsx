@@ -21,27 +21,21 @@ export default function BookingPage() {
   const bookingSteps = [
     {
       number: 1,
-      title: "Choose Your Date & Time",
+      title: "Choose Date & Time",
       description:
-        "Select the date and time that works best for you. Our courts are available from 07:00 to 22:00 every day.",
+        "Select your preferred date and time. Courts available 07:00–22:00 daily.",
     },
     {
       number: 2,
-      title: "Enter Your Contact Info",
+      title: "Enter Your Details",
       description:
-        "Provide your name, email, and phone number so we can confirm your reservation.",
+        "Provide your name, email, and phone number.",
     },
     {
       number: 3,
-      title: "Confirm Your Booking",
+      title: "Instant Confirmation",
       description:
-        "Review your details and confirm. Your booking is reserved once you submit.",
-    },
-    {
-      number: 4,
-      title: "Pay at Reception",
-      description:
-        "When you arrive, pay at our reception desk. We accept cash, card, MultiSport, and CoolFit.",
+        "Your booking is confirmed automatically. Pay at reception when you arrive.",
     },
   ];
 
@@ -57,7 +51,7 @@ export default function BookingPage() {
       {/* How to Book Guide */}
       <section className="booking-guide">
         <h2 className="h2" style={{ marginBottom: "24px", textAlign: "center", color: "var(--accent)" }}>
-          How to Book in 4 Steps
+          How to Book in 3 Steps
         </h2>
 
         <div className="steps-grid">
@@ -82,6 +76,20 @@ export default function BookingPage() {
         </a>
         .
       </p>
+
+      {/* Note about booking the whole court */}
+      <div style={{
+        marginBottom: "24px",
+        padding: "16px 20px",
+        backgroundColor: "rgba(255, 204, 0, 0.05)",
+        borderLeft: "4px solid var(--accent)",
+        borderRadius: "8px",
+        color: "#ddd",
+      }}>
+        <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
+          <strong style={{ color: "var(--accent)" }}>🎾 Book the whole court:</strong> When you book a time slot, you reserve the entire court. Two players don't need to book separately—just one person books, and both can play!
+        </p>
+      </div>
 
       {/* Card wrapper just to match your site styling */}
       <div className="card" style={{ padding: 0 }}>
