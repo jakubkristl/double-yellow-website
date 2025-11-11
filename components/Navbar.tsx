@@ -93,13 +93,18 @@ export default function Navbar() {
         }
         .link {
           color: #ffcc00;
-          font-weight: 800;
+          font-weight: 900;
           font-size: 26px;
           text-decoration: none;
           position: relative;
+          letter-spacing: 0.5px;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+          transition: all 150ms ease;
         }
         .link:hover {
-          opacity: 0.9;
+          color: #ffdd4d;
+          text-shadow: 0 2px 12px rgba(255, 204, 0, 0.5);
+          transform: translateY(-1px);
         }
         .link.active::after {
           content: "";
@@ -151,6 +156,8 @@ export default function Navbar() {
           }
           .link {
             font-size: 14px;
+            font-weight: 900;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
           }
         }
       `}</style>
