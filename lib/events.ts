@@ -14,6 +14,23 @@ export const EVENTS = [
     },
     image: '/activities/timeforladies.jpg',
     url: 'https://doubleyellow.bg/activities#time-for-ladies',
+    performer: {
+      '@type': 'Organization' as const,
+      name: 'Double Yellow Squash Club',
+      url: 'https://doubleyellow.bg',
+    },
+    organizer: {
+      '@type': 'Organization' as const,
+      name: 'Double Yellow Squash Club',
+      url: 'https://doubleyellow.bg',
+    },
+    eventStatus: 'https://schema.org/EventScheduled',
+    offers: {
+      '@type': 'Offer' as const,
+      url: 'https://doubleyellow.bg/booking',
+      priceCurrency: 'BGN',
+      availability: 'https://schema.org/InStock',
+    },
   },
   {
     id: 'mini-squash',
@@ -30,6 +47,23 @@ export const EVENTS = [
     },
     image: '/activities/minisquash.jpg',
     url: 'https://doubleyellow.bg/activities#mini-squash',
+    performer: {
+      '@type': 'Organization' as const,
+      name: 'Double Yellow Squash Club',
+      url: 'https://doubleyellow.bg',
+    },
+    organizer: {
+      '@type': 'Organization' as const,
+      name: 'Double Yellow Squash Club',
+      url: 'https://doubleyellow.bg',
+    },
+    eventStatus: 'https://schema.org/EventScheduled',
+    offers: {
+      '@type': 'Offer' as const,
+      url: 'https://doubleyellow.bg/booking',
+      priceCurrency: 'BGN',
+      availability: 'https://schema.org/InStock',
+    },
   },
   {
     id: 'magnificent-7',
@@ -46,6 +80,23 @@ export const EVENTS = [
     },
     image: '/activities/magnificent7.jpg',
     url: 'https://doubleyellow.bg/activities#magnificent-7',
+    performer: {
+      '@type': 'Organization' as const,
+      name: 'Double Yellow Squash Club',
+      url: 'https://doubleyellow.bg',
+    },
+    organizer: {
+      '@type': 'Organization' as const,
+      name: 'Double Yellow Squash Club',
+      url: 'https://doubleyellow.bg',
+    },
+    eventStatus: 'https://schema.org/EventScheduled',
+    offers: {
+      '@type': 'Offer' as const,
+      url: 'https://doubleyellow.bg/booking',
+      priceCurrency: 'BGN',
+      availability: 'https://schema.org/InStock',
+    },
   },
 ] as const;
 
