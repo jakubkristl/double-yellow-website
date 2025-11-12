@@ -90,7 +90,7 @@ const faqSchema = {
   ],
 };
 
-const eventsSchema = EVENTS.map((e) => ({
+const eventsSchema = EVENTS.map((e: any) => ({
   "@type": "Event",
   "@context": "https://schema.org",
   name: e.title,
@@ -109,6 +109,16 @@ const eventsSchema = EVENTS.map((e) => ({
       postalCode: e.location.postalCode,
       addressCountry: e.location.addressCountry,
     },
+  },
+  // Add non-critical but helpful properties for Google: performer, organizer, eventStatus and offers
+  performer: e.performer || { "@type": "Organization", name: "Double Yellow Squash Club" },
+  organizer: e.organizer || { "@type": "Organization", name: "Double Yellow Squash Club", url: "https://doubleyellow.bg" },
+  eventStatus: e.eventStatus || "https://schema.org/EventScheduled",
+  offers: e.offers || {
+    "@type": "Offer",
+    url: e.url,
+    availability: "https://schema.org/InStock",
+    priceCurrency: e.priceCurrency || "BGN",
   },
 }));
 
