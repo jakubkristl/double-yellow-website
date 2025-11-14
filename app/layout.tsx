@@ -67,29 +67,6 @@ const localBusinessSchema = {
   ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What equipment do I need to play squash?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "For beginners we provide rackets and balls; regular players should bring non-marking indoor court shoes and a racket. Protective eyewear is recommended.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you accept MultiSport/CoolFit cards?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes — we accept MultiSport and CoolFit cards, and card payments on site.",
-      },
-    },
-  ],
-};
-
 const eventsSchema = EVENTS.map((e) => ({
   "@type": "Event",
   "@context": "https://schema.org",
@@ -128,10 +105,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
         <script
           type="application/ld+json"

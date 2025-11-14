@@ -28,8 +28,10 @@ export const EVENTS = [
     offers: {
       '@type': 'Offer' as const,
       url: 'https://doubleyellow.bg/booking',
+      price: '20',
       priceCurrency: 'BGN',
       availability: 'https://schema.org/InStock',
+      validFrom: '2025-11-12T00:00:00+02:00',
     },
   },
   {
@@ -61,8 +63,10 @@ export const EVENTS = [
     offers: {
       '@type': 'Offer' as const,
       url: 'https://doubleyellow.bg/booking',
+      price: '15',
       priceCurrency: 'BGN',
       availability: 'https://schema.org/InStock',
+      validFrom: '2025-11-15T00:00:00+02:00',
     },
   },
   {
@@ -94,8 +98,10 @@ export const EVENTS = [
     offers: {
       '@type': 'Offer' as const,
       url: 'https://doubleyellow.bg/booking',
+      price: '25',
       priceCurrency: 'BGN',
       availability: 'https://schema.org/InStock',
+      validFrom: '2025-11-13T00:00:00+02:00',
     },
   },
 ] as const;
