@@ -34,7 +34,7 @@ export default function StorePage() {
             <a href="tel:+359896754014" style={{ color: "#ffcc00", textDecoration: "underline" }}>
               0896 754 014
             </a>
-            . We ship via Ekont.
+            . We ship via Ekont / Speedy.
           </span>
         </div>
       </div>
