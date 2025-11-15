@@ -23,7 +23,19 @@ export default function StorePage() {
         <div className="membership-sub">
           Official Double Yellow gear and on-court essentials.
           <br />
-          <strong>Available only at the club</strong> — see it, feel it, play it.
+          <strong>Available at the club</strong> — see it, feel it, play it.
+          <br />
+          <span style={{ marginTop: "8px", display: "inline-block" }}>
+            Order via email{" "}
+            <a href="mailto:jakub@doubleyellowsquash.com" style={{ color: "#ffcc00", textDecoration: "underline" }}>
+              jakub@doubleyellowsquash.com
+            </a>
+            {" "}or phone{" "}
+            <a href="tel:+359896754014" style={{ color: "#ffcc00", textDecoration: "underline" }}>
+              0896 754 014
+            </a>
+            . We ship via Econt.
+          </span>
         </div>
       </div>
 
