@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { CATEGORIES } from "@/data/storeItems";
+import Image from "next/image";
 
 type OpenMap = Record<string, boolean>;
 
@@ -96,15 +97,34 @@ export default function StorePage() {
               className={`store-panel ${isOpen ? "panel-open" : "panel-closed"}`}
             >
               <ul className="store-list">
-                {cat.items.map((p) => (
-                  <li key={p.name} className="store-item">
-                    <span className="store-name">{p.name}</span>
-                    <span className="store-price">
-                      BGN {p.priceBGN.toFixed(2)}
-                      <span className="eur"> ({p.priceEUR.toFixed(2)} €)</span>
-                    </span>
-                  </li>
-                ))}
+                {cat.items.map((p) => {
+                  const iconByCategory: Record<string, string> = {
+                    Rackets: "/store/icons/racket.svg",
+                    Shoes: "/store/icons/shoes.svg",
+                    "Bags & Backpacks": "/store/icons/bag.svg",
+                    "Strings & Grips": "/store/icons/strings.svg",
+                    Apparel: "/store/icons/apparel.svg",
+                    Eyewear: "/store/icons/eyewear.svg",
+                    Drinks: "/store/icons/drink.svg",
+                    Rentals: "/store/icons/rental.svg",
+                  };
+                  const imgSrc = (p as any).image ?? iconByCategory[cat.title] ?? "/store/icons/racket.svg";
+                  const imgAlt = (p as any).imageAlt ?? `${p.name}`;
+                  return (
+                    <li key={p.name} className="store-item">
+                      <div className="store-left">
+                        <div className="store-pic" aria-hidden={!imgAlt}>
+                          <Image src={imgSrc} alt={imgAlt} width={56} height={56} />
+                        </div>
+                        <span className="store-name">{p.name}</span>
+                      </div>
+                      <span className="store-price">
+                        BGN {p.priceBGN.toFixed(2)}
+                        <span className="eur"> ({p.priceEUR.toFixed(2)} €)</span>
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
