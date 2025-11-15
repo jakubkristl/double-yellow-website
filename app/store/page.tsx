@@ -1,27 +1,12 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { CATEGORIES } from "@/data/storeItems";
 import Image from "next/image";
 
-type OpenMap = Record<string, boolean>;
-
 export default function StorePage() {
-  // Track which sections are open
-  const [open, setOpen] = useState<OpenMap>(() =>
-    Object.fromEntries(CATEGORIES.map((c) => [c.title, true])) // default = all open
-  );
-
-  const allOpen = useMemo(
-    () => Object.values(open).every(Boolean),
-    [open]
-  );
-
-  const toggle = (title: string) =>
-    setOpen((prev) => ({ ...prev, [title]: !prev[title] }));
-
-  const setAll = (value: boolean) =>
-    setOpen(Object.fromEntries(CATEGORIES.map((c) => [c.title, value])));
+  // Filter out Drinks category temporarily
+  const visibleCategories = CATEGORIES.filter((cat) => cat.title !== "Drinks");
 
   // Update this whenever you edit prices/items
   const lastUpdated = new Date("2025-11-02");
@@ -42,90 +27,40 @@ export default function StorePage() {
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="store-controls">
-        <button
-          type="button"
-          className="btn-ghost"
-          onClick={() => setAll(true)}
-          disabled={allOpen}
-          aria-disabled={allOpen}
-        >
-          Expand all
-        </button>
-        <button
-          type="button"
-          className="btn-ghost"
-          onClick={() => setAll(false)}
-          disabled={!allOpen}
-          aria-disabled={!allOpen}
-        >
-          Collapse all
-        </button>
-      </div>
+      {/* Category sections with card grids */}
+      {visibleCategories.map((cat) => {
+        const iconByCategory: Record<string, string> = {
+          Rackets: "/store/icons/racket.svg",
+          Shoes: "/store/icons/shoes.svg",
+          "Bags & Backpacks": "/store/icons/bag.svg",
+          "Strings & Grips": "/store/icons/strings.svg",
+          Apparel: "/store/icons/apparel.svg",
+          Eyewear: "/store/icons/eyewear.svg",
+          Rentals: "/store/icons/rental.svg",
+        };
 
-      {/* Accordions */}
-      {CATEGORIES.map((cat) => {
-        const isOpen = open[cat.title];
         return (
-          <div key={cat.title} className="store-block">
-            <button
-              type="button"
-              className="store-accordion"
-              onClick={() => toggle(cat.title)}
-              aria-expanded={isOpen}
-              aria-controls={`panel-${cat.title}`}
-            >
-              <h2 className="store-cat">{cat.title}</h2>
-              <svg
-                className={`store-toggle-icon ${isOpen ? "open" : ""}`}
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                role="img"
-                aria-hidden="true"
-              >
-                <path
-                  fill="currentColor"
-                  d="M12 15.5L5 8.5l1.4-1.4L12 12.7l5.6-5.6L19 8.5z"
-                />
-              </svg>
-            </button>
-
-            <div
-              id={`panel-${cat.title}`}
-              className={`store-panel ${isOpen ? "panel-open" : "panel-closed"}`}
-            >
-              <ul className="store-list">
-                {cat.items.map((p) => {
-                  const iconByCategory: Record<string, string> = {
-                    Rackets: "/store/icons/racket.svg",
-                    Shoes: "/store/icons/shoes.svg",
-                    "Bags & Backpacks": "/store/icons/bag.svg",
-                    "Strings & Grips": "/store/icons/strings.svg",
-                    Apparel: "/store/icons/apparel.svg",
-                    Eyewear: "/store/icons/eyewear.svg",
-                    Drinks: "/store/icons/drink.svg",
-                    Rentals: "/store/icons/rental.svg",
-                  };
-                  const imgSrc = (p as any).image ?? iconByCategory[cat.title] ?? "/store/icons/racket.svg";
-                  const imgAlt = (p as any).imageAlt ?? `${p.name}`;
-                  return (
-                    <li key={p.name} className="store-item">
-                      <div className="store-left">
-                        <div className="store-pic" aria-hidden={!imgAlt}>
-                          <Image src={imgSrc} alt={imgAlt} width={56} height={56} />
-                        </div>
-                        <span className="store-name">{p.name}</span>
+          <div key={cat.title} className="store-category-block">
+            <h2 className="store-cat">{cat.title}</h2>
+            <div className="store-grid">
+              {cat.items.map((item) => {
+                const imgSrc = (item as any).image ?? iconByCategory[cat.title] ?? "/store/icons/racket.svg";
+                const imgAlt = (item as any).imageAlt ?? item.name;
+                return (
+                  <div key={item.name} className="store-card">
+                    <div className="store-card-image">
+                      <Image src={imgSrc} alt={imgAlt} width={280} height={280} />
+                    </div>
+                    <div className="store-card-info">
+                      <h3 className="store-card-name">{item.name}</h3>
+                      <div className="store-card-price">
+                        BGN {item.priceBGN.toFixed(2)}
+                        <span className="store-card-eur"> ({item.priceEUR.toFixed(2)} €)</span>
                       </div>
-                      <span className="store-price">
-                        BGN {p.priceBGN.toFixed(2)}
-                        <span className="eur"> ({p.priceEUR.toFixed(2)} €)</span>
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         );
