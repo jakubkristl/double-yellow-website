@@ -6,8 +6,11 @@ export default function Footer() {
       <div className="container footer-grid">
         <div className="footer-col">
           <h4 className="footer-title">Double Yellow Squash Club</h4>
+          <p className="muted" style={{ fontSize: "0.85rem", marginBottom: "8px" }}>
+            Sport And Beyond EOOD
+          </p>
           <p className="muted">
-            National Sports Academy (NSA), ul. “Akad. Stefan Mladenov” 21, 1700
+            National Sports Academy (NSA), ul. "Akad. Stefan Mladenov" 21, 1700
             Sofia
           </p>
           <p className="muted">
@@ -45,7 +48,7 @@ export default function Footer() {
       </div>
 
       <div className="container footer-note">
-        © {new Date().getFullYear()} Double Yellow Squash Club
+        © {new Date().getFullYear()} Double Yellow Squash Club • Operated by Sport And Beyond EOOD
       </div>
     </footer>
   );

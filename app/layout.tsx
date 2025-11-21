@@ -38,6 +38,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "SportsActivityLocation",
   name: "Double Yellow Squash Club",
+  legalName: "Sport And Beyond EOOD",
   url: "https://doubleyellow.bg",
   telephone: "+359 896 754 014",
   address: {

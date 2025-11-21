@@ -32,17 +32,18 @@ export default function AboutPage() {
 
       <div className="about-content">
         <p>
-          <strong>Double Yellow Squash Club</strong> was born from a simple idea:
+          <strong>Double Yellow Squash Club</strong>, operated by{" "}
+          <strong>Sport And Beyond EOOD</strong>, was born from a simple idea:
           to bring life back to the long-forgotten squash courts at the National
           Sports Academy in Sofia — and to build a modern, community-driven home
           for the game we love.
         </p>
 
         <p>
-          Under <strong>Sport And Beyond EOOD</strong>, the project started as a
-          renovation mission and quickly became a full-blown revival. The courts
-          had seen better days — cracked walls, dim lights, warped floors. But
-          what they lacked in shine, they made up for in potential.
+          The project started as a renovation mission and quickly became a
+          full-blown revival. The courts had seen better days — cracked walls,
+          dim lights, warped floors. But what they lacked in shine, they made up
+          for in potential.
         </p>
 
         <p>
