@@ -37,6 +37,9 @@ const TEAM: Member[] = [
   },
 ];
 
+import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
+
 export default function TeamPage() {
   return (
     <section className="container">
@@ -46,12 +49,7 @@ export default function TeamPage() {
         {TEAM.map((m) => (
           <li key={m.name} className="team-row card">
             <div className="cell avatar">
-              <img
-                src={m.photo}
-                alt={m.name}
-                className="team-photo"
-                loading="lazy"
-              />
+              <OptimizedImage src={m.photo} alt={m.name} width={220} height={220} className="team-photo" style={{ borderRadius: 8 }} />
             </div>
 
             <div className="cell info">

@@ -102,6 +102,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <a
+          href="#main-content"
+          style={{
+            position: "absolute",
+            left: -9999,
+            top: "auto",
+            width: 1,
+            height: 1,
+            overflow: "hidden",
+          }}
+          className="skip-link"
+        >
+          Skip to content
+        </a>
         {/* SEO JSON-LD injections */}
         <script
           type="application/ld+json"
@@ -116,7 +130,7 @@ export default function RootLayout({
         <Breadcrumbs />
 
         <Navbar />
-        <main className="container">{children}</main>
+        <main id="main-content" className="container">{children}</main>
         <Footer />
       </body>
     </html>

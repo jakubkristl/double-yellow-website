@@ -1,0 +1,127 @@
+{
+  "/about\\after1.jpg": [
+    "/optimized/about/after1-480.webp",
+    "/optimized/about/after1-768.webp",
+    "/optimized/about/after1-1200.webp",
+    "/optimized/about/after1-2048.webp",
+    "/optimized/about/after1-1200.jpg"
+  ],
+  "/about\\after2.jpg": [
+    "/optimized/about/after2-480.webp",
+    "/optimized/about/after2-768.webp",
+    "/optimized/about/after2-1200.webp",
+    "/optimized/about/after2-2048.webp",
+    "/optimized/about/after2-1200.jpg"
+  ],
+  "/about\\before1.jpg": [
+    "/optimized/about/before1-480.webp",
+    "/optimized/about/before1-768.webp",
+    "/optimized/about/before1-1200.webp",
+    "/optimized/about/before1-1200.jpg"
+  ],
+  "/about\\before2.jpg": [
+    "/optimized/about/before2-480.webp",
+    "/optimized/about/before2-768.webp",
+    "/optimized/about/before2-1200.webp",
+    "/optimized/about/before2-1200.jpg"
+  ],
+  "/about\\during1.jpg": [
+    "/optimized/about/during1-480.webp",
+    "/optimized/about/during1-768.webp",
+    "/optimized/about/during1-1200.webp",
+    "/optimized/about/during1-2048.webp",
+    "/optimized/about/during1-1200.jpg"
+  ],
+  "/about\\during2.jpg": [
+    "/optimized/about/during2-480.webp",
+    "/optimized/about/during2-768.webp",
+    "/optimized/about/during2-1200.webp",
+    "/optimized/about/during2-2048.webp",
+    "/optimized/about/during2-1200.jpg"
+  ],
+  "/activities\\beginners.jpg": [
+    "/optimized/activities/beginners-480.webp",
+    "/optimized/activities/beginners-768.webp",
+    "/optimized/activities/beginners-1200.webp",
+    "/optimized/activities/beginners-2048.webp",
+    "/optimized/activities/beginners-1200.jpg"
+  ],
+  "/activities\\comeandplay.jpg": [
+    "/optimized/activities/comeandplay-1200.jpg"
+  ],
+  "/activities\\glasschallenge.jpg": [
+    "/optimized/activities/glasschallenge-480.webp",
+    "/optimized/activities/glasschallenge-768.webp",
+    "/optimized/activities/glasschallenge-1200.webp",
+    "/optimized/activities/glasschallenge-1200.jpg"
+  ],
+  "/activities\\magnificent7.jpg": [
+    "/optimized/activities/magnificent7-480.webp",
+    "/optimized/activities/magnificent7-768.webp",
+    "/optimized/activities/magnificent7-1200.webp",
+    "/optimized/activities/magnificent7-2048.webp",
+    "/optimized/activities/magnificent7-1200.jpg"
+  ],
+  "/activities\\minisquash.jpg": [
+    "/optimized/activities/minisquash-480.webp",
+    "/optimized/activities/minisquash-1200.jpg"
+  ],
+  "/activities\\timeforladies.jpg": [
+    "/optimized/activities/timeforladies-480.webp",
+    "/optimized/activities/timeforladies-1200.jpg"
+  ],
+  "/cards\\back.png": [
+    "/optimized/cards/back-480.webp",
+    "/optimized/cards/back-768.webp",
+    "/optimized/cards/back-1200.jpg"
+  ],
+  "/cards\\front.png": [
+    "/optimized/cards/front-480.webp",
+    "/optimized/cards/front-768.webp",
+    "/optimized/cards/front-1200.jpg"
+  ],
+  "/events\\tomas.jpg": [
+    "/optimized/events/tomas-480.webp",
+    "/optimized/events/tomas-768.webp",
+    "/optimized/events/tomas-1200.jpg"
+  ],
+  "/hero\\01.jpg": [
+    "/optimized/hero/01-480.webp",
+    "/optimized/hero/01-768.webp",
+    "/optimized/hero/01-1200.webp",
+    "/optimized/hero/01-2048.webp",
+    "/optimized/hero/01-1200.jpg"
+  ],
+  "/hero\\02.jpg": [
+    "/optimized/hero/02-480.webp",
+    "/optimized/hero/02-768.webp",
+    "/optimized/hero/02-1200.webp",
+    "/optimized/hero/02-2048.webp",
+    "/optimized/hero/02-1200.jpg"
+  ],
+  "/hero\\03.jpg": [
+    "/optimized/hero/03-480.webp",
+    "/optimized/hero/03-768.webp",
+    "/optimized/hero/03-1200.webp",
+    "/optimized/hero/03-2048.webp",
+    "/optimized/hero/03-1200.jpg"
+  ],
+  "/hero\\04.jpg": [
+    "/optimized/hero/04-480.webp",
+    "/optimized/hero/04-768.webp",
+    "/optimized/hero/04-1200.webp",
+    "/optimized/hero/04-2048.webp",
+    "/optimized/hero/04-1200.jpg"
+  ],
+  "/team\\jakub.jpg": [
+    "/optimized/team/jakub-480.webp",
+    "/optimized/team/jakub-768.webp",
+    "/optimized/team/jakub-1200.jpg"
+  ],
+  "/team\\margarita.jpg": [
+    "/optimized/team/margarita-1200.jpg"
+  ],
+  "/team\\vasil-stoimenov.jpg": [
+    "/optimized/team/vasil-stoimenov-1200.jpg"
+  ]
+}

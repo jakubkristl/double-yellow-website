@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <header className="navbar-wrap">
-      <nav className="container navbar">
+      <nav className="container navbar" aria-label="Main navigation">
         <Link href={"/" as Route} className="brand" aria-label="Double Yellow Squash Club | Home">
           <Image
             src="/logo.png"
@@ -125,6 +125,13 @@ export default function Navbar() {
           padding: 10px;
           z-index: 101;
         }
+        .hamburger:focus-visible,
+        .link:focus-visible,
+        .brand:focus-visible {
+          outline: 3px solid #ffcc00;
+          outline-offset: 3px;
+          border-radius: 6px;
+        }
         .hamburger span {
           display: block;
           width: 28px;
@@ -169,6 +176,9 @@ export default function Navbar() {
           color: #ffdd4d;
           text-shadow: 0 2px 12px rgba(255, 204, 0, 0.5);
           transform: translateY(-1px);
+        }
+        .link:focus {
+          transform: none;
         }
         .link.active::after {
           content: "";

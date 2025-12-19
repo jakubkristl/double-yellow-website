@@ -36,6 +36,9 @@ type Pack = {
 const BGN_PER_EUR = 1.95583;
 const toEUR = (bgn: number) => (bgn > 0 ? Math.round(bgn / BGN_PER_EUR) : 0);
 
+import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
+
 const CARD_FRONT = "/cards/front.png";
 const CARD_BACK = "/cards/back.png";
 
@@ -82,26 +85,12 @@ export default function MembershipPage() {
     flexWrap: "wrap",
   }}
 >
-  <img
-    src={CARD_FRONT}
-    alt="Card Front"
-    style={{
-      width: "320px",
-      height: "auto",
-      borderRadius: "12px",
-      boxShadow: "0 0 20px rgba(0,0,0,0.5)",
-    }}
-  />
-  <img
-    src={CARD_BACK}
-    alt="Card Back"
-    style={{
-      width: "320px",
-      height: "auto",
-      borderRadius: "12px",
-      boxShadow: "0 0 20px rgba(0,0,0,0.5)",
-    }}
-  />
+  <div style={{ width: 320 }}>
+    <OptimizedImage src={CARD_FRONT} alt="Card Front" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
+  </div>
+  <div style={{ width: 320 }}>
+    <OptimizedImage src={CARD_BACK} alt="Card Back" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
+  </div>
 </div>
 
 

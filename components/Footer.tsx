@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" role="contentinfo">
       <div className="container footer-grid">
         <div className="footer-col">
           <h4 className="footer-title">Double Yellow Squash Club</h4>
@@ -40,7 +40,7 @@ export default function Footer() {
           <h4 className="footer-title">Contact</h4>
           <p className="muted">+359 896 754 014</p>
           <p className="muted">
-            <a href="mailto:jakub@doubleyellowsquash.com">
+            <a href="mailto:jakub@doubleyellowsquash.com" aria-label="Email Double Yellow">
               jakub@doubleyellowsquash.com
             </a>
           </p>
