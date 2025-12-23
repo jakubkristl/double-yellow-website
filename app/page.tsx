@@ -13,7 +13,7 @@ export default function Home() {
   const heroImages = baseImages;
   const heroAlts = baseAlts;
 
-  // show only the Santa holiday image until Jan 2, 2026
+  // Show Santa holiday image until Jan 2, 2026; automatically switch to carousel after
   const today = new Date();
   const holidayEndDate = new Date(2026, 0, 2);
   const isHolidayPeriod = today < holidayEndDate;

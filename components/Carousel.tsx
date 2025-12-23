@@ -26,15 +26,6 @@ export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props
   const prev = () => setI((p) => (p - 1 + Math.max(1, displayImages.length)) % Math.max(1, displayImages.length));
   const next = () => setI((p) => (p + 1) % Math.max(1, displayImages.length));
 
-  // Debug: log images length and active index (visible in browser console)
-  useEffect(() => {
-    try {
-      // eslint-disable-next-line no-console
-      console.log("Carousel debug:", { length: displayImages.length, index: i, images: displayImages });
-    } catch (e) {
-      // ignore
-    }
-  }, [displayImages, i]);
 
   // On client mount, optionally prepend the holiday image so SSR stays consistent
   useEffect(() => {
