@@ -1,5 +1,7 @@
 // app/about/page.tsx
 import React from "react";
+import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -80,25 +82,37 @@ export default function AboutPage() {
       <div className="about-gallery-grid">
         <div className="gallery-group">
           <h3 className="gallery-heading">Before</h3>
-          <div className="gallery-row">
-            <img src="/about/before1.jpg" alt="Before renovation - worn walls" />
-            <img src="/about/before2.jpg" alt="Before renovation - damage detail" />
-          </div>
+            <div className="gallery-row">
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+                <OptimizedImage src="/about/before1.jpg" alt="Before renovation - worn walls" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+              </div>
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+                <OptimizedImage src="/about/before2.jpg" alt="Before renovation - damage detail" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+              </div>
+            </div>
         </div>
 
         <div className="gallery-group">
           <h3 className="gallery-heading">During</h3>
           <div className="gallery-row">
-            <img src="/about/during1.jpg" alt="Renovation in progress - front wall" />
-            <img src="/about/during2.jpg" alt="Renovation in progress - new panels" />
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+              <OptimizedImage src="/about/during1.jpg" alt="Renovation in progress - front wall" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+            </div>
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+              <OptimizedImage src="/about/during2.jpg" alt="Renovation in progress - new panels" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+            </div>
           </div>
         </div>
 
         <div className="gallery-group">
           <h3 className="gallery-heading">After</h3>
           <div className="gallery-row">
-            <img src="/about/after1.jpg" alt="Renovated squash courts - Double Yellow" />
-            <img src="/about/after2.jpg" alt="Finished court with seating area" />
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+              <OptimizedImage src="/about/after1.jpg" alt="Renovated squash courts - Double Yellow" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+            </div>
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+              <OptimizedImage src="/about/after2.jpg" alt="Finished court with seating area" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+            </div>
           </div>
         </div>
       </div>

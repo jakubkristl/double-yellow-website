@@ -1,4 +1,5 @@
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -46,13 +47,7 @@ export default function ActivitiesPage() {
           }}
         >
           <div style={{ height: "200px", overflow: "hidden" }}>
-            <Image
-              src="/activities/timeforladies.jpg"
-              alt="Time for Ladies"
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <OptimizedImage src="/activities/timeforladies.jpg" alt="Time for Ladies" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div style={{ padding: "20px" }}>
             <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
@@ -91,13 +86,7 @@ export default function ActivitiesPage() {
           }}
         >
           <div style={{ height: "200px", overflow: "hidden" }}>
-            <Image
-              src="/activities/minisquash.jpg"
-              alt="Mini Squash"
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <OptimizedImage src="/activities/minisquash.jpg" alt="Mini Squash" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div style={{ padding: "20px" }}>
             <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
@@ -136,13 +125,7 @@ export default function ActivitiesPage() {
           }}
         >
           <div style={{ height: "200px", overflow: "hidden" }}>
-            <Image
-              src="/activities/magnificent7.jpg"
-              alt="Magnificent 7"
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <OptimizedImage src="/activities/magnificent7.jpg" alt="Magnificent 7" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div style={{ padding: "20px" }}>
             <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
@@ -181,13 +164,7 @@ export default function ActivitiesPage() {
           }}
         >
           <div style={{ height: "200px", overflow: "hidden" }}>
-            <Image
-              src="/activities/comeandplay.jpg"
-              alt="Come and Play"
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <OptimizedImage src="/activities/comeandplay.jpg" alt="Come and Play" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div style={{ padding: "20px" }}>
             <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
@@ -226,13 +203,7 @@ export default function ActivitiesPage() {
           }}
         >
           <div style={{ height: "200px", overflow: "hidden" }}>
-            <Image
-              src="/activities/beginners.jpg"
-              alt="Squash for Beginners"
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <OptimizedImage src="/activities/beginners.jpg" alt="Squash for Beginners" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div style={{ padding: "20px" }}>
             <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
@@ -271,13 +242,7 @@ export default function ActivitiesPage() {
           }}
         >
           <div style={{ height: "200px", overflow: "hidden" }}>
-            <Image
-              src="/activities/glasschallenge.jpg"
-              alt="Glass Challenge"
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <OptimizedImage src="/activities/glasschallenge.jpg" alt="Glass Challenge" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div style={{ padding: "20px" }}>
             <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>

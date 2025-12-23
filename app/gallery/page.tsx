@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const galleryCategories = [
   {
@@ -42,7 +42,50 @@ const galleryCategories = [
 ];
 
 export default function GalleryPage() {
-  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+  const [selected, setSelected] = useState<{ catIdx: number; imgIdx: number } | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const lastActiveRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!selected) return;
+
+    lastActiveRef.current = document.activeElement as HTMLElement | null;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelected(null);
+      }
+      if (e.key === "ArrowRight") {
+        navigate(1);
+      }
+      if (e.key === "ArrowLeft") {
+        navigate(-1);
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    // focus the close button for screen reader / keyboard users
+    setTimeout(() => closeButtonRef.current?.focus(), 0);
+
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      // return focus to previous element
+      lastActiveRef.current?.focus?.();
+    };
+
+    // helper to navigate images when modal is open
+    const sel = selected;
+    function navigate(delta: number) {
+      if (!sel) return;
+      const flat = galleryCategories.flatMap((c, ci) =>
+        c.images.map((img, i) => ({ ci, i, src: img.src, alt: img.alt }))
+      );
+      const current = flat.findIndex((it) => it.ci === sel.catIdx && it.i === sel.imgIdx);
+      if (current === -1) return;
+      const next = flat[(current + delta + flat.length) % flat.length];
+      setSelected({ catIdx: next.ci, imgIdx: next.i });
+    }
+  }, [selected]);
 
   return (
     <main style={{ padding: "40px 20px", maxWidth: "1400px", margin: "0 auto" }}>
@@ -75,9 +118,10 @@ export default function GalleryPage() {
             }}
           >
             {category.images.map((image, imgIdx) => (
-              <div
-                key={imgIdx}
-                onClick={() => setSelectedImage(image)}
+              <button
+                key={image.src + imgIdx}
+                type="button"
+                onClick={() => setSelected({ catIdx: idx, imgIdx })}
                 style={{
                   position: "relative",
                   aspectRatio: "4/3",
@@ -86,15 +130,20 @@ export default function GalleryPage() {
                   cursor: "pointer",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                  border: "none",
+                  padding: 0,
+                  background: "transparent",
+                  textAlign: "left",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05)";
-                  e.currentTarget.style.boxShadow = "0 8px 24px rgba(255, 204, 0, 0.3)";
+                  (e.currentTarget as HTMLElement).style.transform = "scale(1.05)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(255, 204, 0, 0.3)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+                  (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
                 }}
+                aria-label={`Open ${image.alt} in lightbox`}
               >
                 <Image
                   src={image.src}
@@ -102,17 +151,20 @@ export default function GalleryPage() {
                   fill
                   style={{ objectFit: "cover" }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  loading="lazy"
                 />
-              </div>
+              </button>
             ))}
           </div>
         </section>
       ))}
 
       {/* Lightbox Modal */}
-      {selectedImage && (
+      {selected && (
         <div
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelected(null)}
+          role="dialog"
+          aria-modal="true"
           style={{
             position: "fixed",
             top: 0,
@@ -137,45 +189,57 @@ export default function GalleryPage() {
               cursor: "default",
             }}
           >
-            <Image
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              width={1200}
-              height={900}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "90vh",
-                width: "auto",
-                height: "auto",
-                objectFit: "contain",
-              }}
-            />
-            <button
-              onClick={() => setSelectedImage(null)}
-              style={{
-                position: "absolute",
-                top: "-40px",
-                right: "0",
-                background: "none",
-                border: "none",
-                color: "#fff",
-                fontSize: "32px",
-                cursor: "pointer",
-                padding: "10px",
-                lineHeight: 1,
-              }}
-              aria-label="Close"
-            >
-              ✕
-            </button>
-            <p style={{
-              color: "#ccc",
-              textAlign: "center",
-              marginTop: "16px",
-              fontSize: "14px",
-            }}>
-              {selectedImage.alt}
-            </p>
+            {
+              (() => {
+                const img = galleryCategories[selected.catIdx].images[selected.imgIdx];
+                return (
+                  <>
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      width={1200}
+                      height={900}
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "90vh",
+                        width: "auto",
+                        height: "auto",
+                        objectFit: "contain",
+                      }}
+                    />
+                    <button
+                      ref={closeButtonRef}
+                      onClick={() => setSelected(null)}
+                      style={{
+                        position: "absolute",
+                        top: "-40px",
+                        right: "0",
+                        background: "none",
+                        border: "none",
+                        color: "#fff",
+                        fontSize: "32px",
+                        cursor: "pointer",
+                        padding: "10px",
+                        lineHeight: 1,
+                      }}
+                      aria-label="Close"
+                    >
+                      ✕
+                    </button>
+                    <p
+                      style={{
+                        color: "#ccc",
+                        textAlign: "center",
+                        marginTop: "16px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {img.alt}
+                    </p>
+                  </>
+                );
+              })()
+            }
           </div>
         </div>
       )}

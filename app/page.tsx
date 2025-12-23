@@ -2,13 +2,29 @@ import Carousel from "@/components/Carousel";
 import Image from "next/image";
 
 export default function Home() {
-  const heroImages = ["/hero/01.jpg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
-  const heroAlts = [
-    "Double Yellow Squash Club - renovated courts with WSF specifications",
-    "Professional squash player serving on a bright, newly renovated court",
-    "Multiple squash courts with modern lighting and equipment",
-    "Players warming up before a match at Double Yellow Squash Club"
-  ];
+  // Include holiday image until 1/2/26
+  const today = new Date();
+  const holidayEndDate = new Date(2026, 0, 2); // January 2, 2026
+  const isHolidayPeriod = today < holidayEndDate;
+  
+  const heroImages = isHolidayPeriod 
+    ? ["/hero/santa-holiday.jpg", "/hero/01.jpg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"]
+    : ["/hero/01.jpg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
+  
+  const heroAlts = isHolidayPeriod
+    ? [
+        "Holiday special - Santa celebrating with tennis at Double Yellow Squash Club",
+        "Double Yellow Squash Club - renovated courts with WSF specifications",
+        "Professional squash player serving on a bright, newly renovated court",
+        "Multiple squash courts with modern lighting and equipment",
+        "Players warming up before a match at Double Yellow Squash Club"
+      ]
+    : [
+        "Double Yellow Squash Club - renovated courts with WSF specifications",
+        "Professional squash player serving on a bright, newly renovated court",
+        "Multiple squash courts with modern lighting and equipment",
+        "Players warming up before a match at Double Yellow Squash Club"
+      ];
 
   return (
     <>

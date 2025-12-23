@@ -3,6 +3,7 @@
 import React from "react";
 import { CATEGORIES } from "@/data/storeItems";
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 
 export default function StorePage() {
   // Filter out Drinks category temporarily
@@ -61,7 +62,7 @@ export default function StorePage() {
                 return (
                   <div key={item.name} className="store-card">
                     <div className="store-card-image">
-                      <Image src={imgSrc} alt={imgAlt} width={280} height={280} />
+                      <OptimizedImage src={imgSrc} alt={imgAlt} width={280} height={280} />
                     </div>
                     <div className="store-card-info">
                       <h3 className="store-card-name">{item.name}</h3>

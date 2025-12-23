@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "optimize-images": "node tools/optimize-images.mjs",
+    "prebuild": "node tools/optimize-images.mjs || true",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit"
@@ -18,6 +20,7 @@
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.4.5"
   }
 }
