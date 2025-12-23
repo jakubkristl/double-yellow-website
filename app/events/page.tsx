@@ -1,4 +1,5 @@
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -29,7 +30,7 @@ export default function EventsPage() {
 
         <article className="event-card">
           <div className="event-card__image">
-            <Image
+            <OptimizedImage
               src="/events/tomas.jpg"
               alt="Tomáš Tóth coaching at Double Yellow Squash Club"
               width={1600}

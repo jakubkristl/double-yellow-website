@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "optimize-images": "node tools/optimize-images.mjs",
+    "prebuild": "node tools/optimize-images.mjs || true",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit"
