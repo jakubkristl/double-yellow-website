@@ -8,41 +8,41 @@ const galleryCategories = [
     title: "The Courts",
     description: "Our renovated squash courts with WSF specifications",
     images: [
-      { src: "/hero/01.jpg", alt: "Main squash court - Double Yellow" },
-      { src: "/hero/02.jpg", alt: "Court view with lighting" },
-      { src: "/hero/03.jpg", alt: "Professional court setup" },
-      { src: "/hero/04.jpg", alt: "Court flooring and walls" },
+      { src: "/hero/01.jpg", alt: "Main squash court - Double Yellow", rotation: 0 },
+      { src: "/hero/02.jpg", alt: "Court view with lighting", rotation: 0 },
+      { src: "/hero/03.jpg", alt: "Professional court setup", rotation: 0 },
+      { src: "/hero/04.jpg", alt: "Court flooring and walls", rotation: 0 },
     ],
   },
   {
     title: "Transformation",
     description: "From renovation to revival — our journey",
     images: [
-      { src: "/about/before1.jpg", alt: "Before renovation - worn walls" },
-      { src: "/about/before2.jpg", alt: "Before renovation - damage detail" },
-      { src: "/about/during1.jpg", alt: "Renovation in progress - front wall" },
-      { src: "/about/during2.jpg", alt: "Renovation in progress - new panels" },
-      { src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow" },
-      { src: "/about/after2.jpg", alt: "Finished court with seating area" },
+      { src: "/about/before1.jpg", alt: "Before renovation - worn walls", rotation: 0 },
+      { src: "/about/before2.jpg", alt: "Before renovation - damage detail", rotation: 0 },
+      { src: "/about/during1.jpg", alt: "Renovation in progress - front wall", rotation: 90 },
+      { src: "/about/during2.jpg", alt: "Renovation in progress - new panels", rotation: 90 },
+      { src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow", rotation: 0 },
+      { src: "/about/after2.jpg", alt: "Finished court with seating area", rotation: 0 },
     ],
   },
   {
     title: "Activities & Events",
     description: "Community sessions, tournaments, and coaching",
     images: [
-      { src: "/activities/timeforladies.jpg", alt: "Time for Ladies session" },
-      { src: "/activities/minisquash.jpg", alt: "Mini Squash for kids" },
-      { src: "/activities/magnificent7.jpg", alt: "Magnificent 7 tournament" },
-      { src: "/activities/comeandplay.jpg", alt: "Come and Play session" },
-      { src: "/activities/beginners.jpg", alt: "Squash for Beginners class" },
-      { src: "/activities/glasschallenge.jpg", alt: "Glass Challenge event" },
-      { src: "/events/tomas.jpg", alt: "Special event with Tomas" },
+      { src: "/activities/timeforladies.jpg", alt: "Time for Ladies session", rotation: 0 },
+      { src: "/activities/minisquash.jpg", alt: "Mini Squash for kids", rotation: 0 },
+      { src: "/activities/magnificent7.jpg", alt: "Magnificent 7 tournament", rotation: 0 },
+      { src: "/activities/comeandplay.jpg", alt: "Come and Play session", rotation: 0 },
+      { src: "/activities/beginners.jpg", alt: "Squash for Beginners class", rotation: 0 },
+      { src: "/activities/glasschallenge.jpg", alt: "Glass Challenge event", rotation: 0 },
     ],
   },
 ];
 
 export default function GalleryPage() {
   const [selected, setSelected] = useState<{ catIdx: number; imgIdx: number } | null>(null);
+  const [zoom, setZoom] = useState(1);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const lastActiveRef = useRef<HTMLElement | null>(null);
 
@@ -50,6 +50,7 @@ export default function GalleryPage() {
     if (!selected) return;
 
     lastActiveRef.current = document.activeElement as HTMLElement | null;
+    setZoom(1); // Reset zoom when opening a new image
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -127,7 +128,7 @@ export default function GalleryPage() {
                   aspectRatio: "4/3",
                   overflow: "hidden",
                   borderRadius: "12px",
-                  cursor: "pointer",
+                  cursor: "zoom-in",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
                   border: "none",
@@ -149,7 +150,7 @@ export default function GalleryPage() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover", transform: `rotate(${image.rotation}deg)` }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   loading="lazy"
                 />
@@ -177,16 +178,36 @@ export default function GalleryPage() {
             justifyContent: "center",
             zIndex: 1000,
             padding: "20px",
-            cursor: "pointer",
+            cursor: zoom > 1 ? "grab" : "pointer",
+            overflow: "hidden",
+          }}
+          onWheel={(e) => {
+            if (e.deltaY < 0) {
+              setZoom((prev) => Math.min(prev + 0.2, 3));
+            } else {
+              setZoom((prev) => Math.max(prev - 0.2, 1));
+            }
+            e.preventDefault();
           }}
         >
           <div
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (zoom === 1) {
+                setZoom(2);
+              } else {
+                setZoom(1);
+              }
+            }}
             style={{
               position: "relative",
               maxWidth: "90vw",
               maxHeight: "90vh",
-              cursor: "default",
+              cursor: zoom > 1 ? "zoom-out" : "zoom-in",
+              transition: "transform 0.3s ease",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             {
@@ -205,6 +226,9 @@ export default function GalleryPage() {
                         width: "auto",
                         height: "auto",
                         objectFit: "contain",
+                        transform: `rotate(${img.rotation}deg) scale(${zoom})`,
+                        transition: "transform 0.3s ease",
+                        cursor: zoom > 1 ? "zoom-out" : "zoom-in",
                       }}
                     />
                     <button
