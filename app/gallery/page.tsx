@@ -45,6 +45,13 @@ export default function GalleryPage() {
   const [zoom, setZoom] = useState(1);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const lastActiveRef = useRef<HTMLElement | null>(null);
+  const pointersRef = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const initialPinchDistanceRef = useRef<number | null>(null);
+  const initialZoomRef = useRef<number>(1);
+  const lastPointerPosRef = useRef<{ x: number; y: number } | null>(null);
+  const panRef = useRef({ x: 0, y: 0 });
+  const isDraggingRef = useRef(false);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!selected) return;
@@ -87,6 +94,68 @@ export default function GalleryPage() {
       setSelected({ catIdx: next.ci, imgIdx: next.i });
     }
   }, [selected]);
+
+  useEffect(() => {
+    if (zoom === 1) {
+      panRef.current = { x: 0, y: 0 };
+      setTranslate({ x: 0, y: 0 });
+    }
+    initialZoomRef.current = zoom;
+  }, [zoom]);
+
+  function getDistance(a: { x: number; y: number }, b: { x: number; y: number }) {
+    return Math.hypot(b.x - a.x, b.y - a.y);
+  }
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    (e.currentTarget as Element).setPointerCapture(e.pointerId);
+    pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    lastPointerPosRef.current = { x: e.clientX, y: e.clientY };
+    if (pointersRef.current.size === 2) {
+      const [p1, p2] = Array.from(pointersRef.current.values());
+      initialPinchDistanceRef.current = getDistance(p1, p2);
+      initialZoomRef.current = zoom;
+    }
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!pointersRef.current.has(e.pointerId)) return;
+    pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pointersRef.current.size === 2) {
+      const [p1, p2] = Array.from(pointersRef.current.values());
+      const dist = getDistance(p1, p2);
+      const initial = initialPinchDistanceRef.current;
+      if (initial && initial > 0) {
+        const scaleFactor = dist / initial;
+        const nextZoom = Math.min(Math.max(initialZoomRef.current * scaleFactor, 1), 3);
+        setZoom(nextZoom);
+      }
+    } else if (pointersRef.current.size === 1 && zoom > 1) {
+      const last = lastPointerPosRef.current;
+      if (!last) return;
+      const dx = e.clientX - last.x;
+      const dy = e.clientY - last.y;
+      panRef.current = { x: panRef.current.x + dx, y: panRef.current.y + dy };
+      setTranslate({ ...panRef.current });
+      lastPointerPosRef.current = { x: e.clientX, y: e.clientY };
+      isDraggingRef.current = true;
+    }
+  };
+
+  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    pointersRef.current.delete(e.pointerId);
+    lastPointerPosRef.current = null;
+    initialPinchDistanceRef.current = null;
+    initialZoomRef.current = zoom;
+    try {
+      (e.currentTarget as Element).releasePointerCapture(e.pointerId);
+    } catch (err) {}
+    if (pointersRef.current.size === 0 && zoom <= 1) {
+      panRef.current = { x: 0, y: 0 };
+      setTranslate({ x: 0, y: 0 });
+    }
+  };
 
   return (
     <main style={{ padding: "40px 20px", maxWidth: "1400px", margin: "0 auto" }}>
@@ -193,12 +262,21 @@ export default function GalleryPage() {
           <div
             onClick={(e) => {
               e.stopPropagation();
+              if (isDraggingRef.current) {
+                // avoid click after panning
+                isDraggingRef.current = false;
+                return;
+              }
               if (zoom === 1) {
                 setZoom(2);
               } else {
                 setZoom(1);
               }
             }}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
             style={{
               position: "relative",
               maxWidth: "90vw",
@@ -208,6 +286,7 @@ export default function GalleryPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              touchAction: "none",
             }}
           >
             {
@@ -226,8 +305,8 @@ export default function GalleryPage() {
                         width: "auto",
                         height: "auto",
                         objectFit: "contain",
-                        transform: `rotate(${img.rotation}deg) scale(${zoom})`,
-                        transition: "transform 0.3s ease",
+                        transform: `translate(${translate.x}px, ${translate.y}px) rotate(${img.rotation}deg) scale(${zoom})`,
+                        transition: "transform 0.12s ease",
                         cursor: zoom > 1 ? "zoom-out" : "zoom-in",
                       }}
                     />
