@@ -52,6 +52,7 @@ export default function GalleryPage() {
   const panRef = useRef({ x: 0, y: 0 });
   const isDraggingRef = useRef(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!selected) return;
@@ -107,6 +108,27 @@ export default function GalleryPage() {
     return Math.hypot(b.x - a.x, b.y - a.y);
   }
 
+  function clampTranslateForCurrent(translateIn: { x: number; y: number }, zoomIn: number) {
+    const container = containerRef.current;
+    if (!container) return translateIn;
+    const img = container.querySelector('img') as HTMLImageElement | null;
+    if (!img) return translateIn;
+    const cRect = container.getBoundingClientRect();
+    const imgRect = img.getBoundingClientRect();
+
+    const displayedW = imgRect.width;
+    const displayedH = imgRect.height;
+    const overflowX = Math.max(0, displayedW * zoomIn - cRect.width);
+    const overflowY = Math.max(0, displayedH * zoomIn - cRect.height);
+    const maxX = overflowX / 2;
+    const maxY = overflowY / 2;
+
+    return {
+      x: Math.max(-maxX, Math.min(maxX, translateIn.x)),
+      y: Math.max(-maxY, Math.min(maxY, translateIn.y)),
+    };
+  }
+
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     (e.currentTarget as Element).setPointerCapture(e.pointerId);
     pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
@@ -137,6 +159,8 @@ export default function GalleryPage() {
       const dx = e.clientX - last.x;
       const dy = e.clientY - last.y;
       panRef.current = { x: panRef.current.x + dx, y: panRef.current.y + dy };
+      const clamped = clampTranslateForCurrent(panRef.current, zoom);
+      panRef.current = clamped;
       setTranslate({ ...panRef.current });
       lastPointerPosRef.current = { x: e.clientX, y: e.clientY };
       isDraggingRef.current = true;
@@ -155,6 +179,27 @@ export default function GalleryPage() {
       panRef.current = { x: 0, y: 0 };
       setTranslate({ x: 0, y: 0 });
     }
+  };
+
+  const onDoubleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const container = containerRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const clickX = e.clientX - rect.left - rect.width / 2 - translate.x;
+    const clickY = e.clientY - rect.top - rect.height / 2 - translate.y;
+
+    const targetZoom = zoom === 1 ? 2 : 1;
+    const factor = targetZoom / (zoom || 1);
+    const next = {
+      x: (translate.x - clickX) * factor + clickX,
+      y: (translate.y - clickY) * factor + clickY,
+    };
+    initialZoomRef.current = targetZoom;
+    setZoom(targetZoom);
+    const clamped = clampTranslateForCurrent(next, targetZoom);
+    panRef.current = clamped;
+    setTranslate(clamped);
   };
 
   return (
@@ -251,12 +296,26 @@ export default function GalleryPage() {
             overflow: "hidden",
           }}
           onWheel={(e) => {
-            if (e.deltaY < 0) {
-              setZoom((prev) => Math.min(prev + 0.2, 3));
-            } else {
-              setZoom((prev) => Math.max(prev - 0.2, 1));
-            }
             e.preventDefault();
+            const rect = containerRef.current?.getBoundingClientRect();
+            const delta = e.deltaY < 0 ? 0.2 : -0.2;
+            const prev = zoom;
+            const nextZoom = Math.min(Math.max(prev + delta, 1), 3);
+
+            if (rect && prev !== nextZoom) {
+              const clickX = e.clientX - rect.left - rect.width / 2 - translate.x;
+              const clickY = e.clientY - rect.top - rect.height / 2 - translate.y;
+              const factor = nextZoom / prev;
+              const next = {
+                x: (translate.x - clickX) * factor + clickX,
+                y: (translate.y - clickY) * factor + clickY,
+              };
+              const clamped = clampTranslateForCurrent(next, nextZoom);
+              panRef.current = clamped;
+              setTranslate(clamped);
+            }
+
+            setZoom(nextZoom);
           }}
         >
           <div
@@ -273,6 +332,8 @@ export default function GalleryPage() {
                 setZoom(1);
               }
             }}
+            ref={containerRef}
+            onDoubleClick={onDoubleClick}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
