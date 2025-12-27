@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     url: "https://doubleyellow.bg/events",
     images: [
       {
-        url: "https://doubleyellow.bg/events/tomas.jpg",
-        alt: "Special coaching visit at Double Yellow",
+        url: "https://doubleyellow.bg/hero/01.jpg",
+        alt: "Double Yellow Squash Club",
       },
     ],
   },
@@ -28,48 +28,7 @@ export default function EventsPage() {
         <h1 className="page-title">Events</h1>
         <p className="subtitle">One-off events, workshops & guest visits.</p>
 
-        <article className="event-card">
-          <div className="event-card__image">
-            <OptimizedImage
-              src="/events/tomas.jpg"
-              alt="Tomáš Tóth coaching at Double Yellow Squash Club"
-              width={1600}
-              height={900}
-              priority
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "12px 12px 0 0",
-              }}
-            />
-          </div>
-
-          <div className="event-card__body">
-            <h2 className="title-lg">Tomáš Tóth — Coaching Visit</h2>
-            <p className="event-card__meta">Thu–Sun • 4–7 December</p>
-            <p className="event-card__text">
-              Slovak #1 Tomáš Tóth is visiting Double Yellow for a limited
-              coaching block and a special Saturday tournament. Book individual
-              or group sessions and join the club challenge.
-            </p>
-
-            <ul className="tags">
-              <li>Guest Coach</li>
-              <li>1-to-1 &amp; Group</li>
-              <li>Limited Slots</li>
-            </ul>
-
-            <div className="actions">
-              <Link href="/booking" className="btn btn--primary">
-                Book a session
-              </Link>
-              <Link href="/contact" className="btn btn--ghost">
-                Ask a question
-              </Link>
-            </div>
-          </div>
-        </article>
+        <p className="event-card__text">There are no upcoming guest coaching visits scheduled at the moment. Check back later for new events.</p>
       </section>
     </main>
   );
