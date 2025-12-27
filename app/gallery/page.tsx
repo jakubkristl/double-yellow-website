@@ -14,18 +14,18 @@ const galleryCategories = [
       { src: "/hero/04.jpg", alt: "Court flooring and walls", rotation: 0 },
     ],
   },
-  {
-    title: "Transformation",
-    description: "From renovation to revival — our journey",
-    images: [
-      { src: "/about/before1.jpg", alt: "Before renovation - worn walls", rotation: 0 },
-      { src: "/about/before2.jpg", alt: "Before renovation - damage detail", rotation: 0 },
-      { src: "/about/during1.jpg", alt: "Renovation in progress - front wall", rotation: 90 },
-      { src: "/about/during2.jpg", alt: "Renovation in progress - new panels", rotation: 90 },
-      { src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow", rotation: 0 },
-      { src: "/about/after2.jpg", alt: "Finished court with seating area", rotation: 0 },
-    ],
-  },
+      {
+        title: "Transformation",
+        description: "From renovation to revival — our journey",
+        images: [
+          { src: "/about/before1.jpg", alt: "Before renovation - worn walls", rotation: 0 },
+          { src: "/about/before2.jpg", alt: "Before renovation - damage detail", rotation: 0 },
+          { src: "/about/during1.jpg", alt: "Renovation in progress - front wall", rotation: 0 },
+          { src: "/about/during2.jpg", alt: "Renovation in progress - new panels", rotation: 0 },
+          { src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow", rotation: 0 },
+          { src: "/about/after2.jpg", alt: "Finished court with seating area", rotation: 0 },
+        ],
+      },
   {
     title: "Activities & Events",
     description: "Community sessions, tournaments, and coaching",
