@@ -20,8 +20,8 @@ const galleryCategories = [
         images: [
           { src: "/about/before1.jpg", alt: "Before renovation - worn walls", rotation: 0 },
           { src: "/about/before2.jpg", alt: "Before renovation - damage detail", rotation: 0 },
-          { src: "/about/during1.jpg", alt: "Renovation in progress - front wall", rotation: 0 },
-          { src: "/about/during2.jpg", alt: "Renovation in progress - new panels", rotation: 0 },
+          { src: "/about/during1.jpg", alt: "Renovation in progress - front wall", rotation: 90 },
+          { src: "/about/during2.jpg", alt: "Renovation in progress - new panels", rotation: 90 },
           { src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow", rotation: 0 },
           { src: "/about/after2.jpg", alt: "Finished court with seating area", rotation: 0 },
         ],
@@ -203,7 +203,7 @@ export default function GalleryPage() {
   };
 
   return (
-    <main style={{ padding: "40px 20px", maxWidth: "1400px", margin: "0 auto" }}>
+    <main style={{ padding: "100px 20px 40px", maxWidth: "1400px", margin: "0 auto" }}>
       <h1 className="page-title">Gallery</h1>
       <p style={{ color: "#ccc", fontSize: "20px", marginBottom: "60px", textAlign: "center" }}>
         A visual journey through Double Yellow — courts, community, and everything in between.
