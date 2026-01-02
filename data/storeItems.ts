@@ -21,7 +21,7 @@ export const CATEGORIES: Category[] = [
       { name: "Unsquashable TOUR-TEC PRO 125", price: 89.48, image: "/store/products/rackets/Unsquashable TOUR-TEC PRO 125.webp" },
       { name: "Unsquashable JAMES WILLSTROP SIGNATURE", price: 71.07, image: "/store/products/rackets/Unsquashable JAMES WILLSTROP SIGNATURE.webp" },
       { name: "Unsquashable ULTRA-LITE 135", price: 48.57, image: "/store/products/rackets/Unsquashable ULTRA-LITE 135.webp" },
-      { name: "Unsquashable SYN-TEC 125", price: 79.25, image: "/store/products/rackets/Unsquashable SYN-TEC PRO 125.webp" },
+      { name: "Unsquashable SYN-TEC 125", price: 79.25, image: "/store/products/rackets/Unsquashable SYN-TEC 125.webp" },
       { name: "Unsquashable SAM GERRITS AUTOGRAPH", price: 89.48, image: "/store/products/rackets/Unsquashable SAM GERRITS AUTOGRAPH.webp" },
       { name: "Prince Vortex Pro 650", price: 89.48, image: "/store/products/rackets/Prince Vortex Pro 650.webp" },
       { name: "Dunlop Sonic Core Ultimate 132", price: 89.48, image: "/store/products/rackets/Dunlop Sonic Core Ultimate 132.webp" },
