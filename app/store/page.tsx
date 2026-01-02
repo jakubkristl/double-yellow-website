@@ -67,8 +67,7 @@ export default function StorePage() {
                     <div className="store-card-info">
                       <h3 className="store-card-name">{item.name}</h3>
                       <div className="store-card-price">
-                        BGN {item.priceBGN.toFixed(2)}
-                        <span className="store-card-eur"> ({item.priceEUR.toFixed(2)} €)</span>
+                        €{(item as any).price.toFixed(2)}
                       </div>
                     </div>
                   </div>

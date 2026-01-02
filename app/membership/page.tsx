@@ -28,13 +28,11 @@ export const metadata: Metadata = {
 
 type Pack = {
   name: string;
-  bgn: number;
+  priceEUR: number;
   fun: string;
   daytime?: boolean;
 };
 
-const BGN_PER_EUR = 1.95583;
-const toEUR = (bgn: number) => (bgn > 0 ? Math.round(bgn / BGN_PER_EUR) : 0);
 
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
@@ -45,22 +43,22 @@ const CARD_BACK = "/cards/back.png";
 const PACKS: Pack[] = [
   {
     name: "Monthly 4 Pack",
-    bgn: 70.41,
+    priceEUR: 36,
     fun: "One match a week to keep the rust away. Stretch, swing, repeat — progress without the burnout.",
   },
   {
     name: "Monthly 8 Pack",
-    bgn: 129.08,
+    priceEUR: 66,
     fun: "Your twice-a-week rhythm: sweat, smile, and brag about that one perfect nick for days.",
   },
   {
     name: "Monthly 12 Pack",
-    bgn: 189.72,
+    priceEUR: 97,
     fun: "Three sessions a week — for people who call the court their second living room (we approve).",
   },
   {
     name: "Daytime Pass",
-    bgn: 205.36,
+    priceEUR: 105,
     fun: "The lunchtime legend bundle. Sneak in a session, return a happier human.",
     daytime: true,
   },
@@ -98,8 +96,7 @@ export default function MembershipPage() {
         {PACKS.map((p) => (
           <article key={p.name} className="price-card">
             <h3>{p.name}</h3>
-            <div className="price price-bgn">{p.bgn.toFixed(2)} BGN</div>
-            <div className="price-eur">{toEUR(p.bgn)} EUR</div>
+            <div className="price">{p.priceEUR} EUR</div>
             <div>{p.fun}</div>
             {p.daytime && <div className="badge">Once per day until 17:00</div>}
           </article>

@@ -108,6 +108,11 @@
     "/optimized/hero/04-2048.webp",
     "/optimized/hero/04-1200.jpg"
   ],
+  "/hero\\santa-holiday.jpg": [
+    "/optimized/hero/santa-holiday-480.webp",
+    "/optimized/hero/santa-holiday-768.webp",
+    "/optimized/hero/santa-holiday-1200.jpg"
+  ],
   "/team\\jakub.jpg": [
     "/optimized/team/jakub-480.webp",
     "/optimized/team/jakub-768.webp",
