@@ -13,28 +13,12 @@ export default function Home() {
   const heroImages = baseImages;
   const heroAlts = baseAlts;
 
-  // Show Santa holiday image until Jan 2, 2026; automatically switch to carousel after
-  const today = new Date();
-  const holidayEndDate = new Date(2026, 0, 2);
-  const isHolidayPeriod = today < holidayEndDate;
-
   return (
     <>
       <header className="page-hero">
-        {/* Carousel is now ABOVE the title */}
+        {/* Carousel hero section */}
         <div className="hero-carousel">
-          {isHolidayPeriod ? (
-            <OptimizedImage
-              src="/hero/santa-holiday.jpg"
-              alt="Holiday special - Santa celebrating with tennis at Double Yellow Squash Club"
-              width={1600}
-              height={900}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              priority
-            />
-          ) : (
-            <Carousel images={heroImages} alts={heroAlts} />
-          )}
+          <Carousel images={heroImages} alts={heroAlts} />
         </div>
 
         <h1 className="page-title">

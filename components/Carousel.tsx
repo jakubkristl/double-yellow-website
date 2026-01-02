@@ -15,19 +15,23 @@ export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props
   const [displayImages, setDisplayImages] = useState<string[]>(images);
   const [displayAlts, setDisplayAlts] = useState<string[]>(alts);
 
+  // Sync displayImages when props.images changes
+  useEffect(() => {
+    setDisplayImages(images);
+    setDisplayAlts(alts);
+  }, [images, alts]);
+
   // slide rotation uses the client-side `displayImages` length
   useEffect(() => {
+    if (displayImages.length === 0) return;
     const id = setInterval(() => {
-      setI((p) => (p + 1) % Math.max(1, displayImages.length));
+      setI((p) => (p + 1) % displayImages.length);
     }, intervalMs);
     return () => clearInterval(id);
   }, [displayImages.length, intervalMs]);
 
   const prev = () => setI((p) => (p - 1 + Math.max(1, displayImages.length)) % Math.max(1, displayImages.length));
   const next = () => setI((p) => (p + 1) % Math.max(1, displayImages.length));
-
-
-  // Holiday logic removed (expired Jan 2, 2026)
 
   return (
     <div className="carousel">

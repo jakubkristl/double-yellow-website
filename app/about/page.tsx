@@ -1,28 +1,11 @@
 // app/about/page.tsx
-import React from "react";
-import Image from "next/image";
-// Use Next's Image for correct EXIF orientation handling
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "About Double Yellow — Renovation & History",
-  description:
-    "Learn the story of Double Yellow Squash Club's renovation from a forgotten venue to a thriving modern squash home in Sofia.",
-  openGraph: {
-    title: "About Double Yellow — Renovation & History",
-    description:
-      "Learn the story of Double Yellow Squash Club's renovation from a forgotten venue to a thriving modern squash home in Sofia.",
-    url: "https://doubleyellow.bg/about",
-    images: [
-      {
-        url: "https://doubleyellow.bg/about/after1.jpg",
-        alt: "Double Yellow Squash Club after renovation",
-      },
-    ],
-  },
-};
+import React, { useState } from "react";
+import Image from "next/image";
 
 export default function AboutPage() {
+  const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
   return (
     <section className="container about-section">
       <div className="membership-header">
@@ -83,10 +66,10 @@ export default function AboutPage() {
         <div className="gallery-group">
           <h3 className="gallery-heading">Before</h3>
             <div className="gallery-row">
-                <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+                <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/before1.jpg", alt: "Before renovation - worn walls" })}>
                 <Image src="/about/before1.jpg" alt="Before renovation - worn walls" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
               </div>
-              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/before2.jpg", alt: "Before renovation - damage detail" })}>
                 <Image src="/about/before2.jpg" alt="Before renovation - damage detail" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
               </div>
             </div>
@@ -95,10 +78,10 @@ export default function AboutPage() {
         <div className="gallery-group">
           <h3 className="gallery-heading">During</h3>
           <div className="gallery-row">
-            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/during1.jpg", alt: "Renovation in progress - front wall" })}>
               <Image src="/about/during1.jpg" alt="Renovation in progress - front wall" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
-            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/during2.jpg", alt: "Renovation in progress - new panels" })}>
               <Image src="/about/during2.jpg" alt="Renovation in progress - new panels" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
           </div>
@@ -107,15 +90,70 @@ export default function AboutPage() {
         <div className="gallery-group">
           <h3 className="gallery-heading">After</h3>
           <div className="gallery-row">
-              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow" })}>
               <Image src="/about/after1.jpg" alt="Renovated squash courts - Double Yellow" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
-            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/after2.jpg", alt: "Finished court with seating area" })}>
               <Image src="/about/after2.jpg" alt="Finished court with seating area" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
           </div>
         </div>
       </div>
+
+      {/* Zoom Lightbox */}
+      {zoomedImg && (
+        <div
+          onClick={() => setZoomedImg(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.95)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+            padding: "20px",
+            cursor: "pointer",
+          }}
+        >
+          <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "90vw", maxHeight: "90vh" }}>
+            <Image
+              src={zoomedImg.src}
+              alt={zoomedImg.alt}
+              width={1200}
+              height={900}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "90vh",
+                width: "auto",
+                height: "auto",
+                objectFit: "contain",
+              }}
+            />
+            <button
+              onClick={() => setZoomedImg(null)}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "none",
+                border: "none",
+                color: "#fff",
+                fontSize: "32px",
+                cursor: "pointer",
+                padding: "10px",
+                zIndex: 1001,
+              }}
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
