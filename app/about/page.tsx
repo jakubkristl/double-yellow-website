@@ -96,10 +96,10 @@ export default function AboutPage() {
           <h3 className="gallery-heading">During</h3>
           <div className="gallery-row">
             <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
-              <Image src="/about/during1.jpg" alt="Renovation in progress - front wall" width={600} height={800} style={{ objectFit: "cover", borderRadius: 8, transform: "rotate(90deg)" }} />
+              <Image src="/about/during1.jpg" alt="Renovation in progress - front wall" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
             <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200 }}>
-              <Image src="/about/during2.jpg" alt="Renovation in progress - new panels" width={600} height={800} style={{ objectFit: "cover", borderRadius: 8, transform: "rotate(90deg)" }} />
+              <Image src="/about/during2.jpg" alt="Renovation in progress - new panels" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
           </div>
         </div>

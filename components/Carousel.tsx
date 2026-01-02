@@ -27,30 +27,7 @@ export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props
   const next = () => setI((p) => (p + 1) % Math.max(1, displayImages.length));
 
 
-  // On client mount, optionally prepend the holiday image so SSR stays consistent
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const holidayUrl = '/hero/santa-holiday.jpg';
-        const end = new Date(2026, 0, 2); // Jan 2, 2026
-        if (typeof window !== 'undefined' && new Date() < end) {
-          if (!images.includes(holidayUrl)) {
-            const res = await fetch(holidayUrl, { method: 'HEAD' });
-            if (!mounted) return;
-            if (res.ok) {
-              setDisplayImages((prev) => [holidayUrl, ...prev]);
-              setDisplayAlts((prev) => ["Holiday special - Santa celebrating with tennis at Double Yellow Squash Club", ...prev]);
-              setI(0);
-            }
-          }
-        }
-      } catch (e) {
-        // ignore network errors
-      }
-    })();
-    return () => { mounted = false; };
-  }, [images]);
+  // Holiday logic removed (expired Jan 2, 2026)
 
   return (
     <div className="carousel">

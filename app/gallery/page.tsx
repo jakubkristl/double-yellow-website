@@ -20,8 +20,8 @@ const galleryCategories = [
         images: [
           { src: "/about/before1.jpg", alt: "Before renovation - worn walls", rotation: 0 },
           { src: "/about/before2.jpg", alt: "Before renovation - damage detail", rotation: 0 },
-          { src: "/about/during1.jpg", alt: "Renovation in progress - front wall", rotation: 90 },
-          { src: "/about/during2.jpg", alt: "Renovation in progress - new panels", rotation: 90 },
+          { src: "/about/during1.jpg", alt: "Renovation in progress - front wall", rotation: 0 },
+          { src: "/about/during2.jpg", alt: "Renovation in progress - new panels", rotation: 0 },
           { src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow", rotation: 0 },
           { src: "/about/after2.jpg", alt: "Finished court with seating area", rotation: 0 },
         ],
