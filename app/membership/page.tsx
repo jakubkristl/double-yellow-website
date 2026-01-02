@@ -65,6 +65,7 @@ const PACKS: Pack[] = [
 ];
 
 export default function MembershipPage() {
+  const fmt = new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR" });
   return (
     <section className="container">
       <div className="membership-header">
@@ -96,7 +97,7 @@ export default function MembershipPage() {
         {PACKS.map((p) => (
           <article key={p.name} className="price-card">
             <h3>{p.name}</h3>
-            <div className="price">{p.priceEUR} EUR</div>
+            <div className="price">{fmt.format(p.priceEUR)}</div>
             <div>{p.fun}</div>
             {p.daytime && <div className="badge">Once per day until 17:00</div>}
           </article>

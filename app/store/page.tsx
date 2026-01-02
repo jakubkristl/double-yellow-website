@@ -2,6 +2,7 @@
 
 import React from "react";
 import { CATEGORIES } from "@/data/storeItems";
+import type { Item } from "@/data/storeItems";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 
@@ -67,7 +68,7 @@ export default function StorePage() {
                     <div className="store-card-info">
                       <h3 className="store-card-name">{item.name}</h3>
                       <div className="store-card-price">
-                        €{(item as any).price.toFixed(2)}
+                        {new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR" }).format((item as Item).price)}
                       </div>
                     </div>
                   </div>
