@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function ActivitiesPage() {
   const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
+
   return (
     <main style={{ padding: "40px 20px", maxWidth: "1200px", margin: "0 auto" }}>
       <h1 className="page-title">Activities</h1>

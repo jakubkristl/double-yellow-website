@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import OptimizedImage from "@/components/OptimizedImage";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -40,14 +39,14 @@ export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props
           key={src}
           className={`slide ${idx === i ? "active" : ""}`}
           aria-hidden={idx !== i}
-          style={{ position: "relative" }}
         >
-          <OptimizedImage
+          <Image
             src={src}
             alt={displayAlts[idx] || alts[idx] || "Club photo"}
-            width={1600}
-            height={900}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            fill
+            style={{ objectFit: "cover" }}
+            priority={idx === 0}
+            sizes="100vw"
           />
         </div>
       ))}

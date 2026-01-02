@@ -318,6 +318,35 @@ export default function GalleryPage() {
             setZoom(nextZoom);
           }}
         >
+          <button
+            ref={closeButtonRef}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelected(null);
+            }}
+            style={{
+              position: "fixed",
+              top: "30px",
+              right: "30px",
+              background: "rgba(0, 0, 0, 0.5)",
+              border: "2px solid #fff",
+              borderRadius: "50%",
+              color: "#fff",
+              fontSize: "28px",
+              cursor: "pointer",
+              padding: "8px 12px",
+              lineHeight: 1,
+              zIndex: 1002,
+              width: "48px",
+              height: "48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
           <div
             onClick={(e) => {
               e.stopPropagation();
@@ -371,25 +400,6 @@ export default function GalleryPage() {
                         cursor: zoom > 1 ? "zoom-out" : "zoom-in",
                       }}
                     />
-                    <button
-                      ref={closeButtonRef}
-                      onClick={() => setSelected(null)}
-                      style={{
-                        position: "absolute",
-                        top: "-40px",
-                        right: "0",
-                        background: "none",
-                        border: "none",
-                        color: "#fff",
-                        fontSize: "32px",
-                        cursor: "pointer",
-                        padding: "10px",
-                        lineHeight: 1,
-                      }}
-                      aria-label="Close"
-                    >
-                      ✕
-                    </button>
                     <p
                       style={{
                         color: "#ccc",

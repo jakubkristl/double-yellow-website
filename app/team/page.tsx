@@ -1,24 +1,8 @@
-export const dynamic = "force-static";
+"use client";
 
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Team | Meet the People Behind Double Yellow",
-  description:
-    "Meet Jakub Kristl and the team behind Double Yellow Squash Club — passionate about renovating and growing squash in Sofia.",
-  openGraph: {
-    title: "Team | Meet the People Behind Double Yellow",
-    description:
-      "Meet Jakub Kristl and the team behind Double Yellow Squash Club — passionate about renovating and growing squash in Sofia.",
-    url: "https://doubleyellow.bg/team",
-    images: [
-      {
-        url: "https://doubleyellow.bg/team/jakub.jpg",
-        alt: "Jakub Kristl, founder of Double Yellow",
-      },
-    ],
-  },
-};
+import { useState } from "react";
+import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 
 type Member = {
   name: string;
@@ -37,10 +21,9 @@ const TEAM: Member[] = [
   },
 ];
 
-import Image from "next/image";
-import OptimizedImage from "@/components/OptimizedImage";
-
 export default function TeamPage() {
+  const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
+  
   return (
     <section className="container">
       <h1 className="page-title">Team</h1>
@@ -49,7 +32,9 @@ export default function TeamPage() {
         {TEAM.map((m) => (
           <li key={m.name} className="team-row card">
             <div className="cell avatar">
-              <OptimizedImage src={m.photo} alt={m.name} width={220} height={220} className="team-photo" style={{ borderRadius: 8 }} />
+              <div onClick={() => setZoomedImg({ src: m.photo, alt: m.name })} style={{ cursor: "pointer" }}>
+                <OptimizedImage src={m.photo} alt={m.name} width={220} height={220} className="team-photo" style={{ borderRadius: 8 }} />
+              </div>
             </div>
 
             <div className="cell info">
@@ -60,6 +45,70 @@ export default function TeamPage() {
           </li>
         ))}
       </ul>
+
+      {zoomedImg && (
+        <div
+          onClick={() => setZoomedImg(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.95)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+            padding: "20px",
+            cursor: "pointer",
+          }}
+        >
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setZoomedImg(null);
+            }}
+            style={{
+              position: "fixed",
+              top: "30px",
+              right: "30px",
+              background: "rgba(0, 0, 0, 0.5)",
+              border: "2px solid #fff",
+              borderRadius: "50%",
+              color: "#fff",
+              fontSize: "28px",
+              cursor: "pointer",
+              padding: "8px 12px",
+              lineHeight: 1,
+              zIndex: 1002,
+              width: "48px",
+              height: "48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "90vw", maxHeight: "90vh" }}>
+            <Image
+              src={zoomedImg.src}
+              alt={zoomedImg.alt}
+              width={1200}
+              height={900}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "90vh",
+                width: "auto",
+                height: "auto",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -119,6 +119,34 @@ export default function AboutPage() {
             cursor: "pointer",
           }}
         >
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setZoomedImg(null);
+            }}
+            style={{
+              position: "fixed",
+              top: "30px",
+              right: "30px",
+              background: "rgba(0, 0, 0, 0.5)",
+              border: "2px solid #fff",
+              borderRadius: "50%",
+              color: "#fff",
+              fontSize: "28px",
+              cursor: "pointer",
+              padding: "8px 12px",
+              lineHeight: 1,
+              zIndex: 1002,
+              width: "48px",
+              height: "48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
           <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "90vw", maxHeight: "90vh" }}>
             <Image
               src={zoomedImg.src}
@@ -133,24 +161,6 @@ export default function AboutPage() {
                 objectFit: "contain",
               }}
             />
-            <button
-              onClick={() => setZoomedImg(null)}
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                background: "none",
-                border: "none",
-                color: "#fff",
-                fontSize: "32px",
-                cursor: "pointer",
-                padding: "10px",
-                zIndex: 1001,
-              }}
-              aria-label="Close"
-            >
-              ✕
-            </button>
           </div>
         </div>
       )}

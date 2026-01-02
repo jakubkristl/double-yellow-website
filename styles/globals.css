@@ -179,6 +179,9 @@ li {
   opacity: 0;
   transition: opacity 400ms ease-in-out;
 }
+.slide > * {
+  position: relative !important;
+}
 .slide.active { opacity: 1; }
 .slide img { object-fit: cover; }
 
