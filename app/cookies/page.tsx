@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Image from "next/image";
 import "../privacy/styles.css";
 
 export default function CookiesPage() {
@@ -29,7 +30,7 @@ export default function CookiesPage() {
             aria-label="Switch to Bulgarian"
             title="Български"
           >
-            🇧🇬
+            <Image src="/flags/bg.svg" alt="Bulgarian" width={32} height={20} />
           </button>
           <button 
             onClick={() => setLanguage("en")} 
@@ -37,7 +38,7 @@ export default function CookiesPage() {
             aria-label="Switch to English"
             title="English"
           >
-            🇬🇧
+            <Image src="/flags/gb.svg" alt="English" width={32} height={20} />
           </button>
         </div>
       </div>
