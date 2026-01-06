@@ -45,6 +45,21 @@ export default function Footer() {
             </a>
           </p>
         </div>
+
+        <div className="footer-col">
+          <h4 className="footer-title">Legal</h4>
+          <ul className="link-list">
+            <li>
+              <Link href="/privacy">Privacy Policy</Link>
+            </li>
+            <li>
+              <Link href="/terms">Terms &amp; Conditions</Link>
+            </li>
+            <li>
+              <Link href="/cookies">Cookie Policy</Link>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="container footer-note">
