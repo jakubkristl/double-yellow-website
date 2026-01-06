@@ -3,12 +3,13 @@ import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 
 export default function Home() {
-  const baseImages = ["/hero/01.jpg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
+  const baseImages = ["/hero/01.jpg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg", "/hero/bulgarian-squash-tour-2026.png"];
   const baseAlts = [
     "Double Yellow Squash Club - renovated courts with WSF specifications",
     "Professional squash player serving on a bright, newly renovated court",
     "Multiple squash courts with modern lighting and equipment",
-    "Players warming up before a match at Double Yellow Squash Club"
+    "Players warming up before a match at Double Yellow Squash Club",
+    "Bulgarian Squash Tour 2026 - 12 tournaments across the year"
   ];
   const heroImages = baseImages;
   const heroAlts = baseAlts;
