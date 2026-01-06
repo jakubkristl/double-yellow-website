@@ -12,7 +12,16 @@ export default function TermsPage() {
       <Breadcrumbs />
       
       <div className="legal-header">
-        <h1>{language === "bg" ? "Общи условия" : "Terms & Conditions"}</h1>
+        <div className="legal-header-top">
+          <h1>{language === "bg" ? "Общи условия" : "Terms & Conditions"}</h1>
+          <button 
+            onClick={() => window.history.back()} 
+            className="close-btn"
+            aria-label="Go back"
+          >
+            ✕
+          </button>
+        </div>
         <div className="language-toggle">
           <button 
             onClick={() => setLanguage("bg")} 

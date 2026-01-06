@@ -12,7 +12,16 @@ export default function CookiesPage() {
       <Breadcrumbs />
       
       <div className="legal-header">
-        <h1>{language === "bg" ? "Политика за бисквитки" : "Cookie Policy"}</h1>
+        <div className="legal-header-top">
+          <h1>{language === "bg" ? "Политика за бисквитки" : "Cookie Policy"}</h1>
+          <button 
+            onClick={() => window.history.back()} 
+            className="close-btn"
+            aria-label="Go back"
+          >
+            ✕
+          </button>
+        </div>
         <div className="language-toggle">
           <button 
             onClick={() => setLanguage("bg")} 

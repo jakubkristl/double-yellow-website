@@ -12,7 +12,16 @@ export default function PrivacyPolicyPage() {
       <Breadcrumbs />
       
       <div className="legal-header">
-        <h1>{language === "bg" ? "Политика за защита на личните данни" : "Privacy Policy"}</h1>
+        <div className="legal-header-top">
+          <h1>{language === "bg" ? "Политика за защита на личните данни" : "Privacy Policy"}</h1>
+          <button 
+            onClick={() => window.history.back()} 
+            className="close-btn"
+            aria-label="Go back"
+          >
+            ✕
+          </button>
+        </div>
         <div className="language-toggle">
           <button 
             onClick={() => setLanguage("bg")} 

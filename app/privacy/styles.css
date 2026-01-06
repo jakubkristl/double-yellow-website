@@ -3,10 +3,44 @@
   margin-bottom: 2rem;
 }
 
+.legal-header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
 .legal-header h1 {
   font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin: 0;
   color: #1a1a1a;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #f0f0f0;
+  border-color: #999;
+  color: #333;
 }
 
 .language-toggle {
@@ -66,7 +100,8 @@
 
 .legal-content p {
   margin-bottom: 1rem;
-  color: #444;
+  color: #1a1a1a;
+  font-size: 1rem;
 }
 
 .legal-content ul {
@@ -76,7 +111,8 @@
 
 .legal-content li {
   margin-bottom: 0.5rem;
-  color: #444;
+  color: #1a1a1a;
+  font-size: 1rem;
 }
 
 .legal-content a {
@@ -120,8 +156,8 @@
 
 /* Info Boxes */
 .info-box {
-  background: #f0f8ff;
-  border-left: 4px solid #0066cc;
+  background: #f8f9fa;
+  border-left: 3px solid #dee2e6;
   padding: 1.5rem;
   margin: 1.5rem 0;
   border-radius: 8px;
@@ -129,22 +165,30 @@
 
 .info-box h3 {
   margin-top: 0;
-  color: #0066cc;
+  color: #495057;
+  font-size: 1.2rem;
+}
+
+.info-box p,
+.info-box ul,
+.info-box li {
+  color: #1a1a1a;
 }
 
 .marketing-consent {
-  background: #fff8e1;
-  border-left-color: #ffa000;
+  background: #f8f9fa;
+  border-left-color: #dee2e6;
 }
 
 .marketing-consent h3 {
-  color: #f57c00;
+  color: #495057;
 }
 
 /* GDPR Contact Box */
 .gdpr-contact-box {
-  background: #e8f5e9;
-  border: 2px solid #4caf50;
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-left: 3px solid #28a745;
   padding: 1.5rem;
   border-radius: 8px;
   margin: 1.5rem 0;
@@ -152,7 +196,14 @@
 
 .gdpr-contact-box h3 {
   margin-top: 0;
-  color: #2e7d32;
+  color: #28a745;
+  font-size: 1.2rem;
+}
+
+.gdpr-contact-box p,
+.gdpr-contact-box ul,
+.gdpr-contact-box li {
+  color: #1a1a1a;
 }
 
 /* Rights List */
@@ -171,6 +222,16 @@
 @media (max-width: 768px) {
   .legal-header h1 {
     font-size: 2rem;
+  }
+
+  .close-btn {
+    position: static;
+    transform: none;
+    margin-left: auto;
+  }
+
+  .legal-header-top {
+    justify-content: space-between;
   }
 
   .language-toggle {
