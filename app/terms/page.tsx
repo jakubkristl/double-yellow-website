@@ -27,15 +27,17 @@ export default function TermsPage() {
             onClick={() => setLanguage("bg")} 
             className={language === "bg" ? "active" : ""}
             aria-label="Switch to Bulgarian"
+            title="Български"
           >
-            🇧🇬 Български
+            🇧🇬
           </button>
           <button 
             onClick={() => setLanguage("en")} 
             className={language === "en" ? "active" : ""}
             aria-label="Switch to English"
+            title="English"
           >
-            🇬🇧 English
+            🇬🇧
           </button>
         </div>
       </div>
