@@ -156,7 +156,7 @@
 
 /* Info Boxes */
 .info-box {
-  background: #f8f9fa;
+  background: transparent;
   border-left: 3px solid #dee2e6;
   padding: 1.5rem;
   margin: 1.5rem 0;
@@ -165,7 +165,7 @@
 
 .info-box h3 {
   margin-top: 0;
-  color: #495057;
+  color: #ffffff;
   font-size: 1.2rem;
 }
 
@@ -176,17 +176,17 @@
 }
 
 .marketing-consent {
-  background: #f8f9fa;
+  background: transparent;
   border-left-color: #dee2e6;
 }
 
 .marketing-consent h3 {
-  color: #495057;
+  color: #ffffff;
 }
 
 /* GDPR Contact Box */
 .gdpr-contact-box {
-  background: #f8f9fa;
+  background: transparent;
   border: 2px solid #dee2e6;
   border-left: 3px solid #28a745;
   padding: 1.5rem;
