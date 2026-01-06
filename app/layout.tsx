@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "Double Yellow Squash Club — Sofia",
@@ -132,6 +133,7 @@ export default function RootLayout({
         <Navbar />
         <main id="main-content" className="container">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
