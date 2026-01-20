@@ -9,7 +9,7 @@ export default function Home() {
     "Professional squash player serving on a bright, newly renovated court",
     "Multiple squash courts with modern lighting and equipment",
     "Players warming up before a match at Double Yellow Squash Club",
-    "First Training Free - Experience world-class squash at no cost",
+    "First Training Free - Първа тренировка безплатно - Experience world-class squash at no cost",
     "Bulgarian Squash Tour 2026 - 12 tournaments across the year"
   ];
   const heroImages = baseImages;
