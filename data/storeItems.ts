@@ -14,13 +14,13 @@ export const CATEGORIES: Category[] = [
   {
     title: "Rackets",
     items: [
-      { name: "Unsquashable MIGUEL RODRÍGUEZ ONE20 Limited Edition", price: 97.15, image: "/store/products/rackets/Unsquashable MIGUEL RODRÍGUEZ ONE20 Limited Edition.webp" },
-      { name: "Unsquashable NICK WALL 125 Limited Edition", price: 97.15, image: "/store/products/rackets/Unsquashable NICK WALL 125 Limited Edition.webp" },
-      { name: "Unsquashable Y-TEC PRO 125", price: 89.48, image: "/store/products/rackets/Unsquashable Y-TEC PRO 125.webp" },
-      { name: "Unsquashable Y-TEC PRO 110", price: 89.48, image: "/store/products/rackets/Unsquashable Y-TEC PRO 110.webp" },
+      { name: "Unsquashable MIGUEL RODRÍGUEZ ONE20 Limited Edition", price: 98.00, image: "/store/products/rackets/Unsquashable MIGUEL RODRÍGUEZ ONE20 Limited Edition.webp" },
+      { name: "Unsquashable NICK WALL 125 Limited Edition", price: 98.00, image: "/store/products/rackets/Unsquashable NICK WALL 125 Limited Edition.webp" },
+      { name: "Unsquashable Y-TEC PRO 125", price: 90.00, image: "/store/products/rackets/Unsquashable Y-TEC PRO 125.webp" },
+      { name: "Unsquashable Y-TEC PRO 110", price: 90.00, image: "/store/products/rackets/Unsquashable Y-TEC PRO 110.webp" },
       { name: "Unsquashable TOUR-TEC PRO 125", price: 89.48, image: "/store/products/rackets/Unsquashable TOUR-TEC PRO 125.webp" },
       { name: "Unsquashable JAMES WILLSTROP SIGNATURE", price: 71.07, image: "/store/products/rackets/Unsquashable JAMES WILLSTROP SIGNATURE.webp" },
-      { name: "Unsquashable ULTRA-LITE 135", price: 48.57, image: "/store/products/rackets/Unsquashable ULTRA-LITE 135.webp" },
+      { name: "Unsquashable ULTRA-LITE 135", price: 49.00, image: "/store/products/rackets/Unsquashable ULTRA-LITE 135.webp" },
       { name: "Unsquashable SYN-TEC 125", price: 79.25, image: "/store/products/rackets/Unsquashable SYN-TEC 125.webp" },
       { name: "Unsquashable SAM GERRITS AUTOGRAPH", price: 89.48, image: "/store/products/rackets/Unsquashable SAM GERRITS AUTOGRAPH.webp" },
       { name: "Prince Vortex Pro 650", price: 89.48, image: "/store/products/rackets/Prince Vortex Pro 650.webp" },
@@ -31,7 +31,8 @@ export const CATEGORIES: Category[] = [
   {
     title: "Shoes",
     items: [
-      { name: "Unsquashable CROSS-TEC Black Shoe", price: 76.18, image: "/store/products/shoes/Unsquashable CROSS-TEC Black Shoe.webp" },
+      { name: "Unsquashable CROSS-TEC Black Shoe", price: 85.00, image: "/store/products/shoes/Unsquashable CROSS-TEC Black Shoe.webp" },
+      { name: "Unsquashable FAST-TEC Pro Shoe", price: 95.00 },
       { name: "Unsquashable TOUR-TEC PRO Shoe", price: 76.18, image: "/store/products/shoes/Unsquashable TOUR-TEC PRO Shoe.webp" },
     ],
   },
@@ -45,24 +46,25 @@ export const CATEGORIES: Category[] = [
   {
     title: "Strings & Grips",
     items: [
-      { name: "Unsquashable TOUR-TEC PRO 1.18 String (Yellow) — 100m Reel", price: 92.03, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO 1.18 String (Yellow) — 100m Reel.webp" },
-      { name: "Unsquashable TOUR-TEC PRO Grip - 6 Pack", price: 18.41, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO PU Grip.webp" },
+      { name: "Unsquashable TOUR-TEC PRO 1.18 Squash String - Yellow - 100M Reel", price: 92.03, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO 1.18 String (Yellow) — 100m Reel.webp" },
+      { name: "Unsquashable TOUR-TEC PRO PU Grip - 6 Pack", price: 18.00, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO PU Grip.webp" },
     ],
   },
   {
     title: "Apparel",
     items: [
-      { name: "Tecnifibre Team Tech Tee", price: 35.79, image: "/store/products/apparel/Tecnifibre Team Tech Tee.avif" },
-      { name: "Tecnifibre Team Cotton Tee", price: 19.94, image: "/store/products/apparel/Tecnifibre Team Cotton Tee.jpg" },
+      { name: "Tecnifibre Team Tech Tee", price: 35.00, image: "/store/products/apparel/Tecnifibre Team Tech Tee.avif" },
+      { name: "Tecnifibre Team Cotton Tee", price: 20.00, image: "/store/products/apparel/Tecnifibre Team Cotton Tee.jpg" },
+      { name: "Dunlop Men's Indoor Crew Socks", price: 4.00 },
       { name: "Tecnifibre Tech Socks", price: 9.20, image: "/store/products/apparel/Tecnifibre Tech Socks.jpg" },
       { name: "Tecnifibre Classic Socks", price: 9.20, image: "/store/products/apparel/Tecnifibre Classic Socks.jpg" },
-      { name: "Tecnifibre Wristband XL", price: 5.62, image: "/store/products/apparel/Tecnifibre Wristband XL.jpg" },
-      { name: "Dunlop Pro Ball 12 Pack", price: 49.08, image: "/store/products/apparel/Dunlop Pro Ball.WebP" },
+      { name: "Tecnifibre Wristband XL", price: 5.60, image: "/store/products/apparel/Tecnifibre Wristband XL.jpg" },
+      { name: "Dunlop Pro Ball 12 Pack", price: 48.00, image: "/store/products/apparel/Dunlop Pro Ball.WebP" },
     ],
   },
   {
     title: "Eyewear",
-    items: [{ name: "Dunlop Junior Protective Eyewear", price: 20.45, image: "/store/products/eyewear/Dunlop Junior Protective Eyewear.jpg" }],
+    items: [{ name: "Dunlop Junior Protective Eyewear", price: 21.00, image: "/store/products/eyewear/Dunlop Junior Protective Eyewear.jpg" }],
   },
   {
     title: "Drinks",

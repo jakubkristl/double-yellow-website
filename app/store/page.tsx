@@ -12,7 +12,7 @@ export default function StorePage() {
   const visibleCategories = CATEGORIES.filter((cat) => cat.title !== "Drinks");
 
   // Update this whenever you edit prices/items
-  const lastUpdated = new Date("2025-11-02");
+  const lastUpdated = new Date("2026-01-26");
   const formattedDate = lastUpdated.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
@@ -34,7 +34,15 @@ export default function StorePage() {
               jakub@doubleyellowsquash.com
             </a>
             {" "}or phone{" "}
-            <a href="tel:+359896754014" style={{ color: "#ffcc00", textDecoration: "underline" }}>
+            <a 
+              href="tel:+359896754014" 
+              style={{ color: "#ffcc00", textDecoration: "underline" }}
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+                  return (window as any).gtag_report_conversion('tel:+359896754014');
+                }
+              }}
+            >
               0896 754 014
             </a>
             . We ship via Ekont / Speedy.
