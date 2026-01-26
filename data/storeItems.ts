@@ -90,7 +90,7 @@ export const CATEGORIES: Category[] = [
   {
     title: "Rentals",
     items: [
-      { name: "Racket Rental", price: 2.00, image: "/store/products/rentals/Racket.webp" },
+      { name: "Racket Rental", price: 2.50, image: "/store/products/rentals/Racket.webp" },
       { name: "Towel Rental", price: 1.00, image: "/store/products/rentals/Towel.jpg" },
     ],
   },
