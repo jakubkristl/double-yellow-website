@@ -33,7 +33,7 @@ export const CATEGORIES: Category[] = [
     items: [
       { name: "Unsquashable CROSS-TEC Black Shoe", price: 85.00, image: "/store/products/shoes/Unsquashable CROSS-TEC Black Shoe.webp" },
       { name: "Unsquashable FAST-TEC Pro Shoe", price: 95.00, image: "/store/products/shoes/Unsquashable FAST-TEC Pro Shoe.webp" },
-      { name: "Unsquashable TOUR-TEC PRO Shoe", price: 76.18, image: "/store/products/shoes/Unsquashable TOUR-TEC PRO Shoe.webp" },
+      { name: "Unsquashable TOUR-TEC PRO Shoe", price: 90.00, image: "/store/products/shoes/Unsquashable TOUR-TEC PRO Shoe.webp" },
     ],
   },
   {
