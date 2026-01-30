@@ -3,9 +3,8 @@ import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 
 export default function Home() {
-  const baseImages = ["/hero/01b.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg", "/hero/bulgarian-squash-tour-2026.png"];
+  const baseImages = ["/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg", "/hero/bulgarian-squash-tour-2026.png"];
   const baseAlts = [
-    "Main squash court - Double Yellow Squash Club",
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
     "Pro shop gear and equipment display",
