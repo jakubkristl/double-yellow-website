@@ -8,7 +8,7 @@ const galleryCategories = [
     title: "The Courts",
     description: "Our renovated squash courts with WSF specifications",
     images: [
-      { src: "/hero/01.jpg", alt: "Main squash court - Double Yellow", rotation: 0 },
+      { src: "/hero/01.jpeg", alt: "Main squash court - Double Yellow", rotation: 0 },
       { src: "/hero/02.jpg", alt: "Court view with lighting", rotation: 0 },
       { src: "/hero/03.jpg", alt: "Professional court setup", rotation: 0 },
       { src: "/hero/04.jpg", alt: "Court flooring and walls", rotation: 0 },

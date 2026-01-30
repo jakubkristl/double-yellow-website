@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Double Yellow Squash Club",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01.jpg",
+        url: "https://doubleyellow.bg/hero/01.jpeg",
         alt: "Double Yellow Squash Club - renovated WSF courts",
       },
     ],
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Double Yellow Squash Club — Sofia",
     description:
       "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
-    images: ["/hero/01.jpg"],
+    images: ["/hero/01.jpeg"],
   },
 };
 
@@ -115,6 +115,26 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-BQWPYFTG6V');
+          `}
+        </Script>
+
+        {/* Google Ads Conversion Tracking for Click to Call */}
+        <Script id="google-ads-conversion" strategy="afterInteractive">
+          {`
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                'send_to': 'AW-1784043056l/Vnw5CK6LvOAbEOG7_bpC',
+                'value': 1.0,
+                'currency': 'EUR',
+                'event_callback': callback
+              });
+              return false;
+            }
           `}
         </Script>
 

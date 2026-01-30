@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     url: "https://doubleyellow.bg/events",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01.jpg",
+        url: "https://doubleyellow.bg/hero/01.jpeg",
         alt: "Double Yellow Squash Club",
       },
     ],
