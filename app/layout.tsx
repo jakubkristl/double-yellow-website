@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Double Yellow Squash Club",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01.jpeg",
+        url: "https://doubleyellow.bg/hero/01a.jpeg",
         alt: "Double Yellow Squash Club - renovated WSF courts",
       },
     ],
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Double Yellow Squash Club — Sofia",
     description:
       "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
-    images: ["/hero/01.jpeg"],
+    images: ["/hero/01a.jpeg"],
   },
 };
 
