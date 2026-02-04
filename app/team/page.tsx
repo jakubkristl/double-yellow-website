@@ -19,6 +19,13 @@ const TEAM: Member[] = [
     bio:
       "Former karate medal collector turned squash evangelist. Favorite drill: 'one more.' Believes any ball is retrievable with correct footwork and mild stubbornness. Probably reorganizing the club while you read this.",
   },
+  {
+    name: "Ognyan Chorbadzhiev",
+    role: "Coach / Court Whisperer",
+    photo: "/team/ognyan.jpg",
+    bio:
+      "Believes squash is 80% movement, 15% decisions, and 5% creative excuses. Spots lazy footwork from the next court and calls it out with a grin. Says “relax” right before doubling the tempo.",
+  },
 ];
 
 export default function TeamPage() {
