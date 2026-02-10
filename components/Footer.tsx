@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PhoneLink from "@/components/PhoneLink";
 
 export default function Footer() {
   return (
@@ -35,7 +36,11 @@ export default function Footer() {
 
         <div className="footer-col">
           <h4 className="footer-title">Contact</h4>
-          <p className="muted">+359 896 754 014</p>
+          <p className="muted">
+            <PhoneLink href="tel:+359896754014">
+              +359 896 754 014
+            </PhoneLink>
+          </p>
           <p className="muted">
             <a href="mailto:jakub@doubleyellowsquash.com" aria-label="Email Double Yellow">
               jakub@doubleyellowsquash.com

@@ -48,6 +48,12 @@ export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props
             priority={idx === 0}
             sizes="100vw"
           />
+          {idx === 0 && (
+            <div className="carousel-overlay">
+              <p className="carousel-overlay__en">First training free</p>
+              <p className="carousel-overlay__bg">Първата тренировка е безплатна</p>
+            </div>
+          )}
         </div>
       ))}
 

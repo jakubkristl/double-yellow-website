@@ -1,6 +1,35 @@
+import type { Metadata } from "next";
 import Carousel from "@/components/Carousel";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
+
+export const metadata: Metadata = {
+  title: "Squash Club in Sofia — Double Yellow",
+  description:
+    "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Squash Club in Sofia — Double Yellow",
+    description:
+      "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
+    url: "https://doubleyellow.bg",
+    images: [
+      {
+        url: "https://doubleyellow.bg/hero/01b.jpeg",
+        alt: "Double Yellow Squash Club - renovated WSF courts",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Squash Club in Sofia — Double Yellow",
+    description:
+      "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
+    images: ["/hero/01b.jpeg"],
+  },
+};
 
 export default function Home() {
   const baseImages = ["/hero/01.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg", "/hero/bulgarian-squash-tour-2026.png"];

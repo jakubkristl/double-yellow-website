@@ -1,6 +1,7 @@
 // app/contact/page.tsx
 import React from "react";
 import type { Metadata } from "next";
+import PhoneLink from "@/components/PhoneLink";
 
 export const metadata: Metadata = {
   title: "Contact Double Yellow | Phone, Email & Location",
@@ -26,11 +27,11 @@ export default function ContactPage() {
 
       {/* Quick contacts */}
       <div className="contact-grid">
-        <a className="contact-card" href="tel:+359896754014">
+        <PhoneLink className="contact-card" href="tel:+359896754014">
           <div className="contact-title">Phone</div>
           <div className="contact-data">+359 896 754 014</div>
           <div className="contact-note">Call / Viber / WhatsApp</div>
-        </a>
+        </PhoneLink>
 
         <a className="contact-card" href="mailto:jakub@doubleyellowsquash.com">
           <div className="contact-title">Email</div>

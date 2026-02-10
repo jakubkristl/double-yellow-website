@@ -11,12 +11,35 @@ export const metadata: Metadata = {
   description:
     "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
   metadataBase: new URL("https://doubleyellow.bg"),
+  keywords: [
+    "squash club",
+    "squash Sofia",
+    "WSF courts",
+    "squash coaching",
+    "squash lessons",
+    "squash events",
+    "sports club Sofia",
+  ],
+  category: "Sports",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  authors: [{ name: "Double Yellow Squash Club", url: "https://doubleyellow.bg" }],
   openGraph: {
     title: "Double Yellow Squash Club — Sofia",
     description:
       "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
     url: "https://doubleyellow.bg",
     siteName: "Double Yellow Squash Club",
+    locale: "en_BG",
     images: [
       {
         url: "https://doubleyellow.bg/hero/01b.jpeg",
@@ -39,9 +62,11 @@ import { EVENTS } from "@/lib/events";
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "SportsActivityLocation",
+  "@id": "https://doubleyellow.bg/#sportsclub",
   name: "Double Yellow Squash Club",
   legalName: "Sport And Beyond EOOD",
   url: "https://doubleyellow.bg",
+  image: "https://doubleyellow.bg/hero/01b.jpeg",
   telephone: "+359 896 754 014",
   address: {
     "@type": "PostalAddress",
@@ -68,6 +93,19 @@ const localBusinessSchema = {
     "https://facebook.com/doubleyellowsquash",
     "https://instagram.com/doubleyellowsquash",
   ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Double Yellow Squash Club",
+  url: "https://doubleyellow.bg",
+  description:
+    "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
+  inLanguage: "en",
+  publisher: {
+    "@id": "https://doubleyellow.bg/#sportsclub",
+  },
 };
 
 const eventsSchema = EVENTS.map((e) => ({
@@ -156,6 +194,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         <script
           type="application/ld+json"

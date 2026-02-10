@@ -83,7 +83,11 @@ function BulgarianContent() {
           <li><strong>ЕИК:</strong> 208134448</li>
           <li><strong>Адрес:</strong> гр. София, ул. Любен Русев 6, ап.6</li>
           <li><strong>Имейл:</strong> <a href="mailto:jakub@doubleyellowsquash.com">jakub@doubleyellowsquash.com</a></li>
-          <li><strong>Телефон:</strong> <a href="tel:+359896754014">+359 896 754 014</a></li>
+          <li><strong>Телефон:</strong> <a href="tel:+359896754014" onClick={() => {
+            if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+              return (window as any).gtag_report_conversion('tel:+359896754014');
+            }
+          }}>+359 896 754 014</a></li>
         </ul>
       </section>
 
@@ -205,7 +209,11 @@ function BulgarianContent() {
           <p>За упражняване на вашите права, моля изпратете заявка на:</p>
           <p>
             <strong>Имейл:</strong> <a href="mailto:jakub@doubleyellowsquash.com">jakub@doubleyellowsquash.com</a><br />
-            <strong>Телефон:</strong> <a href="tel:+359896754014">+359 896 754 014</a><br />
+            <strong>Телефон:</strong> <a href="tel:+359896754014" onClick={() => {
+              if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+                return (window as any).gtag_report_conversion('tel:+359896754014');
+              }
+            }}>+359 896 754 014</a><br />
             <strong>Срок за отговор:</strong> До 30 дни от получаване на заявката
           </p>
         </div>
@@ -351,7 +359,11 @@ function EnglishContent() {
           <li><strong>UIC:</strong> 208134448</li>
           <li><strong>Address:</strong> Sofia, 6 Lyuben Rusev str., apt. 6</li>
           <li><strong>Email:</strong> <a href="mailto:jakub@doubleyellowsquash.com">jakub@doubleyellowsquash.com</a></li>
-          <li><strong>Phone:</strong> <a href="tel:+359896754014">+359 896 754 014</a></li>
+          <li><strong>Phone:</strong> <a href="tel:+359896754014" onClick={() => {
+            if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+              return (window as any).gtag_report_conversion('tel:+359896754014');
+            }
+          }}>+359 896 754 014</a></li>
         </ul>
       </section>
 
@@ -473,7 +485,11 @@ function EnglishContent() {
           <p>To exercise your rights, please send a request to:</p>
           <p>
             <strong>Email:</strong> <a href="mailto:jakub@doubleyellowsquash.com">jakub@doubleyellowsquash.com</a><br />
-            <strong>Phone:</strong> <a href="tel:+359896754014">+359 896 754 014</a><br />
+            <strong>Phone:</strong> <a href="tel:+359896754014" onClick={() => {
+              if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+                return (window as any).gtag_report_conversion('tel:+359896754014');
+              }
+            }}>+359 896 754 014</a><br />
             <strong>Response time:</strong> Up to 30 days from receiving the request
           </p>
         </div>
