@@ -39,8 +39,9 @@ export default function Carousel({ images, alts = [], links = [], intervalMs = 4
   return (
     <div className="carousel">
       {displayImages.map((src, idx) => {
+        const isPosterSlide = idx === 0 && Boolean(links[idx]);
         const imageStyle = {
-          objectFit: "cover" as const,
+          objectFit: isPosterSlide ? ("contain" as const) : ("cover" as const),
           objectPosition: "center",
         };
 
