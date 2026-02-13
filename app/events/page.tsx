@@ -1,14 +1,11 @@
 import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import type { Metadata } from "next";
-
-const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-player-reference.jpg";
-const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-16T23:59:59+02:00");
-const DOUBLE_YELLOW_OPEN_URL = "https://www.rankedin.com/en/tournament/64627/double-yellow-open";
-
-function isDoubleYellowOpenActive() {
-  return new Date() < DOUBLE_YELLOW_OPEN_EXPIRES_AT;
-}
+import {
+  DOUBLE_YELLOW_OPEN_POSTER,
+  DOUBLE_YELLOW_OPEN_URL,
+  isDoubleYellowOpenActive,
+} from "@/lib/doubleYellowOpen";
 
 export const metadata: Metadata = {
   title: "Special Events & Coaching Visits | Double Yellow Squash",
@@ -51,8 +48,8 @@ export default function EventsPage() {
               <OptimizedImage
                 src={DOUBLE_YELLOW_OPEN_POSTER}
                 alt="Double Yellow Open tournament on 14-15 March 2026"
-                width={1600}
-                height={1143}
+                width={1536}
+                height={1024}
                 className="event-card__image"
                 style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
                 priority
@@ -81,6 +78,17 @@ export default function EventsPage() {
           </div>
         )}
 
+        {showDoubleYellowOpen && (
+          <hr
+            aria-hidden="true"
+            style={{
+              border: 0,
+              borderTop: '3px solid var(--accent)',
+              margin: '0 0 2rem 0',
+            }}
+          />
+        )}
+
         <div className="event-card" style={{ marginBottom: '2rem' }}>
           <h2 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>БЪЛГАРСКИ СКУОШ ТУР 2026</h2>
           <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
@@ -93,7 +101,7 @@ export default function EventsPage() {
           <h3 style={{ color: 'var(--accent)', marginTop: '2rem', marginBottom: '1rem' }}>📅 Календар 2026</h3>
           <ul style={{ lineHeight: '1.8' }}>
             <li>1️⃣ <strong>07–08 февруари</strong> – Fireball</li>
-            <li>2️⃣ <strong>07–08 март</strong> – Double Yellow Squash Club</li>
+            <li>2️⃣ <strong>14–15 март</strong> – Double Yellow Squash Club</li>
             <li>3️⃣ <strong>21–22 март</strong> – Sofia Squash Center</li>
             <li>4️⃣ <strong>18–19 април</strong> – Double Yellow Squash Club</li>
             <li>5️⃣ <strong>02–03 май</strong> – Fireball</li>
@@ -102,7 +110,7 @@ export default function EventsPage() {
             <li style={{ fontStyle: 'italic', opacity: 0.7 }}>— лятна пауза за възстановяване на дробовете —</li>
             <li>8️⃣ <strong>19–20 септември</strong> – Sofia Squash Center</li>
             <li>9️⃣ <strong>03–04 октомври</strong> – Fireball</li>
-            <li>🔟 <strong>24–25 октомври</strong> – Double Yellow Squash Club</li>
+            <li>1️⃣0️⃣ <strong>24–25 октомври</strong> – Double Yellow Squash Club</li>
             <li>1️⃣1️⃣ <strong>14–15 ноември</strong> – Fireball</li>
             <li>1️⃣2️⃣ <strong>05–06 декември</strong> – Sofia Squash Center</li>
           </ul>

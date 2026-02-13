@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import Carousel from "@/components/Carousel";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
+import {
+  DOUBLE_YELLOW_OPEN_POSTER,
+  DOUBLE_YELLOW_OPEN_URL,
+  isDoubleYellowOpenActive,
+} from "@/lib/doubleYellowOpen";
 
 export const metadata: Metadata = {
   title: "Squash Club in Sofia — Double Yellow",
@@ -32,14 +37,6 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 3600;
-
-const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-player-reference.jpg";
-const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-16T23:59:59+02:00");
-const DOUBLE_YELLOW_OPEN_URL = "https://www.rankedin.com/en/tournament/64627/double-yellow-open";
-
-function isDoubleYellowOpenActive() {
-  return new Date() < DOUBLE_YELLOW_OPEN_EXPIRES_AT;
-}
 
 export default function Home() {
   const showDoubleYellowOpen = isDoubleYellowOpenActive();
