@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-player-reference.jpg";
-const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-17T00:00:00+02:00");
+const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-16T23:59:59+02:00");
 const DOUBLE_YELLOW_OPEN_URL = "https://www.rankedin.com/en/tournament/64627/double-yellow-open";
 
 function isDoubleYellowOpenActive() {
@@ -82,14 +82,6 @@ export default function EventsPage() {
         )}
 
         <div className="event-card" style={{ marginBottom: '2rem' }}>
-          <OptimizedImage
-            src="/hero/bulgarian-squash-tour-2026.png"
-            alt="Bulgarian Squash Tour 2026"
-            width={1920}
-            height={1080}
-            className="event-card__image"
-            style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '1.5rem' }}
-          />
           <h2 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>БЪЛГАРСКИ СКУОШ ТУР 2026</h2>
           <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
             12 турнира. 1 ранглиста. Само най-добрите 8 резултата броят.

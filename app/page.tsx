@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-player-reference.jpg";
-const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-17T00:00:00+02:00");
+const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-16T23:59:59+02:00");
 const DOUBLE_YELLOW_OPEN_URL = "https://www.rankedin.com/en/tournament/64627/double-yellow-open";
 
 function isDoubleYellowOpenActive() {
@@ -43,13 +43,12 @@ function isDoubleYellowOpenActive() {
 
 export default function Home() {
   const showDoubleYellowOpen = isDoubleYellowOpenActive();
-  const baseImages = ["/hero/01.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg", "/hero/bulgarian-squash-tour-2026.png"];
+  const baseImages = ["/hero/01.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
   const baseAlts = [
     "First training free - Първа тренировка безплатна",
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
-    "Pro shop gear and equipment display",
-    "Bulgarian Squash Tour 2026 - 12 tournaments across the year"
+    "Pro shop gear and equipment display"
   ];
   const heroImages = showDoubleYellowOpen ? [DOUBLE_YELLOW_OPEN_POSTER, ...baseImages] : baseImages;
   const heroAlts = showDoubleYellowOpen
