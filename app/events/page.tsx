@@ -1,7 +1,13 @@
-import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import type { Metadata } from "next";
+
+const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-14-15-march-2026.svg";
+const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-17T00:00:00+02:00");
+
+function isDoubleYellowOpenActive() {
+  return new Date() < DOUBLE_YELLOW_OPEN_EXPIRES_AT;
+}
 
 export const metadata: Metadata = {
   title: "Special Events & Coaching Visits | Double Yellow Squash",
@@ -21,12 +27,50 @@ export const metadata: Metadata = {
   },
 };
 
+export const revalidate = 3600;
+
 export default function EventsPage() {
+  const showDoubleYellowOpen = isDoubleYellowOpenActive();
+
   return (
     <main>
       <section className="container container--narrow">
         <h1 className="page-title">Events</h1>
         <p className="subtitle">One-off events, workshops & guest visits.</p>
+
+        {showDoubleYellowOpen && (
+          <div className="event-card" style={{ marginBottom: '2rem' }}>
+            <OptimizedImage
+              src={DOUBLE_YELLOW_OPEN_POSTER}
+              alt="Double Yellow Open tournament on 14-15 March 2026"
+              width={1920}
+              height={1080}
+              className="event-card__image"
+              style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '1.5rem' }}
+              priority
+            />
+            <h2 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>🚨 Double Yellow Open is HERE! 🚨</h2>
+            <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
+              Вторият турнир от Bulgarian Squash Tour идва с важен ъпдейт.
+            </p>
+            <p style={{ marginBottom: '1rem' }}>
+              📅 <strong>Нова дата: 14–15 март</strong> (една седмица по-късно). Последен шанс да тествате форма, нерви и удари преди Национално първенство.
+            </p>
+            <p style={{ marginBottom: '1.2rem' }}>
+              🔥 Силни мачове • 🔥 Още по-силни нерви • 🔥 Класическото „как изпуснах ТАЗИ топка?!“
+            </p>
+            <div className="actions" style={{ marginBottom: '0.4rem' }}>
+              <Link
+                href="https://www.rankedin.com/en/tournament/64627/double-yellow-open"
+                className="btn btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Register on RankedIn
+              </Link>
+            </div>
+          </div>
+        )}
 
         <div className="event-card" style={{ marginBottom: '2rem' }}>
           <OptimizedImage

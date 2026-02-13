@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Double Yellow Open 14-15 March</title>
+  <desc id="desc">Catchy tournament poster with real squash court and player photo layers plus event details.</desc>
+
+  <defs>
+    <linearGradient id="shadeTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.34"/>
+      <stop offset="45%" stop-color="#000" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.46"/>
+    </linearGradient>
+    <linearGradient id="leftPanel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.58"/>
+      <stop offset="100%" stop-color="#111" stop-opacity="0.32"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffcc00"/>
+      <stop offset="100%" stop-color="#ffd84d"/>
+    </linearGradient>
+    <linearGradient id="playerShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.2"/>
+    </linearGradient>
+    <clipPath id="playerFrameClip">
+      <rect x="1320" y="210" width="520" height="770" rx="30"/>
+    </clipPath>
+  </defs>
+
+  <image href="/hero/01.jpeg" x="0" y="0" width="1920" height="1080" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="1920" height="1080" fill="url(#shadeTop)"/>
+
+  <rect x="1320" y="210" width="520" height="770" rx="30" fill="#111" opacity="0.35" stroke="#ffcc00" stroke-width="3"/>
+  <image href="/hero/02.jpg" x="1260" y="120" width="680" height="930" preserveAspectRatio="xMidYMid slice" clip-path="url(#playerFrameClip)"/>
+  <rect x="1320" y="210" width="520" height="770" rx="30" fill="url(#playerShade)"/>
+
+  <path d="M1400 130 L1840 130" stroke="#ffcc00" stroke-width="5" opacity="0.5"/>
+  <path d="M1400 170 L1760 170" stroke="#ffcc00" stroke-width="3" opacity="0.35"/>
+
+  <rect x="84" y="74" width="1240" height="932" rx="34" fill="url(#leftPanel)" stroke="#2b2b2b"/>
+  <rect x="84" y="74" width="1240" height="18" fill="url(#accent)"/>
+
+  <text x="150" y="210" fill="#ffcc00" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="84" font-weight="900">DOUBLE YELLOW OPEN</text>
+  <text x="150" y="270" fill="#fff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="44" font-weight="700">Bulgarian Squash Tour • Tournament #2</text>
+
+  <rect x="150" y="316" width="570" height="110" rx="14" fill="#ffcc00"/>
+  <text x="186" y="387" fill="#000" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="54" font-weight="900">14–15 МАРТ 2026</text>
+
+  <text x="150" y="500" fill="#fff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="40" font-weight="700">Последен тест преди Национално първенство.</text>
+  <text x="150" y="560" fill="#e4e4e4" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="33">Форма. Нерви. Удари. Време е да разбереш къде си.</text>
+  <text x="150" y="620" fill="#ffcc00" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="800">🔥 Силни мачове   🔥 Още по-силни нерви   🔥 Драма до последната топка</text>
+
+  <a href="https://www.rankedin.com/en/tournament/64627/double-yellow-open" target="_blank" rel="noopener noreferrer">
+    <rect x="150" y="684" width="1110" height="116" rx="14" fill="#101010" stroke="#ffcc00" stroke-width="3"/>
+    <text x="186" y="735" fill="#ffcc00" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30" font-weight="800">Записване:</text>
+    <text x="186" y="776" fill="#fff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="35" font-weight="700">rankedin.com/en/tournament/64627/double-yellow-open</text>
+  </a>
+
+  <text x="150" y="886" fill="#ffd84d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="43" font-weight="900">Виждаме се на корта 💪</text>
+
+</svg>

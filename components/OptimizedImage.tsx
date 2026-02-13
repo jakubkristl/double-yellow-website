@@ -37,6 +37,7 @@ async function loadManifest() {
 
 export default function OptimizedImage({ src, alt, width, height, className, style, loading = 'lazy', priority = false }: Props) {
   const [variants, setVariants] = useState<string[] | null>(null);
+  const nextImageLoading = priority ? undefined : loading;
 
   useEffect(() => {
     let mounted = true;
@@ -51,7 +52,7 @@ export default function OptimizedImage({ src, alt, width, height, className, sty
 
   if (!variants || variants.length === 0) {
     return (
-      <Image src={src} alt={alt} width={width || 800} height={height || 600} className={className} style={style} loading={loading} priority={priority} />
+      <Image src={src} alt={alt} width={width || 800} height={height || 600} className={className} style={style} loading={nextImageLoading} priority={priority} />
     );
   }
 

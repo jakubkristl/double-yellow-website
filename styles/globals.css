@@ -182,6 +182,11 @@ li {
 .slide > span {
   position: relative !important;
 }
+.slide-link {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
 .slide.active { opacity: 1; }
 .slide img { object-fit: cover; }
 

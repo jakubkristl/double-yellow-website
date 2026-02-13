@@ -6,13 +6,17 @@ import { useEffect, useState } from "react";
 type Props = {
   images: string[];
   alts?: string[];
+  links?: Array<string | undefined>;
   intervalMs?: number;
 };
 
-export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props) {
+export default function Carousel({ images, alts = [], links = [], intervalMs = 4500 }: Props) {
   const [i, setI] = useState(0);
   const [displayImages, setDisplayImages] = useState<string[]>(images);
   const [displayAlts, setDisplayAlts] = useState<string[]>(alts);
+  const firstTrainingSlideIndex = displayAlts.findIndex((alt) =>
+    alt.toLowerCase().includes("first training free")
+  );
 
   // Sync displayImages when props.images changes
   useEffect(() => {
@@ -40,15 +44,34 @@ export default function Carousel({ images, alts = [], intervalMs = 4500 }: Props
           className={`slide ${idx === i ? "active" : ""}`}
           aria-hidden={idx !== i}
         >
-          <Image
-            src={src}
-            alt={displayAlts[idx] || alts[idx] || "Club photo"}
-            fill
-            style={{ objectFit: "cover" }}
-            priority={idx === 0}
-            sizes="100vw"
-          />
-          {idx === 0 && (
+          {links[idx] ? (
+            <a
+              href={links[idx]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="slide-link"
+              aria-label="Open tournament registration"
+            >
+              <Image
+                src={src}
+                alt={displayAlts[idx] || alts[idx] || "Club photo"}
+                fill
+                style={{ objectFit: "cover" }}
+                priority={idx === 0}
+                sizes="100vw"
+              />
+            </a>
+          ) : (
+            <Image
+              src={src}
+              alt={displayAlts[idx] || alts[idx] || "Club photo"}
+              fill
+              style={{ objectFit: "cover" }}
+              priority={idx === 0}
+              sizes="100vw"
+            />
+          )}
+          {idx === firstTrainingSlideIndex && (
             <div className="carousel-overlay">
               <p className="carousel-overlay__en">First training free</p>
               <p className="carousel-overlay__bg">Първата тренировка е безплатна</p>

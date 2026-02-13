@@ -31,7 +31,18 @@ export const metadata: Metadata = {
   },
 };
 
+export const revalidate = 3600;
+
+const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-14-15-march-2026.svg";
+const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-17T00:00:00+02:00");
+const DOUBLE_YELLOW_OPEN_URL = "https://www.rankedin.com/en/tournament/64627/double-yellow-open";
+
+function isDoubleYellowOpenActive() {
+  return new Date() < DOUBLE_YELLOW_OPEN_EXPIRES_AT;
+}
+
 export default function Home() {
+  const showDoubleYellowOpen = isDoubleYellowOpenActive();
   const baseImages = ["/hero/01.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg", "/hero/bulgarian-squash-tour-2026.png"];
   const baseAlts = [
     "First training free - Първа тренировка безплатна",
@@ -40,15 +51,18 @@ export default function Home() {
     "Pro shop gear and equipment display",
     "Bulgarian Squash Tour 2026 - 12 tournaments across the year"
   ];
-  const heroImages = baseImages;
-  const heroAlts = baseAlts;
+  const heroImages = showDoubleYellowOpen ? [DOUBLE_YELLOW_OPEN_POSTER, ...baseImages] : baseImages;
+  const heroAlts = showDoubleYellowOpen
+    ? ["Double Yellow Open on 14-15 March 2026 - registration on RankedIn", ...baseAlts]
+    : baseAlts;
+  const heroLinks = showDoubleYellowOpen ? [DOUBLE_YELLOW_OPEN_URL, ...baseImages.map(() => undefined)] : baseImages.map(() => undefined);
 
   return (
     <>
       <header className="page-hero">
         {/* Carousel hero section */}
         <div className="hero-carousel">
-          <Carousel images={heroImages} alts={heroAlts} />
+          <Carousel images={heroImages} alts={heroAlts} links={heroLinks} />
         </div>
 
         <h1 className="page-title">
