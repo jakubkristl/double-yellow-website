@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     url: "https://doubleyellow.bg/events",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01b.jpeg",
-        alt: "Double Yellow Squash Club",
+        url: "https://doubleyellow.bg/events/double-yellow-open-tournament.png",
+        alt: "Double Yellow Open tournament poster",
       },
     ],
   },
@@ -29,6 +29,7 @@ export const revalidate = 3600;
 
 export default function EventsPage() {
   const showDoubleYellowOpen = isDoubleYellowOpenActive();
+  const showArchivedDoubleYellowOpen = !showDoubleYellowOpen;
 
   return (
     <main>
@@ -76,6 +77,51 @@ export default function EventsPage() {
               </Link>
             </div>
           </div>
+        )}
+
+        {showArchivedDoubleYellowOpen && (
+          <section>
+            <h2>Old Events</h2>
+            <p>
+              Past tournaments, workshops, and special club events.
+            </p>
+
+            <div className="event-card">
+              <Link
+                href={DOUBLE_YELLOW_OPEN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Double Yellow Open tournament page"
+              >
+                <OptimizedImage
+                  src={DOUBLE_YELLOW_OPEN_POSTER}
+                  alt="Double Yellow Open tournament on 14-15 March 2026"
+                  width={1536}
+                  height={1024}
+                  className="event-card__image"
+                  style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+                  priority={false}
+                />
+              </Link>
+
+              <h3>
+                Double Yellow Open — 14–15 March 2026
+              </h3>
+              <p>
+                Event finished. Thanks to everyone who joined the second stop of the Bulgarian Squash Tour.
+              </p>
+              <div className="actions">
+                <Link
+                  href={DOUBLE_YELLOW_OPEN_URL}
+                  className="btn btn--secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Tournament Page
+                </Link>
+              </div>
+            </div>
+          </section>
         )}
 
         {showDoubleYellowOpen && (

@@ -40,18 +40,14 @@ export const revalidate = 3600;
 
 export default function Home() {
   const showDoubleYellowOpen = isDoubleYellowOpenActive();
-  const baseImages = ["/hero/01.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
-  const baseAlts = [
-    "First training free - Първа тренировка безплатна",
+  const heroImages = [DOUBLE_YELLOW_OPEN_POSTER, "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
+  const heroAlts = [
+    "Double Yellow Open on 14-15 March 2026 - registration on RankedIn",
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
     "Pro shop gear and equipment display"
   ];
-  const heroImages = showDoubleYellowOpen ? [DOUBLE_YELLOW_OPEN_POSTER, ...baseImages] : baseImages;
-  const heroAlts = showDoubleYellowOpen
-    ? ["Double Yellow Open on 14-15 March 2026 - registration on RankedIn", ...baseAlts]
-    : baseAlts;
-  const heroLinks = showDoubleYellowOpen ? [DOUBLE_YELLOW_OPEN_URL, ...baseImages.map(() => undefined)] : baseImages.map(() => undefined);
+  const heroLinks = [showDoubleYellowOpen ? DOUBLE_YELLOW_OPEN_URL : undefined, undefined, undefined, undefined];
 
   return (
     <>
