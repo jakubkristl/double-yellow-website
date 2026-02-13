@@ -39,10 +39,9 @@ export default function Carousel({ images, alts = [], links = [], intervalMs = 4
   return (
     <div className="carousel">
       {displayImages.map((src, idx) => {
-        const preserveBottomContent = idx === 0 && Boolean(links[idx]);
         const imageStyle = {
           objectFit: "cover" as const,
-          objectPosition: preserveBottomContent ? "bottom center" : "center",
+          objectPosition: "center",
         };
 
         return (

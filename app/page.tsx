@@ -39,7 +39,7 @@ export const revalidate = 3600;
 
 export default function Home() {
   const showDoubleYellowOpen = isDoubleYellowOpenActive();
-  const baseImages = ["/hero/first-training-free.png", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
+  const baseImages = ["/hero/01.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
   const baseAlts = [
     "First training free - Първа тренировка безплатна",
     "Professional squash player serving on a bright, newly renovated court",
