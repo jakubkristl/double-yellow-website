@@ -177,6 +177,7 @@ li {
   position: absolute;
   inset: 0;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 400ms ease-in-out;
 }
 .slide > span {
@@ -187,7 +188,10 @@ li {
   inset: 0;
   display: block;
 }
-.slide.active { opacity: 1; }
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
 .slide img { object-fit: cover; }
 
 .carousel-overlay {
