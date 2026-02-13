@@ -38,47 +38,54 @@ export default function Carousel({ images, alts = [], links = [], intervalMs = 4
 
   return (
     <div className="carousel">
-      {displayImages.map((src, idx) => (
-        <div
-          key={src}
-          className={`slide ${idx === i ? "active" : ""}`}
-          aria-hidden={idx !== i}
-        >
-          {links[idx] ? (
-            <a
-              href={links[idx]}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="slide-link"
-              aria-label="Open tournament registration"
-            >
+      {displayImages.map((src, idx) => {
+        const preserveBottomContent = idx === 0 && Boolean(links[idx]);
+        const imageStyle = {
+          objectFit: "cover" as const,
+          objectPosition: preserveBottomContent ? "bottom center" : "center",
+        };
+
+        return (
+          <div
+            key={src}
+            className={`slide ${idx === i ? "active" : ""}`}
+          >
+            {links[idx] ? (
+              <a
+                href={links[idx]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="slide-link"
+                aria-label="Open tournament registration"
+              >
+                <Image
+                  src={src}
+                  alt={displayAlts[idx] || alts[idx] || "Club photo"}
+                  fill
+                  style={imageStyle}
+                  priority={idx === 0}
+                  sizes="100vw"
+                />
+              </a>
+            ) : (
               <Image
                 src={src}
                 alt={displayAlts[idx] || alts[idx] || "Club photo"}
                 fill
-                style={{ objectFit: "cover" }}
+                style={imageStyle}
                 priority={idx === 0}
                 sizes="100vw"
               />
-            </a>
-          ) : (
-            <Image
-              src={src}
-              alt={displayAlts[idx] || alts[idx] || "Club photo"}
-              fill
-              style={{ objectFit: "cover" }}
-              priority={idx === 0}
-              sizes="100vw"
-            />
-          )}
-          {idx === firstTrainingSlideIndex && (
-            <div className="carousel-overlay">
-              <p className="carousel-overlay__en">First training free</p>
-              <p className="carousel-overlay__bg">Първата тренировка е безплатна</p>
-            </div>
-          )}
-        </div>
-      ))}
+            )}
+            {idx === firstTrainingSlideIndex && (
+              <div className="carousel-overlay">
+                <p className="carousel-overlay__en">First training free</p>
+                <p className="carousel-overlay__bg">Първата тренировка е безплатна</p>
+              </div>
+            )}
+          </div>
+        );
+      })}
 
       <button className="nav prev" aria-label="Previous photo" onClick={prev}>
         ‹

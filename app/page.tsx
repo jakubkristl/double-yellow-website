@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Carousel from "@/components/Carousel";
 import Image from "next/image";
-import OptimizedImage from "@/components/OptimizedImage";
 import {
   DOUBLE_YELLOW_OPEN_POSTER,
   DOUBLE_YELLOW_OPEN_URL,
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://doubleyellow.bg",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01b.jpeg",
+        url: "https://doubleyellow.bg/hero/01.jpeg",
         alt: "Double Yellow Squash Club - renovated WSF courts",
       },
     ],
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
     title: "Squash Club in Sofia — Double Yellow",
     description:
       "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
-    images: ["/hero/01b.jpeg"],
+    images: ["/hero/01.jpeg"],
   },
 };
 
@@ -40,14 +39,20 @@ export const revalidate = 3600;
 
 export default function Home() {
   const showDoubleYellowOpen = isDoubleYellowOpenActive();
-  const heroImages = [DOUBLE_YELLOW_OPEN_POSTER, "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
-  const heroAlts = [
-    "Double Yellow Open on 14-15 March 2026 - registration on RankedIn",
+  const baseImages = ["/hero/first-training-free.png", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
+  const baseAlts = [
+    "First training free - Първа тренировка безплатна",
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
     "Pro shop gear and equipment display"
   ];
-  const heroLinks = [showDoubleYellowOpen ? DOUBLE_YELLOW_OPEN_URL : undefined, undefined, undefined, undefined];
+  const heroImages = showDoubleYellowOpen ? [DOUBLE_YELLOW_OPEN_POSTER, ...baseImages] : baseImages;
+  const heroAlts = showDoubleYellowOpen
+    ? ["Double Yellow Open on 14-15 March 2026 - registration on RankedIn", ...baseAlts]
+    : baseAlts;
+  const heroLinks = showDoubleYellowOpen
+    ? [DOUBLE_YELLOW_OPEN_URL, ...baseImages.map(() => undefined)]
+    : baseImages.map(() => undefined);
 
   return (
     <>
