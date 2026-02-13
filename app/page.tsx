@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600;
 
-const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-14-15-march-2026.svg";
+const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-player-reference.jpg";
 const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-17T00:00:00+02:00");
 const DOUBLE_YELLOW_OPEN_URL = "https://www.rankedin.com/en/tournament/64627/double-yellow-open";
 

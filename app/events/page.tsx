@@ -2,8 +2,9 @@ import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-14-15-march-2026.svg";
+const DOUBLE_YELLOW_OPEN_POSTER = "/events/double-yellow-open-player-reference.jpg";
 const DOUBLE_YELLOW_OPEN_EXPIRES_AT = new Date("2026-03-17T00:00:00+02:00");
+const DOUBLE_YELLOW_OPEN_URL = "https://www.rankedin.com/en/tournament/64627/double-yellow-open";
 
 function isDoubleYellowOpenActive() {
   return new Date() < DOUBLE_YELLOW_OPEN_EXPIRES_AT;
@@ -40,15 +41,23 @@ export default function EventsPage() {
 
         {showDoubleYellowOpen && (
           <div className="event-card" style={{ marginBottom: '2rem' }}>
-            <OptimizedImage
-              src={DOUBLE_YELLOW_OPEN_POSTER}
-              alt="Double Yellow Open tournament on 14-15 March 2026"
-              width={1920}
-              height={1080}
-              className="event-card__image"
-              style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '1.5rem' }}
-              priority
-            />
+            <Link
+              href={DOUBLE_YELLOW_OPEN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Double Yellow Open registration"
+              style={{ display: 'block', marginBottom: '1.5rem' }}
+            >
+              <OptimizedImage
+                src={DOUBLE_YELLOW_OPEN_POSTER}
+                alt="Double Yellow Open tournament on 14-15 March 2026"
+                width={1600}
+                height={1143}
+                className="event-card__image"
+                style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+                priority
+              />
+            </Link>
             <h2 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>🚨 Double Yellow Open is HERE! 🚨</h2>
             <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
               Вторият турнир от Bulgarian Squash Tour идва с важен ъпдейт.
@@ -61,7 +70,7 @@ export default function EventsPage() {
             </p>
             <div className="actions" style={{ marginBottom: '0.4rem' }}>
               <Link
-                href="https://www.rankedin.com/en/tournament/64627/double-yellow-open"
+                href={DOUBLE_YELLOW_OPEN_URL}
                 className="btn btn--primary"
                 target="_blank"
                 rel="noopener noreferrer"
