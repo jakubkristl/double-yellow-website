@@ -1,0 +1,41 @@
+.eventCardMidGap {
+  margin-bottom: 1.5rem;
+}
+
+.eventCardLargeGap {
+  margin-bottom: 2rem;
+}
+
+.eventHeading {
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.eventTextGap {
+  margin-bottom: 1rem;
+}
+
+.eventSubheading {
+  color: var(--accent);
+  margin: 1.5rem 0 0.8rem;
+}
+
+.eventList {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.eventListSpaced {
+  line-height: 1.8;
+}
+
+.eventMediaLink {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.eventMedia {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
