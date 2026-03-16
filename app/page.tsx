@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Carousel from "@/components/Carousel";
 import Image from "next/image";
 
+const BNT_ARTICLE_URL =
+  "https://bnt.bg/news/chuzhdencite-slovakat-yakob-kristal-koito-razviva-skuosh-v-balgariya-v410712-347134news.html";
+
 export const metadata: Metadata = {
   title: "Squash Club in Sofia — Double Yellow",
   description:
@@ -33,13 +36,19 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default function Home() {
-  const heroImages = ["/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
+  const heroImages = [
+    "/events/bnt-jakob-kristal.png",
+    "/hero/02.jpg",
+    "/hero/03.jpg",
+    "/hero/04.jpg",
+  ];
   const heroAlts = [
+    "BNT feature: Jakub Kristl developing squash in Bulgaria",
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
     "Pro shop gear and equipment display"
   ];
-  const heroLinks = heroImages.map(() => undefined);
+  const heroLinks = [BNT_ARTICLE_URL, ...heroImages.slice(1).map(() => undefined)];
 
   return (
     <>
