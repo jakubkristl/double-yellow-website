@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import Carousel from "@/components/Carousel";
 import Image from "next/image";
-import {
-  DOUBLE_YELLOW_OPEN_POSTER,
-  DOUBLE_YELLOW_OPEN_URL,
-  isDoubleYellowOpenActive,
-} from "@/lib/doubleYellowOpen";
 
 export const metadata: Metadata = {
   title: "Squash Club in Sofia — Double Yellow",
@@ -38,21 +33,13 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default function Home() {
-  const showDoubleYellowOpen = isDoubleYellowOpenActive();
-  const baseImages = ["/hero/01.jpeg", "/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
-  const baseAlts = [
-    "First training free - Първа тренировка безплатна",
+  const heroImages = ["/hero/02.jpg", "/hero/03.jpg", "/hero/04.jpg"];
+  const heroAlts = [
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
     "Pro shop gear and equipment display"
   ];
-  const heroImages = showDoubleYellowOpen ? [DOUBLE_YELLOW_OPEN_POSTER, ...baseImages] : baseImages;
-  const heroAlts = showDoubleYellowOpen
-    ? ["Double Yellow Open on 14-15 March 2026 - registration on RankedIn", ...baseAlts]
-    : baseAlts;
-  const heroLinks = showDoubleYellowOpen
-    ? [DOUBLE_YELLOW_OPEN_URL, ...baseImages.map(() => undefined)]
-    : baseImages.map(() => undefined);
+  const heroLinks = heroImages.map(() => undefined);
 
   return (
     <>
