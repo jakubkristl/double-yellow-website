@@ -17,6 +17,7 @@ const nav: NavItem[] = [
   { href: "/membership", label: "Membership" },
   { href: "/activities", label: "Activities" },
   { href: "/team", label: "Team" },
+  { href: "/events", label: "Events" },
   { href: "/store", label: "Store" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
