@@ -107,6 +107,7 @@ li {
 .navbar-wrap {
   border-bottom: 1px solid var(--border);
   background: rgba(10, 10, 10, 0.9);
+  -webkit-backdrop-filter: saturate(140%) blur(6px);
   backdrop-filter: saturate(140%) blur(6px);
   position: sticky;
   top: 0;
@@ -207,6 +208,7 @@ li {
   background: rgba(0, 0, 0, 0.45);
   color: #fff;
   max-width: min(78%, 520px);
+    -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
@@ -221,6 +223,59 @@ li {
   font-weight: 500;
   font-size: clamp(14px, 1.6vw, 20px);
   opacity: 0.95;
+}
+
+.carousel-promo {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(78%, 560px);
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.78), rgba(10, 10, 10, 0.58));
+  color: #fff;
+    -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
+}
+
+.carousel-promo__eyebrow {
+  margin: 0;
+  color: var(--accent-2);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.carousel-promo__title {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.carousel-promo__body {
+  margin: 0;
+  font-size: clamp(14px, 1.4vw, 18px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.carousel-promo__cta {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #111;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .nav {
@@ -467,6 +522,22 @@ a:hover { color: var(--accent); }
     bottom: 14px;
     padding: 10px 12px;
     max-width: 92%;
+  }
+
+  .carousel-promo {
+    left: 14px;
+    top: 14px;
+    max-width: calc(100% - 28px);
+    padding: 12px 14px;
+    gap: 6px;
+  }
+
+  .carousel-promo__title {
+    font-size: clamp(20px, 7vw, 28px);
+  }
+
+  .carousel-promo__body {
+    font-size: 14px;
   }
 
   .steps-grid {

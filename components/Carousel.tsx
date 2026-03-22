@@ -7,10 +7,27 @@ type Props = {
   images: string[];
   alts?: string[];
   links?: Array<string | undefined>;
+  linkLabels?: Array<string | undefined>;
+  overlays?: Array<
+    | {
+        eyebrow?: string;
+        title: string;
+        body?: string;
+        ctaLabel?: string;
+      }
+    | undefined
+  >;
   intervalMs?: number;
 };
 
-export default function Carousel({ images, alts = [], links = [], intervalMs = 4500 }: Props) {
+export default function Carousel({
+  images,
+  alts = [],
+  links = [],
+  linkLabels = [],
+  overlays = [],
+  intervalMs = 4500,
+}: Props) {
   const [i, setI] = useState(0);
   const [displayImages, setDisplayImages] = useState<string[]>(images);
   const [displayAlts, setDisplayAlts] = useState<string[]>(alts);
@@ -40,6 +57,7 @@ export default function Carousel({ images, alts = [], links = [], intervalMs = 4
     <div className="carousel">
       {displayImages.map((src, idx) => {
         const isPosterSlide = idx === 0 && Boolean(links[idx]);
+        const overlay = overlays[idx];
         const imageStyle = {
           objectFit: isPosterSlide ? ("contain" as const) : ("cover" as const),
           objectPosition: "center",
@@ -56,7 +74,7 @@ export default function Carousel({ images, alts = [], links = [], intervalMs = 4
                 target="_blank"
                 rel="noopener noreferrer"
                 className="slide-link"
-                aria-label="Open tournament registration"
+                aria-label={linkLabels[idx] || "Open linked slide"}
               >
                 <Image
                   src={src}
@@ -81,6 +99,16 @@ export default function Carousel({ images, alts = [], links = [], intervalMs = 4
               <div className="carousel-overlay">
                 <p className="carousel-overlay__en">First training free</p>
                 <p className="carousel-overlay__bg">Първата тренировка е безплатна</p>
+              </div>
+            )}
+            {overlay && (
+              <div className="carousel-promo">
+                {overlay.eyebrow && <p className="carousel-promo__eyebrow">{overlay.eyebrow}</p>}
+                <p className="carousel-promo__title">{overlay.title}</p>
+                {overlay.body && <p className="carousel-promo__body">{overlay.body}</p>}
+                {links[idx] && overlay.ctaLabel && (
+                  <span className="carousel-promo__cta">{overlay.ctaLabel}</span>
+                )}
               </div>
             )}
           </div>

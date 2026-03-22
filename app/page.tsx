@@ -1,61 +1,75 @@
 import type { Metadata } from "next";
 import Carousel from "@/components/Carousel";
 import Image from "next/image";
+import { createPageMetadata } from "@/lib/seo";
 
 const BNT_ARTICLE_URL =
   "https://bnt.bg/news/chuzhdencite-slovakat-yakob-kristal-koito-razviva-skuosh-v-balgariya-v410712-347134news.html";
+const WSF_LEVEL_1_COURSE_URL =
+  "https://europeansquash.com/event/wsf-level-1-coaching-course/";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/",
   title: "Squash Club in Sofia — Double Yellow",
   description:
     "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Squash Club in Sofia — Double Yellow",
-    description:
-      "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
-    url: "https://doubleyellow.bg",
-    images: [
-      {
-        url: "https://doubleyellow.bg/hero/01.jpeg",
-        alt: "Double Yellow Squash Club - renovated WSF courts",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Squash Club in Sofia — Double Yellow",
-    description:
-      "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
-    images: ["/hero/01.jpeg"],
-  },
-};
+  image: "/hero/01.jpeg",
+});
 
 export const revalidate = 3600;
 
 export default function Home() {
   const heroImages = [
+    "/events/wsf-level-1-coaching-course.jpg",
     "/events/bnt-jakob-kristal.png",
     "/hero/02.jpg",
     "/hero/03.jpg",
     "/hero/04.jpg",
   ];
   const heroAlts = [
+    "WSF Level 1 Coaching Course invitation in Sofia, Bulgaria",
     "BNT feature: Jakub Kristl developing squash in Bulgaria",
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
     "Pro shop gear and equipment display"
   ];
-  const heroLinks = [BNT_ARTICLE_URL, ...heroImages.slice(1).map(() => undefined)];
+  const heroLinks = [
+    WSF_LEVEL_1_COURSE_URL,
+    BNT_ARTICLE_URL,
+    ...heroImages.slice(2).map(() => undefined),
+  ];
+  const heroLinkLabels = [
+    "Open WSF Level 1 Coaching Course on the European Squash Federation website",
+    "Open the BNT feature about Jakub Kristl",
+    undefined,
+    undefined,
+    undefined,
+  ];
+  const heroOverlays = [
+    {
+      eyebrow: "Featured Event",
+      title: "WSF Level 1 Coaching Course",
+      body: "12-14 June 2026 in Sofia. Mainly for aspiring coaches starting with beginner players and junior groups.",
+      ctaLabel: "View course details",
+    },
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+  ];
 
   return (
     <>
       <header className="page-hero">
         {/* Carousel hero section */}
         <div className="hero-carousel">
-          <Carousel images={heroImages} alts={heroAlts} links={heroLinks} />
+          <Carousel
+            images={heroImages}
+            alts={heroAlts}
+            links={heroLinks}
+            linkLabels={heroLinkLabels}
+            overlays={heroOverlays}
+          />
         </div>
 
         <h1 className="page-title">
