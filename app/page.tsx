@@ -19,26 +19,37 @@ export const metadata: Metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function Home() {
-  const heroImages = [
+  const showEasterSlide = new Date() < new Date("2026-04-15");
+
+  const baseImages = [
     "/events/wsf-level-1-coaching-course.jpg",
     "/events/bnt-jakob-kristal.png",
     "/hero/02.jpg",
     "/hero/03.jpg",
     "/hero/04.jpg",
   ];
+  const heroImages = showEasterSlide
+    ? ["/events/easter-holiday-hours-2026.jpg", ...baseImages]
+    : baseImages;
+
   const heroAlts = [
+    ...(showEasterSlide
+      ? ["Easter holiday hours: Double Yellow Squash closed 10–13 April, reopening Tuesday 14 April at 7:00 AM"]
+      : []),
     "WSF Level 1 Coaching Course invitation in Sofia, Bulgaria",
     "BNT feature: Jakub Kristl developing squash in Bulgaria",
     "Professional squash player serving on a bright, newly renovated court",
     "Court view with glass back wall and seating",
-    "Pro shop gear and equipment display"
+    "Pro shop gear and equipment display",
   ];
   const heroLinks = [
+    ...(showEasterSlide ? [undefined] : []),
     WSF_LEVEL_1_COURSE_URL,
     BNT_ARTICLE_URL,
-    ...heroImages.slice(2).map(() => undefined),
+    ...baseImages.slice(2).map(() => undefined),
   ];
   const heroLinkLabels = [
+    ...(showEasterSlide ? [undefined] : []),
     "Open WSF Level 1 Coaching Course on the European Squash Federation website",
     "Open the BNT feature about Jakub Kristl",
     undefined,
@@ -46,6 +57,7 @@ export default function Home() {
     undefined,
   ];
   const heroOverlays = [
+    ...(showEasterSlide ? [undefined] : []),
     {
       eyebrow: "Featured Event",
       title: "WSF Level 1 Coaching Course",
