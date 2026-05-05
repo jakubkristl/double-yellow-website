@@ -91,28 +91,34 @@ export default function Navbar() {
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
         .container {
-          max-width: 1200px;
+          max-width: 1320px;
           margin: 0 auto;
-          padding: 12px 20px;
+          width: min(1320px, calc(100vw - 32px));
+          padding: 12px 16px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 24px;
+          gap: 16px;
           position: relative;
+          overflow: hidden;
         }
         .brand {
           display: inline-flex;
           align-items: center;
-          gap: 14px;
+          gap: 12px;
           text-decoration: none;
           z-index: 101;
+          min-width: 0;
+          flex: 1 1 auto;
         }
         .brand-text {
           font-weight: 800;
-          font-size: 34px;
+          font-size: clamp(24px, 1.4vw + 14px, 32px);
           line-height: 1;
           color: #fff;
           white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         
         /* Hamburger Button */
@@ -158,20 +164,22 @@ export default function Navbar() {
         
         .menu {
           display: flex;
-          gap: 28px;
+          gap: clamp(12px, 1vw, 22px);
           list-style: none;
           margin: 0;
           padding: 0;
+          flex: 0 0 auto;
         }
         .link {
           color: #ffcc00;
           font-weight: 900;
-          font-size: 26px;
+          font-size: clamp(18px, 0.85vw + 10px, 22px);
           text-decoration: none;
           position: relative;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.2px;
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
           transition: all 150ms ease;
+          white-space: nowrap;
         }
         .link:hover {
           color: #ffdd4d;
@@ -192,23 +200,11 @@ export default function Navbar() {
           border-radius: 2px;
         }
 
-        @media (max-width: 960px) {
-          .brand-text {
-            font-size: 26px;
-          }
-          .link {
-            font-size: 20px;
-          }
-          .menu {
-            gap: 18px;
-          }
-        }
-
-        @media (max-width: 720px) {
+        @media (max-width: 1280px) {
           .hamburger {
             display: flex;
           }
-          
+
           .menu-overlay {
             display: block;
             position: fixed;
@@ -220,12 +216,12 @@ export default function Navbar() {
             z-index: 99;
             animation: fadeIn 0.3s ease;
           }
-          
+
           .menu {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 280px;
+            width: min(320px, 86vw);
             height: 100vh;
             background: #0d0d0d;
             flex-direction: column;
@@ -237,23 +233,29 @@ export default function Navbar() {
             overflow-y: auto;
             border-left: 2px solid var(--accent);
           }
-          
+
           .menu-open {
             right: 0;
           }
-          
+
           .link {
             font-size: 22px;
             display: block;
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 204, 0, 0.1);
           }
-          
+
           .link.active::after {
             bottom: 8px;
             left: 0;
             right: auto;
             width: 40px;
+          }
+        }
+
+        @media (max-width: 960px) {
+          .brand-text {
+            font-size: 26px;
           }
         }
 
