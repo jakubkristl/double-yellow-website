@@ -33,6 +33,7 @@ export const siteRoutes: RouteDefinition[] = [
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
   { path: "/cookies", priority: 0.3, changeFrequency: "yearly" },
   { path: "/events", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/learn", priority: 0.9, changeFrequency: "weekly" },
   { path: "/gallery", priority: 0.7, changeFrequency: "monthly" },
   { path: "/membership", priority: 0.8, changeFrequency: "weekly" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },

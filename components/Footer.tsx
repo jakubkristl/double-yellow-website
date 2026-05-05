@@ -34,6 +34,9 @@ export default function Footer() {
             <li>
               <Link href="/squash-sofia">Squash Sofia</Link>
             </li>
+            <li>
+              <Link href="/learn">Beginner tips &amp; guides</Link>
+            </li>
           </ul>
         </div>
 

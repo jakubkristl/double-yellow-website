@@ -22,6 +22,7 @@ const nav: NavItem[] = [
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+  { href: "/learn", label: "Learn" },
 ];
 
 export default function Navbar() {
