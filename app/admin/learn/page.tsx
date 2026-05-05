@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { createAdminClient } from "@/lib/supabase-admin";
 import {
@@ -28,23 +28,11 @@ export default async function AdminLearnPage({
 
   if (!isAuthenticated) {
     return (
-      <main className="container" style={{ maxWidth: 480, paddingTop: 60 }}>
+      <main className="container admin-login-page">
         <h1 className="page-title">Admin Login</h1>
-        {error && (
-          <p style={{ color: "#ff6b6b", margin: "16px 0 0" }}>
-            Wrong password. Try again.
-          </p>
-        )}
-        <form
-          action={loginAction}
-          className="learn-panel"
-          style={{ marginTop: 28, display: "grid", gap: 16 }}
-        >
-          <label
-            htmlFor="admin-pw"
-            className="learn-panel__title"
-            style={{ marginBottom: 0 }}
-          >
+        {error && <p className="admin-error">Wrong password. Try again.</p>}
+        <form action={loginAction} className="learn-panel admin-login-form">
+          <label htmlFor="admin-pw" className="learn-panel__title">
             Password
           </label>
           <input
@@ -91,23 +79,12 @@ export default async function AdminLearnPage({
 
   const pending = comments.filter((c) => c.status === "pending");
   const approved = comments.filter((c) => c.status === "approved");
+  const newTopics = topicRequests.filter((t) => t.status === "new").length;
 
   return (
-    <main className="container" style={{ paddingTop: 24, paddingBottom: 64 }}>
-      {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 32,
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
-        <h1 className="page-title" style={{ margin: 0 }}>
-          Learn Admin
-        </h1>
+    <main className="container admin-page">
+      <div className="admin-header">
+        <h1 className="page-title">Learn Admin</h1>
         <form action={logoutAction}>
           <button type="submit" className="btn btn-secondary">
             Log out
@@ -115,100 +92,64 @@ export default async function AdminLearnPage({
         </form>
       </div>
 
-      {/* Stats row */}
-      <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 40 }}>
-        {[
-          { label: "Pending comments", value: pending.length, highlight: pending.length > 0 },
-          { label: "Approved comments", value: approved.length, highlight: false },
-          {
-            label: "New topic requests",
-            value: topicRequests.filter((t) => t.status === "new").length,
-            highlight: topicRequests.filter((t) => t.status === "new").length > 0,
-          },
-        ].map(({ label, value, highlight }) => (
-          <div
-            key={label}
-            className="learn-panel"
-            style={{
-              flex: "1 1 150px",
-              borderColor: highlight ? "var(--accent)" : undefined,
-            }}
-          >
-            <div
-              className="learn-panel__title"
-              style={{
-                fontSize: "2rem",
-                color: highlight ? "var(--accent)" : "var(--text)",
-              }}
-            >
-              {value}
-            </div>
-            <p className="learn-panel__text" style={{ margin: 0 }}>
-              {label}
-            </p>
-          </div>
-        ))}
+      {/* Stats */}
+      <div className="admin-stats">
+        <div
+          className={`learn-panel admin-stat${pending.length > 0 ? " admin-stat--highlight" : ""}`}
+        >
+          <p className={`admin-stat__number${pending.length > 0 ? " admin-stat__number--highlight" : ""}`}>
+            {pending.length}
+          </p>
+          <p className="admin-stat__label">Pending comments</p>
+        </div>
+        <div className="learn-panel admin-stat">
+          <p className="admin-stat__number">{approved.length}</p>
+          <p className="admin-stat__label">Approved comments</p>
+        </div>
+        <div
+          className={`learn-panel admin-stat${newTopics > 0 ? " admin-stat--highlight" : ""}`}
+        >
+          <p className={`admin-stat__number${newTopics > 0 ? " admin-stat__number--highlight" : ""}`}>
+            {newTopics}
+          </p>
+          <p className="admin-stat__label">New topic requests</p>
+        </div>
         {Object.entries(likesByArticle).map(([slug, count]) => (
-          <div key={slug} className="learn-panel" style={{ flex: "1 1 150px" }}>
-            <div className="learn-panel__title" style={{ fontSize: "2rem" }}>
-              {count} ❤
-            </div>
-            <p
-              className="learn-panel__text"
-              style={{ margin: 0, fontSize: "0.78rem", wordBreak: "break-all" }}
-            >
-              {slug}
-            </p>
+          <div key={slug} className="learn-panel admin-stat">
+            <p className="admin-stat__number">{count} ❤</p>
+            <p className="admin-stat__slug">{slug}</p>
           </div>
         ))}
       </div>
 
       {/* Pending comments */}
-      <h2 className="h2" style={{ marginBottom: 16 }}>
+      <h2 className="h2 admin-section-title">
         Pending{" "}
-        {pending.length > 0 && (
-          <span style={{ color: "var(--accent)" }}>({pending.length})</span>
-        )}
+        {pending.length > 0 && <span>({pending.length})</span>}
       </h2>
       {pending.length === 0 ? (
-        <p className="muted" style={{ marginBottom: 40 }}>
-          Nothing pending. All clear.
-        </p>
+        <p className="muted admin-list">All clear.</p>
       ) : (
-        <div style={{ display: "grid", gap: 12, marginBottom: 40 }}>
+        <div className="admin-list">
           {pending.map((comment) => (
             <div
               key={comment.id}
-              className="learn-panel"
-              style={{ borderColor: "rgba(255,204,0,0.3)" }}
+              className="learn-panel admin-comment admin-comment--pending"
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  gap: 12,
-                  flexWrap: "wrap",
-                  marginBottom: 10,
-                }}
-              >
+              <div className="admin-comment__top">
                 <div>
                   <strong>{comment.name}</strong>
-                  <span
-                    className="muted"
-                    style={{ marginLeft: 10, fontSize: "0.82rem" }}
-                  >
+                  <span className="admin-comment__meta">
                     on <em>{comment.article_slug}</em> ·{" "}
                     {new Date(comment.created_at).toLocaleString("en-GB")}
                   </span>
                 </div>
-                <div style={{ display: "flex", gap: 8 }}>
+                <div className="admin-comment__actions">
                   <form action={approveCommentAction}>
                     <input type="hidden" name="id" value={comment.id} />
                     <button
                       type="submit"
-                      className="btn btn-primary"
-                      style={{ padding: "6px 14px", fontSize: "0.85rem" }}
+                      className="btn btn-primary admin-btn-sm"
                     >
                       Approve
                     </button>
@@ -217,15 +158,14 @@ export default async function AdminLearnPage({
                     <input type="hidden" name="id" value={comment.id} />
                     <button
                       type="submit"
-                      className="btn btn-secondary"
-                      style={{ padding: "6px 14px", fontSize: "0.85rem" }}
+                      className="btn btn-secondary admin-btn-sm"
                     >
                       Reject
                     </button>
                   </form>
                 </div>
               </div>
-              <p style={{ margin: 0 }}>{comment.message}</p>
+              <p className="admin-comment__body">{comment.message}</p>
             </div>
           ))}
         </div>
@@ -234,27 +174,16 @@ export default async function AdminLearnPage({
       {/* Approved comments */}
       {approved.length > 0 && (
         <>
-          <h2 className="h2" style={{ marginBottom: 16 }}>
+          <h2 className="h2 admin-section-title">
             Approved ({approved.length})
           </h2>
-          <div style={{ display: "grid", gap: 12, marginBottom: 40 }}>
+          <div className="admin-list">
             {approved.map((comment) => (
-              <div key={comment.id} className="learn-panel">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: 12,
-                    flexWrap: "wrap",
-                    marginBottom: 8,
-                  }}
-                >
+              <div key={comment.id} className="learn-panel admin-comment">
+                <div className="admin-comment__top">
                   <div>
                     <strong>{comment.name}</strong>
-                    <span
-                      className="muted"
-                      style={{ marginLeft: 10, fontSize: "0.82rem" }}
-                    >
+                    <span className="admin-comment__meta">
                       on <em>{comment.article_slug}</em>
                     </span>
                   </div>
@@ -262,14 +191,13 @@ export default async function AdminLearnPage({
                     <input type="hidden" name="id" value={comment.id} />
                     <button
                       type="submit"
-                      className="btn btn-secondary"
-                      style={{ padding: "6px 14px", fontSize: "0.85rem" }}
+                      className="btn btn-secondary admin-btn-sm"
                     >
                       Remove
                     </button>
                   </form>
                 </div>
-                <p style={{ margin: 0 }}>{comment.message}</p>
+                <p className="admin-comment__body">{comment.message}</p>
               </div>
             ))}
           </div>
@@ -277,41 +205,31 @@ export default async function AdminLearnPage({
       )}
 
       {/* Topic requests */}
-      <h2 className="h2" style={{ marginBottom: 16 }}>
+      <h2 className="h2 admin-section-title">
         Topic requests ({topicRequests.length})
       </h2>
       {topicRequests.length === 0 ? (
         <p className="muted">No requests yet.</p>
       ) : (
-        <div style={{ display: "grid", gap: 12 }}>
+        <div className="admin-list">
           {topicRequests.map((topic) => (
-            <div
-              key={topic.id}
-              className="learn-panel"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                gap: 16,
-                flexWrap: "wrap",
-              }}
-            >
-              <div style={{ flex: "1 1 200px" }}>
-                <p style={{ margin: "0 0 4px" }}>{topic.message}</p>
-                <span className="muted" style={{ fontSize: "0.82rem" }}>
+            <div key={topic.id} className="learn-panel admin-topic">
+              <div className="admin-topic__text">
+                <p className="admin-topic__message">{topic.message}</p>
+                <span className="admin-topic__date">
                   {new Date(topic.created_at).toLocaleDateString("en-GB")}
                 </span>
               </div>
-              <form
-                action={updateTopicStatusAction}
-                style={{ display: "flex", gap: 8, alignItems: "center" }}
-              >
+              <form action={updateTopicStatusAction} className="admin-topic__form">
                 <input type="hidden" name="id" value={topic.id} />
+                <label htmlFor={`status-${topic.id}`} className="sr-only">
+                  Status for: {topic.message}
+                </label>
                 <select
+                  id={`status-${topic.id}`}
                   name="status"
                   defaultValue={topic.status}
                   className="learn-input"
-                  style={{ width: "auto", padding: "8px 12px" }}
                 >
                   <option value="new">New</option>
                   <option value="noted">Noted</option>
@@ -319,8 +237,7 @@ export default async function AdminLearnPage({
                 </select>
                 <button
                   type="submit"
-                  className="btn btn-primary"
-                  style={{ padding: "8px 16px", fontSize: "0.85rem" }}
+                  className="btn btn-primary admin-btn-sm"
                 >
                   Save
                 </button>
