@@ -2438,6 +2438,22 @@ a:hover { color: var(--accent); }
   font: inherit;
 }
 
+select.learn-input option {
+  background: #1a1a1a;
+  color: var(--text);
+}
+
+.learn-comment-form {
+  display: grid;
+  gap: 10px;
+}
+
+.learn-panel__success {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .learn-input::placeholder {
   color: #8d8d8d;
 }
