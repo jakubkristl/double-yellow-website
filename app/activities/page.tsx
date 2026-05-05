@@ -3,307 +3,237 @@
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 import { useState } from "react";
+import IntroLeadForm from "@/components/IntroLeadForm";
+
+const VIBER_URL = "viber://chat?number=%2B359896754014";
+const WHATSAPP_URL = "https://wa.me/359896754014";
+
+type Activity = {
+  title: string;
+  schedule: string;
+  benefit: string;
+  bookingUrl?: string;
+  image: string;
+  alt: string;
+  cta: string;
+  featured?: boolean;
+  badge?: string;
+};
+
+const featuredActivities: Activity[] = [
+  {
+    title: "Social Squash",
+    schedule: "Fridays 18:00–20:00",
+    benefit:
+      "No partner needed. Show up, get matched, and play. Sofia's most social squash night — all levels welcome, just bring yourself.",
+    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=5&time=18:00",
+    image: "/activities/comeandplay.jpg",
+    alt: "Social Squash Friday night",
+    cta: "Join This Friday",
+    featured: true,
+    badge: "Every Friday",
+  },
+  {
+    title: "Mini Squash (Kids)",
+    schedule: "Saturdays & Sundays 10:00",
+    benefit:
+      "Small groups, fun drills, and coach-led development. Great first step for kids, equipment included.",
+    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=6&time=10:00",
+    image: "/activities/minisquash.jpg",
+    alt: "Mini Squash for kids",
+    cta: "Book Kids Session",
+  },
+];
+
+const otherActivities: Activity[] = [
+  {
+    title: "Squash for Beginners",
+    schedule: "Check with reception for current availability",
+    benefit:
+      "Guided sessions for absolute beginners. First lesson free, trainer and equipment included.",
+    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    image: "/activities/beginners.jpg",
+    alt: "Squash for Beginners",
+    cta: "Book Beginner Session",
+  },
+  {
+    title: "Time for Ladies",
+    schedule: "Check with reception for current availability",
+    benefit:
+      "Women-only session with a friendly pace and clear coaching support to build confidence quickly.",
+    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    image: "/activities/timeforladies.jpg",
+    alt: "Time for Ladies",
+    cta: "Book Ladies Session",
+  },
+  {
+    title: "Magnificent 7",
+    schedule: "Check with reception for current availability",
+    benefit:
+      "Play 7 matches in 2 hours, guaranteed. High-energy round-robin format with quick rotations.",
+    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    image: "/activities/magnificent7.jpg",
+    alt: "Magnificent 7",
+    cta: "Reserve Magnificent 7",
+  },
+  {
+    title: "Glass Challenge",
+    schedule: "Ongoing",
+    benefit:
+      "Beat the Glass challenge, log attempts, and climb the monthly leaderboard with the club community.",
+    image: "/activities/glasschallenge.jpg",
+    alt: "Glass Challenge",
+    cta: "Visit Reception To Join",
+  },
+];
+
+function ActivityCard({
+  activity,
+  onZoom,
+}: {
+  activity: Activity;
+  onZoom: (img: { src: string; alt: string }) => void;
+}) {
+  return (
+    <article className={`activity-card${activity.featured ? " activity-card--featured" : ""}`}>
+      {activity.badge && <span className="activity-badge">{activity.badge}</span>}
+      <button
+        type="button"
+        className="activity-media-btn"
+        onClick={() => onZoom({ src: activity.image, alt: activity.alt })}
+        aria-label={`Open image for ${activity.title}`}
+      >
+        <OptimizedImage
+          src={activity.image}
+          alt={activity.alt}
+          width={640}
+          height={420}
+          className="activity-media"
+        />
+      </button>
+      <div className="activity-content">
+        <h2 className="activity-title">{activity.title}</h2>
+        <p className="activity-schedule">{activity.schedule}</p>
+        <p className="activity-benefit">{activity.benefit}</p>
+        {activity.bookingUrl ? (
+          <a
+            href={activity.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+          >
+            {activity.cta}
+          </a>
+        ) : (
+          <p className="activity-static-cta">{activity.cta}</p>
+        )}
+      </div>
+    </article>
+  );
+}
 
 export default function ActivitiesPage() {
   const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
+
   return (
-    <main style={{ padding: "40px 20px", maxWidth: "1200px", margin: "0 auto" }}>
+    <main className="activities-page">
       <h1 className="page-title">Activities</h1>
-      <p style={{ color: "#ccc", fontSize: "22px", marginBottom: "40px" }}>
-        All recurring programs live here.{" "}
-        <strong style={{ color: "#ffcc00" }}>Events</strong> is now for{" "}
-        <em>one-off</em> tournaments, workshops & special visits.
+      <p className="activities-subtitle">
+        No partner needed. No experience needed. Just show up.
       </p>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "24px",
-        }}
-      >
-        {/* --- Time for Ladies --- */}
-        <div
-          style={{
-            background: "#111",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 0 16px rgba(0,0,0,0.3)",
-          }}
-        >
-          <div style={{ height: "200px", overflow: "hidden", cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/activities/timeforladies.jpg", alt: "Time for Ladies" })}>
-            <OptimizedImage src="/activities/timeforladies.jpg" alt="Time for Ladies" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      {/* Viber community block */}
+      <section className="viber-community-block">
+        <div className="viber-community-inner">
+          <div className="viber-community-text">
+            <p className="beginner-kicker">Viber Community</p>
+            <h2 className="viber-community-title">Аматъорски, ама сквош</h2>
+            <p className="viber-community-desc">
+              Find a game partner any day of the week. Ask questions, stay updated on Social Squash nights, and connect with the club community — all in one place.
+            </p>
           </div>
-          <div style={{ padding: "20px" }}>
-            <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
-              Time for Ladies
-            </h2>
-            <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
-              Wednesdays • 18:00
-            </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
-              Women-only session: friendly pace, great vibes, quick progress.
-              Bring a friend or come solo — we'll pair you up.
-            </p>
+          <div className="viber-community-actions">
             <a
-              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=3&time=18:00"
+              href={VIBER_URL}
+              className="btn btn-viber"
+            >
+              Join on Viber
+            </a>
+            <a
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn"
-              style={{
-                display: "inline-block",
-                textAlign: "center",
-                textDecoration: "none",
-              }}
+              className="btn btn-secondary"
             >
-              Book This Activity
+              Message on WhatsApp
             </a>
           </div>
         </div>
+      </section>
 
-        {/* --- Mini Squash --- */}
-        <div
-          style={{
-            background: "#111",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 0 16px rgba(0,0,0,0.3)",
-          }}
-        >
-          <div style={{ height: "200px", overflow: "hidden", cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/activities/minisquash.jpg", alt: "Mini Squash" })}>
-            <OptimizedImage src="/activities/minisquash.jpg" alt="Mini Squash" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-          <div style={{ padding: "20px" }}>
-            <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
-              Mini Squash (Kids)
-            </h2>
-            <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
-              Saturday & Sunday • 10:00
-            </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
-              Fun skills & games for kids to fall in love with squash. Small
-              groups — up to 6 kids per coach. Equipment included.
-            </p>
-            <a
-              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=6&time=10:00"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-              style={{
-                display: "inline-block",
-                textAlign: "center",
-                textDecoration: "none",
-              }}
-            >
-              Book This Activity
-            </a>
-          </div>
-        </div>
-
-        {/* --- Magnificent 7 --- */}
-        <div
-          style={{
-            background: "#111",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 0 16px rgba(0,0,0,0.3)",
-          }}
-        >
-          <div style={{ height: "200px", overflow: "hidden", cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/activities/magnificent7.jpg", alt: "Magnificent 7" })}>
-            <OptimizedImage src="/activities/magnificent7.jpg" alt="Magnificent 7" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-          <div style={{ padding: "20px" }}>
-            <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
-              Magnificent 7
-            </h2>
-            <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
-              Thursdays • 18:00–20:30
-            </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
-              Round-robin for seven players — tight matches, quick rotations,
-              scoreboard thrills. Ranking and registration available on RankedIn.
-            </p>
-            <a
-              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=4&time=18:00"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-              style={{
-                display: "inline-block",
-                textAlign: "center",
-                textDecoration: "none",
-              }}
-            >
-              Book This Activity
-            </a>
-          </div>
-        </div>
-
-        {/* --- Come-and-Play --- */}
-        <div
-          style={{
-            background: "#111",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 0 16px rgba(0,0,0,0.3)",
-          }}
-        >
-          <div style={{ height: "200px", overflow: "hidden", cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/activities/comeandplay.jpg", alt: "Come and Play" })}>
-            <OptimizedImage src="/activities/comeandplay.jpg" alt="Come and Play" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-          <div style={{ padding: "20px" }}>
-            <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
-              Come-and-Play
-            </h2>
-            <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
-              Tuesdays • 18:00 | Saturdays • 11:00–13:00
-            </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
-              Open community session — rotate courts, meet partners, find your
-              level. The most social way to play.
-            </p>
-            <a
-              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=2&time=18:00"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-              style={{
-                display: "inline-block",
-                textAlign: "center",
-                textDecoration: "none",
-              }}
-            >
-              Book This Activity
-            </a>
-          </div>
-        </div>
-
-        {/* --- Squash for Beginners --- */}
-        <div
-          style={{
-            background: "#111",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 0 16px rgba(0,0,0,0.3)",
-          }}
-        >
-          <div style={{ height: "200px", overflow: "hidden", cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/activities/beginners.jpg", alt: "Squash for Beginners" })}>
-            <OptimizedImage src="/activities/beginners.jpg" alt="Squash for Beginners" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-          <div style={{ padding: "20px" }}>
-            <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
-              Squash for Beginners
-            </h2>
-            <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>
-              Mondays • 18:00 | Fridays • 18:00
-            </p>
-            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
-              Start from zero: movement basics, swing shape and simple drills so
-              you can start rallying fast.
-            </p>
-            <a
-              href="https://sport.bookinggood.net/bg/embed/facility/44/72?day=1&time=18:00"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-              style={{
-                display: "inline-block",
-                textAlign: "center",
-                textDecoration: "none",
-              }}
-            >
-              Book This Activity
-            </a>
-          </div>
-        </div>
-
-        {/* --- Glass Challenge --- */}
-        <div
-          style={{
-            background: "#111",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 0 16px rgba(0,0,0,0.3)",
-          }}
-        >
-          <div style={{ height: "200px", overflow: "hidden", cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/activities/glasschallenge.jpg", alt: "Glass Challenge" })}>
-            <OptimizedImage src="/activities/glasschallenge.jpg" alt="Glass Challenge" width={600} height={400} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-          <div style={{ padding: "20px" }}>
-            <h2 style={{ color: "#ffcc00", fontSize: "1.4rem", fontWeight: 700 }}>
-              Challenges — Glass Challenge
-            </h2>
-            <p style={{ fontWeight: 700, margin: "6px 0 14px" }}>Ongoing</p>
-            <p style={{ color: "#ddd", lineHeight: 1.5, marginBottom: "20px" }}>
-              Beat the Glass! Ongoing challenge on our back-wall courts. Log
-              attempts at the desk; monthly leaderboard and bragging rights.
-            </p>
-            <div style={{ padding: "12px 24px", textAlign: "center", color: "#999", fontSize: "14px" }}>
-              Visit reception to participate
-            </div>
-          </div>
-        </div>
+      {/* Featured activities */}
+      <div className="activities-grid">
+        {featuredActivities.map((activity) => (
+          <ActivityCard key={activity.title} activity={activity} onZoom={setZoomedImg} />
+        ))}
       </div>
+
+      {/* Beginner offer */}
+      <section className="activities-offer card">
+        <p className="beginner-kicker">New to squash?</p>
+        <h2 className="h2">First lesson free. Trainer and equipment included.</h2>
+        <ul className="beginner-list">
+          <li>No experience needed</li>
+          <li>Trainer guides every step</li>
+          <li>Racket and shoes provided</li>
+        </ul>
+        <div className="cta-buttons">
+          <a href="https://sport.bookinggood.net/bg/embed/facility/44/72" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+            Claim Free First Lesson
+          </a>
+          <a href="/contact" className="btn btn-secondary">
+            Ask A Trainer
+          </a>
+        </div>
+      </section>
+
+      {/* Other programs */}
+      <section className="other-programs">
+        <h2 className="other-programs-title">Other Programs</h2>
+        <p className="other-programs-note">
+          The following programs run occasionally. Contact reception to check current availability.
+        </p>
+        <div className="activities-grid activities-grid--compact">
+          {otherActivities.map((activity) => (
+            <ActivityCard key={activity.title} activity={activity} onZoom={setZoomedImg} />
+          ))}
+        </div>
+      </section>
+
+      <IntroLeadForm />
 
       {zoomedImg && (
         <div
           onClick={() => setZoomedImg(null)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.95)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-            padding: "20px",
-            cursor: "pointer",
-          }}
+          className="zoom-overlay"
         >
           <button
             onClick={(e) => {
               e.stopPropagation();
               setZoomedImg(null);
             }}
-            style={{
-              position: "fixed",
-              top: "30px",
-              right: "30px",
-              background: "rgba(0, 0, 0, 0.5)",
-              border: "2px solid #fff",
-              borderRadius: "50%",
-              color: "#fff",
-              fontSize: "28px",
-              cursor: "pointer",
-              padding: "8px 12px",
-              lineHeight: 1,
-              zIndex: 1002,
-              width: "48px",
-              height: "48px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            className="zoom-close"
             aria-label="Close"
           >
             ✕
           </button>
-          <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "90vw", maxHeight: "90vh" }}>
+          <div onClick={(e) => e.stopPropagation()} className="zoom-content">
             <Image
               src={zoomedImg.src}
               alt={zoomedImg.alt}
               width={1200}
               height={900}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "90vh",
-                width: "auto",
-                height: "auto",
-                objectFit: "contain",
-              }}
+              className="zoom-image"
             />
           </div>
         </div>

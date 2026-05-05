@@ -23,13 +23,16 @@ export default function Footer() {
               <Link href="/booking">Book a court</Link>
             </li>
             <li>
+              <Link href="/beginner-squash-sofia">New to squash? Start here</Link>
+            </li>
+            <li>
               <Link href="/membership">Membership packs</Link>
             </li>
             <li>
               <Link href="/events">Events &amp; programs</Link>
             </li>
             <li>
-              <Link href="/gallery">Photo gallery</Link>
+              <Link href="/squash-sofia">Squash Sofia</Link>
             </li>
           </ul>
         </div>
@@ -65,10 +68,10 @@ export default function Footer() {
       </div>
 
       <div className="container footer-note">
-        <p style={{ margin: 0 }}>
+        <p className="footer-note-main">
           © {new Date().getFullYear()} Double Yellow Squash Club
         </p>
-        <p style={{ fontSize: "0.8rem", margin: "0.5rem 0 0 0", opacity: 0.7 }}>
+        <p className="footer-note-meta">
           Operated by Sport And Beyond EOOD • EIK 208134448 • Lyuben Rusev 6, 1113 Sofia
         </p>
       </div>

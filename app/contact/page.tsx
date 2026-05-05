@@ -2,6 +2,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import PhoneLink from "@/components/PhoneLink";
+import IntroLeadForm from "@/components/IntroLeadForm";
 
 export const metadata: Metadata = {
   title: "Contact Double Yellow | Phone, Email & Location",
@@ -21,9 +22,11 @@ export default function ContactPage() {
       <div className="membership-header">
         <h1 className="page-title">Contact</h1>
         <div className="membership-sub">
-          Book a court, ask a question, or just say hi — we’re always nearby.
+          First lesson free. Trainer and equipment included. Book a court, ask a question, or just say hi.
         </div>
       </div>
+
+      <IntroLeadForm />
 
       {/* Quick contacts */}
       <div className="contact-grid">
@@ -149,7 +152,7 @@ export default function ContactPage() {
               title="Double Yellow Squash Club – NSA"
               width="100%"
               height="420"
-              style={{ border: 0, borderRadius: "12px" }}
+              className="map-frame"
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"

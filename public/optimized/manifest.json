@@ -80,6 +80,38 @@
     "/optimized/cards/front-768.webp",
     "/optimized/cards/front-1200.jpg"
   ],
+  "/events\\bnt-jakob-kristal.png": [
+    "/optimized/events/bnt-jakob-kristal-480.webp",
+    "/optimized/events/bnt-jakob-kristal-768.webp",
+    "/optimized/events/bnt-jakob-kristal-1200.webp",
+    "/optimized/events/bnt-jakob-kristal-1200.jpg"
+  ],
+  "/events\\double-yellow-open-player-reference.jpg": [
+    "/optimized/events/double-yellow-open-player-reference-480.webp",
+    "/optimized/events/double-yellow-open-player-reference-768.webp",
+    "/optimized/events/double-yellow-open-player-reference-1200.webp",
+    "/optimized/events/double-yellow-open-player-reference-2048.webp",
+    "/optimized/events/double-yellow-open-player-reference-1200.jpg"
+  ],
+  "/events\\double-yellow-open-tournament.png": [
+    "/optimized/events/double-yellow-open-tournament-480.webp",
+    "/optimized/events/double-yellow-open-tournament-768.webp",
+    "/optimized/events/double-yellow-open-tournament-1200.webp",
+    "/optimized/events/double-yellow-open-tournament-1200.jpg"
+  ],
+  "/events\\easter-holiday-hours-2026.jpg": [
+    "/optimized/events/easter-holiday-hours-2026-480.webp",
+    "/optimized/events/easter-holiday-hours-2026-768.webp",
+    "/optimized/events/easter-holiday-hours-2026-1200.webp",
+    "/optimized/events/easter-holiday-hours-2026-2048.webp",
+    "/optimized/events/easter-holiday-hours-2026-1200.jpg"
+  ],
+  "/events\\wsf-level-1-coaching-course.jpg": [
+    "/optimized/events/wsf-level-1-coaching-course-480.webp",
+    "/optimized/events/wsf-level-1-coaching-course-768.webp",
+    "/optimized/events/wsf-level-1-coaching-course-1200.webp",
+    "/optimized/events/wsf-level-1-coaching-course-1200.jpg"
+  ],
   "/hero\\01.jpeg": [
     "/optimized/hero/01-480.webp",
     "/optimized/hero/01-768.webp",
@@ -108,11 +140,11 @@
     "/optimized/hero/04-2048.webp",
     "/optimized/hero/04-1200.jpg"
   ],
-  "/hero\\bulgarian-squash-tour-2026.png": [
-    "/optimized/hero/bulgarian-squash-tour-2026-480.webp",
-    "/optimized/hero/bulgarian-squash-tour-2026-768.webp",
-    "/optimized/hero/bulgarian-squash-tour-2026-1200.webp",
-    "/optimized/hero/bulgarian-squash-tour-2026-1200.jpg"
+  "/hero\\first-training-free.png": [
+    "/optimized/hero/first-training-free-480.webp",
+    "/optimized/hero/first-training-free-768.webp",
+    "/optimized/hero/first-training-free-1200.webp",
+    "/optimized/hero/first-training-free-1200.jpg"
   ],
   "/team\\jakub.jpg": [
     "/optimized/team/jakub-480.webp",
@@ -121,6 +153,11 @@
   ],
   "/team\\margarita.jpg": [
     "/optimized/team/margarita-1200.jpg"
+  ],
+  "/team\\ognyan.jpg": [
+    "/optimized/team/ognyan-480.webp",
+    "/optimized/team/ognyan-768.webp",
+    "/optimized/team/ognyan-1200.jpg"
   ],
   "/team\\vasil-stoimenov.jpg": [
     "/optimized/team/vasil-stoimenov-1200.jpg"

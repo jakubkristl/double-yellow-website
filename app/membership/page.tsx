@@ -9,6 +9,8 @@ type Pack = {
   priceEUR: number;
   fun: string;
   daytime?: boolean;
+  tag?: string;
+  valueNote?: string;
 };
 
 const CARD_FRONT = "/cards/front.png";
@@ -24,11 +26,15 @@ const PACKS: Pack[] = [
     name: "Monthly 8 Pack",
     priceEUR: 66,
     fun: "Your twice-a-week rhythm: sweat, smile, and brag about that one perfect nick for days.",
+    tag: "Most Popular",
+    valueNote: "Save EUR 14 vs 8 single sessions.",
   },
   {
     name: "Monthly 12 Pack",
     priceEUR: 97,
     fun: "Three sessions a week — for people who call the court their second living room (we approve).",
+    tag: "Best Value",
+    valueNote: "Save EUR 35 vs 12 single sessions.",
   },
   {
     name: "Daytime Pass",
@@ -70,9 +76,11 @@ export default function MembershipPage() {
 
       <div className="price-grid">
         {PACKS.map((p) => (
-          <article key={p.name} className="price-card">
+          <article key={p.name} className={`price-card ${p.tag ? "price-card-convert" : ""}`}>
             <h3>{p.name}</h3>
+            {p.tag && <div className="membership-tag">{p.tag}</div>}
             <div className="price">{fmt.format(p.priceEUR)}</div>
+            {p.valueNote && <div className="membership-value-note">{p.valueNote}</div>}
             <div>{p.fun}</div>
             {p.daytime && <div className="badge">Once per day until 17:00</div>}
           </article>

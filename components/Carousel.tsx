@@ -107,7 +107,15 @@ export default function Carousel({
                 <p className="carousel-promo__title">{overlay.title}</p>
                 {overlay.body && <p className="carousel-promo__body">{overlay.body}</p>}
                 {links[idx] && overlay.ctaLabel && (
-                  <span className="carousel-promo__cta">{overlay.ctaLabel}</span>
+                  <a
+                    href={links[idx]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="carousel-promo__cta"
+                    aria-label={linkLabels[idx] || overlay.ctaLabel}
+                  >
+                    {overlay.ctaLabel}
+                  </a>
                 )}
               </div>
             )}
