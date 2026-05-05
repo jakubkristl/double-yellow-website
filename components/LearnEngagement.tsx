@@ -132,7 +132,6 @@ export default function LearnEngagement({ articleSlug, articleTitle }: LearnEnga
             type="button"
             className={`learn-like-btn ${liked ? "is-active" : ""}`}
             onClick={() => setLiked((current) => !current)}
-            aria-pressed={liked}
           >
             {liked ? "Liked" : "Like this"}
           </button>
