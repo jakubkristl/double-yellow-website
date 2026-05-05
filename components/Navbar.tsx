@@ -168,7 +168,7 @@ export default function Navbar() {
           gap: clamp(12px, 1vw, 22px);
           list-style: none;
           margin: 0;
-          padding: 0;
+          padding: 0 0 0 64px;
           flex: 1 1 100%;
           justify-content: flex-start;
           flex-wrap: wrap;
@@ -214,6 +214,7 @@ export default function Navbar() {
           }
 
           .menu {
+            padding-left: 64px;
             gap: 12px 18px;
           }
 
@@ -230,6 +231,10 @@ export default function Navbar() {
 
           .brand {
             flex: 1 1 auto;
+          }
+
+          .menu {
+            padding-left: 0;
           }
 
           .hamburger {
