@@ -40,7 +40,7 @@ export async function approveCommentAction(formData: FormData) {
   if (!id) return;
   await createAdminClient()
     .from("article_comments")
-    .update({ status: "approved" })
+    .update({ status: "approved" as const })
     .eq("id", id);
   revalidatePath("/admin/learn");
 }
@@ -51,7 +51,7 @@ export async function rejectCommentAction(formData: FormData) {
   if (!id) return;
   await createAdminClient()
     .from("article_comments")
-    .update({ status: "rejected" })
+    .update({ status: "rejected" as const })
     .eq("id", id);
   revalidatePath("/admin/learn");
 }
@@ -59,7 +59,7 @@ export async function rejectCommentAction(formData: FormData) {
 export async function updateTopicStatusAction(formData: FormData) {
   await requireAdmin();
   const id = formData.get("id")?.toString();
-  const status = formData.get("status")?.toString();
+  const status = formData.get("status")?.toString() as "new" | "noted" | "done" | undefined;
   if (!id || !status) return;
   await createAdminClient()
     .from("topic_requests")
