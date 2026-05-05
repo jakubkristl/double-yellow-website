@@ -95,11 +95,11 @@ export default function Navbar() {
           width: min(1320px, calc(100vw - 32px));
           padding: 12px 16px;
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
           gap: 16px;
           position: relative;
-          overflow: hidden;
         }
         .brand {
           display: inline-flex;
@@ -167,7 +167,9 @@ export default function Navbar() {
           list-style: none;
           margin: 0;
           padding: 0;
-          flex: 0 0 auto;
+          flex: 1 1 100%;
+          justify-content: flex-end;
+          flex-wrap: wrap;
         }
         .link {
           color: #ffcc00;
@@ -199,7 +201,25 @@ export default function Navbar() {
           border-radius: 2px;
         }
 
-        @media (max-width: 1280px) {
+        @media (max-width: 1180px) {
+          .container {
+            gap: 10px 16px;
+          }
+
+          .brand-text {
+            font-size: clamp(20px, 1vw + 12px, 28px);
+          }
+
+          .menu {
+            gap: 12px 18px;
+          }
+
+          .link {
+            font-size: 18px;
+          }
+        }
+
+        @media (max-width: 980px) {
           .hamburger {
             display: flex;
           }
@@ -224,6 +244,8 @@ export default function Navbar() {
             height: 100vh;
             background: #0d0d0d;
             flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
             padding: 100px 30px 30px;
             gap: 20px;
             box-shadow: -4px 0 20px rgba(0, 0, 0, 0.8);
