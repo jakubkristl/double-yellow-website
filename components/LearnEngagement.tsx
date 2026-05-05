@@ -1,107 +1,156 @@
-"use client";
+﻿"use client";
 
-// --- LEGACY TYPE, kept only to avoid syntax errors during the full replacement below ---
-type _Unused = never;
+import { useEffect, useState } from "react";
+import { createBrowserClient } from "@/lib/supabase";
+import type { Database } from "@/lib/supabase";
 
-function parseStoredEngagement(value: string | null): { liked: boolean; comments: never[] } {
-  if (!value) return { liked: false, comments: [] };
-  try {
-    const parsed = JSON.parse(value) as Partial<{ liked: boolean }>;
-    return { liked: parsed.liked === true, comments: [] };
-  } catch {
-    return { liked: false, comments: [] };
-  }
-}
-    return {
-      liked: parsed.liked === true,
-      comments: Array.isArray(parsed.comments) ? parsed.comments : [],
-    };
-  } catch {
-    return { liked: false, comments: [] };
-  }
-}
+type Comment = Database["public"]["Tables"]["article_comments"]["Row"];
 
-export default function LearnEngagement({ articleSlug, articleTitle }: LearnEngagementProps) {
-  const storageKey = useMemo(
-    () => `double-yellow:learn:${articleSlug ?? "hub"}`,
-    [articleSlug],
+type LearnEngagementProps = {
+  articleSlug?: string;
+  articleTitle?: string;
+};
+
+const FINGERPRINT_KEY = "dy:fp";
+const WHATSAPP_BASE = "https://wa.me/359896754014?text=";
+
+function openWhatsApp(message: string) {
+  window.open(
+    `${WHATSAPP_BASE}${encodeURIComponent(message)}`,
+    "_blank",
+    "noopener,noreferrer",
   );
-  const contextLabel = articleTitle ? `the article \"${articleTitle}\"` : "the Learn Squash section";
+}
+
+function getOrCreateFingerprint(): string {
+  try {
+    let fp = window.localStorage.getItem(FINGERPRINT_KEY);
+    if (!fp) {
+      fp =
+        typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+      window.localStorage.setItem(FINGERPRINT_KEY, fp);
+    }
+    return fp;
+  } catch {
+    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  }
+}
+
+export default function LearnEngagement({
+  articleSlug,
+  articleTitle,
+}: LearnEngagementProps) {
+  const slug = articleSlug ?? "hub";
+  const contextLabel = articleTitle
+    ? `the article "${articleTitle}"`
+    : "the Learn Squash section";
 
   const [isReady, setIsReady] = useState(false);
+  const [fingerprint, setFingerprint] = useState("");
   const [liked, setLiked] = useState(false);
-  const [comments, setComments] = useState<LearnComment[]>([]);
+  const [likeCount, setLikeCount] = useState(0);
+  const [comments, setComments] = useState<Comment[]>([]);
+
   const [commentName, setCommentName] = useState("");
   const [commentMessage, setCommentMessage] = useState("");
+  const [commentSubmitted, setCommentSubmitted] = useState(false);
+
   const [adviceMessage, setAdviceMessage] = useState("");
+
   const [topicMessage, setTopicMessage] = useState("");
+  const [topicSubmitted, setTopicSubmitted] = useState(false);
 
   useEffect(() => {
-    const stored = parseStoredEngagement(window.localStorage.getItem(storageKey));
-    setLiked(stored.liked);
-    setComments(stored.comments);
-    setIsReady(true);
-  }, [storageKey]);
+    const db = createBrowserClient();
+    const fp = getOrCreateFingerprint();
+    setFingerprint(fp);
 
-  useEffect(() => {
-    if (!isReady) {
-      return;
+    async function load() {
+      const [{ count }, { data: userLike }, { data: commentData }] =
+        await Promise.all([
+          db
+            .from("article_likes")
+            .select("*", { count: "exact", head: true })
+            .eq("article_slug", slug),
+          db
+            .from("article_likes")
+            .select("id")
+            .eq("article_slug", slug)
+            .eq("fingerprint", fp)
+            .maybeSingle(),
+          db
+            .from("article_comments")
+            .select("*")
+            .eq("article_slug", slug)
+            .eq("status", "approved")
+            .order("created_at", { ascending: false }),
+        ]);
+
+      setLikeCount(count ?? 0);
+      setLiked(!!userLike);
+      setComments(commentData ?? []);
+      setIsReady(true);
     }
 
-    const payload: StoredEngagement = { liked, comments };
-    window.localStorage.setItem(storageKey, JSON.stringify(payload));
-  }, [comments, isReady, liked, storageKey]);
+    load().catch(() => setIsReady(true));
+  }, [slug]);
 
-  function openWhatsApp(message: string) {
-    const href = `${WHATSAPP_BASE_URL}${encodeURIComponent(message)}`;
-    window.open(href, "_blank", "noopener,noreferrer");
+  async function handleLike() {
+    if (!isReady || !fingerprint) return;
+    const db = createBrowserClient();
+    const next = !liked;
+    setLiked(next);
+    setLikeCount((c) => Math.max(0, next ? c + 1 : c - 1));
+
+    if (next) {
+      await db.from("article_likes").upsert({ article_slug: slug, fingerprint });
+    } else {
+      await db
+        .from("article_likes")
+        .delete()
+        .eq("article_slug", slug)
+        .eq("fingerprint", fingerprint);
+    }
   }
 
-  function handleCommentSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleCommentSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const message = commentMessage.trim();
+    const name = commentName.trim() || "Anonymous";
+    if (!message) return;
 
-    const nextMessage = commentMessage.trim();
-    const nextName = commentName.trim() || "Squash curious human";
+    const db = createBrowserClient();
+    await db
+      .from("article_comments")
+      .insert({ article_slug: slug, name, message });
 
-    if (!nextMessage) {
-      return;
-    }
-
-    setComments((current) => [
-      {
-        id: `${Date.now()}`,
-        name: nextName,
-        message: nextMessage,
-        createdAt: new Date().toISOString(),
-      },
-      ...current,
-    ]);
     setCommentName("");
     setCommentMessage("");
+    setCommentSubmitted(true);
   }
 
   function handleAdviceRequest() {
     const trimmed = adviceMessage.trim();
-    if (!trimmed) {
-      return;
-    }
-
+    if (!trimmed) return;
     openWhatsApp(
       `Hi Double Yellow! I need advice about ${contextLabel}. My question: ${trimmed}`,
     );
     setAdviceMessage("");
   }
 
-  function handleTopicRequest() {
+  async function handleTopicRequest() {
     const trimmed = topicMessage.trim();
-    if (!trimmed) {
-      return;
-    }
+    if (!trimmed) return;
 
+    const db = createBrowserClient();
+    await db.from("topic_requests").insert({ message: trimmed });
     openWhatsApp(
       `Hi Double Yellow! I want a new Learn topic about: ${trimmed}`,
     );
     setTopicMessage("");
+    setTopicSubmitted(true);
   }
 
   return (
@@ -109,56 +158,89 @@ export default function LearnEngagement({ articleSlug, articleTitle }: LearnEnga
       <div className="learn-engagement__header">
         <div>
           <p className="beginner-kicker">Make the Learn section a conversation</p>
-          <h2 className="h2">React, comment, ask for advice, or suggest the next topic.</h2>
+          <h2 className="h2">
+            React, comment, ask for advice, or suggest the next topic.
+          </h2>
         </div>
         <div className="learn-engagement__meta">
           <button
             type="button"
-            className={`learn-like-btn ${liked ? "is-active" : ""}`}
-            onClick={() => setLiked((current) => !current)}
+            className={`learn-like-btn${liked ? " is-active" : ""}`}
+            onClick={handleLike}
+            disabled={!isReady}
           >
-            {liked ? "Liked" : "Like this"}
+            {liked ? "❤ Liked" : "♡ Like this"}
           </button>
-          <span className="learn-engagement__stat">{comments.length} comments here</span>
+          {isReady && likeCount > 0 && (
+            <span className="learn-engagement__stat">
+              {likeCount} {likeCount === 1 ? "like" : "likes"}
+            </span>
+          )}
+          <span className="learn-engagement__stat">
+            {comments.length} comment{comments.length !== 1 ? "s" : ""}
+          </span>
         </div>
       </div>
 
       <div className="learn-engagement__grid">
-        <form className="learn-panel learn-comment-form" onSubmit={handleCommentSubmit}>
+        {/* Comments */}
+        <div className="learn-panel">
           <h3 className="learn-panel__title">Leave a comment</h3>
-          <p className="learn-panel__text">Drop a quick reaction, question, or your own beginner mistake so the section feels alive.</p>
-          <input
-            type="text"
-            className="learn-input"
-            placeholder="Name or nickname"
-            value={commentName}
-            onChange={(event) => setCommentName(event.target.value)}
-            maxLength={50}
-          />
-          <textarea
-            className="learn-input learn-textarea"
-            placeholder="What helped, what confused you, what should we explain better?"
-            value={commentMessage}
-            onChange={(event) => setCommentMessage(event.target.value)}
-            rows={4}
-            maxLength={400}
-          />
-          <div className="learn-panel__actions">
-            <button type="submit" className="btn btn-primary">Post comment</button>
-          </div>
+          <p className="learn-panel__text">
+            Drop a reaction, question, or beginner mistake. Comments appear
+            after a quick moderation check.
+          </p>
+
+          {commentSubmitted ? (
+            <p className="learn-panel__success">
+              Thanks! Your comment is in the queue — it&apos;ll appear once
+              approved.
+            </p>
+          ) : (
+            <form onSubmit={handleCommentSubmit} className="learn-comment-form">
+              <input
+                type="text"
+                className="learn-input"
+                placeholder="Name or nickname"
+                value={commentName}
+                onChange={(e) => setCommentName(e.target.value)}
+                maxLength={50}
+              />
+              <textarea
+                className="learn-input learn-textarea"
+                placeholder="What helped, what confused you, what should we explain better?"
+                value={commentMessage}
+                onChange={(e) => setCommentMessage(e.target.value)}
+                rows={4}
+                maxLength={400}
+              />
+              <div className="learn-panel__actions">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={!commentMessage.trim()}
+                >
+                  Post comment
+                </button>
+              </div>
+            </form>
+          )}
+
           <div className="learn-comments">
             {comments.length === 0 ? (
-              <p className="learn-comments__empty">No comments yet. Be the first useful squash nerd.</p>
+              <p className="learn-comments__empty">
+                No approved comments yet. Be the first.
+              </p>
             ) : (
-              comments.slice(0, 4).map((comment) => (
+              comments.slice(0, 6).map((comment) => (
                 <article key={comment.id} className="learn-comment">
                   <div className="learn-comment__top">
                     <strong>{comment.name}</strong>
-                    <time dateTime={comment.createdAt}>
-                      {new Date(comment.createdAt).toLocaleDateString("en-GB", {
-                        day: "numeric",
-                        month: "short",
-                      })}
+                    <time dateTime={comment.created_at}>
+                      {new Date(comment.created_at).toLocaleDateString(
+                        "en-GB",
+                        { day: "numeric", month: "short", year: "numeric" },
+                      )}
                     </time>
                   </div>
                   <p>{comment.message}</p>
@@ -166,17 +248,21 @@ export default function LearnEngagement({ articleSlug, articleTitle }: LearnEnga
               ))
             )}
           </div>
-        </form>
+        </div>
 
+        {/* Right column */}
         <div className="learn-panel-group">
           <section className="learn-panel">
             <h3 className="learn-panel__title">Ask for advice</h3>
-            <p className="learn-panel__text">Send a real question and we open WhatsApp with the article context already filled in.</p>
+            <p className="learn-panel__text">
+              Opens WhatsApp with your question pre-filled so we can answer
+              on-court or with a voice message.
+            </p>
             <textarea
               className="learn-input learn-textarea"
               placeholder="Example: I keep framing the backhand when I swing faster. What should I change?"
               value={adviceMessage}
-              onChange={(event) => setAdviceMessage(event.target.value)}
+              onChange={(e) => setAdviceMessage(e.target.value)}
               rows={4}
               maxLength={500}
             />
@@ -194,25 +280,34 @@ export default function LearnEngagement({ articleSlug, articleTitle }: LearnEnga
 
           <section className="learn-panel">
             <h3 className="learn-panel__title">Request the next topic</h3>
-            <p className="learn-panel__text">Tell us what should be turned into the next beginner guide, breakdown, or myth-busting piece.</p>
-            <input
-              type="text"
-              className="learn-input"
-              placeholder="Example: How to return serve without panicking"
-              value={topicMessage}
-              onChange={(event) => setTopicMessage(event.target.value)}
-              maxLength={120}
-            />
-            <div className="learn-panel__actions">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={handleTopicRequest}
-                disabled={!topicMessage.trim()}
-              >
-                Suggest topic
-              </button>
-            </div>
+            <p className="learn-panel__text">
+              Tell us what the next beginner guide should cover. Topic also
+              goes to WhatsApp so nothing gets lost.
+            </p>
+            {topicSubmitted ? (
+              <p className="learn-panel__success">Got it! Added to the list.</p>
+            ) : (
+              <>
+                <input
+                  type="text"
+                  className="learn-input"
+                  placeholder="Example: How to return serve without panicking"
+                  value={topicMessage}
+                  onChange={(e) => setTopicMessage(e.target.value)}
+                  maxLength={120}
+                />
+                <div className="learn-panel__actions">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={handleTopicRequest}
+                    disabled={!topicMessage.trim()}
+                  >
+                    Suggest topic
+                  </button>
+                </div>
+              </>
+            )}
           </section>
         </div>
       </div>
