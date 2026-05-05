@@ -168,7 +168,7 @@ export default function Navbar() {
           margin: 0;
           padding: 0;
           flex: 1 1 100%;
-          justify-content: flex-end;
+          justify-content: center;
           flex-wrap: wrap;
         }
         .link {
@@ -219,7 +219,7 @@ export default function Navbar() {
           }
         }
 
-        @media (max-width: 980px) {
+        @media (max-width: 820px) {
           .hamburger {
             display: flex;
           }
