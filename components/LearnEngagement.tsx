@@ -1,33 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+// --- LEGACY TYPE, kept only to avoid syntax errors during the full replacement below ---
+type _Unused = never;
 
-type LearnComment = {
-  id: string;
-  name: string;
-  message: string;
-  createdAt: string;
-};
-
-type StoredEngagement = {
-  liked: boolean;
-  comments: LearnComment[];
-};
-
-type LearnEngagementProps = {
-  articleSlug?: string;
-  articleTitle?: string;
-};
-
-const WHATSAPP_BASE_URL = "https://wa.me/359896754014?text=";
-
-function parseStoredEngagement(value: string | null): StoredEngagement {
-  if (!value) {
+function parseStoredEngagement(value: string | null): { liked: boolean; comments: never[] } {
+  if (!value) return { liked: false, comments: [] };
+  try {
+    const parsed = JSON.parse(value) as Partial<{ liked: boolean }>;
+    return { liked: parsed.liked === true, comments: [] };
+  } catch {
     return { liked: false, comments: [] };
   }
-
-  try {
-    const parsed = JSON.parse(value) as Partial<StoredEngagement>;
+}
     return {
       liked: parsed.liked === true,
       comments: Array.isArray(parsed.comments) ? parsed.comments : [],
