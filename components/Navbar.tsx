@@ -48,7 +48,6 @@ export default function Navbar() {
           className="hamburger"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
-          aria-expanded={mobileMenuOpen ? "true" : "false"}
         >
           <span className={mobileMenuOpen ? "open" : ""}></span>
           <span className={mobileMenuOpen ? "open" : ""}></span>
