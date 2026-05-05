@@ -88,6 +88,8 @@ export default function Navbar() {
         .navbar-wrap {
           background: #0a0a0a;
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          position: static;
+          top: auto;
         }
         .container {
           max-width: 1320px;
@@ -96,9 +98,9 @@ export default function Navbar() {
           padding: 12px 16px;
           display: flex;
           flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 14px 16px;
           position: relative;
         }
         .brand {
@@ -108,7 +110,7 @@ export default function Navbar() {
           text-decoration: none;
           z-index: 101;
           min-width: 0;
-          flex: 1 1 auto;
+          flex: 1 1 100%;
         }
         .brand-text {
           font-weight: 800;
@@ -168,8 +170,9 @@ export default function Navbar() {
           margin: 0;
           padding: 0;
           flex: 1 1 100%;
-          justify-content: center;
+          justify-content: flex-start;
           flex-wrap: wrap;
+          align-items: center;
         }
         .link {
           color: #ffcc00;
@@ -220,6 +223,15 @@ export default function Navbar() {
         }
 
         @media (max-width: 820px) {
+          .container {
+            align-items: center;
+            justify-content: space-between;
+          }
+
+          .brand {
+            flex: 1 1 auto;
+          }
+
           .hamburger {
             display: flex;
           }
