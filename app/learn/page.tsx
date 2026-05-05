@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
 import { articles } from "@/lib/articles";
+import LearnEngagement from "@/components/LearnEngagement";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/learn",
@@ -52,6 +53,8 @@ export default function LearnPage() {
           </Link>
         ))}
       </div>
+
+      <LearnEngagement />
 
       <section className="learn-cta card">
         <p className="beginner-kicker">Ready to put it into practice?</p>

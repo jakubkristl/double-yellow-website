@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
 import { articles, getArticleBySlug } from "@/lib/articles";
+import LearnEngagement from "@/components/LearnEngagement";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -66,6 +67,8 @@ export default async function ArticlePage({ params }: Props) {
           className="article-content"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
+
+        <LearnEngagement articleSlug={article.slug} articleTitle={article.title} />
 
         <aside className="article-cta card">
           <p className="beginner-kicker">Put it into practice</p>
