@@ -105,7 +105,7 @@ export default function ContactPage() {
           <p className="contact-address">
             <strong>Double Yellow Squash Club</strong><br />
             National Sports Academy (NSA) — Multifunctional Hall<br />
-            ул. акад. Стефан Малденов 21, 1700 София, Bulgaria
+            21 Akademik Stefan Mladenov St, 1700 Sofia, Bulgaria
           </p>
 
           <div className="directions">
@@ -120,11 +120,11 @@ export default function ContactPage() {
               <div className="dir-title">Directions</div>
               <ul>
                 <li>
-                  We're in the <em>Multifunctional Hall</em> at NSA — squash
-                  courts are on <strong>floor –1</strong>.
+                  Double Yellow Squash Club is located within the National Sports Academy (NSA)
+                  campus in the Studentski Grad district.
                 </li>
                 <li>
-                  <strong>Parking:</strong> available inside the NSA campus.
+                  We are in the <em>Multifunctional Hall</em> and the squash courts are on <strong>floor –1</strong>.
                 </li>
               </ul>
             </div>
@@ -133,13 +133,64 @@ export default function ContactPage() {
               <div className="dir-title">Public Transport</div>
               <ul>
                 <li>
-                  <strong>Metro (Метро):</strong> Line M1 to "Stadion Vasil Levski" station (5 min walk).
+                  <strong>From airport/city center:</strong> take Metro Line M1 or M4 to
+                  <strong> "G.M. Dimitrov"</strong> station.
                 </li>
                 <li>
-                  <strong>Tram:</strong> Tram lines 1, 3, 5, 6 or 11 to "Vasil Levski Stadium" stop (5–10 min walk).
+                  <strong>Bus transfer:</strong> from G.M. Dimitrov, take Bus 280
+                  (direction Studentski Grad).
                 </li>
                 <li>
-                  <strong>Bus:</strong> Multiple bus lines serve NSA. Check Google Maps or Citymapper for real-time routes.
+                  <strong>Arrival:</strong> get off at the NSA (National Sports Academy) stop.
+                </li>
+                <li>
+                  <strong>Walking:</strong> enter the NSA campus through the main gate and follow signs
+                  toward the tennis and squash facilities.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">Taxi / Ride-Hailing</div>
+              <ul>
+                <li>
+                  <strong>Apps:</strong> Yellow! and TaxiMe are reliable options with clear pricing.
+                </li>
+                <li>
+                  <strong>Destination:</strong> set destination to "Double Yellow Squash Club" or
+                  "NSA Studentski Grad".
+                </li>
+                <li>
+                  <strong>Typical cost from city center:</strong> 8.00 EUR to 12.00 EUR.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">By Car</div>
+              <ul>
+                <li>
+                  <strong>Navigation:</strong> enter "Double Yellow Squash Club" in Google Maps or Waze.
+                </li>
+                <li>
+                  <strong>Entrance:</strong> access the campus via Akademik Stefan Mladenov Street.
+                </li>
+                <li>
+                  <strong>Parking:</strong> available directly in front of the sports complex.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">Useful Tips</div>
+              <ul>
+                <li>
+                  <strong>Payment:</strong> public transport supports tap-to-pay with contactless card
+                  on blue validators in buses or metro gates (1.60 BGN / ~0.82 EUR per trip).
+                </li>
+                <li>
+                  <strong>Gate security:</strong> if asked at the campus gate, say you are heading
+                  to the squash courts.
                 </li>
               </ul>
             </div>

@@ -88,8 +88,10 @@ export default function Navbar() {
         .navbar-wrap {
           background: #0a0a0a;
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          position: static;
-          top: auto;
+          position: sticky;
+          top: 0;
+          z-index: 11000;
+          isolation: isolate;
         }
         .container {
           max-width: 1320px;
@@ -108,7 +110,7 @@ export default function Navbar() {
           align-items: center;
           gap: 12px;
           text-decoration: none;
-          z-index: 101;
+          z-index: 11002;
           min-width: 0;
           flex: 1 1 100%;
         }
@@ -131,7 +133,7 @@ export default function Navbar() {
           border: none;
           cursor: pointer;
           padding: 10px;
-          z-index: 101;
+          z-index: 11002;
         }
         .hamburger:focus-visible,
         .link:focus-visible,
@@ -249,7 +251,7 @@ export default function Navbar() {
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 99;
+            z-index: 11001;
             animation: fadeIn 0.3s ease;
           }
 
@@ -267,7 +269,7 @@ export default function Navbar() {
             gap: 20px;
             box-shadow: -4px 0 20px rgba(0, 0, 0, 0.8);
             transition: right 0.3s ease;
-            z-index: 100;
+            z-index: 11002;
             overflow-y: auto;
             border-left: 2px solid var(--accent);
           }
