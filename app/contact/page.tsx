@@ -133,19 +133,17 @@ export default function ContactPage() {
               <div className="dir-title">Public Transport</div>
               <ul>
                 <li>
-                  <strong>From airport/city center:</strong> take Metro Line M1 or M4 to
-                  <strong> "G.M. Dimitrov"</strong> station.
+                  <strong>Bus:</strong> 94, 102, 280, and 294.
                 </li>
                 <li>
-                  <strong>Bus transfer:</strong> from G.M. Dimitrov, take Bus 280
-                  (direction Studentski Grad).
+                  <strong>Metro:</strong> The metro does not go directly to the NSA campus.
+                  You must transfer at G.M. Dimitrov Station (Lines M1 or M4) and take a bus for the final leg.
                 </li>
                 <li>
-                  <strong>Arrival:</strong> get off at the NSA (National Sports Academy) stop.
+                  <strong>From G.M. Dimitrov:</strong> exit at G.M. Dimitrov Metro Station and board Bus 280 or Bus 294.
                 </li>
                 <li>
-                  <strong>Walking:</strong> enter the NSA campus through the main gate and follow signs
-                  toward the tennis and squash facilities.
+                  <strong>Arrival:</strong> get off at the last stop, National Sports Academy.
                 </li>
               </ul>
             </div>

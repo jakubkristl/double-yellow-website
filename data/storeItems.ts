@@ -14,6 +14,7 @@ export const CATEGORIES: Category[] = [
   {
     title: "Rackets",
     items: [
+      { name: "Unsquashable MIGUEL RODRIGUEZ AUTOGRAPH", price: 115.00, image: "/store/products/rackets/unsquashable-miguel-rodriguez-autograph.jpg" },
       { name: "Unsquashable MIGUEL RODRÍGUEZ ONE20 Limited Edition", price: 115.00, image: "/store/products/rackets/Unsquashable MIGUEL RODRÍGUEZ ONE20 Limited Edition.webp" },
       { name: "Unsquashable NICK WALL 125 Limited Edition", price: 105.00, image: "/store/products/rackets/Unsquashable NICK WALL 125 Limited Edition.webp" },
       { name: "Unsquashable Y-TEC PRO 125", price: 95.00, image: "/store/products/rackets/Unsquashable Y-TEC PRO 125.webp" },
@@ -25,6 +26,7 @@ export const CATEGORIES: Category[] = [
       { name: "Unsquashable SAM GERRITS AUTOGRAPH", price: 99.00, image: "/store/products/rackets/Unsquashable SAM GERRITS AUTOGRAPH.webp" },
       { name: "Prince Vortex Pro 650", price: 89.00, image: "/store/products/rackets/Prince Vortex Pro 650.webp" },
       { name: "Dunlop Sonic Core Ultimate 132", price: 95.00, image: "/store/products/rackets/Dunlop Sonic Core Ultimate 132.webp" },
+      { name: "Saxon Aerox 125", price: 59.00, image: "/store/products/rackets/Saxon Aerox 125.jpg" },
       { name: "Tecnifibre Carboflex 120 X-Top V2", price: 165.00, image: "/store/products/rackets/Tecnifibre Carboflex 120 X-Top V2.webp" },
     ],
   },
@@ -47,7 +49,8 @@ export const CATEGORIES: Category[] = [
     title: "Strings & Grips",
     items: [
       { name: "Unsquashable TOUR-TEC PRO 1.18 Squash String - Yellow - 100M Reel", price: 92.00, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO 1.18 String (Yellow) — 100m Reel.webp" },
-      { name: "Unsquashable TOUR-TEC PRO PU Grip - 6 Pack", price: 18.00, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO PU Grip.webp" },
+      { name: "Unsquashable TOUR-TEC PRO PU Grip - 6 Pack", price: 24.00, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO PU Grip.jpg" },
+      { name: "Karakal PU Super Grip", price: 4.00, image: "/store/products/strings-grips/karakal-pu-grip.jpg" },
     ],
   },
   {
