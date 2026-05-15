@@ -134,6 +134,10 @@ const eventsSchema = EVENTS.map((e) => ({
   offers: e.offers,
 }));
 
+const conversionDebugEnabled =
+  process.env.NODE_ENV !== "production" ||
+  process.env.NEXT_PUBLIC_DEBUG_CONVERSIONS === "1";
+
 export default function RootLayout({
   children,
 }: {
@@ -156,23 +160,29 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Google Ads Conversion Tracking for Click to Call */}
+        {/* Google Ads Conversion Tracking for Completed Bookings */}
         <Script id="google-ads-conversion" strategy="afterInteractive">
           {`
-            function gtag_report_conversion(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
-                }
-              };
-              gtag('event', 'conversion', {
-                'send_to': 'AW-1784043056l/Vnw5CK6LvOAbEOG7_bpC',
+            var debugEnabled = ${conversionDebugEnabled ? "true" : "false"};
+
+            window.gtag_report_booking_complete = function (bookingId) {
+              var payload = {
+                'send_to': 'AW-17840430561/Vnw5CK6LvOAbEOG7_bpC',
                 'value': 1.0,
-                'currency': 'EUR',
-                'event_callback': callback
-              });
-              return false;
-            }
+                'currency': 'EUR'
+              };
+
+              if (bookingId) {
+                payload.transaction_id = String(bookingId);
+              }
+
+              if (debugEnabled && typeof console !== 'undefined' && console.info) {
+                console.info('[tracking] booking conversion payload', payload);
+              }
+
+              gtag('event', 'conversion', payload);
+              return true;
+            };
           `}
         </Script>
 
