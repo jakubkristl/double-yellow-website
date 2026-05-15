@@ -84,11 +84,7 @@ function BulgarianContent() {
         <ul>
           <li>🌐 Онлайн чрез сайта</li>
           <li>🏢 На място</li>
-          <li>📞 По телефон: <a href="tel:+359896754014" onClick={() => {
-            if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-              return (window as any).gtag_report_conversion('tel:+359896754014');
-            }
-          }}>+359 896 754 014</a></li>
+          <li>📞 По телефон: <a href="tel:+359896754014">+359 896 754 014</a></li>
         </ul>
 
         <h3>2.2. Продължителност</h3>
@@ -458,11 +454,7 @@ function EnglishContent() {
         <ul>
           <li>🌐 Online via the website</li>
           <li>🏢 On-site</li>
-          <li>📞 By phone: <a href="tel:+359896754014" onClick={() => {
-            if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-              return (window as any).gtag_report_conversion('tel:+359896754014');
-            }
-          }}>+359 896 754 014</a></li>
+          <li>📞 By phone: <a href="tel:+359896754014">+359 896 754 014</a></li>
         </ul>
 
         <h3>2.2. Duration</h3>

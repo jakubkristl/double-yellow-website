@@ -8,9 +8,6 @@ type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
 
 export default function PhoneLink({ href, onClick, ...rest }: Props) {
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
-    if (typeof window !== "undefined" && (window as any).gtag_report_conversion) {
-      (window as any).gtag_report_conversion(href);
-    }
     if (onClick) {
       onClick(event);
     }

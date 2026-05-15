@@ -37,11 +37,6 @@ export default function StorePage() {
             <a 
               href="tel:+359896754014" 
               style={{ color: "#ffcc00", textDecoration: "underline" }}
-              onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
-                  return (window as any).gtag_report_conversion('tel:+359896754014');
-                }
-              }}
             >
               0896 754 014
             </a>
