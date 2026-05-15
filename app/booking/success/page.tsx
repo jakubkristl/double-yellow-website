@@ -10,16 +10,19 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams?: {
+  searchParams?: Promise<{
     booking_id?: string;
     reservation_id?: string;
     id?: string;
-  };
+  }>;
 };
 
-export default function BookingSuccessPage({ searchParams }: Props) {
+export default async function BookingSuccessPage({ searchParams }: Props) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
   const bookingId =
-    searchParams?.booking_id ?? searchParams?.reservation_id ?? searchParams?.id;
+    resolvedSearchParams?.booking_id ??
+    resolvedSearchParams?.reservation_id ??
+    resolvedSearchParams?.id;
 
   return (
     <section className={`container ${styles.successSection}`}>
