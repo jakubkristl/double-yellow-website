@@ -54,7 +54,7 @@ export default function LearnPage() {
         ))}
       </div>
 
-      <LearnEngagement />
+      <LearnEngagement locale="bg" />
 
       <section className="learn-cta card">
         <p className="beginner-kicker">Готов ли си да го приложиш на корта?</p>

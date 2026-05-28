@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
-import { articles } from "@/lib/articles";
+import { articles } from "@/lib/articles-en";
 import LearnEngagement from "@/components/LearnEngagement";
 
 export const metadata: Metadata = createPageMetadata({
@@ -54,7 +54,7 @@ export default function LearnPage() {
         ))}
       </div>
 
-      <LearnEngagement />
+      <LearnEngagement locale="en" />
 
       <section className="learn-cta card">
         <p className="beginner-kicker">Ready to put it into practice?</p>

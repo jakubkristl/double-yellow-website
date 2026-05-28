@@ -11,147 +11,147 @@ export type Article = {
 export const articles: Article[] = [
   {
     slug: "how-to-hold-a-squash-racket",
-    title: "How to Hold a Squash Racket (Without Looking Like You're Strangling It)",
+    title: "Как да държиш скуош ракета (без да изглежда, че я душиш)",
     excerpt:
-      "The grip is the single most important thing a beginner gets wrong — and the easiest to fix in five minutes. Your knuckles will thank you.",
+      "Хватът е най-важното нещо, което начинаещите бъркат, и най-лесното за поправяне за пет минути. Пръстите ти ще са благодарни.",
     date: "2026-04-28",
     readingMinutes: 4,
-    tags: ["beginners", "technique", "grip"],
+    tags: ["начинаещи", "техника", "хват"],
     content: `
-<p>You picked up a squash racket. You squeezed it like a debt collector squeezes a promise. That is wrong. Let us fix it.</p>
+<p>Взе скуош ракета. Стисна я така, сякаш събираш дългове. Това е грешно. Нека го оправим.</p>
 
-<h2>The V-grip — your new best friend</h2>
-<p>Hold the racket out in front of you by the throat (the thin bit above the grip). Now shake hands with the handle like you are meeting it for the first time — firm, polite, not panicked. Look at your thumb and index finger: they form a <strong>V shape</strong> that should sit slightly left of centre on the top bevel. That is the forehand grip.</p>
+<h2>V-хватът - новият ти най-добър приятел</h2>
+<p>Хвани ракетата отпред за гърлото ѝ (тънката част над дръжката). После "се здрависай" с дръжката, сякаш се срещате за първи път - стабилно, спокойно, без паника. Погледни палеца и показалеца си: те образуват <strong>V форма</strong>, която трябва да стои малко вляво от центъра върху горния ръб на дръжката. Това е форхенд хватът.</p>
 
-<h2>How tight is tight enough?</h2>
-<p>On a scale of 1–10, you want a 4. Not a 1 (racket flies into the wall), not a 10 (your wrist seizes up after three shots). A common test: if someone can pull the racket out of your hand without a fight, tighten up slightly. If your forearm is already burning before the rally starts, loosen up.</p>
+<h2>Колко силно да стискаш?</h2>
+<p>По скала от 1 до 10 целиш 4. Не 1 (ракетата излита към стената), не 10 (китката ти блокира след три удара). Лесен тест: ако някой може да издърпа ракетата от ръката ти без усилие, стегни малко. Ако предмишницата ти вече гори още преди разиграването да е започнало, отпусни хвата.</p>
 
-<h2>The "death grip" problem</h2>
-<p>Most beginners squeeze harder as they get nervous. The racket vibrates, the arm tenses, the elbow protests. The fix is counterintuitive: <strong>relax the grip just before impact</strong>, then let the natural swing do the work. The racket has a head for a reason. Let it swing.</p>
+<h2>Проблемът с "хвата на смъртта"</h2>
+<p>Повечето начинаещи стискат по-силно, когато се притеснят. Ракетата вибрира, ръката се напряга, лакътят протестира. Решението е леко нелогично: <strong>отпусни хвата точно преди контакта</strong>, а после остави естествения замах да свърши работата. Главата на ракетата не е случайно там. Остави я да се движи.</p>
 
-<h2>Backhand: a small rotation</h2>
-<p>For backhand shots, rotate the racket slightly clockwise (for right-handers) so the V shifts a little more to the top of the handle. Do not re-grip mid-rally — not yet. That is an advanced trick. For now: one grip, two hands on heart, eyes open.</p>
+<h2>Бекхенд: малко завъртане</h2>
+<p>За бекхенд удари завърти ракетата леко по часовниковата стрелка (ако играеш с дясна ръка), така че V-то да отиде още малко към горната част на дръжката. Не прехващай по време на разиграването - още не. Това е за по-напреднали. Засега: един хват, спокойно сърце, отворени очи.</p>
 
-<h2>The two-finger knuckle test</h2>
-<p>Wrap your hand around the grip. Slide two fingers between your palm and the grip — they should just fit. Too tight? Bigger grip size. Too loose? Smaller or add an overgrip. Most club rentals come in a standard size that fits most people, so do not worry too much about this on day one.</p>
+<h2>Тестът с двата пръста</h2>
+<p>Обхвани дръжката с ръка. Пъхни два пръста между дланта и дръжката - трябва да влизат точно. Твърде тясно? Трябва ти по-дебел грип. Твърде хлабаво? По-тънък или сложи оувъргрип. Повечето ракети под наем в клуба са в стандартен размер, така че не се тревожи прекалено за това в първия ден.</p>
 
-<h2>Quick recap</h2>
+<h2>Накратко</h2>
 <ul>
-  <li>Shake-hands grip, not stranglehold.</li>
-  <li>V shape on top-left bevel (right-handers).</li>
-  <li>Tension: 4/10.</li>
-  <li>Relax just before you hit.</li>
+  <li>Хват като за здрависване, не като за душене.</li>
+  <li>V формата е върху горния ляв ръб (за десничари).</li>
+  <li>Напрежение: 4/10.</li>
+  <li>Отпусни хвата точно преди удара.</li>
 </ul>
-<p>Practice in front of a mirror for 60 seconds before your next session. Seriously. Your wrist, elbow, and the wall behind your opponent will all benefit.</p>
+<p>Упражнявай пред огледало 60 секунди преди следващата си тренировка. Сериозно. Китката ти, лакътят ти и стената зад противника ще ти благодарят.</p>
 `,
   },
   {
     slug: "squash-ball-dots-explained",
-    title: "What Do the Dots on a Squash Ball Actually Mean? (It Is Not Decoration)",
+    title: "Какво всъщност означават точките върху скуош топката? (Не са за украса)",
     excerpt:
-      "Yellow dot, red dot, blue dot — why does squash ball colour-coding exist and which one should you be using? Spoiler: the pro ball will destroy your fun.",
+      "Жълта точка, червена точка, синя точка - защо съществува това цветово кодиране и с коя топка трябва да играеш? Кратката версия: професионалната топка ще ти развали удоволствието.",
     date: "2026-05-05",
     readingMinutes: 3,
-    tags: ["beginners", "equipment", "balls"],
+    tags: ["начинаещи", "екипировка", "топки"],
     content: `
-<p>You opened a tin of squash balls. There are two small rubber spheres with coloured dots. You assumed the dots were aesthetic. They are not. They are a temperature and bounce rating system, and picking the wrong one is the fastest way to hate squash.</p>
+<p>Отвори кутия скуош топки. Вътре има две малки гумени топчета с цветни точки. Може да си помислиш, че са само за визия. Не са. Те показват как се държи топката спрямо температурата и отскока ѝ, а грешният избор е най-бързият начин да намразиш скуоша.</p>
 
-<h2>The dot system</h2>
-<p>The dots indicate how much the ball bounces relative to its temperature. Cold rubber barely bounces. Warm rubber bounces more. The dots tell you how warm the ball needs to get before it behaves correctly:</p>
+<h2>Системата с точките</h2>
+<p>Точките показват колко отскача топката спрямо температурата ѝ. Студената гума почти не отскача. Загрятата гума отскача повече. Точките показват колко трябва да се загрее топката, за да се държи както трябва:</p>
 <ul>
-  <li><strong>Double yellow dot</strong> — Pro ball. Very low bounce. Needs extensive warming up and lots of pace. This is what you see in professional matches. This is <em>not</em> for beginners.</li>
-  <li><strong>Single yellow dot</strong> — Club/amateur standard. Slightly more bounce than double yellow. Still needs warming up. Good for intermediate players.</li>
-  <li><strong>Red dot</strong> — Beginner/recreational. Higher bounce, stays lively even when cool. This is what you want if you have played fewer than ~20 sessions.</li>
-  <li><strong>Blue dot</strong> — Starter/junior. The bounciest of all. Used for children and absolute beginners. Stays playable without any warm-up.</li>
+  <li><strong>Двойна жълта точка</strong> - професионална топка. Много нисък отскок. Иска сериозно загряване и добро темпо. Това е топката, която виждаш в професионалните мачове. Това <em>не</em> е топка за начинаещи.</li>
+  <li><strong>Единична жълта точка</strong> - стандарт за клубни и любителски играчи. Отскача малко повече от двойната жълта. Пак има нужда от загряване. Добър вариант за средно напреднали.</li>
+  <li><strong>Червена точка</strong> - за начинаещи и любителска игра. По-висок отскок, остава жива дори когато е по-хладна. Това искаш, ако имаш по-малко от около 20 тренировки.</li>
+  <li><strong>Синя точка</strong> - стартова / детска. Най-отскачащата от всички. Използва се за деца и съвсем начинаещи. Става за игра и без загряване.</li>
 </ul>
 
-<h2>Why does warming up the ball matter?</h2>
-<p>Squash balls are hollow rubber. Cold rubber is stiff and absorbs impact energy rather than returning it. As you play, friction and repeated impact heat the ball up, and it becomes livelier. A professional double-yellow dot ball at room temperature bounces about 12% of the height it is dropped from. After a proper warm-up, that rises to around 30%. Without warm-up: dead on arrival.</p>
+<h2>Защо загряването на топката е важно?</h2>
+<p>Скуош топките са куха гума. Студената гума е твърда и поглъща енергията при удара вместо да я връща. Докато играеш, триенето и повтарящите се удари загряват топката и тя става по-жива. Професионална топка с двойна жълта точка при стайна температура отскача около 12% от височината, от която е пусната. След добро загряване това стига до около 30%. Без загряване: почти мъртва.</p>
 
-<h2>What should you use as a beginner?</h2>
-<p><strong>Red dot.</strong> Full stop. Using a double-yellow dot as a beginner is like trying to learn to drive in a Formula 1 car — technically possible, emotionally scarring. The red dot gives you enough bounce to develop your swing without spending the whole session sprinting to the back corner to retrieve a ball that barely moved.</p>
+<h2>Коя топка да използваш като начинаещ?</h2>
+<p><strong>Червена точка.</strong> Точка по въпроса. Да започнеш с двойна жълта точка е като да се учиш да караш с болид от Формула 1 - технически е възможно, но емоционално ще те съсипе. Червената точка дава достатъчно отскок, за да развиваш замаха си, без да прекарваш цялата тренировка в спринтове към задния ъгъл за топка, която почти не е мръднала.</p>
 
-<h2>When to move up</h2>
-<p>Switch to a single-yellow when rallies regularly last more than 8–10 shots and you feel the red is getting too bouncy and unpredictable. Most players are ready after 2–3 months of regular play. There is no prize for using the hard ball early.</p>
+<h2>Кога да минеш на следващо ниво?</h2>
+<p>Мини на единична жълта точка, когато разиграванията ти редовно стигат над 8-10 удара и започнеш да усещаш, че червената топка е твърде жива и непредвидима. Повечето играчи са готови след 2-3 месеца редовна игра. Няма награда за това да минеш прекалено рано на по-трудната топка.</p>
 
-<h2>The name, by the way</h2>
-<p>Our club is called Double Yellow. Yes, after the ball. The most demanding, the most rewarding, the one that requires the most effort to make work — much like squash itself.</p>
+<h2>А името, между другото</h2>
+<p>Клубът ни се казва Double Yellow. Да, кръстен е на топката. Най-взискателната, най-възнаграждаващата, тази, която иска най-много работа, за да "тръгне" - точно като самия скуош.</p>
 `,
   },
   {
     slug: "squash-swing-biomechanics-beginners",
-    title: "Swing Biomechanics for Beginners (Without the Biomechanics Degree)",
+    title: "Биомеханика на замаха за начинаещи (без диплома по биомеханика)",
     excerpt:
-      "A good squash swing is not about strength. It is about sequence. Learn the kinetic chain in plain language — and stop hurting your elbow.",
+      "Добрият замах в скуоша не е въпрос на сила, а на последователност. Научи кинетичната верига на разбираем език и спри да тормозиш лакътя си.",
     date: "2026-05-12",
     readingMinutes: 5,
-    tags: ["beginners", "technique", "swing"],
+    tags: ["начинаещи", "техника", "замах"],
     content: `
-<p>Every beginner hits with their arm. Every good player hits with their whole body. The difference is the kinetic chain — and once you feel it once, you cannot unfeel it.</p>
+<p>Всеки начинаещ удря с ръка. Всеки добър играч удря с цялото тяло. Разликата е в кинетичната верига - и щом я усетиш веднъж, после няма как да я "разусетиш".</p>
 
-<h2>What is a kinetic chain?</h2>
-<p>Energy travels through your body like a whip: legs → hips → shoulder → elbow → wrist → racket head. Each segment adds velocity to the next. Skip a link (say, hit with only your arm) and you lose most of your power and put enormous strain on your elbow. Hello, squash elbow.</p>
+<h2>Какво е кинетична верига?</h2>
+<p>Енергията преминава през тялото ти като камшик: крака → ханш → рамо → лакът → китка → глава на ракетата. Всеки сегмент добавя скорост към следващия. Пропуснеш ли едно звено (например удряш само с ръка), губиш голяма част от силата си и натоварваш сериозно лакътя. Здравей, скуош лакът.</p>
 
-<h2>The four phases of a squash swing</h2>
+<h2>Четирите фази на скуош замаха</h2>
 
-<h3>1. Preparation (backswing)</h3>
-<p>Turn your shoulders to face the side wall. Raise the racket so the head is above your wrist — not beside it. Think of the letter <strong>L</strong>: upper arm roughly parallel to the floor, forearm pointing up. This is your loaded position. If your racket is still dangling by your hip when the ball arrives, it is already too late.</p>
+<h3>1. Подготовка (backswing)</h3>
+<p>Завърти раменете към страничната стена. Вдигни ракетата така, че главата ѝ да е над китката, а не до нея. Мисли за буквата <strong>L</strong>: горната част на ръката е приблизително успоредна на пода, предмишницата сочи нагоре. Това е заредената ти позиция. Ако ракетата още виси до бедрото ти, когато топката дойде, вече си закъснял.</p>
 
-<h3>2. Step and coil</h3>
-<p>Step toward the ball with your front foot, pointing it roughly at the side wall. Your hips and shoulders are still turned. Feel the coil — like a spring under tension. Do not uncoil yet.</p>
+<h3>2. Крачка и навиване</h3>
+<p>Стъпи към топката с предния крак, насочен приблизително към страничната стена. Ханшът и раменете още са завъртени. Усети навиването - като пружина под напрежение. Още не я отпускай.</p>
 
-<h3>3. Impact</h3>
-<p>Hips rotate first, then the shoulder pulls the arm through, then the forearm and wrist snap through contact. The contact point for a forehand drive should be level with your front foot, arm roughly extended but not fully locked. Hit through the ball, not at it — the follow-through matters.</p>
+<h3>3. Контакт</h3>
+<p>Първо се завърта ханшът, после рамото повежда ръката, а след това предмишницата и китката минават през контакта. Точката на удара при форхенд драйв трябва да е на нивото на предния крак, с ръка почти изпъната, но не напълно заключена. Удряй през топката, не в нея - довършването на замаха има значение.</p>
 
-<h3>4. Follow-through</h3>
-<p>Let the racket continue across your body. A proper follow-through is not a stylistic flourish — it proves you did not decelerate before contact. Stopping the swing early is the single biggest power leak in beginner squash.</p>
+<h3>4. Довършване</h3>
+<p>Остави ракетата да продължи през тялото ти. Доброто довършване не е стилова поза - то доказва, че не си спрял замаха преди контакта. Спирането твърде рано е една от най-големите загуби на сила в начинаещия скуош.</p>
 
-<h2>Common mistakes</h2>
+<h2>Чести грешки</h2>
 <ul>
-  <li><strong>Hitting with only the arm</strong> — your shoulder will thank you later for not doing this.</li>
-  <li><strong>Swinging too early</strong> — you rush because you are nervous. Trust your footwork to get you there.</li>
-  <li><strong>Ball too close to the body</strong> — you end up cramped and can only push, not swing. Give yourself room.</li>
-  <li><strong>Watching the ball all the way to the racket</strong> — great in theory, distracting in practice. Watch the ball, yes, but keep peripheral awareness of where you are on court.</li>
+  <li><strong>Удряне само с ръка</strong> - рамото ти по-късно ще ти благодари, ако спреш с това.</li>
+  <li><strong>Твърде ранен замах</strong> - бързаш, защото си напрегнат. Довери се на движението си, че ще те заведе навреме.</li>
+  <li><strong>Топката е твърде близо до тялото</strong> - ставаш "свит" и можеш само да бутнеш, но не и да замахнеш. Остави си пространство.</li>
+  <li><strong>Следиш топката чак до ракетата</strong> - звучи добре на теория, но на практика често разсейва. Гледай топката, да, но пази и периферно усещане къде си на корта.</li>
 </ul>
 
-<h2>A drill to feel the chain</h2>
-<p>Stand still, no ball. Make a slow-motion forehand swing, deliberately starting from the hips. Feel the shoulder follow, the elbow trail, the wrist snap last. Do this 20 times slowly. Then do it fast. You will feel extra power immediately — without hitting harder.</p>
+<h2>Упражнение, за да усетиш веригата</h2>
+<p>Застани на място, без топка. Направи форхенд замах на бавен каданс, като съзнателно започнеш от ханша. Усети как рамото следва, лакътят изостава, а китката щраква последна. Направи това 20 пъти бавно. После го направи бързо. Ще усетиш повече сила веднага - без да удряш по-силно.</p>
 
-<p>Squash is a sport of sequence, not strength. Beginners who understand this improve five times faster than those who just try to hit the ball harder.</p>
+<p>Скуошът е спорт на последователност, а не на груба сила. Начинаещите, които разбират това, напредват в пъти по-бързо от тези, които просто се опитват да удрят по-силно.</p>
 `,
   },
   {
     slug: "squash-court-positions-beginners",
-    title: "Where Should You Stand on a Squash Court? (Not Glued to the Back Wall)",
+    title: "Къде трябва да стоиш на скуош корта? (Не залепен за задната стена)",
     excerpt:
-      "New players hug the back wall like it owes them money. Here is where to actually stand, why the T is valuable, and how court position wins you points without hitting harder.",
+      "Новите играчи стоят до задната стена, сякаш им дължи пари. Ето къде всъщност трябва да стоиш, защо T позицията е толкова ценна и как добрата позиция ти печели точки без по-силен удар.",
     date: "2026-05-19",
     readingMinutes: 4,
-    tags: ["beginners", "tactics", "court-position"],
+    tags: ["начинаещи", "тактика", "позиция-на-корта"],
     content: `
-<p>If you watch two beginners play squash, they spend most of the match in the back corners, lunging desperately at the ball and hoping for the best. If you watch two club players, one of them spends most of the time near the middle of the court looking almost relaxed. That middle position has a name: <strong>the T</strong>.</p>
+<p>Ако гледаш двама начинаещи да играят скуош, ще видиш как прекарват по-голямата част от мача в задните ъгли, хвърлят се отчаяно към топката и се надяват на най-доброто. Ако гледаш двама клубни играчи, единият прекарва по-голямата част от времето близо до средата на корта и изглежда почти спокоен. Тази средна позиция си има име: <strong>T</strong>.</p>
 
-<h2>What is the T?</h2>
-<p>The T is the intersection of the red lines in the middle of the court — where the short line meets the half-court line. It is the most central position you can occupy. From the T, you are equidistant from all four corners. Every ball hit by your opponent requires you to travel the minimum possible distance to reach it.</p>
+<h2>Какво е T?</h2>
+<p>T е пресечната точка на червените линии в средата на корта - там, където късата линия среща средната линия. Това е най-централната позиция, която можеш да заемеш. От T си на приблизително еднакво разстояние от четирите ъгъла. Всеки удар на противника ти изисква минимално възможното движение, за да стигнеш до топката.</p>
 
-<h2>Why do beginners avoid it?</h2>
-<p>Because the ball keeps going to the back corners and instinct says "follow the ball". After you hit, you chase the ball, you stay there, your opponent hits it somewhere else, you sprint again, you are exhausted by rally three. The T is the answer. Hit the ball. Walk back to the T. Wait. Hit. T. Repeat.</p>
+<h2>Защо начинаещите го избягват?</h2>
+<p>Защото топката често отива в задните ъгли и инстинктът казва "тръгни след топката". Удряш, гониш я, оставаш там, противникът я праща другаде, пак спринтираш и още на третото разиграване си изморен. T е решението. Удар. Връщане към T. Изчакване. Удар. T. Повторение.</p>
 
-<h2>The principle: hit and recover</h2>
-<p>Every shot has two parts: the hit and the recovery. Beginners focus entirely on the hit. Good players focus equally on the recovery. After every shot — every single one — your goal is to return to the T before your opponent's racket hits the ball.</p>
+<h2>Принципът: удар и възстановяване на позицията</h2>
+<p>Всеки удар има две части: самият удар и връщането в позиция. Начинаещите мислят само за удара. Добрите играчи мислят еднакво и за връщането. След всеки удар - всеки един - целта ти е да се върнеш на T преди ракетата на противника да срещне топката.</p>
 
-<h2>Practical starting positions</h2>
+<h2>Практични начални позиции</h2>
 <ul>
-  <li><strong>Serving</strong>: Stand in the service box, hit, then move immediately to the T.</li>
-  <li><strong>Receiving</strong>: Stand roughly one metre behind the short line, slightly to the side of the expected serve.</li>
-  <li><strong>During the rally</strong>: Always the T, always facing the front wall, always watching your opponent's racket over your shoulder.</li>
+  <li><strong>При сервис</strong>: стой в полето за сервис, удари и веднага се премести към T.</li>
+  <li><strong>При посрещане</strong>: стой приблизително метър зад късата линия, леко встрани от очаквания сервис.</li>
+  <li><strong>По време на разиграване</strong>: винаги T, винаги с лице към предната стена, винаги наблюдавай ракетата на противника периферно.</li>
 </ul>
 
-<h2>How court position wins points</h2>
-<p>When you control the T, your opponent has to play around you. They must hit the ball past you, to the corners, under pressure. They make errors. You win points not by hitting winners but by being in the right place and making your opponent hit more shots than you.</p>
+<h2>Как позицията на корта печели точки</h2>
+<p>Когато контролираш T, противникът трябва да играе около теб. Трябва да изпраща топката покрай теб, към ъглите, под напрежение. Така идват грешките. Печелиш точки не само с уинъри, а като си на правилното място и караш противника да удря по-трудни топки от теб.</p>
 
-<h2>One rule to start with</h2>
-<p>This week, after every shot you play, say to yourself: "T." Then move there. You do not need to master anything else yet. This single habit will make you a noticeably better player within three sessions.</p>
+<h2>Едно правило за начало</h2>
+<p>Тази седмица след всеки свой удар си казвай: "T." После се премести там. Не е нужно да овладяваш нищо друго засега. Само този навик ще те направи осезаемо по-добър играч в рамките на няколко тренировки.</p>
 `,
   },
 ];

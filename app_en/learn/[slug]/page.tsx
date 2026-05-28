@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
-import { articles, getArticleBySlug } from "@/lib/articles";
+import { articles, getArticleBySlug } from "@/lib/articles-en";
 import LearnEngagement from "@/components/LearnEngagement";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -68,7 +68,7 @@ export default async function ArticlePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
-        <LearnEngagement articleSlug={article.slug} articleTitle={article.title} />
+        <LearnEngagement articleSlug={article.slug} articleTitle={article.title} locale="en" />
 
         <aside className="article-cta card">
           <p className="beginner-kicker">Put it into practice</p>

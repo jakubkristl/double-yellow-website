@@ -68,7 +68,7 @@ export default async function ArticlePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
-        <LearnEngagement articleSlug={article.slug} articleTitle={article.title} />
+        <LearnEngagement articleSlug={article.slug} articleTitle={article.title} locale="bg" />
 
         <aside className="article-cta card">
           <p className="beginner-kicker">Приложи го на корта</p>
