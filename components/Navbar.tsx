@@ -364,12 +364,15 @@ export default function Navbar() {
           overflow: hidden;
           z-index: 11005;
           padding: 6px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
         }
 
         .lang-option {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 14px;
           padding: 11px 12px;
           color: #1f5ecc;
           text-decoration: none;
@@ -377,10 +380,11 @@ export default function Navbar() {
           border-radius: 8px;
           background: transparent;
           transition: background-color 140ms ease, color 140ms ease;
+          width: 100%;
         }
 
         .lang-option + .lang-option {
-          margin-top: 2px;
+          margin-top: 0;
         }
 
         .lang-option.active {
