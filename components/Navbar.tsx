@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Route } from "next";
 
 type NavItem = {
@@ -36,14 +36,47 @@ function withPrefix(path: string, prefix: string): Route {
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const languageMenuRef = useRef<HTMLLIElement | null>(null);
   const isEn = pathname === "/en" || pathname?.startsWith("/en/");
   const prefix = isEn ? "/en" : "";
   const basePath = isEn
     ? pathname.replace(/^\/en(?=\/|$)/, "") || "/"
     : pathname;
-  const languageSwitchHref = (isEn
-    ? `/bg${basePath === "/" ? "" : basePath}`
-    : `/en${pathname === "/" ? "" : pathname}`) as Route;
+
+  const activePath = isEn ? basePath : pathname;
+  const languageBgHref = (`/bg${activePath === "/" ? "" : activePath}`) as Route;
+  const languageEnHref = (`/en${activePath === "/" ? "" : activePath}`) as Route;
+
+  useEffect(() => {
+    setLanguageMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!languageMenuOpen) {
+      return;
+    }
+
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (!languageMenuRef.current?.contains(event.target as Node)) {
+        setLanguageMenuOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setLanguageMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleDocumentClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleDocumentClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [languageMenuOpen]);
 
   return (
     <header className="navbar-wrap">
@@ -97,15 +130,57 @@ export default function Navbar() {
               </li>
             );
           })}
-          <li>
-            <Link
-              href={languageSwitchHref}
-              className="link link-lang-toggle"
-              aria-label={isEn ? "Switch language to Bulgarian" : "Switch language to English"}
-              onClick={() => setMobileMenuOpen(false)}
+          <li className="lang-menu" ref={languageMenuRef}>
+            <button
+              type="button"
+              className="lang-toggle-btn"
+              aria-haspopup="menu"
+              aria-expanded={languageMenuOpen}
+              aria-label={isEn ? "Change language" : "Смени език"}
+              onClick={() => setLanguageMenuOpen((open) => !open)}
             >
-              {isEn ? "🇧🇬 BG" : "🇬🇧 EN"}
-            </Link>
+              <Image
+                src={isEn ? "/flags/gb.svg" : "/flags/bg.svg"}
+                alt={isEn ? "English" : "Български"}
+                width={20}
+                height={14}
+                className="lang-flag"
+              />
+              <span>{isEn ? "EN" : "BG"}</span>
+              <span className="lang-caret" aria-hidden="true">▾</span>
+            </button>
+
+            {languageMenuOpen && (
+              <div className="lang-dropdown" role="menu">
+                <Link
+                  href={languageEnHref}
+                  className={`lang-option ${isEn ? "active" : ""}`}
+                  role="menuitem"
+                  onClick={() => {
+                    setLanguageMenuOpen(false);
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  <Image src="/flags/gb.svg" alt="English" width={20} height={14} className="lang-flag" />
+                  <span className="lang-code">EN</span>
+                  <span className="lang-name">English</span>
+                </Link>
+
+                <Link
+                  href={languageBgHref}
+                  className={`lang-option ${!isEn ? "active" : ""}`}
+                  role="menuitem"
+                  onClick={() => {
+                    setLanguageMenuOpen(false);
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  <Image src="/flags/bg.svg" alt="Български" width={20} height={14} className="lang-flag" />
+                  <span className="lang-code">BG</span>
+                  <span className="lang-name">Български</span>
+                </Link>
+              </div>
+            )}
           </li>
         </ul>
       </nav>
@@ -162,6 +237,7 @@ export default function Navbar() {
           z-index: 11002;
         }
         .hamburger:focus-visible,
+        .lang-toggle-btn:focus-visible,
         .link:focus-visible,
         .brand:focus-visible {
           outline: 3px solid #ffcc00;
@@ -231,16 +307,88 @@ export default function Navbar() {
           background: #ffcc00;
           border-radius: 2px;
         }
-        .link-lang-toggle {
-          border: 1px solid rgba(255, 204, 0, 0.35);
-          border-radius: 999px;
-          padding: 6px 12px;
+
+        .lang-menu {
+          position: relative;
+        }
+
+        .lang-toggle-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: #ffcc00;
+          background: transparent;
+          border: 2px solid rgba(255, 255, 255, 0.75);
+          border-radius: 8px;
+          padding: 6px 10px;
+          font-weight: 900;
           font-size: clamp(16px, 0.6vw + 11px, 19px);
+          cursor: pointer;
           line-height: 1;
         }
-        .link-lang-toggle:hover {
-          border-color: rgba(255, 204, 0, 0.8);
-          transform: translateY(-1px);
+
+        .lang-toggle-btn:hover {
+          border-color: #ffffff;
+        }
+
+        .lang-caret {
+          font-size: 14px;
+          opacity: 0.95;
+        }
+
+        .lang-dropdown {
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 0;
+          min-width: 210px;
+          background: #e9e9e9;
+          border: 1px solid #bdbdbd;
+          border-radius: 4px;
+          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+          overflow: hidden;
+          z-index: 11005;
+        }
+
+        .lang-option {
+          display: grid;
+          grid-template-columns: 24px 36px 1fr;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 14px;
+          color: #2b6fe8;
+          text-decoration: none;
+          font-size: 16px;
+          border-bottom: 1px solid #d0d0d0;
+          background: #efefef;
+        }
+
+        .lang-option:last-child {
+          border-bottom: none;
+        }
+
+        .lang-option.active {
+          background: #dfe5f2;
+        }
+
+        .lang-option:hover {
+          background: #d8deeb;
+        }
+
+        .lang-code {
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          font-size: 18px;
+        }
+
+        .lang-name {
+          font-size: 16px;
+          line-height: 1.1;
+          color: #2b6fe8;
+        }
+
+        .lang-flag {
+          border-radius: 2px;
+          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 1180px) {
@@ -321,10 +469,14 @@ export default function Navbar() {
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 204, 0, 0.1);
           }
-          .link-lang-toggle {
-            width: fit-content;
-            padding: 10px 14px;
-            border-bottom: 1px solid rgba(255, 204, 0, 0.35);
+          .lang-toggle-btn {
+            margin-top: 8px;
+          }
+
+          .lang-dropdown {
+            right: auto;
+            left: 0;
+            min-width: 220px;
           }
 
           .link.active::after {
