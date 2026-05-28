@@ -30,15 +30,6 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
-  const activeLang = request.cookies.get("site_lang")?.value;
-  if (activeLang === "en") {
-    const enUrl = new URL(`/en${pathname === "/" ? "" : pathname}${search}`, request.url);
-    const response = NextResponse.redirect(enUrl);
-    response.cookies.set("site_lang", "en", { path: "/", sameSite: "lax" });
-    response.cookies.set("googtrans", "/auto/en", { path: "/", sameSite: "lax" });
-    return response;
-  }
-
   const response = NextResponse.next();
   response.cookies.set("site_lang", "bg", { path: "/", sameSite: "lax" });
   response.cookies.set("googtrans", "/auto/bg", { path: "/", sameSite: "lax" });
