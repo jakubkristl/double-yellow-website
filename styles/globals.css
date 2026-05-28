@@ -2690,10 +2690,3 @@ select.learn-input option {
   border: 0;
 }
 
-.goog-te-banner-frame.skiptranslate {
-  display: none !important;
-}
-
-body {
-  top: 0 !important;
-}

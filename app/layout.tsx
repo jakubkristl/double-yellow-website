@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CookieConsent from "@/components/CookieConsent";
-import AutoTranslate from "@/components/AutoTranslate";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
@@ -226,7 +225,6 @@ export default async function RootLayout({
         <main id="main-content" className="container">{children}</main>
         <Footer />
         <CookieConsent />
-        <AutoTranslate />
       </body>
     </html>
   );

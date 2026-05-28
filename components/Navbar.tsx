@@ -100,10 +100,11 @@ export default function Navbar() {
           <li>
             <Link
               href={languageSwitchHref}
-              className="link"
+              className="link link-lang-toggle"
+              aria-label={isEn ? "Switch language to Bulgarian" : "Switch language to English"}
               onClick={() => setMobileMenuOpen(false)}
             >
-              {isEn ? "Български" : "English"}
+              {isEn ? "🇧🇬 BG" : "🇬🇧 EN"}
             </Link>
           </li>
         </ul>
@@ -230,6 +231,17 @@ export default function Navbar() {
           background: #ffcc00;
           border-radius: 2px;
         }
+        .link-lang-toggle {
+          border: 1px solid rgba(255, 204, 0, 0.35);
+          border-radius: 999px;
+          padding: 6px 12px;
+          font-size: clamp(16px, 0.6vw + 11px, 19px);
+          line-height: 1;
+        }
+        .link-lang-toggle:hover {
+          border-color: rgba(255, 204, 0, 0.8);
+          transform: translateY(-1px);
+        }
 
         @media (max-width: 1180px) {
           .container {
@@ -308,6 +320,11 @@ export default function Navbar() {
             display: block;
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 204, 0, 0.1);
+          }
+          .link-lang-toggle {
+            width: fit-content;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 204, 0, 0.35);
           }
 
           .link.active::after {
