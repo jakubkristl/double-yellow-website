@@ -319,7 +319,7 @@ export default function Navbar() {
         .lang-toggle-btn {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
+          gap: 12px;
           color: #ffcc00;
           background: rgba(255, 255, 255, 0.04);
           border: 2px solid rgba(255, 255, 255, 0.75);
@@ -373,7 +373,7 @@ export default function Navbar() {
           display: grid;
           grid-template-columns: 20px 1fr 18px;
           align-items: center;
-          column-gap: 12px;
+          column-gap: 16px;
           padding: 11px 12px;
           color: #1f5ecc;
           text-decoration: none;
