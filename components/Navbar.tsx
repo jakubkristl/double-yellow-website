@@ -146,7 +146,7 @@ export default function Navbar() {
                 height={14}
                 className="lang-flag"
               />
-              <span>{isEn ? "EN" : "BG"}</span>
+              <span>{isEn ? "EN" : "БГ"}</span>
               <span className="lang-caret" aria-hidden="true">▾</span>
             </button>
 
@@ -164,7 +164,6 @@ export default function Navbar() {
                   <Image src="/flags/gb.svg" alt="English" width={20} height={14} className="lang-flag" />
                   <span className="lang-labels">
                     <span className="lang-code">EN</span>
-                    <span className="lang-name">English</span>
                   </span>
                   <span className="lang-check" aria-hidden="true">{isEn ? "✓" : ""}</span>
                 </Link>
@@ -180,8 +179,7 @@ export default function Navbar() {
                 >
                   <Image src="/flags/bg.svg" alt="Български" width={20} height={14} className="lang-flag" />
                   <span className="lang-labels">
-                    <span className="lang-code">BG</span>
-                    <span className="lang-name">Български</span>
+                    <span className="lang-code">БГ</span>
                   </span>
                   <span className="lang-check" aria-hidden="true">{!isEn ? "✓" : ""}</span>
                 </Link>
@@ -395,8 +393,7 @@ export default function Navbar() {
 
         .lang-labels {
           display: inline-flex;
-          align-items: baseline;
-          gap: 8px;
+          align-items: center;
           min-width: 0;
           flex: 1;
         }
@@ -405,13 +402,6 @@ export default function Navbar() {
           font-weight: 700;
           letter-spacing: 0.5px;
           font-size: 17px;
-        }
-
-        .lang-name {
-          font-size: 17px;
-          line-height: 1.1;
-          color: inherit;
-          white-space: nowrap;
         }
 
         .lang-check {
