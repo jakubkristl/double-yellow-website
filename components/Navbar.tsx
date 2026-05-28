@@ -364,15 +364,16 @@ export default function Navbar() {
           overflow: hidden;
           z-index: 11005;
           padding: 6px;
-          display: flex;
-          flex-direction: column;
+          display: grid;
+          grid-template-columns: 1fr;
           gap: 4px;
         }
 
         .lang-option {
-          display: flex;
+          display: grid;
+          grid-template-columns: 20px 1fr 18px;
           align-items: center;
-          gap: 14px;
+          column-gap: 12px;
           padding: 11px 12px;
           color: #1f5ecc;
           text-decoration: none;
@@ -381,6 +382,8 @@ export default function Navbar() {
           background: transparent;
           transition: background-color 140ms ease, color 140ms ease;
           width: 100%;
+          min-width: 0;
+          white-space: nowrap;
         }
 
         .lang-option + .lang-option {
