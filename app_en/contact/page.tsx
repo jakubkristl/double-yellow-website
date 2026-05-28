@@ -1,0 +1,218 @@
+// app/contact/page.tsx
+import React from "react";
+import type { Metadata } from "next";
+import PhoneLink from "@/components/PhoneLink";
+import IntroLeadForm from "@/components/IntroLeadForm";
+
+export const metadata: Metadata = {
+  title: "Contact Double Yellow | Phone, Email & Location",
+  description:
+    "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
+  openGraph: {
+    title: "Contact Double Yellow | Phone, Email & Location",
+    description:
+      "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
+    url: "https://doubleyellow.bg/contact",
+  },
+};
+
+export default function ContactPage() {
+  return (
+    <section className="container contact-section">
+      <div className="membership-header">
+        <h1 className="page-title">Contact</h1>
+        <div className="membership-sub">
+          First lesson free. Trainer and equipment included. Book a court, ask a question, or just say hi.
+        </div>
+      </div>
+
+      <IntroLeadForm />
+
+      {/* Quick contacts */}
+      <div className="contact-grid">
+        <PhoneLink className="contact-card" href="tel:+359896754014">
+          <div className="contact-title">Phone</div>
+          <div className="contact-data">+359 896 754 014</div>
+          <div className="contact-note">Call / Viber / WhatsApp</div>
+        </PhoneLink>
+
+        <a className="contact-card" href="mailto:jakub@doubleyellowsquash.com">
+          <div className="contact-title">Email</div>
+          <div className="contact-data">jakub@doubleyellowsquash.com</div>
+          <div className="contact-note">Bookings • Events • Partnerships</div>
+        </a>
+
+        <a
+          className="contact-card"
+          href="https://www.doubleyellowsquash.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="contact-title">Website</div>
+          <div className="contact-data">doubleyellowsquash.com</div>
+          <div className="contact-note">News • Memberships • Schedules</div>
+        </a>
+
+        <a
+          className="contact-card"
+          href="https://maps.app.goo.gl/UDAAByWq8sRQgraM9"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="contact-title">Location</div>
+          <div className="contact-data">View on Maps</div>
+          <div className="contact-note">NSA Campus, Sofia</div>
+        </a>
+
+        <a
+          className="contact-card"
+          href="https://www.facebook.com/profile.php?id=61576296615086"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="contact-title">Facebook</div>
+          <div className="contact-data">@DoubleYellowSquashClub</div>
+          <div className="contact-note">Updates, photos & events</div>
+        </a>
+
+        <a
+          className="contact-card"
+          href="https://www.instagram.com/doubleyellowsquashclub/#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="contact-title">Instagram</div>
+          <div className="contact-data">@doubleyellowsquashclub</div>
+          <div className="contact-note">Stories, reels & daily fun</div>
+        </a>
+
+        <a
+          className="contact-card"
+          href="https://www.tiktok.com/@doubleyellowsquash"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="contact-title">TikTok</div>
+          <div className="contact-data">@doubleyellowsquash</div>
+          <div className="contact-note">Clips, rallies & behind-the-scenes</div>
+        </a>
+      </div>
+
+      {/* Location & directions */}
+      <div className="contact-cols">
+        <div className="contact-left">
+          <h3 className="contact-heading">Where to find us</h3>
+          <p className="contact-address">
+            <strong>Double Yellow Squash Club</strong><br />
+            National Sports Academy (NSA) — Multifunctional Hall<br />
+            21 Akademik Stefan Mladenov St, 1700 Sofia, Bulgaria
+          </p>
+
+          <div className="directions">
+            <div className="dir-block">
+              <div className="dir-title">Opening hours</div>
+              <ul>
+                <li><strong>Every day:</strong> 07:00 – 22:00</li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">Directions</div>
+              <ul>
+                <li>
+                  Double Yellow Squash Club is located within the National Sports Academy (NSA)
+                  campus in the Studentski Grad district.
+                </li>
+                <li>
+                  We are in the <em>Multifunctional Hall</em> and the squash courts are on <strong>floor –1</strong>.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">Public Transport</div>
+              <ul>
+                <li>
+                  <strong>Bus:</strong> 94, 102, 280, and 294.
+                </li>
+                <li>
+                  <strong>Metro:</strong> The metro does not go directly to the NSA campus.
+                  You must transfer at G.M. Dimitrov Station (Lines M1 or M4) and take a bus for the final leg.
+                </li>
+                <li>
+                  <strong>From G.M. Dimitrov:</strong> exit at G.M. Dimitrov Metro Station and board Bus 280 or Bus 294.
+                </li>
+                <li>
+                  <strong>Arrival:</strong> get off at the last stop, National Sports Academy.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">Taxi / Ride-Hailing</div>
+              <ul>
+                <li>
+                  <strong>Apps:</strong> Yellow! and TaxiMe are reliable options with clear pricing.
+                </li>
+                <li>
+                  <strong>Destination:</strong> set destination to "Double Yellow Squash Club" or
+                  "NSA Studentski Grad".
+                </li>
+                <li>
+                  <strong>Typical cost from city center:</strong> 8.00 EUR to 12.00 EUR.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">By Car</div>
+              <ul>
+                <li>
+                  <strong>Navigation:</strong> enter "Double Yellow Squash Club" in Google Maps or Waze.
+                </li>
+                <li>
+                  <strong>Entrance:</strong> access the campus via Akademik Stefan Mladenov Street.
+                </li>
+                <li>
+                  <strong>Parking:</strong> available directly in front of the sports complex.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">Useful Tips</div>
+              <ul>
+                <li>
+                  <strong>Payment:</strong> public transport supports tap-to-pay with contactless card
+                  on blue validators in buses or metro gates (1.60 BGN / ~0.82 EUR per trip).
+                </li>
+                <li>
+                  <strong>Gate security:</strong> if asked at the campus gate, say you are heading
+                  to the squash courts.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="contact-right">
+          <div className="map-wrap">
+            <iframe
+              title="Double Yellow Squash Club – NSA"
+              width="100%"
+              height="420"
+              className="map-frame"
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=42.64691445104994,23.34826493526649&z=17&output=embed"
+            />
+          </div>
+          <div className="map-note">
+            Located at the National Sports Academy campus. Squash courts on level –1 of the Multifunctional Hall.
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

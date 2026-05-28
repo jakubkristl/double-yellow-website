@@ -18,28 +18,28 @@ const CARD_BACK = "/cards/back.png";
 
 const PACKS: Pack[] = [
   {
-    name: "Monthly 4 Pack",
+    name: "Месечен пакет 4",
     priceEUR: 36,
-    fun: "One match a week to keep the rust away. Stretch, swing, repeat — progress without the burnout.",
+    fun: "Един мач седмично, за да не губиш ритъм. Раздвижване, замах, повторение - прогрес без пренатоварване.",
   },
   {
-    name: "Monthly 8 Pack",
+    name: "Месечен пакет 8",
     priceEUR: 66,
-    fun: "Your twice-a-week rhythm: sweat, smile, and brag about that one perfect nick for days.",
-    tag: "Most Popular",
-    valueNote: "Save EUR 14 vs 8 single sessions.",
+    fun: "Твоят ритъм два пъти седмично: пот, усмивка и онзи перфектен удар, за който говориш дни наред.",
+    tag: "Най-популярен",
+    valueNote: "Спестяваш 14 EUR спрямо 8 единични посещения.",
   },
   {
-    name: "Monthly 12 Pack",
+    name: "Месечен пакет 12",
     priceEUR: 97,
-    fun: "Three sessions a week — for people who call the court their second living room (we approve).",
-    tag: "Best Value",
-    valueNote: "Save EUR 35 vs 12 single sessions.",
+    fun: "Три посещения седмично - за хората, които наричат корта втори дом (и това ни харесва).",
+    tag: "Най-добра стойност",
+    valueNote: "Спестяваш 35 EUR спрямо 12 единични посещения.",
   },
   {
-    name: "Daytime Pass",
+    name: "Дневен пас",
     priceEUR: 105,
-    fun: "The lunchtime legend bundle. Sneak in a session, return a happier human.",
+    fun: "Легендарният пакет за обедни игри. Вмъкни тренировка и се върни по-зареден.",
     daytime: true,
   },
 ];
@@ -51,8 +51,8 @@ export default function MembershipPage() {
   return (
     <section className="container">
       <div className="membership-header">
-        <h1 className="page-title">Membership Packs</h1>
-        <div className="membership-sub">Valid 30 days from purchase</div>
+        <h1 className="page-title">Абонаментни пакети</h1>
+        <div className="membership-sub">Валидни 30 дни от датата на покупка</div>
       </div>
 
       {/* Shared card preview */}
@@ -66,11 +66,11 @@ export default function MembershipPage() {
           flexWrap: "wrap",
         }}
       >
-        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Card Front" })}>
-          <OptimizedImage src={CARD_FRONT} alt="Card Front" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
+        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Лице на карта" })}>
+          <OptimizedImage src={CARD_FRONT} alt="Лице на карта" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
         </div>
-        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_BACK, alt: "Card Back" })}>
-          <OptimizedImage src={CARD_BACK} alt="Card Back" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
+        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_BACK, alt: "Гръб на карта" })}>
+          <OptimizedImage src={CARD_BACK} alt="Гръб на карта" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export default function MembershipPage() {
             <div className="price">{fmt.format(p.priceEUR)}</div>
             {p.valueNote && <div className="membership-value-note">{p.valueNote}</div>}
             <div>{p.fun}</div>
-            {p.daytime && <div className="badge">Once per day until 17:00</div>}
+            {p.daytime && <div className="badge">Веднъж дневно до 17:00</div>}
           </article>
         ))}
       </div>
@@ -97,7 +97,7 @@ export default function MembershipPage() {
         color: "#ddd",
       }}>
         <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
-          <strong style={{ color: "var(--accent)" }}>💳 Physical Cards:</strong> All membership cards are available at the reception desk when you purchase your pack. Bring your ID and come ready to play!
+          <strong style={{ color: "var(--accent)" }}>💳 Физически карти:</strong> Всички абонаментни карти се получават на рецепция при покупка на пакет. Носи документ за самоличност и ела готов за игра.
         </p>
       </div>
 

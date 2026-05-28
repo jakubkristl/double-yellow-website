@@ -4,35 +4,51 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import type { Route } from "next"; // 👈 strict typed routes
+import type { Route } from "next";
 
 type NavItem = {
-  href: Route;   // 👈 internal app routes only (must start with "/")
-  label: string;
+  href: string;
+  labelBg: string;
+  labelEn: string;
 };
 
 const nav: NavItem[] = [
-  { href: "/", label: "Home" },
-  { href: "/booking", label: "Booking" },
-  { href: "/membership", label: "Membership" },
-  { href: "/activities", label: "Activities" },
-  { href: "/team", label: "Team" },
-  { href: "/events", label: "Events" },
-  { href: "/store", label: "Store" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-  { href: "/learn", label: "Learn" },
+  { href: "/", labelBg: "Начало", labelEn: "Home" },
+  { href: "/booking", labelBg: "Резервации", labelEn: "Booking" },
+  { href: "/membership", labelBg: "Абонаменти", labelEn: "Membership" },
+  { href: "/activities", labelBg: "Активности", labelEn: "Activities" },
+  { href: "/team", labelBg: "Екип", labelEn: "Team" },
+  { href: "/events", labelBg: "Събития", labelEn: "Events" },
+  { href: "/store", labelBg: "Магазин", labelEn: "Store" },
+  { href: "/gallery", labelBg: "Галерия", labelEn: "Gallery" },
+  { href: "/about", labelBg: "За нас", labelEn: "About" },
+  { href: "/contact", labelBg: "Контакт", labelEn: "Contact" },
+  { href: "/learn", labelBg: "Научи", labelEn: "Learn" },
 ];
+
+function withPrefix(path: string, prefix: string): Route {
+  if (path === "/") {
+    return ((prefix || "/") as Route);
+  }
+  return (`${prefix}${path}` as Route);
+}
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isEn = pathname === "/en" || pathname?.startsWith("/en/");
+  const prefix = isEn ? "/en" : "";
+  const basePath = isEn
+    ? pathname.replace(/^\/en(?=\/|$)/, "") || "/"
+    : pathname;
+  const languageSwitchHref = (isEn
+    ? `/bg${basePath === "/" ? "" : basePath}`
+    : `/en${pathname === "/" ? "" : pathname}`) as Route;
 
   return (
     <header className="navbar-wrap">
-      <nav className="container navbar" aria-label="Main navigation">
-        <Link href={"/" as Route} className="brand" aria-label="Double Yellow Squash Club | Home">
+      <nav className="container navbar" aria-label={isEn ? "Main navigation" : "Главна навигация"}>
+        <Link href={withPrefix("/", prefix)} className="brand" aria-label={isEn ? "Double Yellow Squash Club | Home" : "Double Yellow Squash Club | Начало"}>
           <Image
             src="/logo.png"
             alt="Double Yellow logo"
@@ -40,14 +56,14 @@ export default function Navbar() {
             height={52}
             priority
           />
-          <span className="brand-text">Double Yellow Squash Club</span>
+          <span className="brand-text notranslate">Double Yellow Squash Club</span>
         </Link>
 
         {/* Hamburger Button */}
         <button
           className="hamburger"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={isEn ? "Toggle menu" : "Превключи меню"}
         >
           <span className={mobileMenuOpen ? "open" : ""}></span>
           <span className={mobileMenuOpen ? "open" : ""}></span>
@@ -66,21 +82,30 @@ export default function Navbar() {
           {nav.map((item) => {
             const active =
               item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
+                ? basePath === "/"
+                : basePath.startsWith(item.href);
 
             return (
               <li key={item.href}>
                 <Link 
-                  href={item.href} 
+                  href={withPrefix(item.href, prefix)} 
                   className={`link ${active ? "active" : ""}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {item.label}
+                  {isEn ? item.labelEn : item.labelBg}
                 </Link>
               </li>
             );
           })}
+          <li>
+            <Link
+              href={languageSwitchHref}
+              className="link"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {isEn ? "Български" : "English"}
+            </Link>
+          </li>
         </ul>
       </nav>
 

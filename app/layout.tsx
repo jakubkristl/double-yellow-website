@@ -5,11 +5,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CookieConsent from "@/components/CookieConsent";
+import AutoTranslate from "@/components/AutoTranslate";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
-  title: "Double Yellow Squash Club — Sofia",
+  title: "Double Yellow Squash Club - София",
   description:
-    "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
+    "Нови кортове. Нова енергия. Същата страст към скуоша. Double Yellow Squash Club, София.",
   metadataBase: new URL("https://doubleyellow.bg"),
   keywords: [
     "squash club",
@@ -34,12 +36,12 @@ export const metadata: Metadata = {
   },
   authors: [{ name: "Double Yellow Squash Club", url: "https://doubleyellow.bg" }],
   openGraph: {
-    title: "Double Yellow Squash Club — Sofia",
+    title: "Double Yellow Squash Club - София",
     description:
-      "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
+      "Нови кортове. Нова енергия. Същата страст към скуоша. Double Yellow Squash Club, София.",
     url: "https://doubleyellow.bg",
     siteName: "Double Yellow Squash Club",
-    locale: "en_BG",
+    locale: "bg_BG",
     images: [
       {
         url: "https://doubleyellow.bg/hero/01.jpeg",
@@ -50,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Double Yellow Squash Club — Sofia",
+    title: "Double Yellow Squash Club - София",
     description:
-      "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
+      "Нови кортове. Нова енергия. Същата страст към скуоша. Double Yellow Squash Club, София.",
     images: ["/hero/01.jpeg"],
   },
 };
@@ -101,8 +103,8 @@ const websiteSchema = {
   name: "Double Yellow Squash Club",
   url: "https://doubleyellow.bg",
   description:
-    "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
-  inLanguage: "en",
+    "Нови кортове. Нова енергия. Същата страст към скуоша. Double Yellow Squash Club, София.",
+  inLanguage: "bg",
   publisher: {
     "@id": "https://doubleyellow.bg/#sportsclub",
   },
@@ -138,13 +140,16 @@ const conversionDebugEnabled =
   process.env.NODE_ENV !== "production" ||
   process.env.NEXT_PUBLIC_DEBUG_CONVERSIONS === "1";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
+  const activeLang = cookieStore.get("site_lang")?.value === "en" ? "en" : "bg";
+
   return (
-    <html lang="en">
+    <html lang={activeLang}>
       <body>
         {/* Google tag (gtag.js) */}
         <Script
@@ -198,7 +203,7 @@ export default function RootLayout({
           }}
           className="skip-link"
         >
-          Skip to content
+          {activeLang === "en" ? "Skip to content" : "Към съдържанието"}
         </a>
         {/* SEO JSON-LD injections */}
         <script
@@ -221,6 +226,7 @@ export default function RootLayout({
         <main id="main-content" className="container">{children}</main>
         <Footer />
         <CookieConsent />
+        <AutoTranslate />
       </body>
     </html>
   );

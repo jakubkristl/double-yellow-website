@@ -48,6 +48,10 @@ export function getCanonicalUrl(path: `/${string}` | "/") {
   return path === "/" ? SITE_URL : `${SITE_URL}${path}`;
 }
 
+function getEnglishAlternate(path: `/${string}` | "/") {
+  return path === "/" ? `${SITE_URL}/en` : `${SITE_URL}/en${path}`;
+}
+
 export function createPageMetadata({
   path,
   title,
@@ -62,13 +66,17 @@ export function createPageMetadata({
     description,
     alternates: {
       canonical: path,
+      languages: {
+        "bg-BG": path,
+        "en-US": getEnglishAlternate(path),
+      },
     },
     openGraph: {
       title,
       description,
       url: canonicalUrl,
       siteName: SITE_NAME,
-      locale: "en_BG",
+      locale: "bg_BG",
       type: "website",
       images: [
         {

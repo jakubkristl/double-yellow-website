@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book a Squash Court | Fast & Easy Reservations | Double Yellow",
+  title: "Резервация на скуош корт | Бързо и лесно | Double Yellow",
   description:
-    "Reserve a squash court at Double Yellow Squash Club in Sofia. Instant booking, flexible times, premium courts.",
+    "Резервирай скуош корт в Double Yellow Squash Club в София. Моментално потвърждение, гъвкави часове и премиум кортове.",
   openGraph: {
-    title: "Book a Squash Court | Fast & Easy Reservations | Double Yellow",
+    title: "Резервация на скуош корт | Бързо и лесно | Double Yellow",
     description:
-      "Reserve a squash court at Double Yellow Squash Club in Sofia. Instant booking, flexible times, premium courts.",
+      "Резервирай скуош корт в Double Yellow Squash Club в София. Моментално потвърждение, гъвкави часове и премиум кортове.",
     url: "https://doubleyellow.bg/booking",
   },
   alternates: { canonical: "/booking" },

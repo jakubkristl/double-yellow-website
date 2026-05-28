@@ -9,7 +9,7 @@ const BOOKING_EMBED_URL =
   "https://sport.bookinggood.net/bg/embed/facility/44/72";
 
 const WHATSAPP_CTA_URL =
-  "https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%20want%20to%20book%20my%20first%20squash%20session.";
+  "https://wa.me/359896754014?text=Здравейте%20Double%20Yellow!%20Искам%20да%20запазя%20първата%20си%20тренировка%20по%20скуош.";
 
 type HeroSlide = {
   src: string;
@@ -54,9 +54,9 @@ function isSlideActive(slide: HeroSlide, today: string) {
 
 export const metadata: Metadata = createPageMetadata({
   path: "/",
-  title: "Squash Club in Sofia — Double Yellow",
+  title: "Скуош клуб в София - Double Yellow",
   description:
-    "WSF-spec squash courts, coaching, events, and memberships in Sofia. Book your court or try your first session free.",
+    "Скуош кортове по WSF стандарт, тренировки, събития и абонаменти в София. Запази корт или пробвай първата си тренировка безплатно.",
   image: "/hero/01.jpeg",
 });
 
@@ -68,40 +68,40 @@ export default function Home() {
   const heroSlides: HeroSlide[] = [
     {
       src: "/events/easter-holiday-hours-2026.jpg",
-      alt: "Double Yellow Squash Easter holiday hours poster",
+      alt: "Плакат за великденското работно време на Double Yellow Squash",
       startsOn: "2026-03-20",
       endsOn: "2026-04-13",
     },
     {
       src: "/events/wsf-level-1-coaching-course.jpg",
-      alt: "WSF Level 1 Coaching Course invitation in Sofia, Bulgaria",
+      alt: "Покана за WSF Level 1 Coaching Course в София, България",
       link: WSF_LEVEL_1_COURSE_URL,
-      linkLabel: "Open WSF Level 1 Coaching Course on the European Squash Federation website",
+      linkLabel: "Отвори WSF Level 1 Coaching Course в сайта на Европейската скуош федерация",
       overlay: {
-        eyebrow: "Featured Event",
+        eyebrow: "Акцент",
         title: "WSF Level 1 Coaching Course",
-        body: "12-14 June 2026 in Sofia. Mainly for aspiring coaches starting with beginner players and junior groups.",
-        ctaLabel: "View course details",
+        body: "12-14 юни 2026 г. в София. Подходящо за бъдещи треньори, които започват с начинаещи и юношески групи.",
+        ctaLabel: "Виж детайли",
       },
       endsOn: "2026-06-14",
     },
     {
       src: "/events/bnt-jakob-kristal.png",
-      alt: "BNT feature: Jakub Kristl developing squash in Bulgaria",
+      alt: "Репортаж на БНТ: Якуб Кристл развива скуоша в България",
       link: BNT_ARTICLE_URL,
-      linkLabel: "Open the BNT feature about Jakub Kristl",
+      linkLabel: "Отвори репортажа на БНТ за Якуб Кристл",
     },
     {
       src: "/hero/02.jpg",
-      alt: "Professional squash player serving on a bright, newly renovated court",
+      alt: "Професионален състезател по скуош сервира на светъл, новореновиран корт",
     },
     {
       src: "/hero/03.jpg",
-      alt: "Court view with glass back wall and seating",
+      alt: "Изглед към корт със стъклена задна стена и места за публика",
     },
     {
       src: "/hero/04.jpg",
-      alt: "Pro shop gear and equipment display",
+      alt: "Екипировка и аксесоари в магазина",
     },
   ];
 
@@ -119,45 +119,45 @@ export default function Home() {
   const testimonials = [
     {
       quote:
-        "I started with zero experience. In one session I learned enough to rally and actually enjoy it.",
-      author: "Nina, beginner player",
+        "Започнах без никакъв опит. Само за една тренировка вече разигравах и наистина ми стана любимо.",
+      author: "Нина, начинаещ играч",
     },
     {
       quote:
-        "No partner? No problem. The team matched me instantly and now I play every week.",
-      author: "Petar, community sessions",
+        "Нямаш партньор? Няма проблем. Екипът ме свърза веднага и вече играя всяка седмица.",
+      author: "Петър, общностни сесии",
     },
     {
       quote:
-        "Courts are excellent and booking is easy. Peak hours really fill up fast.",
-      author: "Martin, regular member",
+        "Кортовете са отлични, а резервацията е лесна. Пиковите часове се запълват много бързо.",
+      author: "Мартин, редовен член",
     },
   ];
 
   return (
     <>
-      <a href="/booking" className="sticky-book" aria-label="Book a court now">
-        First Lesson Free
+      <a href="/booking" className="sticky-book" aria-label="Резервирай корт сега">
+        Първи урок безплатно
       </a>
 
       <section className="beginner-priority card">
-        <p className="beginner-kicker">New to squash?</p>
-        <h2 className="beginner-title">Start here. First lesson free.</h2>
+        <p className="beginner-kicker">Нов в скуоша?</p>
+        <h2 className="beginner-title">Започни оттук. Първи урок безплатно.</h2>
         <ul className="beginner-list">
-          <li>Trainer included from minute one</li>
-          <li>Equipment included on site</li>
-          <li>We match you with players at your level</li>
+          <li>Треньор от първата минута</li>
+          <li>Екипировка на място</li>
+          <li>Свързваме те с играчи на твоето ниво</li>
         </ul>
         <div className="urgency-strip" role="status" aria-live="polite">
-          <span>Peak hours sell out daily</span>
-          <span>Next available: today 19:00</span>
+          <span>Пиковите часове се изчерпват всеки ден</span>
+          <span>Следващ свободен: днес 19:00</span>
         </div>
         <div className="cta-buttons">
           <a href="/activities" className="btn btn-primary">
-            Join Beginner Session
+            Включи се в сесия за начинаещи
           </a>
           <a href={WHATSAPP_CTA_URL} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-            Ask On WhatsApp
+            Пиши в WhatsApp
           </a>
         </div>
       </section>
@@ -175,43 +175,43 @@ export default function Home() {
         </div>
 
         <h1 className="page-title">
-          New courts. New energy. Same obsession with squash.
+          Нови кортове. Нова енергия. Същата страст към скуоша.
         </h1>
         <p className="hero-subtitle">
-          First lesson free, trainer included, equipment included. Start squash today without stress.
+          Първи урок безплатно, с включен треньор и екипировка. Започни скуош още днес без стрес.
         </p>
         <div className="cta-buttons">
           <a href="/booking" className="btn btn-primary">
-            Book Now
+            Резервирай сега
           </a>
           <a href="/membership" className="btn btn-secondary">
-            See Prices
+            Виж цени
           </a>
         </div>
       </header>
 
       <section className="split">
         <div className="card">
-          <h2 className="h2">Visit us</h2>
+          <h2 className="h2">Посети ни</h2>
           <dl className="kv">
             <div>
-              <dt>Address</dt>
+              <dt>Адрес</dt>
               <dd>
                 National Sports Academy (NSA), ul. “Akad. Stefan Mladenov” 21, 1700 Sofia
               </dd>
             </div>
             <div>
-              <dt>Working hours</dt>
-              <dd>07:00 – 22:00 (every day)</dd>
+              <dt>Работно време</dt>
+              <dd>07:00 - 22:00 (всеки ден)</dd>
             </div>
             <div>
-              <dt>Payments</dt>
-              <dd>MultiSport, CoolFit &amp; card payments accepted</dd>
+              <dt>Плащания</dt>
+              <dd>Приемаме MultiSport, CoolFit и картови плащания</dd>
             </div>
           </dl>
 
           {/* Payment logos */}
-          <div className="payment-logos" aria-label="Accepted passes">
+          <div className="payment-logos" aria-label="Приемани карти и карти за достъп">
             <Image
               src="/logos/multisport.png"
               alt="MultiSport"
@@ -231,21 +231,19 @@ export default function Home() {
 
         <div className="card">
           <p className="lead">
-            We've fully renovated the club from top to tin — brand-new courts installed to
-            official <strong>WSF specifications</strong>, brighter lighting, and a faster
-            playing surface. Whether you're stepping on court for the first time or
-            chasing match ball, you'll feel the upgrade the moment the ball hits the wall.
-            Join weekly events, coaching sessions, and flexible membership packs. Rackets
-            &amp; balls available on site — just bring your energy.
+            Клубът е напълно реновиран - нови кортове по официални <strong>WSF стандарти</strong>,
+            по-добро осветление и по-бърза настилка. Независимо дали стъпваш за първи път на
+            корта или гониш мачбол, ще усетиш разликата веднага. Включи се в седмичните събития,
+            тренировки и гъвкави абонаменти. Ракети и топки има на място - донеси само енергия.
           </p>
 
           {/* CTA Buttons */}
           <div className="cta-buttons">
             <a href="/booking" className="btn btn-primary">
-              Book Now
+              Резервирай сега
             </a>
             <a href="/membership" className="btn btn-secondary">
-              View Memberships
+              Виж абонаменти
             </a>
           </div>
         </div>
@@ -253,28 +251,28 @@ export default function Home() {
 
       <section className="conversion-grid">
         <article className="card">
-          <h2 className="h2">Why beginners choose Double Yellow</h2>
+          <h2 className="h2">Защо начинаещите избират Double Yellow</h2>
           <div className="value-points">
-            <p><strong>No equipment stress:</strong> Rackets and balls are available at the club.</p>
-            <p><strong>No partner stress:</strong> Join come-and-play and we find your match-up.</p>
-            <p><strong>No "I will look silly" stress:</strong> Beginner sessions are built for first-timers.</p>
+            <p><strong>Без стрес за екипировка:</strong> Ракети и топки има в клуба.</p>
+            <p><strong>Без стрес за партньор:</strong> Включваш се в отворени сесии и ние намираме подходящ съперник.</p>
+            <p><strong>Без притеснение:</strong> Сесиите за начинаещи са създадени за първи стъпки.</p>
           </div>
         </article>
 
         <article className="card availability-card">
-          <h2 className="h2">Fast booking, real urgency</h2>
+          <h2 className="h2">Бърза резервация, реални свободни часове</h2>
           <p className="lead">
-            Courts are busiest 18:00-21:00. If you want evening play, book ahead.
+            Най-натоварените часове са 18:00-21:00. Ако искаш вечерна игра, резервирай предварително.
           </p>
           <AvailabilityTeaser />
           <a href={BOOKING_EMBED_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-            Open Live Booking
+            Отвори резервациите на живо
           </a>
         </article>
       </section>
 
       <section className="card social-proof">
-        <h2 className="h2">What players say</h2>
+        <h2 className="h2">Какво казват играчите</h2>
         <div className="testimonial-grid">
           {testimonials.map((item) => (
             <blockquote key={item.author} className="testimonial-card">
@@ -286,26 +284,26 @@ export default function Home() {
       </section>
 
       <section className="card community-funnel">
-        <h2 className="h2">Join the community, not just a court</h2>
+        <h2 className="h2">Стани част от общност, не просто резервация на корт</h2>
         <div className="community-grid">
           <div>
-            <h3>No partner? No problem.</h3>
+            <h3>Нямаш партньор? Няма проблем.</h3>
             <p>
-              <strong>Social Squash — every Friday 18:00–20:00.</strong> Show up, get matched, and play with whoever is there. All levels welcome.
+              <strong>Social Squash - всеки петък 18:00-20:00.</strong> Идваш, намираме ти партньор и играеш с наличните хора. Всички нива са добре дошли.
             </p>
-            <a href="/activities" className="inline-link">See Friday Social Squash →</a>
+            <a href="/activities" className="inline-link">Виж петъчния Social Squash →</a>
           </div>
           <div>
             <h3>Аматъорски, ама сквош</h3>
             <p>
-              Our Viber community to find a game partner any day of the week, get court tips, and stay in the loop.
+              Нашата Viber общност, в която намираш партньор за игра всеки ден, получаваш съвети и следиш новините.
             </p>
-            <a href="viber://chat?number=%2B359896754014" className="inline-link">Join on Viber</a>
+            <a href="viber://chat?number=%2B359896754014" className="inline-link">Присъедини се във Viber</a>
           </div>
           <div>
-            <h3>Need a coach-led start?</h3>
-            <p>Beginner coaching builds confidence fast so you can rally with anyone.</p>
-            <a href="/squash-lessons-sofia" className="inline-link">See coaching options</a>
+            <h3>Искаш старт с треньор?</h3>
+            <p>Тренировките за начинаещи изграждат увереност бързо, за да разиграваш с всеки.</p>
+            <a href="/squash-lessons-sofia" className="inline-link">Виж опциите за тренировки</a>
           </div>
         </div>
       </section>

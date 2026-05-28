@@ -5,13 +5,13 @@ import PhoneLink from "@/components/PhoneLink";
 import IntroLeadForm from "@/components/IntroLeadForm";
 
 export const metadata: Metadata = {
-  title: "Contact Double Yellow | Phone, Email & Location",
+  title: "Контакт с Double Yellow | Телефон, имейл и локация",
   description:
-    "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
+    "Свържи се с Double Yellow Squash Club. Телефон: +359 896 754 014, имейл: jakub@doubleyellowsquash.com. Намираме се в НСА, София.",
   openGraph: {
-    title: "Contact Double Yellow | Phone, Email & Location",
+    title: "Контакт с Double Yellow | Телефон, имейл и локация",
     description:
-      "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
+      "Свържи се с Double Yellow Squash Club. Телефон: +359 896 754 014, имейл: jakub@doubleyellowsquash.com. Намираме се в НСА, София.",
     url: "https://doubleyellow.bg/contact",
   },
 };
@@ -20,9 +20,9 @@ export default function ContactPage() {
   return (
     <section className="container contact-section">
       <div className="membership-header">
-        <h1 className="page-title">Contact</h1>
+        <h1 className="page-title">Контакт</h1>
         <div className="membership-sub">
-          First lesson free. Trainer and equipment included. Book a court, ask a question, or just say hi.
+          Първи урок безплатно. Треньор и екипировка са включени. Запази корт, задай въпрос или просто ни пиши.
         </div>
       </div>
 
@@ -31,15 +31,15 @@ export default function ContactPage() {
       {/* Quick contacts */}
       <div className="contact-grid">
         <PhoneLink className="contact-card" href="tel:+359896754014">
-          <div className="contact-title">Phone</div>
+          <div className="contact-title">Телефон</div>
           <div className="contact-data">+359 896 754 014</div>
-          <div className="contact-note">Call / Viber / WhatsApp</div>
+          <div className="contact-note">Обаждане / Viber / WhatsApp</div>
         </PhoneLink>
 
         <a className="contact-card" href="mailto:jakub@doubleyellowsquash.com">
-          <div className="contact-title">Email</div>
+          <div className="contact-title">Имейл</div>
           <div className="contact-data">jakub@doubleyellowsquash.com</div>
-          <div className="contact-note">Bookings • Events • Partnerships</div>
+          <div className="contact-note">Резервации • Събития • Партньорства</div>
         </a>
 
         <a
@@ -48,9 +48,9 @@ export default function ContactPage() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="contact-title">Website</div>
+          <div className="contact-title">Уебсайт</div>
           <div className="contact-data">doubleyellowsquash.com</div>
-          <div className="contact-note">News • Memberships • Schedules</div>
+          <div className="contact-note">Новини • Абонаменти • График</div>
         </a>
 
         <a
@@ -59,9 +59,9 @@ export default function ContactPage() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="contact-title">Location</div>
-          <div className="contact-data">View on Maps</div>
-          <div className="contact-note">NSA Campus, Sofia</div>
+          <div className="contact-title">Локация</div>
+          <div className="contact-data">Отвори в Maps</div>
+          <div className="contact-note">Кампус НСА, София</div>
         </a>
 
         <a
@@ -72,7 +72,7 @@ export default function ContactPage() {
         >
           <div className="contact-title">Facebook</div>
           <div className="contact-data">@DoubleYellowSquashClub</div>
-          <div className="contact-note">Updates, photos & events</div>
+          <div className="contact-note">Новини, снимки и събития</div>
         </a>
 
         <a
@@ -83,7 +83,7 @@ export default function ContactPage() {
         >
           <div className="contact-title">Instagram</div>
           <div className="contact-data">@doubleyellowsquashclub</div>
-          <div className="contact-note">Stories, reels & daily fun</div>
+          <div className="contact-note">Сторита, reels и ежедневни моменти</div>
         </a>
 
         <a
@@ -94,101 +94,101 @@ export default function ContactPage() {
         >
           <div className="contact-title">TikTok</div>
           <div className="contact-data">@doubleyellowsquash</div>
-          <div className="contact-note">Clips, rallies & behind-the-scenes</div>
+          <div className="contact-note">Клипове, разигравания и кадри зад сцената</div>
         </a>
       </div>
 
       {/* Location & directions */}
       <div className="contact-cols">
         <div className="contact-left">
-          <h3 className="contact-heading">Where to find us</h3>
+          <h3 className="contact-heading">Къде да ни откриеш</h3>
           <p className="contact-address">
             <strong>Double Yellow Squash Club</strong><br />
-            National Sports Academy (NSA) — Multifunctional Hall<br />
-            21 Akademik Stefan Mladenov St, 1700 Sofia, Bulgaria
+            Национална спортна академия (НСА) - Многофункционална зала<br />
+            ул. Акад. Стефан Младенов 21, 1700 София, България
           </p>
 
           <div className="directions">
             <div className="dir-block">
-              <div className="dir-title">Opening hours</div>
+              <div className="dir-title">Работно време</div>
               <ul>
-                <li><strong>Every day:</strong> 07:00 – 22:00</li>
+                <li><strong>Всеки ден:</strong> 07:00 - 22:00</li>
               </ul>
             </div>
 
             <div className="dir-block">
-              <div className="dir-title">Directions</div>
+              <div className="dir-title">Упътване</div>
               <ul>
                 <li>
-                  Double Yellow Squash Club is located within the National Sports Academy (NSA)
-                  campus in the Studentski Grad district.
+                  Double Yellow Squash Club се намира в кампуса на Национална спортна академия (НСА)
+                  в квартал Студентски град.
                 </li>
                 <li>
-                  We are in the <em>Multifunctional Hall</em> and the squash courts are on <strong>floor –1</strong>.
-                </li>
-              </ul>
-            </div>
-
-            <div className="dir-block">
-              <div className="dir-title">Public Transport</div>
-              <ul>
-                <li>
-                  <strong>Bus:</strong> 94, 102, 280, and 294.
-                </li>
-                <li>
-                  <strong>Metro:</strong> The metro does not go directly to the NSA campus.
-                  You must transfer at G.M. Dimitrov Station (Lines M1 or M4) and take a bus for the final leg.
-                </li>
-                <li>
-                  <strong>From G.M. Dimitrov:</strong> exit at G.M. Dimitrov Metro Station and board Bus 280 or Bus 294.
-                </li>
-                <li>
-                  <strong>Arrival:</strong> get off at the last stop, National Sports Academy.
+                  Намираме се в <em>Многофункционалната зала</em>, а скуош кортовете са на <strong>етаж -1</strong>.
                 </li>
               </ul>
             </div>
 
             <div className="dir-block">
-              <div className="dir-title">Taxi / Ride-Hailing</div>
+              <div className="dir-title">Градски транспорт</div>
               <ul>
                 <li>
-                  <strong>Apps:</strong> Yellow! and TaxiMe are reliable options with clear pricing.
+                  <strong>Автобус:</strong> 94, 102, 280 и 294.
                 </li>
                 <li>
-                  <strong>Destination:</strong> set destination to "Double Yellow Squash Club" or
+                  <strong>Метро:</strong> метрото не стига директно до кампуса на НСА.
+                  Трябва да се прехвърлиш на спирка Г. М. Димитров (линия M1 или M4) и да вземеш автобус.
+                </li>
+                <li>
+                  <strong>От Г. М. Димитров:</strong> излез от метростанцията и се качи на автобус 280 или 294.
+                </li>
+                <li>
+                  <strong>Пристигане:</strong> слез на крайната спирка Национална спортна академия.
+                </li>
+              </ul>
+            </div>
+
+            <div className="dir-block">
+              <div className="dir-title">Такси / Ride-hailing</div>
+              <ul>
+                <li>
+                  <strong>Приложения:</strong> Yellow! и TaxiMe са надеждни опции с ясни цени.
+                </li>
+                <li>
+                  <strong>Дестинация:</strong> задай "Double Yellow Squash Club" или
                   "NSA Studentski Grad".
                 </li>
                 <li>
-                  <strong>Typical cost from city center:</strong> 8.00 EUR to 12.00 EUR.
+                  <strong>Ориентировъчна цена от центъра:</strong> 8.00 EUR до 12.00 EUR.
                 </li>
               </ul>
             </div>
 
             <div className="dir-block">
-              <div className="dir-title">By Car</div>
+              <div className="dir-title">С автомобил</div>
               <ul>
                 <li>
-                  <strong>Navigation:</strong> enter "Double Yellow Squash Club" in Google Maps or Waze.
+                  <strong>Навигация:</strong> въведи "Double Yellow Squash Club" в Google Maps или Waze.
                 </li>
                 <li>
-                  <strong>Entrance:</strong> access the campus via Akademik Stefan Mladenov Street.
+                  <strong>Вход:</strong> достъпът до кампуса е от ул. Акад. Стефан Младенов.
                 </li>
                 <li>
-                  <strong>Parking:</strong> available directly in front of the sports complex.
+                  <strong>Паркинг:</strong> наличен директно пред спортния комплекс.
                 </li>
               </ul>
             </div>
 
             <div className="dir-block">
-              <div className="dir-title">Useful Tips</div>
+              <div className="dir-title">Полезни съвети</div>
               <ul>
                 <li>
-                  <strong>Payment:</strong> public transport supports tap-to-pay with contactless card
-                  on blue validators in buses or metro gates (1.60 BGN / ~0.82 EUR per trip).
+                  <strong>Плащане:</strong> градският транспорт поддържа плащане с безконтактна карта
+                  на сините валидатори в автобусите или на входовете на метрото (1.60 лв. / ~0.82 EUR на пътуване).
                 </li>
                 <li>
-                  <strong>Gate security:</strong> if asked at the campus gate, say you are heading
-                  to the squash courts.
+                  <strong>Охрана на входа:</strong> ако те попитат на входа на кампуса, кажи че отиваш
+                  към скуош кортовете.
                 </li>
               </ul>
             </div>
@@ -198,7 +198,7 @@ export default function ContactPage() {
         <div className="contact-right">
           <div className="map-wrap">
             <iframe
-              title="Double Yellow Squash Club – NSA"
+              title="Double Yellow Squash Club - НСА"
               width="100%"
               height="420"
               className="map-frame"
@@ -209,7 +209,7 @@ export default function ContactPage() {
             />
           </div>
           <div className="map-note">
-            Located at the National Sports Academy campus. Squash courts on level –1 of the Multifunctional Hall.
+            Намираме се в кампуса на Национална спортна академия. Скуош кортовете са на ниво -1 в Многофункционалната зала.
           </div>
         </div>
       </div>

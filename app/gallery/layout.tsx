@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Photo Gallery | Double Yellow Squash Club",
+  title: "Галерия | Double Yellow Squash Club",
   description:
-    "Browse photos of our renovated squash courts, community events, activities, and players at Double Yellow Squash Club in Sofia.",
+    "Разгледай снимки на реновираните ни скуош кортове, събития, активности и играчи в Double Yellow Squash Club в София.",
   openGraph: {
-    title: "Photo Gallery | Double Yellow Squash Club",
+    title: "Галерия | Double Yellow Squash Club",
     description:
-      "Browse photos of our renovated squash courts, community events, activities, and players at Double Yellow Squash Club in Sofia.",
+      "Разгледай снимки на реновираните ни скуош кортове, събития, активности и играчи в Double Yellow Squash Club в София.",
     url: "https://doubleyellow.bg/gallery",
     images: [
       {

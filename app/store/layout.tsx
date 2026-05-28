@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Store | Official Double Yellow Gear & Essentials",
+  title: "Магазин | Официална екипировка Double Yellow",
   description:
-    "Shop official Double Yellow gear, squash essentials, and club merchandise. Available only at the club in Sofia.",
+    "Пазарувай официална екипировка Double Yellow, скуош аксесоари и клубни артикули. Налични само в клуба в София.",
   openGraph: {
-    title: "Store | Official Double Yellow Gear & Essentials",
+    title: "Магазин | Официална екипировка Double Yellow",
     description:
-      "Shop official Double Yellow gear, squash essentials, and club merchandise. Available only at the club in Sofia.",
+      "Пазарувай официална екипировка Double Yellow, скуош аксесоари и клубни артикули. Налични само в клуба в София.",
     url: "https://doubleyellow.bg/store",
   },
 };

@@ -23,67 +23,67 @@ type Activity = {
 const featuredActivities: Activity[] = [
   {
     title: "Social Squash",
-    schedule: "Fridays 18:00–20:00",
+    schedule: "Петък 18:00-20:00",
     benefit:
-      "No partner needed. Show up, get matched, and play. Sofia's most social squash night — all levels welcome, just bring yourself.",
+      "Не ти трябва партньор. Идваш, намираме ти мач и играеш. Най-социалната скуош вечер в София - всички нива са добре дошли.",
     bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=5&time=18:00",
     image: "/activities/comeandplay.jpg",
-    alt: "Social Squash Friday night",
-    cta: "Join This Friday",
+    alt: "Social Squash в петък вечер",
+    cta: "Включи се този петък",
     featured: true,
-    badge: "Every Friday",
+    badge: "Всеки петък",
   },
   {
-    title: "Mini Squash (Kids)",
-    schedule: "Saturdays & Sundays 10:00",
+    title: "Mini Squash (деца)",
+    schedule: "Събота и неделя 10:00",
     benefit:
-      "Small groups, fun drills, and coach-led development. Great first step for kids, equipment included.",
+      "Малки групи, забавни упражнения и развитие с треньор. Отлична първа стъпка за деца, с включена екипировка.",
     bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=6&time=10:00",
     image: "/activities/minisquash.jpg",
-    alt: "Mini Squash for kids",
-    cta: "Book Kids Session",
+    alt: "Mini Squash за деца",
+    cta: "Запази детска тренировка",
   },
 ];
 
 const otherActivities: Activity[] = [
   {
-    title: "Squash for Beginners",
-    schedule: "Check with reception for current availability",
+    title: "Скуош за начинаещи",
+    schedule: "Провери на рецепция за актуални часове",
     benefit:
-      "Guided sessions for absolute beginners. First lesson free, trainer and equipment included.",
+      "Водени сесии за напълно начинаещи. Първият урок е безплатен, с включени треньор и екипировка.",
     bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
     image: "/activities/beginners.jpg",
-    alt: "Squash for Beginners",
-    cta: "Book Beginner Session",
+    alt: "Скуош за начинаещи",
+    cta: "Запази сесия за начинаещи",
   },
   {
     title: "Time for Ladies",
-    schedule: "Check with reception for current availability",
+    schedule: "Провери на рецепция за актуални часове",
     benefit:
-      "Women-only session with a friendly pace and clear coaching support to build confidence quickly.",
+      "Сесия само за жени с приятелско темпо и ясна подкрепа от треньор за бързо изграждане на увереност.",
     bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
     image: "/activities/timeforladies.jpg",
     alt: "Time for Ladies",
-    cta: "Book Ladies Session",
+    cta: "Запази дамска сесия",
   },
   {
     title: "Magnificent 7",
-    schedule: "Check with reception for current availability",
+    schedule: "Провери на рецепция за актуални часове",
     benefit:
-      "Play 7 matches in 2 hours, guaranteed. High-energy round-robin format with quick rotations.",
+      "Изиграй 7 мача за 2 часа - гарантирано. Високоенергиен round-robin формат с бързи ротации.",
     bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
     image: "/activities/magnificent7.jpg",
     alt: "Magnificent 7",
-    cta: "Reserve Magnificent 7",
+    cta: "Запази Magnificent 7",
   },
   {
     title: "Glass Challenge",
-    schedule: "Ongoing",
+    schedule: "Постоянно",
     benefit:
-      "Beat the Glass challenge, log attempts, and climb the monthly leaderboard with the club community.",
+      "Премини Glass Challenge, записвай опитите си и се изкачи в месечната класация на клуба.",
     image: "/activities/glasschallenge.jpg",
     alt: "Glass Challenge",
-    cta: "Visit Reception To Join",
+    cta: "Запиши се на рецепция",
   },
 ];
 
@@ -101,7 +101,7 @@ function ActivityCard({
         type="button"
         className="activity-media-btn"
         onClick={() => onZoom({ src: activity.image, alt: activity.alt })}
-        aria-label={`Open image for ${activity.title}`}
+        aria-label={`Отвори изображение за ${activity.title}`}
       >
         <OptimizedImage
           src={activity.image}
@@ -139,17 +139,17 @@ export default function ActivitiesPage() {
     <main className="activities-page">
       <h1 className="page-title">Activities</h1>
       <p className="activities-subtitle">
-        No partner needed. No experience needed. Just show up.
+        Не ти трябва партньор. Не ти трябва опит. Просто ела.
       </p>
 
       {/* Viber community block */}
       <section className="viber-community-block">
         <div className="viber-community-inner">
           <div className="viber-community-text">
-            <p className="beginner-kicker">Viber Community</p>
+            <p className="beginner-kicker">Viber общност</p>
             <h2 className="viber-community-title">Аматъорски, ама сквош</h2>
             <p className="viber-community-desc">
-              Find a game partner any day of the week. Ask questions, stay updated on Social Squash nights, and connect with the club community — all in one place.
+              Намери си партньор за игра всеки ден от седмицата. Задавай въпроси, следи Social Squash вечерите и бъди част от клубната общност на едно място.
             </p>
           </div>
           <div className="viber-community-actions">
@@ -157,7 +157,7 @@ export default function ActivitiesPage() {
               href={VIBER_URL}
               className="btn btn-viber"
             >
-              Join on Viber
+              Присъедини се във Viber
             </a>
             <a
               href={WHATSAPP_URL}
@@ -165,7 +165,7 @@ export default function ActivitiesPage() {
               rel="noopener noreferrer"
               className="btn btn-secondary"
             >
-              Message on WhatsApp
+              Пиши в WhatsApp
             </a>
           </div>
         </div>
@@ -180,28 +180,28 @@ export default function ActivitiesPage() {
 
       {/* Beginner offer */}
       <section className="activities-offer card">
-        <p className="beginner-kicker">New to squash?</p>
-        <h2 className="h2">First lesson free. Trainer and equipment included.</h2>
+        <p className="beginner-kicker">Нов в скуоша?</p>
+        <h2 className="h2">Първи урок безплатно. Треньор и екипировка са включени.</h2>
         <ul className="beginner-list">
-          <li>No experience needed</li>
-          <li>Trainer guides every step</li>
-          <li>Racket and shoes provided</li>
+          <li>Не е нужен опит</li>
+          <li>Треньор те води във всяка стъпка</li>
+          <li>Ракета и обувки са осигурени</li>
         </ul>
         <div className="cta-buttons">
           <a href="https://sport.bookinggood.net/bg/embed/facility/44/72" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-            Claim Free First Lesson
+            Вземи безплатен първи урок
           </a>
           <a href="/contact" className="btn btn-secondary">
-            Ask A Trainer
+            Попитай треньор
           </a>
         </div>
       </section>
 
       {/* Other programs */}
       <section className="other-programs">
-        <h2 className="other-programs-title">Other Programs</h2>
+        <h2 className="other-programs-title">Други програми</h2>
         <p className="other-programs-note">
-          The following programs run occasionally. Contact reception to check current availability.
+          Следните програми се провеждат периодично. Свържи се с рецепция за актуални часове.
         </p>
         <div className="activities-grid activities-grid--compact">
           {otherActivities.map((activity) => (
@@ -223,7 +223,7 @@ export default function ActivitiesPage() {
               setZoomedImg(null);
             }}
             className="zoom-close"
-            aria-label="Close"
+            aria-label="Затвори"
           >
             ✕
           </button>

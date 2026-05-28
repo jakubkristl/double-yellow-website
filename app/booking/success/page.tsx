@@ -3,9 +3,9 @@ import BookingSuccessTracker from "@/components/BookingSuccessTracker";
 import styles from "./styles.module.css";
 
 export const metadata: Metadata = {
-  title: "Booking Confirmed | Double Yellow",
+  title: "Резервацията е потвърдена | Double Yellow",
   description:
-    "Your booking has been confirmed. See you on court at Double Yellow Squash Club.",
+    "Резервацията ти е потвърдена. Очакваме те на корта в Double Yellow Squash Club.",
   alternates: { canonical: "/booking/success" },
 };
 
@@ -28,13 +28,13 @@ export default async function BookingSuccessPage({ searchParams }: Props) {
     <section className={`container ${styles.successSection}`}>
       <BookingSuccessTracker bookingId={bookingId} />
 
-      <h1 className="page-title">Booking Confirmed</h1>
+      <h1 className="page-title">Резервацията е потвърдена</h1>
       <p className={`lead ${styles.leadSpacing}`}>
-        Thank you. Your court is reserved and we look forward to seeing you.
+        Благодарим ти. Кортът е запазен и очакваме да се видим скоро.
       </p>
 
       <p className={`muted ${styles.noteSpacing}`}>
-        If you need to change your reservation, call us at +359 896 754 014.
+        Ако искаш да промениш резервацията, обади ни се на +359 896 754 014.
       </p>
     </section>
   );

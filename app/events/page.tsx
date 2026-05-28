@@ -13,9 +13,9 @@ const WSF_LEVEL_1_ENTRY_FORM_URL =
 
 export const metadata: Metadata = createPageMetadata({
   path: "/events",
-  title: "Events | Double Yellow Squash",
+  title: "Събития | Double Yellow Squash",
   description:
-    "Follow upcoming community sessions, guest coaching visits, and squash workshops at Double Yellow Squash Club in Sofia.",
+    "Следи предстоящите общностни сесии, гостуващи треньори и скуош уъркшопи в Double Yellow Squash Club в София.",
   image: "/hero/02.jpg",
 });
 
@@ -25,8 +25,8 @@ export default function EventsPage() {
   return (
     <main>
       <section className="container container--narrow">
-        <h1 className="page-title">Events</h1>
-        <p className="subtitle">One-off events, workshops & guest visits.</p>
+        <h1 className="page-title">Събития</h1>
+        <p className="subtitle">Еднократни събития, уъркшопи и гостуващи треньори.</p>
 
         <div className={`event-card ${styles.eventCardMidGap}`}>
           <h2 className={styles.eventHeading}>WSF Level 1 Coaching Course</h2>
@@ -34,12 +34,12 @@ export default function EventsPage() {
             href={WSF_LEVEL_1_COURSE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open WSF Level 1 Coaching Course on the European Squash Federation website"
+            aria-label="Отвори WSF Level 1 Coaching Course в сайта на Европейската скуош федерация"
             className={styles.eventMediaLink}
           >
             <OptimizedImage
               src="/events/wsf-level-1-coaching-course.jpg"
-              alt="WSF Level 1 Coaching Course session with a coach and children on a squash court"
+              alt="Сесия от WSF Level 1 Coaching Course с треньор и деца на скуош корт"
               width={1366}
               height={768}
               className={styles.eventMedia}
@@ -47,60 +47,59 @@ export default function EventsPage() {
             />
           </Link>
           <p className={styles.eventTextGap}>
-            <strong>Dates:</strong> 12-14 June 2026 in Sofia, Bulgaria.
+            <strong>Дати:</strong> 12-14 юни 2026 г. в София, България.
           </p>
           <p className={styles.eventTextGap}>
-            We are pleased to invite coaches, players, and squash enthusiasts to participate
-            in the WSF Level 1 Coaching Course, delivered within the framework of the World
-            Squash Federation Coaching Programme and supported by the European Squash Federation.
+            С удоволствие каним треньори, играчи и почитатели на скуоша да участват
+            в WSF Level 1 Coaching Course, провеждан в рамките на програмата на World
+            Squash Federation и с подкрепата на European Squash Federation.
           </p>
           <p className={styles.eventTextGap}>
-            The course will be held in Sofia, Bulgaria, and provides an introduction to the
-            fundamental principles of squash coaching. It is mainly intended for aspiring
-            coaches who want to start working with beginner players and junior groups.
+            Курсът ще се проведе в София и дава въведение в основните принципи на
+            треньорската работа в скуоша. Насочен е основно към бъдещи треньори,
+            които искат да започнат работа с начинаещи и юношески групи.
           </p>
           <p className={styles.eventTextGap}>
-            The programme combines theoretical knowledge with practical on-court sessions and
-            focuses on the basic technical, tactical, and organizational aspects of coaching.
-            Participants who successfully complete the course will receive the WSF Level 1
-            Coaching Certificate, recognized internationally within the WSF coaching pathway.
+            Програмата съчетава теория и практика на корта и се фокусира върху базовите
+            технически, тактически и организационни аспекти на треньорството. Участниците,
+            които успешно завършат курса, получават WSF Level 1 Coaching Certificate,
+            международно признат в треньорската система на WSF.
           </p>
           <p className={styles.eventTextGap}>
-            Places are limited, early registration is recommended, and entries close on
-            1 May 2026.
+            Местата са ограничени, препоръчва се ранна регистрация, а записването приключва
+            на 1 май 2026 г.
           </p>
 
-          <h3 className={styles.eventSubheading}>Key Details</h3>
+          <h3 className={styles.eventSubheading}>Ключови детайли</h3>
           <ul className={styles.eventList}>
-            <li>Course dates: 12-14 June 2026</li>
-            <li>Location: Sofia, Bulgaria</li>
-            <li>Registration deadline: 1 May 2026</li>
-            <li>Course organizer: Jakub Kristl</li>
-            <li>Course tutor: Michael Khan</li>
-            <li>Certification: WSF Level 1 Coaching Certificate</li>
+            <li>Дати на курса: 12-14 юни 2026</li>
+            <li>Локация: София, България</li>
+            <li>Краен срок за регистрация: 1 май 2026</li>
+            <li>Организатор: Jakub Kristl</li>
+            <li>Лектор: Michael Khan</li>
+            <li>Сертификация: WSF Level 1 Coaching Certificate</li>
           </ul>
 
-          <h3 className={styles.eventSubheading}>Who It Is For</h3>
+          <h3 className={styles.eventSubheading}>За кого е курсът</h3>
           <p className={styles.eventTextGap}>
-            This course is mainly for aspiring coaches at the start of their coaching path.
-            It is a strong fit for players, teachers, club helpers, and squash enthusiasts
-            who want to begin coaching early learners, beginners, and junior groups in a
-            structured way.
+            Курсът е основно за бъдещи треньори в началото на своя път. Подходящ е
+            за играчи, преподаватели, клубни помощници и скуош ентусиасти, които искат
+            да започнат структурирана работа с ранни обучаеми, начинаещи и юношески групи.
           </p>
 
-          <h3 className={styles.eventSubheading}>What Level 1 Focuses On</h3>
+          <h3 className={styles.eventSubheading}>Върху какво се фокусира Level 1</h3>
           <ul className={styles.eventList}>
-            <li>Working with early learners in a "learning to play" environment</li>
-            <li>Using fun games and simple rallies as the core learning tools</li>
-            <li>Building hand-eye coordination and fundamental movement habits</li>
-            <li>Learning a teaching style suited to children and complete beginners</li>
-            <li>Combining theory with practical on-court coaching sessions</li>
+            <li>Работа с ранни обучаеми в среда тип "learning to play"</li>
+            <li>Използване на забавни игри и прости разигравания като основни инструменти</li>
+            <li>Изграждане на координация око-ръка и базови двигателни навици</li>
+            <li>Стил на преподаване, подходящ за деца и напълно начинаещи</li>
+            <li>Комбинация от теория и практически сесии на корта</li>
           </ul>
 
-          <h3 className={styles.eventSubheading}>How To Register</h3>
+          <h3 className={styles.eventSubheading}>Как да се регистрираш</h3>
           <p className={styles.eventTextGap}>
-            The ESF event page includes the fact sheet and the official entry form. Early
-            registration is recommended because places are limited.
+            На страницата на ESF ще намериш fact sheet и официалната форма за участие.
+            Препоръчваме ранна регистрация, защото местата са ограничени.
           </p>
           <div className="actions">
             <Link
@@ -109,7 +108,7 @@ export default function EventsPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Open Course Details
+              Отвори детайли за курса
             </Link>
             <Link
               href={WSF_LEVEL_1_ENTRY_FORM_URL}
@@ -117,27 +116,27 @@ export default function EventsPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Open Entry Form
+              Отвори формата за участие
             </Link>
           </div>
         </div>
 
         <div className={`event-card ${styles.eventCardMidGap}`}>
-          <h2 className={styles.eventHeading}>Featured On BNT</h2>
+          <h2 className={styles.eventHeading}>Репортаж в БНТ</h2>
           <p className={styles.eventTextGap}>
-            BNT featured Jakub Kristl and the growth of squash in Bulgaria in the
-            "Chuzhdentsite" segment. Watch the story and read the article.
+            БНТ представи Якуб Кристл и развитието на скуоша в България в
+            рубриката "Чужденците". Виж историята и прочети статията.
           </p>
           <Link
             href={BNT_ARTICLE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open BNT feature about Jakub Kristl"
+            aria-label="Отвори репортажа на БНТ за Якуб Кристл"
             className={styles.eventMediaLink}
           >
             <OptimizedImage
               src="/events/bnt-jakob-kristal.png"
-              alt="BNT feature about Jakub Kristl developing squash in Bulgaria"
+              alt="Репортаж на БНТ за Якуб Кристл и развитието на скуоша в България"
               width={840}
               height={454}
               className={styles.eventMedia}
@@ -151,38 +150,38 @@ export default function EventsPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Open BNT Article
+              Отвори статията в БНТ
             </Link>
           </div>
         </div>
 
         <div className={`event-card ${styles.eventCardMidGap}`}>
-          <h2 className={styles.eventHeading}>Guest Coaching Visits</h2>
+          <h2 className={styles.eventHeading}>Гостуващи треньори</h2>
           <p>
-            We regularly host experienced coaches for focused clinics and tactical sessions.
-            Follow this page and our social channels for upcoming dates.
+            Редовно посрещаме опитни треньори за фокусирани клиники и тактически сесии.
+            Следи тази страница и социалните ни канали за предстоящи дати.
           </p>
         </div>
 
         <div className={`event-card ${styles.eventCardMidGap}`}>
-          <h2 className={styles.eventHeading}>Workshops & Community Sessions</h2>
+          <h2 className={styles.eventHeading}>Уъркшопи и общностни сесии</h2>
           <p>
-            The club runs one-off workshops and themed community sessions for all levels,
-            from first-time players to competitive regulars.
+            Клубът организира еднократни уъркшопи и тематични общностни сесии за всички нива,
+            от напълно начинаещи до състезателно настроени редовни играчи.
           </p>
         </div>
 
         <div className={`event-card ${styles.eventCardMidGap}`}>
           <h2 className={styles.eventHeading}>Bulgarian Squash Tour 2026</h2>
           <p className={styles.eventTextGap}>
-            12 tournaments, one ranking, best 8 results count. This section stays published
-            throughout the 2026 season.
+            12 турнира, едно класиране, броят се най-добрите 8 резултата. Този раздел
+            остава публикуван през целия сезон 2026.
           </p>
           <p className={styles.eventTextGap}>
-            Organized under the Bulgarian Squash Federation and managed digitally in RankedIn.
+            Организира се под егидата на Българската скуош федерация и се администрира дигитално в RankedIn.
           </p>
 
-          <h3 className={styles.eventSubheading}>Calendar 2026</h3>
+          <h3 className={styles.eventSubheading}>Календар 2026</h3>
           <ul className={`${styles.eventList} ${styles.eventListSpaced}`}>
             <li>07-08 February - Fireball</li>
             <li>14-15 March - Double Yellow Squash Club</li>
@@ -198,32 +197,32 @@ export default function EventsPage() {
             <li>05-06 December - Sofia Squash Center</li>
           </ul>
 
-          <h3 className={styles.eventSubheading}>How The Tour Works</h3>
+          <h3 className={styles.eventSubheading}>Как работи турът</h3>
           <ul className={styles.eventList}>
-            <li>12 monthly tournaments</li>
-            <li>Best 8 results enter the ranking</li>
-            <li>Minimum 2 guaranteed matches per player</li>
-            <li>Format: best of 3 games (finals best of 5), PAR 11</li>
-            <li>Loser referees the next match</li>
+            <li>12 месечни турнира</li>
+            <li>В класирането влизат 8-те най-добри резултата</li>
+            <li>Минимум 2 гарантирани мача за всеки играч</li>
+            <li>Формат: до 2 от 3 гейма (финали до 3 от 5), PAR 11</li>
+            <li>Загубилият съдийства следващия мач</li>
           </ul>
 
-          <h3 className={styles.eventSubheading}>Fees</h3>
+          <h3 className={styles.eventSubheading}>Такси</h3>
           <ul className={styles.eventList}>
-            <li>Registered athletes: 25 EUR</li>
-            <li>Non-registered players: 35 EUR</li>
-            <li>Annual athlete registration: 25 EUR</li>
-            <li>Annual club registration to federation: 180 EUR</li>
+            <li>Регистрирани състезатели: 25 EUR</li>
+            <li>Нерегистрирани играчи: 35 EUR</li>
+            <li>Годишна регистрация на състезател: 25 EUR</li>
+            <li>Годишна клубна регистрация към федерацията: 180 EUR</li>
           </ul>
         </div>
 
         <div className={`event-card ${styles.eventCardLargeGap}`}>
-          <h2 className={styles.eventHeading}>How To Join</h2>
+          <h2 className={styles.eventHeading}>Как да се включиш</h2>
           <p className={styles.eventTextGap}>
-            To join upcoming events, check available sessions in Activities or contact us directly.
+            За да се включиш в предстоящите събития, провери наличните сесии в Активности или се свържи директно с нас.
           </p>
           <div className="actions">
-            <Link href="/activities" className="btn btn--secondary">Browse Activities</Link>
-            <Link href="/contact" className="btn btn--primary">Contact The Club</Link>
+            <Link href="/activities" className="btn btn--secondary">Разгледай активности</Link>
+            <Link href="/contact" className="btn btn--primary">Свържи се с клуба</Link>
           </div>
         </div>
       </section>

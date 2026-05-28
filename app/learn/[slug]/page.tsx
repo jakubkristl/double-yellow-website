@@ -34,10 +34,10 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <main className="article-page container">
-      <nav className="breadcrumb-nav" aria-label="Breadcrumb">
-        <Link href="/" className="breadcrumb-link">Home</Link>
+      <nav className="breadcrumb-nav" aria-label="Навигационна пътека">
+        <Link href="/" className="breadcrumb-link">Начало</Link>
         <span className="breadcrumb-sep">›</span>
-        <Link href="/learn" className="breadcrumb-link">Learn Squash</Link>
+        <Link href="/learn" className="breadcrumb-link">Научи скуош</Link>
         <span className="breadcrumb-sep">›</span>
         <span className="breadcrumb-current">{article.title}</span>
       </nav>
@@ -46,13 +46,13 @@ export default async function ArticlePage({ params }: Props) {
         <header className="article-header">
           <div className="article-meta">
             <time dateTime={article.date} className="article-date">
-              {new Date(article.date).toLocaleDateString("en-GB", {
+              {new Date(article.date).toLocaleDateString("bg-BG", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               })}
             </time>
-            <span className="article-read">{article.readingMinutes} min read</span>
+            <span className="article-read">{article.readingMinutes} мин четене</span>
           </div>
           <h1 className="article-page-title">{article.title}</h1>
           <p className="article-page-excerpt">{article.excerpt}</p>
@@ -71,8 +71,8 @@ export default async function ArticlePage({ params }: Props) {
         <LearnEngagement articleSlug={article.slug} articleTitle={article.title} />
 
         <aside className="article-cta card">
-          <p className="beginner-kicker">Put it into practice</p>
-          <h2 className="h2">First lesson free. Trainer and equipment included.</h2>
+          <p className="beginner-kicker">Приложи го на корта</p>
+          <h2 className="h2">Първи урок безплатно. Треньор и екипировка са включени.</h2>
           <div className="cta-buttons">
             <a
               href="https://sport.bookinggood.net/bg/embed/facility/44/72"
@@ -80,15 +80,15 @@ export default async function ArticlePage({ params }: Props) {
               rel="noopener noreferrer"
               className="btn btn-primary"
             >
-              Book Free First Lesson
+              Запази безплатен първи урок
             </a>
             <a
-              href="https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%20read%20your%20beginner%20tips%20and%20want%20to%20try%20squash."
+              href="https://wa.me/359896754014?text=Здравейте%20Double%20Yellow!%20Прочетох%20съветите%20за%20начинаещи%20и%20искам%20да%20пробвам%20скуош."
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
             >
-              Ask on WhatsApp
+              Пиши в WhatsApp
             </a>
           </div>
         </aside>
@@ -96,20 +96,20 @@ export default async function ArticlePage({ params }: Props) {
 
       {others.length > 0 && (
         <section className="article-more">
-          <h2 className="article-more-title">More beginner guides</h2>
+          <h2 className="article-more-title">Още ръководства за начинаещи</h2>
           <div className="article-grid article-grid--compact">
             {others.map((a) => (
               <Link key={a.slug} href={`/learn/${a.slug}`} className="article-card">
                 <div className="article-card-body">
                   <div className="article-meta">
                     <time dateTime={a.date} className="article-date">
-                      {new Date(a.date).toLocaleDateString("en-GB", {
+                      {new Date(a.date).toLocaleDateString("bg-BG", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       })}
                     </time>
-                    <span className="article-read">{a.readingMinutes} min read</span>
+                    <span className="article-read">{a.readingMinutes} мин четене</span>
                   </div>
                   <h3 className="article-title">{a.title}</h3>
                   <p className="article-excerpt">{a.excerpt}</p>

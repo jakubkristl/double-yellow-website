@@ -10,10 +10,19 @@ export default function StorePage() {
   const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
   // Filter out Drinks category temporarily
   const visibleCategories = CATEGORIES.filter((cat) => cat.title !== "Drinks");
+  const categoryLabels: Record<string, string> = {
+    Rackets: "Ракети",
+    Shoes: "Обувки",
+    "Bags & Backpacks": "Сакове и раници",
+    "Strings & Grips": "Кордажи и грипове",
+    Apparel: "Облекло",
+    Eyewear: "Очила",
+    Rentals: "Наеми",
+  };
 
   // Update this whenever you edit prices/items
   const lastUpdated = new Date("2026-01-26");
-  const formattedDate = lastUpdated.toLocaleDateString("en-GB", {
+  const formattedDate = lastUpdated.toLocaleDateString("bg-BG", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -22,25 +31,25 @@ export default function StorePage() {
   return (
     <section className="container store-section">
       <div className="membership-header">
-        <h1 className="page-title">Store</h1>
+        <h1 className="page-title">Магазин</h1>
         <div className="membership-sub">
-          Official Double Yellow gear and on-court essentials.
+          Официална екипировка на Double Yellow и всичко необходимо за корта.
           <br />
-          <strong>Available at the club</strong> — see it, feel it, play it.
+          <strong>Налично в клуба</strong> - виж го, пробвай го, играй.
           <br />
           <span style={{ marginTop: "8px", display: "inline-block" }}>
-            Order via email{" "}
+            Поръчай по имейл{" "}
             <a href="mailto:jakub@doubleyellowsquash.com" style={{ color: "#ffcc00", textDecoration: "underline" }}>
               jakub@doubleyellowsquash.com
             </a>
-            {" "}or phone{" "}
+            {" "}или на телефон{" "}
             <a 
               href="tel:+359896754014" 
               style={{ color: "#ffcc00", textDecoration: "underline" }}
             >
               0896 754 014
             </a>
-            . We ship via Ekont / Speedy.
+            . Изпращаме с Еконт / Спиди.
           </span>
         </div>
       </div>
@@ -59,7 +68,7 @@ export default function StorePage() {
 
         return (
           <div key={cat.title} className="store-category-block">
-            <h2 className="store-cat">{cat.title}</h2>
+            <h2 className="store-cat">{categoryLabels[cat.title] ?? cat.title}</h2>
             <div className="store-grid">
               {cat.items.map((item) => {
                 const imgSrc = (item as any).image ?? iconByCategory[cat.title] ?? "/store/icons/racket.svg";
@@ -84,7 +93,7 @@ export default function StorePage() {
       })}
 
       <div className="store-updated">
-        <em>Prices last updated on {formattedDate}</em>
+        <em>Цените са актуализирани на {formattedDate}</em>
       </div>
 
       {zoomedImg && (

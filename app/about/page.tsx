@@ -9,92 +9,92 @@ export default function AboutPage() {
   return (
     <section className="container about-section">
       <div className="membership-header">
-        <h1 className="page-title">About Double Yellow</h1>
+        <h1 className="page-title">За Double Yellow</h1>
         <div className="membership-sub">
-          Passion, renovation, and a bit of squash dust.
+          Страст, реновация и малко скуош прах.
         </div>
       </div>
 
       <div className="about-content">
         <p>
           <strong>Double Yellow Squash Club</strong>, operated by{" "}
-          <strong>Sport And Beyond EOOD</strong>, was born from a simple idea:
-          to bring life back to the long-forgotten squash courts at the National
-          Sports Academy in Sofia — and to build a modern, community-driven home
-          for the game we love.
+          <strong>Sport And Beyond EOOD</strong>, се роди от една проста идея:
+          да върне живот на дълго забравените скуош кортове в Националната
+          спортна академия в София - и да изгради модерен клуб, движен от
+          общността и любовта към играта.
         </p>
 
         <p>
-          The project started as a renovation mission and quickly became a
-          full-blown revival. The courts had seen better days — cracked walls,
-          dim lights, warped floors. But what they lacked in shine, they made up
-          for in potential.
+          Проектът започна като реновационна мисия и бързо се превърна в
+          истинско възраждане. Кортовете бяха виждали и по-добри дни - напукани
+          стени, слабо осветление, износени настилки. Но това, което им липсваше
+          като вид, го компенсираха с огромен потенциал.
         </p>
 
         <p>
-          Over the following months, we stripped, repaired, and rebuilt.{" "}
-          <strong>Front-wall HPL panels</strong>, new <strong>LED lighting</strong>,
-          resurfaced floors, redesigned reception — every detail mattered. From
-          the tin logo to the court lines, the goal was clear:{" "}
-          <em>bring energy, visibility, and pride back to Bulgarian squash.</em>
+          През следващите месеци демонтирахме, ремонтирахме и изградихме наново.{" "}
+          <strong>HPL панели на предната стена</strong>, ново <strong>LED осветление</strong>,
+          обновени подове, преработена рецепция - всеки детайл имаше значение.
+          От логото над тина до линиите на корта, целта беше ясна:{" "}
+          <em>да върнем енергията, видимостта и гордостта в българския скуош.</em>
         </p>
 
         <p>
-          Today, Double Yellow is more than a club. It’s a space for players,
-          beginners, and fans alike — running weekly sessions, tournaments, and
-          community events that keep the game alive and accessible.
+          Днес Double Yellow е повече от клуб. Това е място за играчи,
+          начинаещи и фенове - със седмични сесии, турнири и общностни събития,
+          които държат играта жива и достъпна.
         </p>
 
         <p className="about-signoff">
           <strong>— Jakub Kristl</strong>
           <br />
-          Founder, Double Yellow Squash Club • Sport And Beyond EOOD
+          Основател, Double Yellow Squash Club • Sport And Beyond EOOD
         </p>
       </div>
 
       {/* FROM DUST TO DOUBLE YELLOW */}
       <div className="about-gallery-intro">
-        <h2 className="gallery-title">From Dust to Double Yellow</h2>
+        <h2 className="gallery-title">От прах до Double Yellow</h2>
         <div className="gallery-underline"></div>
         <p className="gallery-sub">
-          A look back at how it started, how it went, and how it shines today.
+          Поглед назад към това как започна, как се разви и как изглежда днес.
         </p>
       </div>
 
       {/* BEFORE / DURING / AFTER visual story */}
       <div className="about-gallery-grid">
         <div className="gallery-group">
-          <h3 className="gallery-heading">Before</h3>
+          <h3 className="gallery-heading">Преди</h3>
             <div className="gallery-row">
-                <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/before1.jpg", alt: "Before renovation - worn walls" })}>
-                <Image src="/about/before1.jpg" alt="Before renovation - worn walls" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+                <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/before1.jpg", alt: "Преди реновацията - износени стени" })}>
+                <Image src="/about/before1.jpg" alt="Преди реновацията - износени стени" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
               </div>
-              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/before2.jpg", alt: "Before renovation - damage detail" })}>
-                <Image src="/about/before2.jpg" alt="Before renovation - damage detail" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/before2.jpg", alt: "Преди реновацията - детайл на щетите" })}>
+                <Image src="/about/before2.jpg" alt="Преди реновацията - детайл на щетите" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
               </div>
             </div>
         </div>
 
         <div className="gallery-group">
-          <h3 className="gallery-heading">During</h3>
+          <h3 className="gallery-heading">По време</h3>
           <div className="gallery-row">
-              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/during1.jpg", alt: "Renovation in progress - front wall" })}>
-              <Image src="/about/during1.jpg" alt="Renovation in progress - front wall" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/during1.jpg", alt: "Реновация в процес - предна стена" })}>
+              <Image src="/about/during1.jpg" alt="Реновация в процес - предна стена" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
-            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/during2.jpg", alt: "Renovation in progress - new panels" })}>
-              <Image src="/about/during2.jpg" alt="Renovation in progress - new panels" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/during2.jpg", alt: "Реновация в процес - нови панели" })}>
+              <Image src="/about/during2.jpg" alt="Реновация в процес - нови панели" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
           </div>
         </div>
 
         <div className="gallery-group">
-          <h3 className="gallery-heading">After</h3>
+          <h3 className="gallery-heading">След</h3>
           <div className="gallery-row">
-              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/after1.jpg", alt: "Renovated squash courts - Double Yellow" })}>
-              <Image src="/about/after1.jpg" alt="Renovated squash courts - Double Yellow" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+              <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/after1.jpg", alt: "Реновирани скуош кортове - Double Yellow" })}>
+              <Image src="/about/after1.jpg" alt="Реновирани скуош кортове - Double Yellow" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
-            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/after2.jpg", alt: "Finished court with seating area" })}>
-              <Image src="/about/after2.jpg" alt="Finished court with seating area" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
+            <div style={{ position: "relative", width: "100%", flex: 1, minWidth: 200, cursor: "pointer" }} onClick={() => setZoomedImg({ src: "/about/after2.jpg", alt: "Завършен корт със зона за публика" })}>
+              <Image src="/about/after2.jpg" alt="Завършен корт със зона за публика" width={800} height={600} style={{ objectFit: "cover", borderRadius: 8 }} />
             </div>
           </div>
         </div>
