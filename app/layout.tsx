@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     locale: "en_BG",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01b.jpeg",
+        url: "https://doubleyellow.bg/hero/01.jpeg",
         alt: "Double Yellow Squash Club - renovated WSF courts",
       },
     ],
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "Double Yellow Squash Club — Sofia",
     description:
       "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
-    images: ["/hero/01b.jpeg"],
+    images: ["/hero/01.jpeg"],
   },
 };
 
@@ -66,7 +66,7 @@ const localBusinessSchema = {
   name: "Double Yellow Squash Club",
   legalName: "Sport And Beyond EOOD",
   url: "https://doubleyellow.bg",
-  image: "https://doubleyellow.bg/hero/01b.jpeg",
+  image: "https://doubleyellow.bg/hero/01.jpeg",
   telephone: "+359 896 754 014",
   address: {
     "@type": "PostalAddress",
