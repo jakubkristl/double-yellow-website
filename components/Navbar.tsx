@@ -130,7 +130,7 @@ export default function Navbar() {
               </li>
             );
           })}
-          <li className="lang-menu" ref={languageMenuRef}>
+          <li className={`lang-menu ${languageMenuOpen ? "open" : ""}`} ref={languageMenuRef}>
             <button
               type="button"
               className="lang-toggle-btn"
@@ -162,8 +162,11 @@ export default function Navbar() {
                   }}
                 >
                   <Image src="/flags/gb.svg" alt="English" width={20} height={14} className="lang-flag" />
-                  <span className="lang-code">EN</span>
-                  <span className="lang-name">English</span>
+                  <span className="lang-labels">
+                    <span className="lang-code">EN</span>
+                    <span className="lang-name">English</span>
+                  </span>
+                  <span className="lang-check" aria-hidden="true">{isEn ? "✓" : ""}</span>
                 </Link>
 
                 <Link
@@ -176,8 +179,11 @@ export default function Navbar() {
                   }}
                 >
                   <Image src="/flags/bg.svg" alt="Български" width={20} height={14} className="lang-flag" />
-                  <span className="lang-code">BG</span>
-                  <span className="lang-name">Български</span>
+                  <span className="lang-labels">
+                    <span className="lang-code">BG</span>
+                    <span className="lang-name">Български</span>
+                  </span>
+                  <span className="lang-check" aria-hidden="true">{!isEn ? "✓" : ""}</span>
                 </Link>
               </div>
             )}
@@ -317,73 +323,104 @@ export default function Navbar() {
           align-items: center;
           gap: 8px;
           color: #ffcc00;
-          background: transparent;
+          background: rgba(255, 255, 255, 0.04);
           border: 2px solid rgba(255, 255, 255, 0.75);
           border-radius: 8px;
-          padding: 6px 10px;
+          padding: 7px 11px;
           font-weight: 900;
           font-size: clamp(16px, 0.6vw + 11px, 19px);
           cursor: pointer;
           line-height: 1;
+          transition: border-color 160ms ease, background-color 160ms ease;
         }
 
         .lang-toggle-btn:hover {
           border-color: #ffffff;
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        .lang-menu.open .lang-toggle-btn {
+          border-color: #ffffff;
+          background: rgba(255, 255, 255, 0.12);
         }
 
         .lang-caret {
           font-size: 14px;
           opacity: 0.95;
+          transition: transform 150ms ease;
+        }
+
+        .lang-menu.open .lang-caret {
+          transform: rotate(180deg);
         }
 
         .lang-dropdown {
           position: absolute;
-          top: calc(100% + 8px);
+          top: calc(100% + 10px);
           right: 0;
-          min-width: 210px;
-          background: #e9e9e9;
-          border: 1px solid #bdbdbd;
-          border-radius: 4px;
-          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+          min-width: 248px;
+          background: #f5f7fb;
+          border: 1px solid #ced5e3;
+          border-radius: 12px;
+          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
           overflow: hidden;
           z-index: 11005;
+          padding: 6px;
         }
 
         .lang-option {
-          display: grid;
-          grid-template-columns: 24px 36px 1fr;
+          display: flex;
           align-items: center;
           gap: 10px;
-          padding: 12px 14px;
-          color: #2b6fe8;
+          padding: 11px 12px;
+          color: #1f5ecc;
           text-decoration: none;
           font-size: 16px;
-          border-bottom: 1px solid #d0d0d0;
-          background: #efefef;
+          border-radius: 8px;
+          background: transparent;
+          transition: background-color 140ms ease, color 140ms ease;
         }
 
-        .lang-option:last-child {
-          border-bottom: none;
+        .lang-option + .lang-option {
+          margin-top: 2px;
         }
 
         .lang-option.active {
-          background: #dfe5f2;
+          background: #e5ecfb;
         }
 
         .lang-option:hover {
-          background: #d8deeb;
+          background: #dde6f8;
+        }
+
+        .lang-labels {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 8px;
+          min-width: 0;
+          flex: 1;
         }
 
         .lang-code {
           font-weight: 700;
           letter-spacing: 0.5px;
-          font-size: 18px;
+          font-size: 17px;
         }
 
         .lang-name {
-          font-size: 16px;
+          font-size: 17px;
           line-height: 1.1;
-          color: #2b6fe8;
+          color: inherit;
+          white-space: nowrap;
+        }
+
+        .lang-check {
+          width: 18px;
+          text-align: right;
+          font-size: 14px;
+          color: #1549a8;
+          opacity: 0.9;
+          font-weight: 700;
         }
 
         .lang-flag {
@@ -474,9 +511,10 @@ export default function Navbar() {
           }
 
           .lang-dropdown {
-            right: auto;
-            left: 0;
-            min-width: 220px;
+            position: static;
+            margin-top: 10px;
+            min-width: 0;
+            width: 100%;
           }
 
           .link.active::after {
