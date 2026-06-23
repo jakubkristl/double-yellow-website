@@ -101,6 +101,20 @@ export default function MembershipPage() {
         </p>
       </div>
 
+      {/* Note about paying for whole court */}
+      <div style={{
+        marginTop: "20px",
+        padding: "20px",
+        backgroundColor: "rgba(255, 204, 0, 0.08)",
+        borderLeft: "4px solid var(--accent)",
+        borderRadius: "8px",
+        color: "#ddd",
+      }}>
+        <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
+          <strong style={{ color: "var(--accent)" }}>🎾 Paying for the Whole Court:</strong> One card covers one player only. To pay for the entire court (two players), you need to swipe the card twice — once for each player. Each swipe counts as one session entry.
+        </p>
+      </div>
+
       {zoomedImg && (
         <div
           onClick={() => setZoomedImg(null)}

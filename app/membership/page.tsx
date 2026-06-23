@@ -101,6 +101,20 @@ export default function MembershipPage() {
         </p>
       </div>
 
+      {/* Note about paying for whole court */}
+      <div style={{
+        marginTop: "20px",
+        padding: "20px",
+        backgroundColor: "rgba(255, 204, 0, 0.08)",
+        borderLeft: "4px solid var(--accent)",
+        borderRadius: "8px",
+        color: "#ddd",
+      }}>
+        <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
+          <strong style={{ color: "var(--accent)" }}>🎾 Плащане за цял корт:</strong> Една карта покрива само един играч. За да платиш за целия корт (двама играчи), трябва да преминеш картата дважды - веднъж за всеки играч. Всяко преминаване отчита един вход.
+        </p>
+      </div>
+
       {zoomedImg && (
         <div
           onClick={() => setZoomedImg(null)}
