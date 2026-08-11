@@ -136,10 +136,6 @@ export default function Home() {
 
   return (
     <>
-      <a href="/booking" className="sticky-book" aria-label="Book a court now">
-        First Lesson Free
-      </a>
-
       <section className="beginner-priority card">
         <p className="beginner-kicker">New to squash?</p>
         <h2 className="beginner-title">Start here. First lesson free.</h2>

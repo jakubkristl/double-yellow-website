@@ -5,12 +5,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CookieConsent from "@/components/CookieConsent";
+import FloatingContactActions from "@/components/FloatingContactActions";
 
 export const metadata: Metadata = {
   title: "Double Yellow Squash Club — Sofia",
   description:
     "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
-  metadataBase: new URL("https://doubleyellow.bg"),
+  metadataBase: new URL("https://www.doubleyellowsquash.com"),
   keywords: [
     "squash club",
     "squash Sofia",
@@ -32,18 +33,18 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  authors: [{ name: "Double Yellow Squash Club", url: "https://doubleyellow.bg" }],
+  authors: [{ name: "Double Yellow Squash Club", url: "https://www.doubleyellowsquash.com" }],
   openGraph: {
     title: "Double Yellow Squash Club — Sofia",
     description:
       "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
-    url: "https://doubleyellow.bg",
+    url: "https://www.doubleyellowsquash.com",
     siteName: "Double Yellow Squash Club",
     locale: "en_BG",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01.jpeg",
-        alt: "Double Yellow Squash Club - renovated WSF courts",
+        url: "https://www.doubleyellowsquash.com/og/double-yellow-social-1200x630.png",
+        alt: "Double Yellow Squash Club social card",
       },
     ],
     type: "website",
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     title: "Double Yellow Squash Club — Sofia",
     description:
       "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
-    images: ["/hero/01.jpeg"],
+    images: ["/og/double-yellow-social-1200x630.png"],
   },
 };
 
@@ -62,11 +63,11 @@ import { EVENTS } from "@/lib/events";
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "SportsActivityLocation",
-  "@id": "https://doubleyellow.bg/#sportsclub",
+  "@id": "https://www.doubleyellowsquash.com/#sportsclub",
   name: "Double Yellow Squash Club",
   legalName: "Sport And Beyond EOOD",
-  url: "https://doubleyellow.bg",
-  image: "https://doubleyellow.bg/hero/01.jpeg",
+  url: "https://www.doubleyellowsquash.com",
+  image: "https://www.doubleyellowsquash.com/logo.png",
   telephone: "+359 896 754 014",
   address: {
     "@type": "PostalAddress",
@@ -99,12 +100,12 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Double Yellow Squash Club",
-  url: "https://doubleyellow.bg",
+  url: "https://www.doubleyellowsquash.com",
   description:
     "New courts. New energy. Same obsession with squash. Double Yellow Squash Club, Sofia.",
   inLanguage: "en",
   publisher: {
-    "@id": "https://doubleyellow.bg/#sportsclub",
+    "@id": "https://www.doubleyellowsquash.com/#sportsclub",
   },
 };
 
@@ -220,6 +221,7 @@ export default function RootLayout({
         <Navbar />
         <main id="main-content" className="container">{children}</main>
         <Footer />
+        <FloatingContactActions />
         <CookieConsent />
       </body>
     </html>

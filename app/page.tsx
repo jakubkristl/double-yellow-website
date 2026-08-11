@@ -136,10 +136,6 @@ export default function Home() {
 
   return (
     <>
-      <a href="/booking" className="sticky-book" aria-label="Резервирай корт сега">
-        Първи урок безплатно
-      </a>
-
       <section className="beginner-priority card">
         <p className="beginner-kicker">Нов в скуоша?</p>
         <h2 className="beginner-title">Започни оттук. Първи урок безплатно.</h2>
