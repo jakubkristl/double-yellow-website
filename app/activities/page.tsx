@@ -210,7 +210,7 @@ export default function ActivitiesPage() {
         </div>
       </section>
 
-      <IntroLeadForm />
+      <IntroLeadForm locale="bg" />
 
       {zoomedImg && (
         <div

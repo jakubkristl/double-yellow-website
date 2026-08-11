@@ -306,7 +306,7 @@ export default function Home() {
         </div>
       </section>
 
-      <IntroLeadForm />
+      <IntroLeadForm locale="en" />
     </>
   );
 }

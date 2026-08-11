@@ -12,7 +12,13 @@ export const metadata: Metadata = {
     title: "Контакт с Double Yellow | Телефон, имейл и локация",
     description:
       "Свържи се с Double Yellow Squash Club. Телефон: +359 896 754 014, имейл: jakub@doubleyellowsquash.com. Намираме се в НСА, София.",
-    url: "https://doubleyellow.bg/contact",
+    url: "https://www.doubleyellowsquash.com/contact",
+    images: [
+      {
+        url: "https://www.doubleyellowsquash.com/og/double-yellow-social-1200x630.png",
+        alt: "Double Yellow Squash Club social card",
+      },
+    ],
   },
 };
 
@@ -26,7 +32,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <IntroLeadForm />
+      <IntroLeadForm locale="bg" />
 
       {/* Quick contacts */}
       <div className="contact-grid">
