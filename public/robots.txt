@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://doubleyellow.bg/sitemap.xml
+Sitemap: https://www.doubleyellowsquash.com/sitemap.xml

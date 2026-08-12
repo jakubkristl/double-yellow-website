@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://doubleyellow.bg/</loc>
+    <loc>https://www.doubleyellowsquash.com/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/about</loc>
+    <loc>https://www.doubleyellowsquash.com/about</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/activities</loc>
+    <loc>https://www.doubleyellowsquash.com/activities</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/booking</loc>
+    <loc>https://www.doubleyellowsquash.com/booking</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/contact</loc>
+    <loc>https://www.doubleyellowsquash.com/contact</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/events</loc>
+    <loc>https://www.doubleyellowsquash.com/events</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/membership</loc>
+    <loc>https://www.doubleyellowsquash.com/membership</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/store</loc>
+    <loc>https://www.doubleyellowsquash.com/store</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://doubleyellow.bg/team</loc>
+    <loc>https://www.doubleyellowsquash.com/team</loc>
     <priority>0.8</priority>
   </url>
 </urlset>

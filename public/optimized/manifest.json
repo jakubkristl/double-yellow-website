@@ -119,6 +119,13 @@
     "/optimized/hero/01-2048.webp",
     "/optimized/hero/01-1200.jpg"
   ],
+  "/hero\\01b.jpeg": [
+    "/optimized/hero/01b-480.webp",
+    "/optimized/hero/01b-768.webp",
+    "/optimized/hero/01b-1200.webp",
+    "/optimized/hero/01b-2048.webp",
+    "/optimized/hero/01b-1200.jpg"
+  ],
   "/hero\\02.jpg": [
     "/optimized/hero/02-480.webp",
     "/optimized/hero/02-768.webp",

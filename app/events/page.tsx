@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import OptimizedImage from "@/components/OptimizedImage";
 import styles from "./styles.module.css";
 import { createPageMetadata } from "@/lib/seo";
+import { isEventArchived } from "@/lib/eventArchive";
 
 const BNT_ARTICLE_URL =
   "https://bnt.bg/news/chuzhdencite-slovakat-yakob-kristal-koito-razviva-skuosh-v-balgariya-v410712-347134news.html";
@@ -10,6 +11,7 @@ const WSF_LEVEL_1_COURSE_URL =
   "https://europeansquash.com/event/wsf-level-1-coaching-course/";
 const WSF_LEVEL_1_ENTRY_FORM_URL =
   "https://europeansquash.com/wp-content/uploads/2026/03/Entry_Form_Level_1_Bulgaria_2026.pdf";
+const WSF_LEVEL_1_END_DATE = "2026-06-14T23:59:59+02:00";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/events",
@@ -22,104 +24,125 @@ export const metadata: Metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function EventsPage() {
+  const isLevel1Archived = isEventArchived(WSF_LEVEL_1_END_DATE);
+
   return (
     <main>
       <section className="container container--narrow">
         <h1 className="page-title">Събития</h1>
         <p className="subtitle">Еднократни събития, уъркшопи и гостуващи треньори.</p>
 
-        <div className={`event-card ${styles.eventCardMidGap}`}>
-          <h2 className={styles.eventHeading}>WSF Level 1 Coaching Course</h2>
-          <Link
-            href={WSF_LEVEL_1_COURSE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Отвори WSF Level 1 Coaching Course в сайта на Европейската скуош федерация"
-            className={styles.eventMediaLink}
-          >
-            <OptimizedImage
-              src="/events/wsf-level-1-coaching-course.jpg"
-              alt="Сесия от WSF Level 1 Coaching Course с треньор и деца на скуош корт"
-              width={1366}
-              height={768}
-              className={styles.eventMedia}
-              priority
-            />
-          </Link>
-          <p className={styles.eventTextGap}>
-            <strong>Дати:</strong> 12-14 юни 2026 г. в София, България.
-          </p>
-          <p className={styles.eventTextGap}>
-            С удоволствие каним треньори, играчи и почитатели на скуоша да участват
-            в WSF Level 1 Coaching Course, провеждан в рамките на програмата на World
-            Squash Federation и с подкрепата на European Squash Federation.
-          </p>
-          <p className={styles.eventTextGap}>
-            Курсът ще се проведе в София и дава въведение в основните принципи на
-            треньорската работа в скуоша. Насочен е основно към бъдещи треньори,
-            които искат да започнат работа с начинаещи и юношески групи.
-          </p>
-          <p className={styles.eventTextGap}>
-            Програмата съчетава теория и практика на корта и се фокусира върху базовите
-            технически, тактически и организационни аспекти на треньорството. Участниците,
-            които успешно завършат курса, получават WSF Level 1 Coaching Certificate,
-            международно признат в треньорската система на WSF.
-          </p>
-          <p className={styles.eventTextGap}>
-            Местата са ограничени, препоръчва се ранна регистрация, а записването приключва
-            на 1 май 2026 г.
-          </p>
-
-          <h3 className={styles.eventSubheading}>Ключови детайли</h3>
-          <ul className={styles.eventList}>
-            <li>Дати на курса: 12-14 юни 2026</li>
-            <li>Локация: София, България</li>
-            <li>Краен срок за регистрация: 1 май 2026</li>
-            <li>Организатор: Jakub Kristl</li>
-            <li>Лектор: Michael Khan</li>
-            <li>Сертификация: WSF Level 1 Coaching Certificate</li>
-          </ul>
-
-          <h3 className={styles.eventSubheading}>За кого е курсът</h3>
-          <p className={styles.eventTextGap}>
-            Курсът е основно за бъдещи треньори в началото на своя път. Подходящ е
-            за играчи, преподаватели, клубни помощници и скуош ентусиасти, които искат
-            да започнат структурирана работа с ранни обучаеми, начинаещи и юношески групи.
-          </p>
-
-          <h3 className={styles.eventSubheading}>Върху какво се фокусира Level 1</h3>
-          <ul className={styles.eventList}>
-            <li>Работа с ранни обучаеми в среда тип "learning to play"</li>
-            <li>Използване на забавни игри и прости разигравания като основни инструменти</li>
-            <li>Изграждане на координация око-ръка и базови двигателни навици</li>
-            <li>Стил на преподаване, подходящ за деца и напълно начинаещи</li>
-            <li>Комбинация от теория и практически сесии на корта</li>
-          </ul>
-
-          <h3 className={styles.eventSubheading}>Как да се регистрираш</h3>
-          <p className={styles.eventTextGap}>
-            На страницата на ESF ще намериш fact sheet и официалната форма за участие.
-            Препоръчваме ранна регистрация, защото местата са ограничени.
-          </p>
-          <div className="actions">
+        {!isLevel1Archived && (
+          <div className={`event-card ${styles.eventCardMidGap}`}>
+            <h2 className={styles.eventHeading}>WSF Level 1 Coaching Course</h2>
             <Link
               href={WSF_LEVEL_1_COURSE_URL}
-              className="btn btn--primary"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Отвори WSF Level 1 Coaching Course в сайта на Европейската скуош федерация"
+              className={styles.eventMediaLink}
             >
-              Отвори детайли за курса
+              <OptimizedImage
+                src="/events/wsf-level-1-coaching-course.jpg"
+                alt="Сесия от WSF Level 1 Coaching Course с треньор и деца на скуош корт"
+                width={1366}
+                height={768}
+                className={styles.eventMedia}
+                priority
+              />
             </Link>
-            <Link
-              href={WSF_LEVEL_1_ENTRY_FORM_URL}
-              className="btn btn--secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Отвори формата за участие
-            </Link>
+            <p className={styles.eventTextGap}>
+              <strong>Дати:</strong> 12-14 юни 2026 г. в София, България.
+            </p>
+            <p className={styles.eventTextGap}>
+              С удоволствие каним треньори, играчи и почитатели на скуоша да участват
+              в WSF Level 1 Coaching Course, провеждан в рамките на програмата на World
+              Squash Federation и с подкрепата на European Squash Federation.
+            </p>
+            <p className={styles.eventTextGap}>
+              Курсът ще се проведе в София и дава въведение в основните принципи на
+              треньорската работа в скуоша. Насочен е основно към бъдещи треньори,
+              които искат да започнат работа с начинаещи и юношески групи.
+            </p>
+            <p className={styles.eventTextGap}>
+              Програмата съчетава теория и практика на корта и се фокусира върху базовите
+              технически, тактически и организационни аспекти на треньорството. Участниците,
+              които успешно завършат курса, получават WSF Level 1 Coaching Certificate,
+              международно признат в треньорската система на WSF.
+            </p>
+            <p className={styles.eventTextGap}>
+              Местата са ограничени, препоръчва се ранна регистрация, а записването приключва
+              на 1 май 2026 г.
+            </p>
+
+            <h3 className={styles.eventSubheading}>Ключови детайли</h3>
+            <ul className={styles.eventList}>
+              <li>Дати на курса: 12-14 юни 2026</li>
+              <li>Локация: София, България</li>
+              <li>Краен срок за регистрация: 1 май 2026</li>
+              <li>Организатор: Jakub Kristl</li>
+              <li>Лектор: Michael Khan</li>
+              <li>Сертификация: WSF Level 1 Coaching Certificate</li>
+            </ul>
+
+            <h3 className={styles.eventSubheading}>За кого е курсът</h3>
+            <p className={styles.eventTextGap}>
+              Курсът е основно за бъдещи треньори в началото на своя път. Подходящ е
+              за играчи, преподаватели, клубни помощници и скуош ентусиасти, които искат
+              да започнат структурирана работа с ранни обучаеми, начинаещи и юношески групи.
+            </p>
+
+            <h3 className={styles.eventSubheading}>Върху какво се фокусира Level 1</h3>
+            <ul className={styles.eventList}>
+              <li>Работа с ранни обучаеми в среда тип "learning to play"</li>
+              <li>Използване на забавни игри и прости разигравания като основни инструменти</li>
+              <li>Изграждане на координация око-ръка и базови двигателни навици</li>
+              <li>Стил на преподаване, подходящ за деца и напълно начинаещи</li>
+              <li>Комбинация от теория и практически сесии на корта</li>
+            </ul>
+
+            <h3 className={styles.eventSubheading}>Как да се регистрираш</h3>
+            <p className={styles.eventTextGap}>
+              На страницата на ESF ще намериш fact sheet и официалната форма за участие.
+              Препоръчваме ранна регистрация, защото местата са ограничени.
+            </p>
+            <div className="actions">
+              <Link
+                href={WSF_LEVEL_1_COURSE_URL}
+                className="btn btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Отвори детайли за курса
+              </Link>
+              <Link
+                href={WSF_LEVEL_1_ENTRY_FORM_URL}
+                className="btn btn--secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Отвори формата за участие
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
+
+        {isLevel1Archived && (
+          <div className={`event-card ${styles.eventCardMidGap}`}>
+            <h2 className={styles.eventHeading}>Архивни събития</h2>
+            <p className={styles.eventArchivedNote}>
+              Минали събития остават достъпни за справка и възстановяване на контекст.
+            </p>
+            <ul className={styles.eventArchiveList}>
+              <li className={styles.eventArchiveItem}>
+                <Link href={WSF_LEVEL_1_COURSE_URL} target="_blank" rel="noopener noreferrer">
+                  WSF Level 1 Coaching Course
+                </Link>
+                <span className={styles.eventArchiveMeta}>Завърши на 14 юни 2026</span>
+              </li>
+            </ul>
+          </div>
+        )}
 
         <div className={`event-card ${styles.eventCardMidGap}`}>
           <h2 className={styles.eventHeading}>Репортаж в БНТ</h2>

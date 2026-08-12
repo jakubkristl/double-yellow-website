@@ -20,6 +20,34 @@
   margin: 1.5rem 0 0.8rem;
 }
 
+.eventArchivedNote {
+  margin: 0 0 1rem;
+  color: #5d6470;
+}
+
+.eventArchiveList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.eventArchiveItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 204, 0, 0.08);
+  border: 1px solid rgba(255, 204, 0, 0.18);
+}
+
+.eventArchiveMeta {
+  color: #5d6470;
+  font-size: 0.9rem;
+}
+
 .eventList {
   margin: 0;
   padding-left: 1.2rem;

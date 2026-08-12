@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import OptimizedImage from "@/components/OptimizedImage";
 import styles from "./styles.module.css";
 import { createPageMetadata } from "@/lib/seo";
+import { isEventArchived } from "@/lib/eventArchive";
 
 const BNT_ARTICLE_URL =
   "https://bnt.bg/news/chuzhdencite-slovakat-yakob-kristal-koito-razviva-skuosh-v-balgariya-v410712-347134news.html";
@@ -10,6 +11,7 @@ const WSF_LEVEL_1_COURSE_URL =
   "https://europeansquash.com/event/wsf-level-1-coaching-course/";
 const WSF_LEVEL_1_ENTRY_FORM_URL =
   "https://europeansquash.com/wp-content/uploads/2026/03/Entry_Form_Level_1_Bulgaria_2026.pdf";
+const WSF_LEVEL_1_END_DATE = "2026-06-14T23:59:59+02:00";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/events",
@@ -22,105 +24,126 @@ export const metadata: Metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function EventsPage() {
+  const isLevel1Archived = isEventArchived(WSF_LEVEL_1_END_DATE);
+
   return (
     <main>
       <section className="container container--narrow">
         <h1 className="page-title">Events</h1>
         <p className="subtitle">One-off events, workshops & guest visits.</p>
 
-        <div className={`event-card ${styles.eventCardMidGap}`}>
-          <h2 className={styles.eventHeading}>WSF Level 1 Coaching Course</h2>
-          <Link
-            href={WSF_LEVEL_1_COURSE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open WSF Level 1 Coaching Course on the European Squash Federation website"
-            className={styles.eventMediaLink}
-          >
-            <OptimizedImage
-              src="/events/wsf-level-1-coaching-course.jpg"
-              alt="WSF Level 1 Coaching Course session with a coach and children on a squash court"
-              width={1366}
-              height={768}
-              className={styles.eventMedia}
-              priority
-            />
-          </Link>
-          <p className={styles.eventTextGap}>
-            <strong>Dates:</strong> 12-14 June 2026 in Sofia, Bulgaria.
-          </p>
-          <p className={styles.eventTextGap}>
-            We are pleased to invite coaches, players, and squash enthusiasts to participate
-            in the WSF Level 1 Coaching Course, delivered within the framework of the World
-            Squash Federation Coaching Programme and supported by the European Squash Federation.
-          </p>
-          <p className={styles.eventTextGap}>
-            The course will be held in Sofia, Bulgaria, and provides an introduction to the
-            fundamental principles of squash coaching. It is mainly intended for aspiring
-            coaches who want to start working with beginner players and junior groups.
-          </p>
-          <p className={styles.eventTextGap}>
-            The programme combines theoretical knowledge with practical on-court sessions and
-            focuses on the basic technical, tactical, and organizational aspects of coaching.
-            Participants who successfully complete the course will receive the WSF Level 1
-            Coaching Certificate, recognized internationally within the WSF coaching pathway.
-          </p>
-          <p className={styles.eventTextGap}>
-            Places are limited, early registration is recommended, and entries close on
-            1 May 2026.
-          </p>
-
-          <h3 className={styles.eventSubheading}>Key Details</h3>
-          <ul className={styles.eventList}>
-            <li>Course dates: 12-14 June 2026</li>
-            <li>Location: Sofia, Bulgaria</li>
-            <li>Registration deadline: 1 May 2026</li>
-            <li>Course organizer: Jakub Kristl</li>
-            <li>Course tutor: Michael Khan</li>
-            <li>Certification: WSF Level 1 Coaching Certificate</li>
-          </ul>
-
-          <h3 className={styles.eventSubheading}>Who It Is For</h3>
-          <p className={styles.eventTextGap}>
-            This course is mainly for aspiring coaches at the start of their coaching path.
-            It is a strong fit for players, teachers, club helpers, and squash enthusiasts
-            who want to begin coaching early learners, beginners, and junior groups in a
-            structured way.
-          </p>
-
-          <h3 className={styles.eventSubheading}>What Level 1 Focuses On</h3>
-          <ul className={styles.eventList}>
-            <li>Working with early learners in a "learning to play" environment</li>
-            <li>Using fun games and simple rallies as the core learning tools</li>
-            <li>Building hand-eye coordination and fundamental movement habits</li>
-            <li>Learning a teaching style suited to children and complete beginners</li>
-            <li>Combining theory with practical on-court coaching sessions</li>
-          </ul>
-
-          <h3 className={styles.eventSubheading}>How To Register</h3>
-          <p className={styles.eventTextGap}>
-            The ESF event page includes the fact sheet and the official entry form. Early
-            registration is recommended because places are limited.
-          </p>
-          <div className="actions">
+        {!isLevel1Archived && (
+          <div className={`event-card ${styles.eventCardMidGap}`}>
+            <h2 className={styles.eventHeading}>WSF Level 1 Coaching Course</h2>
             <Link
               href={WSF_LEVEL_1_COURSE_URL}
-              className="btn btn--primary"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Open WSF Level 1 Coaching Course on the European Squash Federation website"
+              className={styles.eventMediaLink}
             >
-              Open Course Details
+              <OptimizedImage
+                src="/events/wsf-level-1-coaching-course.jpg"
+                alt="WSF Level 1 Coaching Course session with a coach and children on a squash court"
+                width={1366}
+                height={768}
+                className={styles.eventMedia}
+                priority
+              />
             </Link>
-            <Link
-              href={WSF_LEVEL_1_ENTRY_FORM_URL}
-              className="btn btn--secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Entry Form
-            </Link>
+            <p className={styles.eventTextGap}>
+              <strong>Dates:</strong> 12-14 June 2026 in Sofia, Bulgaria.
+            </p>
+            <p className={styles.eventTextGap}>
+              We are pleased to invite coaches, players, and squash enthusiasts to participate
+              in the WSF Level 1 Coaching Course, delivered within the framework of the World
+              Squash Federation Coaching Programme and supported by the European Squash Federation.
+            </p>
+            <p className={styles.eventTextGap}>
+              The course will be held in Sofia, Bulgaria, and provides an introduction to the
+              fundamental principles of squash coaching. It is mainly intended for aspiring
+              coaches who want to start working with beginner players and junior groups.
+            </p>
+            <p className={styles.eventTextGap}>
+              The programme combines theoretical knowledge with practical on-court sessions and
+              focuses on the basic technical, tactical, and organizational aspects of coaching.
+              Participants who successfully complete the course will receive the WSF Level 1
+              Coaching Certificate, recognized internationally within the WSF coaching pathway.
+            </p>
+            <p className={styles.eventTextGap}>
+              Places are limited, early registration is recommended, and entries close on
+              1 May 2026.
+            </p>
+
+            <h3 className={styles.eventSubheading}>Key Details</h3>
+            <ul className={styles.eventList}>
+              <li>Course dates: 12-14 June 2026</li>
+              <li>Location: Sofia, Bulgaria</li>
+              <li>Registration deadline: 1 May 2026</li>
+              <li>Course organizer: Jakub Kristl</li>
+              <li>Course tutor: Michael Khan</li>
+              <li>Certification: WSF Level 1 Coaching Certificate</li>
+            </ul>
+
+            <h3 className={styles.eventSubheading}>Who It Is For</h3>
+            <p className={styles.eventTextGap}>
+              This course is mainly for aspiring coaches at the start of their coaching path.
+              It is a strong fit for players, teachers, club helpers, and squash enthusiasts
+              who want to begin coaching early learners, beginners, and junior groups in a
+              structured way.
+            </p>
+
+            <h3 className={styles.eventSubheading}>What Level 1 Focuses On</h3>
+            <ul className={styles.eventList}>
+              <li>Working with early learners in a "learning to play" environment</li>
+              <li>Using fun games and simple rallies as the core learning tools</li>
+              <li>Building hand-eye coordination and fundamental movement habits</li>
+              <li>Learning a teaching style suited to children and complete beginners</li>
+              <li>Combining theory with practical on-court coaching sessions</li>
+            </ul>
+
+            <h3 className={styles.eventSubheading}>How To Register</h3>
+            <p className={styles.eventTextGap}>
+              The ESF event page includes the fact sheet and the official entry form. Early
+              registration is recommended because places are limited.
+            </p>
+            <div className="actions">
+              <Link
+                href={WSF_LEVEL_1_COURSE_URL}
+                className="btn btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open Course Details
+              </Link>
+              <Link
+                href={WSF_LEVEL_1_ENTRY_FORM_URL}
+                className="btn btn--secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open Entry Form
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
+
+        {isLevel1Archived && (
+          <div className={`event-card ${styles.eventCardMidGap}`}>
+            <h2 className={styles.eventHeading}>Archived events</h2>
+            <p className={styles.eventArchivedNote}>
+              Past events stay available for reference and to revisit the details if needed.
+            </p>
+            <ul className={styles.eventArchiveList}>
+              <li className={styles.eventArchiveItem}>
+                <Link href={WSF_LEVEL_1_COURSE_URL} target="_blank" rel="noopener noreferrer">
+                  WSF Level 1 Coaching Course
+                </Link>
+                <span className={styles.eventArchiveMeta}>Ended 14 June 2026</span>
+              </li>
+            </ul>
+          </div>
+        )}
 
         <div className={`event-card ${styles.eventCardMidGap}`}>
           <h2 className={styles.eventHeading}>Featured On BNT</h2>

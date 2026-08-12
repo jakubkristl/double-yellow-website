@@ -16,7 +16,7 @@ export default function Breadcrumbs() {
 
     // Always start with Home
     const breadcrumbs: BreadcrumbItem[] = [
-      { name: 'Home', url: 'https://doubleyellow.bg' },
+      { name: 'Home', url: 'https://www.doubleyellowsquash.com' },
     ];
 
     // Build path segments
@@ -26,7 +26,7 @@ export default function Breadcrumbs() {
       const name = segment.charAt(0).toUpperCase() + segment.slice(1);
       breadcrumbs.push({
         name,
-        url: `https://doubleyellow.bg${currentPath}`,
+        url: `https://www.doubleyellowsquash.com${currentPath}`,
       });
     });
 

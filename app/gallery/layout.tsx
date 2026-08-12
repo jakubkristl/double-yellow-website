@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     title: "Галерия | Double Yellow Squash Club",
     description:
       "Разгледай снимки на реновираните ни скуош кортове, събития, активности и играчи в Double Yellow Squash Club в София.",
-    url: "https://doubleyellow.bg/gallery",
+    url: "https://www.doubleyellowsquash.com/gallery",
     images: [
       {
-        url: "https://doubleyellow.bg/hero/01.jpeg",
+        url: "https://www.doubleyellowsquash.com/hero/01.jpeg",
         alt: "Double Yellow Squash Club courts",
       },
     ],

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = "https://doubleyellow.bg";
+export const SITE_URL = "https://www.doubleyellowsquash.com";
 export const SITE_NAME = "Double Yellow Squash Club";
-export const DEFAULT_OG_IMAGE = "/hero/01b.jpeg";
+export const DEFAULT_OG_IMAGE = "/og/double-yellow-social-1200x630.png";
 
 type RouteDefinition = {
   path: `/${string}` | "/";

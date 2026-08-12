@@ -5,3 +5,14 @@ node_modules/
 public/optimized/
 
 !public/optimized/manifest.json
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+
+.env*
+!.env.example
