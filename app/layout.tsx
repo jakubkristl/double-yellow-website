@@ -151,17 +151,21 @@ export default async function RootLayout({
   return (
     <html lang={activeLang}>
       <body>
-        {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-BQWPYFTG6V"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-T7KDHVST"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+
+        <Script id="google-tag-manager" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-BQWPYFTG6V');
+            window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+            (function(w,d,s,l,i){var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T7KDHVST');
+            window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
           `}
         </Script>
 
@@ -185,7 +189,7 @@ export default async function RootLayout({
                 console.info('[tracking] booking conversion payload', payload);
               }
 
-              gtag('event', 'conversion', payload);
+              window.gtag('event', 'conversion', payload);
               return true;
             };
           `}
