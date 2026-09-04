@@ -27,6 +27,17 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Build Cloudflare Worker
+        run: npx opennextjs-cloudflare build
+
+      - name: Deploy to Cloudflare Workers
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 33546f27f46c46c4c34e343cb34e5404
+          command: deploy
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
