@@ -150,6 +150,20 @@ export default async function RootLayout({
 
   return (
     <html lang={activeLang}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-T7KDHVST');
+              window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+            `,
+          }}
+        />
+      </head>
       <body>
         <noscript>
           <iframe
@@ -159,15 +173,6 @@ export default async function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-
-        <Script id="google-tag-manager" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-            (function(w,d,s,l,i){var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T7KDHVST');
-            window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-          `}
-        </Script>
 
         {/* Google Ads Conversion Tracking for Completed Bookings */}
         <Script id="google-ads-conversion" strategy="afterInteractive">
