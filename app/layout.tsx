@@ -60,55 +60,10 @@ export const metadata: Metadata = {
 };
 
 import { EVENTS } from "@/lib/events";
+import { getLocalBusinessJsonLd, getWebsiteJsonLd } from "@/lib/business";
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "SportsActivityLocation",
-  "@id": "https://www.doubleyellowsquash.com/#sportsclub",
-  name: "Double Yellow Squash Club",
-  legalName: "Sport And Beyond EOOD",
-  url: "https://www.doubleyellowsquash.com",
-  image: "https://www.doubleyellowsquash.com/logo.png",
-  telephone: "+359 896 754 014",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "ul. Akademik Stefan Mladenov 21",
-    addressLocality: "Sofia",
-    postalCode: "1700",
-    addressCountry: "BG",
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "07:00",
-      closes: "23:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday", "Sunday"],
-      opens: "09:00",
-      closes: "21:00",
-    },
-  ],
-  sameAs: [
-    "https://facebook.com/doubleyellowsquash",
-    "https://instagram.com/doubleyellowsquash",
-  ],
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Double Yellow Squash Club",
-  url: "https://www.doubleyellowsquash.com",
-  description:
-    "Нови кортове. Нова енергия. Същата страст към скуоша. Double Yellow Squash Club, София.",
-  inLanguage: "bg",
-  publisher: {
-    "@id": "https://www.doubleyellowsquash.com/#sportsclub",
-  },
-};
+const localBusinessSchema = getLocalBusinessJsonLd();
+const websiteSchema = getWebsiteJsonLd("bg");
 
 const eventsSchema = EVENTS.map((e) => ({
   "@type": "Event",

@@ -3,24 +3,15 @@ import React from "react";
 import type { Metadata } from "next";
 import PhoneLink from "@/components/PhoneLink";
 import IntroLeadForm from "@/components/IntroLeadForm";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/contact",
+  locale: "en",
   title: "Contact Double Yellow | Phone, Email & Location",
   description:
     "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
-  openGraph: {
-    title: "Contact Double Yellow | Phone, Email & Location",
-    description:
-      "Get in touch with Double Yellow Squash Club. Phone: +359 896 754 014, Email: jakub@doubleyellowsquash.com. Located at NSA, Sofia.",
-    url: "https://www.doubleyellowsquash.com/contact",
-    images: [
-      {
-        url: "https://www.doubleyellowsquash.com/og/double-yellow-social-1200x630.png",
-        alt: "Double Yellow Squash Club social card",
-      },
-    ],
-  },
-};
+});
 
 export default function ContactPage() {
   return (

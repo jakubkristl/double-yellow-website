@@ -3,6 +3,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/squash-lessons-sofia",
+  locale: "en",
   title: "Squash Lessons Sofia | Coaching At Double Yellow",
   description:
     "Book squash lessons in Sofia for beginners and improving players. Learn with coach-led sessions, structured progress, and flexible bookings at Double Yellow.",
