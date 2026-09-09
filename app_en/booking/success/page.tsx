@@ -6,7 +6,8 @@ export const metadata: Metadata = {
   title: "Booking Confirmed | Double Yellow",
   description:
     "Your booking has been confirmed. See you on court at Double Yellow Squash Club.",
-  alternates: { canonical: "/booking/success" },
+  robots: { index: false, follow: false },
+  alternates: { canonical: "/en/booking/success" },
 };
 
 type Props = {

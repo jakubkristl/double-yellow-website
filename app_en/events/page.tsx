@@ -246,8 +246,8 @@ export default function EventsPage() {
             To join upcoming events, check available sessions in Activities or contact us directly.
           </p>
           <div className="actions">
-            <Link href="/activities" className="btn btn--secondary">Browse Activities</Link>
-            <Link href="/contact" className="btn btn--primary">Contact The Club</Link>
+            <Link href="/en/activities" className="btn btn--secondary">Browse Activities</Link>
+            <Link href="/en/contact" className="btn btn--primary">Contact The Club</Link>
           </div>
         </div>
       </section>

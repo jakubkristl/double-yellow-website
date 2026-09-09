@@ -1,32 +1,67 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { BUSINESS } from '@/lib/business';
 
 type BreadcrumbItem = {
   name: string;
   url: string;
 };
 
+const SEGMENT_LABELS: Record<string, { bg: string; en: string }> = {
+  about: { bg: 'За нас', en: 'About' },
+  activities: { bg: 'Активности', en: 'Activities' },
+  booking: { bg: 'Резервация', en: 'Booking' },
+  contact: { bg: 'Контакт', en: 'Contact' },
+  cookies: { bg: 'Бисквитки', en: 'Cookies' },
+  events: { bg: 'Събития', en: 'Events' },
+  gallery: { bg: 'Галерия', en: 'Gallery' },
+  learn: { bg: 'Научи скуош', en: 'Learn Squash' },
+  membership: { bg: 'Абонаменти', en: 'Membership' },
+  privacy: { bg: 'Поверителност', en: 'Privacy' },
+  store: { bg: 'Магазин', en: 'Store' },
+  team: { bg: 'Екип', en: 'Team' },
+  terms: { bg: 'Условия', en: 'Terms' },
+  'beginner-squash-sofia': { bg: 'Скуош за начинаещи', en: 'Beginner Squash' },
+  'squash-lessons-sofia': { bg: 'Уроци по скуош', en: 'Squash Lessons' },
+  'squash-sofia': { bg: 'Скуош София', en: 'Squash Sofia' },
+  success: { bg: 'Потвърждение', en: 'Confirmation' },
+};
+
+function labelForSegment(segment: string, isEn: boolean) {
+  const mapped = SEGMENT_LABELS[segment];
+  if (mapped) return isEn ? mapped.en : mapped.bg;
+  return decodeURIComponent(segment)
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
 export default function Breadcrumbs() {
   const pathname = usePathname();
+  const isEn = pathname === '/en' || pathname?.startsWith('/en/');
 
-  // Generate breadcrumb items from pathname
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const segments = pathname.split('/').filter(Boolean);
-
-    // Always start with Home
     const breadcrumbs: BreadcrumbItem[] = [
-      { name: 'Home', url: 'https://www.doubleyellowsquash.com' },
+      {
+        name: isEn ? 'Home' : 'Начало',
+        url: isEn ? `${BUSINESS.url}/en` : BUSINESS.url,
+      },
     ];
 
-    // Build path segments
     let currentPath = '';
     segments.forEach((segment) => {
+      // Skip the language prefix segment itself in the trail
+      if (segment === 'en') {
+        currentPath = '/en';
+        return;
+      }
+
       currentPath += `/${segment}`;
-      const name = segment.charAt(0).toUpperCase() + segment.slice(1);
       breadcrumbs.push({
-        name,
-        url: `https://www.doubleyellowsquash.com${currentPath}`,
+        name: labelForSegment(segment, isEn),
+        url: `${BUSINESS.url}${currentPath}`,
       });
     });
 
@@ -35,7 +70,6 @@ export default function Breadcrumbs() {
 
   const breadcrumbs = generateBreadcrumbs();
 
-  // Only render if there's more than just Home
   if (breadcrumbs.length <= 1) {
     return null;
   }
@@ -55,7 +89,7 @@ export default function Breadcrumbs() {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(breadcrumbSchema),
+        __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c'),
       }}
     />
   );

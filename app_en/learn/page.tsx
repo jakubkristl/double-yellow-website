@@ -27,7 +27,7 @@ export default function LearnPage() {
         {sorted.map((article) => (
           <Link
             key={article.slug}
-            href={`/learn/${article.slug}`}
+            href={`/en/learn/${article.slug}`}
             className="article-card"
           >
             <div className="article-card-body">

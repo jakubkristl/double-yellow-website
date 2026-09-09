@@ -150,7 +150,7 @@ export default function Home() {
           <span>Next available: today 19:00</span>
         </div>
         <div className="cta-buttons">
-          <a href="/activities" className="btn btn-primary">
+          <a href="/en/activities" className="btn btn-primary">
             Join Beginner Session
           </a>
           <a href={WHATSAPP_CTA_URL} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
@@ -178,10 +178,10 @@ export default function Home() {
           First lesson free, trainer included, equipment included. Start squash today without stress.
         </p>
         <div className="cta-buttons">
-          <a href="/booking" className="btn btn-primary">
+          <a href="/en/booking" className="btn btn-primary">
             Book Now
           </a>
-          <a href="/membership" className="btn btn-secondary">
+          <a href="/en/membership" className="btn btn-secondary">
             See Prices
           </a>
         </div>
@@ -238,10 +238,10 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="cta-buttons">
-            <a href="/booking" className="btn btn-primary">
+            <a href="/en/booking" className="btn btn-primary">
               Book Now
             </a>
-            <a href="/membership" className="btn btn-secondary">
+            <a href="/en/membership" className="btn btn-secondary">
               View Memberships
             </a>
           </div>
@@ -290,7 +290,7 @@ export default function Home() {
             <p>
               <strong>Social Squash — every Friday 18:00–20:00.</strong> Show up, get matched, and play with whoever is there. All levels welcome.
             </p>
-            <a href="/activities" className="inline-link">See Friday Social Squash →</a>
+            <a href="/en/activities" className="inline-link">See Friday Social Squash →</a>
           </div>
           <div>
             <h3>Аматъорски, ама сквош</h3>
@@ -302,7 +302,7 @@ export default function Home() {
           <div>
             <h3>Need a coach-led start?</h3>
             <p>Beginner coaching builds confidence fast so you can rally with anyone.</p>
-            <a href="/squash-lessons-sofia" className="inline-link">See coaching options</a>
+            <a href="/en/squash-lessons-sofia" className="inline-link">See coaching options</a>
           </div>
         </div>
       </section>

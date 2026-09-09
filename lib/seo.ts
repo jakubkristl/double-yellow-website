@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BUSINESS } from "@/lib/business";
+import type { Article } from "@/lib/articles";
 
 export const SITE_URL = BUSINESS.url;
 export const SITE_NAME = BUSINESS.name;
@@ -27,6 +28,9 @@ type CreatePageMetadataInput = {
   description: string;
   image?: string;
   locale?: SiteLocale;
+  type?: "website" | "article";
+  publishedTime?: string;
+  robots?: Metadata["robots"];
 };
 
 export const siteRoutes: RouteDefinition[] = [
@@ -62,12 +66,19 @@ export function getCanonicalUrl(path: string) {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+export function serializeJsonLd(data: unknown) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
 export function createPageMetadata({
   path,
   title,
   description,
   image = DEFAULT_OG_IMAGE,
   locale = "bg",
+  type = "website",
+  publishedTime,
+  robots,
 }: CreatePageMetadataInput): Metadata {
   const bgPath = getBgPath(path);
   const enPath = getEnPath(path);
@@ -78,6 +89,7 @@ export function createPageMetadata({
   return {
     title,
     description,
+    ...(robots ? { robots } : {}),
     alternates: {
       canonical: canonicalPath,
       languages: {
@@ -92,7 +104,10 @@ export function createPageMetadata({
       url: canonicalUrl,
       siteName: SITE_NAME,
       locale: locale === "en" ? "en_BG" : "bg_BG",
-      type: "website",
+      type,
+      ...(type === "article" && publishedTime
+        ? { publishedTime }
+        : {}),
       images: [
         {
           url: imageUrl,
@@ -106,5 +121,45 @@ export function createPageMetadata({
       description,
       images: [image],
     },
+  };
+}
+
+export function getArticleJsonLd({
+  article,
+  locale = "bg",
+  image = DEFAULT_OG_IMAGE,
+}: {
+  article: Pick<Article, "slug" | "title" | "excerpt" | "date" | "tags">;
+  locale?: SiteLocale;
+  image?: string;
+}) {
+  const path = `/learn/${article.slug}` as `/${string}`;
+  const canonicalPath = locale === "en" ? getEnPath(path) : path;
+  const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.date,
+    dateModified: article.date,
+    inLanguage: locale === "en" ? "en" : "bg",
+    mainEntityOfPage: getCanonicalUrl(canonicalPath),
+    image: [imageUrl],
+    author: {
+      "@type": "Organization",
+      name: BUSINESS.name,
+      url: BUSINESS.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS.name,
+      logo: {
+        "@type": "ImageObject",
+        url: BUSINESS.logo,
+      },
+    },
+    keywords: article.tags.join(", "),
   };
 }

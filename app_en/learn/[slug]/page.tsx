@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { createPageMetadata } from "@/lib/seo";
+import {
+  createPageMetadata,
+  getArticleJsonLd,
+  serializeJsonLd,
+} from "@/lib/seo";
 import { articles, getArticleBySlug } from "@/lib/articles-en";
 import LearnEngagement from "@/components/LearnEngagement";
 
@@ -20,6 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     locale: "en",
     title: `${article.title} — Double Yellow`,
     description: article.excerpt,
+    type: "article",
+    publishedTime: article.date,
   });
 }
 
@@ -33,12 +39,18 @@ export default async function ArticlePage({ params }: Props) {
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 3);
 
+  const articleJsonLd = getArticleJsonLd({ article, locale: "en" });
+
   return (
     <main className="article-page container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
+      />
       <nav className="breadcrumb-nav" aria-label="Breadcrumb">
-        <Link href="/" className="breadcrumb-link">Home</Link>
+        <Link href="/en" className="breadcrumb-link">Home</Link>
         <span className="breadcrumb-sep">›</span>
-        <Link href="/learn" className="breadcrumb-link">Learn Squash</Link>
+        <Link href="/en/learn" className="breadcrumb-link">Learn Squash</Link>
         <span className="breadcrumb-sep">›</span>
         <span className="breadcrumb-current">{article.title}</span>
       </nav>
@@ -100,7 +112,7 @@ export default async function ArticlePage({ params }: Props) {
           <h2 className="article-more-title">More beginner guides</h2>
           <div className="article-grid article-grid--compact">
             {others.map((a) => (
-              <Link key={a.slug} href={`/learn/${a.slug}`} className="article-card">
+              <Link key={a.slug} href={`/en/learn/${a.slug}`} className="article-card">
                 <div className="article-card-body">
                   <div className="article-meta">
                     <time dateTime={a.date} className="article-date">

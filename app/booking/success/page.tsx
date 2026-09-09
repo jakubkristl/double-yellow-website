@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Резервацията е потвърдена | Double Yellow",
   description:
     "Резервацията ти е потвърдена. Очакваме те на корта в Double Yellow Squash Club.",
+  robots: { index: false, follow: false },
   alternates: { canonical: "/booking/success" },
 };
 

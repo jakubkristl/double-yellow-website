@@ -8,16 +8,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const route of siteRoutes) {
+    const languageAlternates = {
+      "bg-BG": getCanonicalUrl(route.path),
+      en: getCanonicalUrl(getEnPath(route.path)),
+      "x-default": getCanonicalUrl(route.path),
+    };
+
     entries.push({
       url: getCanonicalUrl(route.path),
       lastModified: now,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
       alternates: {
-        languages: {
-          "bg-BG": getCanonicalUrl(route.path),
-          en: getCanonicalUrl(getEnPath(route.path)),
-        },
+        languages: languageAlternates,
       },
     });
 
@@ -27,32 +30,49 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: route.changeFrequency,
       priority: Math.max(0.1, route.priority - 0.05),
       alternates: {
-        languages: {
-          "bg-BG": getCanonicalUrl(route.path),
-          en: getCanonicalUrl(getEnPath(route.path)),
-        },
+        languages: languageAlternates,
       },
     });
   }
 
+  const enBySlug = new Map(enArticles.map((article) => [article.slug, article]));
+
   for (const article of bgArticles) {
-    const path = `/learn/${article.slug}`;
+    const path = `/learn/${article.slug}` as `/${string}`;
+    const enArticle = enBySlug.get(article.slug);
+    const lastModified = new Date(
+      Math.max(
+        new Date(article.date).getTime(),
+        enArticle ? new Date(enArticle.date).getTime() : 0
+      )
+    );
+    const languageAlternates = {
+      "bg-BG": getCanonicalUrl(path),
+      en: getCanonicalUrl(getEnPath(path)),
+      "x-default": getCanonicalUrl(path),
+    };
+
     entries.push({
       url: getCanonicalUrl(path),
-      lastModified: new Date(article.date),
+      lastModified,
       changeFrequency: "monthly",
       priority: 0.7,
+      alternates: {
+        languages: languageAlternates,
+      },
     });
-  }
 
-  for (const article of enArticles) {
-    const path = `/learn/${article.slug}`;
-    entries.push({
-      url: getCanonicalUrl(getEnPath(path as `/${string}`)),
-      lastModified: new Date(article.date),
-      changeFrequency: "monthly",
-      priority: 0.65,
-    });
+    if (enArticle) {
+      entries.push({
+        url: getCanonicalUrl(getEnPath(path)),
+        lastModified,
+        changeFrequency: "monthly",
+        priority: 0.65,
+        alternates: {
+          languages: languageAlternates,
+        },
+      });
+    }
   }
 
   return entries;

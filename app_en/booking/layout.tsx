@@ -1,23 +1,13 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/booking",
+  locale: "en",
   title: "Book a Squash Court | Fast & Easy Reservations | Double Yellow",
   description:
     "Reserve a squash court at Double Yellow Squash Club in Sofia. Instant booking, flexible times, premium courts.",
-  openGraph: {
-    title: "Book a Squash Court | Fast & Easy Reservations | Double Yellow",
-    description:
-      "Reserve a squash court at Double Yellow Squash Club in Sofia. Instant booking, flexible times, premium courts.",
-    url: "https://www.doubleyellowsquash.com/booking",
-    images: [
-      {
-        url: "https://www.doubleyellowsquash.com/og/double-yellow-social-1200x630.png",
-        alt: "Double Yellow Squash Club social card",
-      },
-    ],
-  },
-  alternates: { canonical: "/booking" },
-};
+});
 
 export default function BookingLayout({
   children,
