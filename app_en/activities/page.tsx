@@ -191,7 +191,7 @@ export default function ActivitiesPage() {
           <a href="https://sport.bookinggood.net/bg/embed/facility/44/72" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
             Claim Free First Lesson
           </a>
-          <a href="/contact" className="btn btn-secondary">
+          <a href="/en/contact" className="btn btn-secondary">
             Ask A Trainer
           </a>
         </div>

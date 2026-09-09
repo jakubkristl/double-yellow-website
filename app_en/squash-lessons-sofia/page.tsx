@@ -29,8 +29,8 @@ export default function SquashLessonsSofiaPage() {
             <li>Event and community formats for match experience</li>
           </ul>
           <div className="cta-buttons">
-            <a href="/activities" className="btn btn-primary">View Coaching Sessions</a>
-            <a href="/contact" className="btn btn-secondary">Ask About Coaching</a>
+            <a href="/en/activities" className="btn btn-primary">View Coaching Sessions</a>
+            <a href="/en/contact" className="btn btn-secondary">Ask About Coaching</a>
           </div>
         </article>
 
@@ -39,7 +39,7 @@ export default function SquashLessonsSofiaPage() {
           <p className="lead">Clear drills and goals each session.</p>
           <p className="lead">Faster improvement with feedback on movement and shot choices.</p>
           <p className="lead">Direct path from first lesson to social and competitive play.</p>
-          <a href="/booking" className="btn btn-primary cta-top-gap">
+          <a href="/en/booking" className="btn btn-primary cta-top-gap">
             Reserve A Time
           </a>
         </article>

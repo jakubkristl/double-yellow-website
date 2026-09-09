@@ -60,12 +60,14 @@ export const metadata: Metadata = {
 };
 
 import { EVENTS } from "@/lib/events";
+import { isEventArchived } from "@/lib/eventArchive";
 import { getLocalBusinessJsonLd, getWebsiteJsonLd } from "@/lib/business";
+import { serializeJsonLd } from "@/lib/seo";
 
 const localBusinessSchema = getLocalBusinessJsonLd();
 const websiteSchema = getWebsiteJsonLd("bg");
 
-const eventsSchema = EVENTS.map((e) => ({
+const eventsSchema = EVENTS.filter((e) => !isEventArchived(e.endDate)).map((e) => ({
   "@type": "Event",
   "@context": "https://schema.org",
   name: e.title,
@@ -172,16 +174,18 @@ export default async function RootLayout({
         {/* SEO JSON-LD injections */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(localBusinessSchema) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteSchema) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }}
-        />
+        {eventsSchema.length > 0 ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: serializeJsonLd(eventsSchema) }}
+          />
+        ) : null}
 
         {/* Breadcrumb schema */}
         <Breadcrumbs />

@@ -31,8 +31,8 @@ export default function BeginnerSquashSofiaPage() {
           <li>Friendly players at your level</li>
         </ul>
         <div className="cta-buttons">
-          <a href="/activities" className="btn btn-primary">Join Beginner Session</a>
-          <a href="/booking" className="btn btn-secondary">Book A Court</a>
+          <a href="/en/activities" className="btn btn-primary">Join Beginner Session</a>
+          <a href="/en/booking" className="btn btn-secondary">Book A Court</a>
         </div>
       </article>
 

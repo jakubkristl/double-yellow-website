@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { createPageMetadata } from "@/lib/seo";
+import {
+  createPageMetadata,
+  getArticleJsonLd,
+  serializeJsonLd,
+} from "@/lib/seo";
 import { articles, getArticleBySlug } from "@/lib/articles";
 import LearnEngagement from "@/components/LearnEngagement";
 
@@ -19,6 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/learn/${article.slug}`,
     title: `${article.title} — Double Yellow`,
     description: article.excerpt,
+    type: "article",
+    publishedTime: article.date,
   });
 }
 
@@ -32,8 +38,14 @@ export default async function ArticlePage({ params }: Props) {
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 3);
 
+  const articleJsonLd = getArticleJsonLd({ article, locale: "bg" });
+
   return (
     <main className="article-page container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
+      />
       <nav className="breadcrumb-nav" aria-label="Навигационна пътека">
         <Link href="/" className="breadcrumb-link">Начало</Link>
         <span className="breadcrumb-sep">›</span>

@@ -30,8 +30,8 @@ export default function SquashSofiaPage() {
             <li>Rackets and balls available on site</li>
           </ul>
           <div className="cta-buttons">
-            <a href="/booking" className="btn btn-primary">Book A Court</a>
-            <a href="/activities" className="btn btn-secondary">Find A Session</a>
+            <a href="/en/booking" className="btn btn-primary">Book A Court</a>
+            <a href="/en/activities" className="btn btn-secondary">Find A Session</a>
           </div>
         </article>
 
