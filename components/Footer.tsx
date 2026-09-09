@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Route } from "next";
 import PhoneLink from "@/components/PhoneLink";
+import { BUSINESS, getVenueAddressLine } from "@/lib/business";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -27,11 +28,8 @@ export default function Footer() {
     <footer className="footer" role="contentinfo">
       <div className="container footer-grid">
         <div className="footer-col">
-          <h4 className="footer-title notranslate">Double Yellow Squash Club</h4>
-          <p className="muted">
-            National Sports Academy (NSA), ul. "Akad. Stefan Mladenov" 21, 1700
-            Sofia
-          </p>
+          <h4 className="footer-title notranslate">{BUSINESS.name}</h4>
+          <p className="muted">{getVenueAddressLine(isEn ? "en" : "bg")}</p>
           <p className="muted">
             {isEn
               ? "Open daily • MultiSport, CoolFit & card payments accepted"
@@ -71,13 +69,13 @@ export default function Footer() {
         <div className="footer-col">
           <h4 className="footer-title">{isEn ? "Contact" : "Контакт"}</h4>
           <p className="muted">
-            <PhoneLink href="tel:+359896754014">
-              +359 896 754 014
+            <PhoneLink href={BUSINESS.telephoneTelHref}>
+              {BUSINESS.telephoneDisplay}
             </PhoneLink>
           </p>
           <p className="muted">
-            <a href="mailto:jakub@doubleyellowsquash.com" aria-label="Email Double Yellow">
-              jakub@doubleyellowsquash.com
+            <a href={`mailto:${BUSINESS.email}`} aria-label="Email Double Yellow">
+              {BUSINESS.email}
             </a>
           </p>
         </div>
@@ -100,10 +98,12 @@ export default function Footer() {
 
       <div className="container footer-note">
         <p className="footer-note-main">
-          © {new Date().getFullYear()} Double Yellow Squash Club
+          © {new Date().getFullYear()} {BUSINESS.name}
         </p>
         <p className="footer-note-meta">
-          Operated by Sport And Beyond EOOD • EIK 208134448 • Lyuben Rusev 6, 1113 Sofia
+          Operated by {BUSINESS.legalName} • EIK {BUSINESS.eik} •{" "}
+          {BUSINESS.legal.streetAddress}, {BUSINESS.legal.postalCode}{" "}
+          {BUSINESS.legal.addressLocality}
         </p>
       </div>
     </footer>

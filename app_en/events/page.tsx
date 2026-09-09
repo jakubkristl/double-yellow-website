@@ -15,6 +15,7 @@ const WSF_LEVEL_1_END_DATE = "2026-06-14T23:59:59+02:00";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/events",
+  locale: "en",
   title: "Events | Double Yellow Squash",
   description:
     "Follow upcoming community sessions, guest coaching visits, and squash workshops at Double Yellow Squash Club in Sofia.",

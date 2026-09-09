@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import { BUSINESS } from "@/lib/business";
 
-export const SITE_URL = "https://www.doubleyellowsquash.com";
-export const SITE_NAME = "Double Yellow Squash Club";
+export const SITE_URL = BUSINESS.url;
+export const SITE_NAME = BUSINESS.name;
 export const DEFAULT_OG_IMAGE = "/og/double-yellow-social-1200x630.png";
+
+export type SiteLocale = "bg" | "en";
 
 type RouteDefinition = {
   path: `/${string}` | "/";
@@ -18,10 +21,12 @@ type RouteDefinition = {
 };
 
 type CreatePageMetadataInput = {
+  /** Unprefixed route path, e.g. "/" or "/contact" */
   path: `/${string}` | "/";
   title: string;
   description: string;
   image?: string;
+  locale?: SiteLocale;
 };
 
 export const siteRoutes: RouteDefinition[] = [
@@ -44,12 +49,17 @@ export const siteRoutes: RouteDefinition[] = [
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
 ];
 
-export function getCanonicalUrl(path: `/${string}` | "/") {
-  return path === "/" ? SITE_URL : `${SITE_URL}${path}`;
+export function getBgPath(path: `/${string}` | "/") {
+  return path;
 }
 
-function getEnglishAlternate(path: `/${string}` | "/") {
-  return path === "/" ? `${SITE_URL}/en` : `${SITE_URL}/en${path}`;
+export function getEnPath(path: `/${string}` | "/") {
+  return path === "/" ? "/en" : `/en${path}`;
+}
+
+export function getCanonicalUrl(path: string) {
+  if (path === "/" || path === "") return SITE_URL;
+  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 export function createPageMetadata({
@@ -57,18 +67,23 @@ export function createPageMetadata({
   title,
   description,
   image = DEFAULT_OG_IMAGE,
+  locale = "bg",
 }: CreatePageMetadataInput): Metadata {
-  const canonicalUrl = getCanonicalUrl(path);
+  const bgPath = getBgPath(path);
+  const enPath = getEnPath(path);
+  const canonicalPath = locale === "en" ? enPath : bgPath;
+  const canonicalUrl = getCanonicalUrl(canonicalPath);
   const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: path,
+      canonical: canonicalPath,
       languages: {
-        "bg-BG": path,
-        "en-US": getEnglishAlternate(path),
+        "bg-BG": bgPath,
+        en: enPath,
+        "x-default": bgPath,
       },
     },
     openGraph: {
@@ -76,7 +91,7 @@ export function createPageMetadata({
       description,
       url: canonicalUrl,
       siteName: SITE_NAME,
-      locale: "bg_BG",
+      locale: locale === "en" ? "en_BG" : "bg_BG",
       type: "website",
       images: [
         {

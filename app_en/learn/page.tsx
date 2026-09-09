@@ -6,6 +6,7 @@ import LearnEngagement from "@/components/LearnEngagement";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/learn",
+  locale: "en",
   title: "Squash Tips for Beginners — Double Yellow",
   description:
     "Weekly squash tips, tricks, and guides written for beginners in plain language. Learn the grip, the swing, the court, and why the dots on the ball matter.",
