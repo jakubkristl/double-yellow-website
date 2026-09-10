@@ -1,26 +1,31 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CookieConsent from "@/components/CookieConsent";
 import FloatingContactActions from "@/components/FloatingContactActions";
+import GoogleTracking, {
+  GoogleTagManagerNoscript,
+} from "@/components/GoogleTracking";
 import { cookies } from "next/headers";
+import { EVENTS } from "@/lib/events";
+import { getLocalBusinessJsonLd, getWebsiteJsonLd } from "@/lib/business";
+import { SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Double Yellow Squash Club - София",
   description:
     "Нови кортове. Нова енергия. Същата страст към скуоша. Double Yellow Squash Club, София.",
-  metadataBase: new URL("https://www.doubleyellowsquash.com"),
+  metadataBase: new URL(SITE_URL),
   keywords: [
-    "squash club",
+    "скуош София",
+    "скуош клуб",
     "squash Sofia",
+    "squash club Sofia",
     "WSF courts",
-    "squash coaching",
-    "squash lessons",
-    "squash events",
-    "sports club Sofia",
+    "уроци по скуош",
+    "резервация скуош корт",
   ],
   category: "Sports",
   robots: {
@@ -34,7 +39,7 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  authors: [{ name: "Double Yellow Squash Club", url: "https://www.doubleyellowsquash.com" }],
+  authors: [{ name: "Double Yellow Squash Club", url: SITE_URL }],
   openGraph: {
     title: "Double Yellow Squash Club - София",
     description:
@@ -59,11 +64,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { EVENTS } from "@/lib/events";
-import { getLocalBusinessJsonLd, getWebsiteJsonLd } from "@/lib/business";
-
 const localBusinessSchema = getLocalBusinessJsonLd();
-const websiteSchema = getWebsiteJsonLd("bg");
 
 const eventsSchema = EVENTS.map((e) => ({
   "@type": "Event",
@@ -91,10 +92,6 @@ const eventsSchema = EVENTS.map((e) => ({
   offers: e.offers,
 }));
 
-const conversionDebugEnabled =
-  process.env.NODE_ENV !== "production" ||
-  process.env.NEXT_PUBLIC_DEBUG_CONVERSIONS === "1";
-
 export default async function RootLayout({
   children,
 }: {
@@ -102,58 +99,15 @@ export default async function RootLayout({
 }) {
   const cookieStore = await cookies();
   const activeLang = cookieStore.get("site_lang")?.value === "en" ? "en" : "bg";
+  const websiteSchema = getWebsiteJsonLd(activeLang);
 
   return (
     <html lang={activeLang}>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-T7KDHVST');
-              window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-            `,
-          }}
-        />
+        <GoogleTracking />
       </head>
       <body>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-T7KDHVST"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-
-        {/* Google Ads Conversion Tracking for Completed Bookings */}
-        <Script id="google-ads-conversion" strategy="afterInteractive">
-          {`
-            var debugEnabled = ${conversionDebugEnabled ? "true" : "false"};
-
-            window.gtag_report_booking_complete = function (bookingId) {
-              var payload = {
-                'send_to': 'AW-17840430561/Vnw5CK6LvOAbEOG7_bpC',
-                'value': 1.0,
-                'currency': 'EUR'
-              };
-
-              if (bookingId) {
-                payload.transaction_id = String(bookingId);
-              }
-
-              if (debugEnabled && typeof console !== 'undefined' && console.info) {
-                console.info('[tracking] booking conversion payload', payload);
-              }
-
-              window.gtag('event', 'conversion', payload);
-              return true;
-            };
-          `}
-        </Script>
+        <GoogleTagManagerNoscript />
 
         <a
           href="#main-content"

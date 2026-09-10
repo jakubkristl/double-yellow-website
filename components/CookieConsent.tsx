@@ -2,6 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import {
+  applyGoogleConsent,
+  COOKIE_CONSENT_STORAGE_KEY,
+  type CookieConsentPreferences,
+} from "@/lib/tracking";
 import "./CookieConsent.css";
 
 export default function CookieConsent() {
@@ -14,37 +19,36 @@ export default function CookieConsent() {
   });
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const consent = localStorage.getItem("cookieConsent");
+    const consent = localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY);
     if (!consent) {
-      // Small delay to avoid flash on page load
+      applyGoogleConsent({
+        essential: true,
+        analytics: false,
+        marketing: false,
+      });
       setTimeout(() => setShowBanner(true), 500);
-    } else {
-      // Load saved preferences
-      try {
-        const saved = JSON.parse(consent);
-        setPreferences(saved);
-      } catch (e) {
-        // Invalid data, show banner again
-        setShowBanner(true);
-      }
+      return;
+    }
+
+    try {
+      const saved = JSON.parse(consent) as CookieConsentPreferences;
+      setPreferences(saved);
+      applyGoogleConsent(saved);
+    } catch {
+      applyGoogleConsent({
+        essential: true,
+        analytics: false,
+        marketing: false,
+      });
+      setShowBanner(true);
     }
   }, []);
 
   const savePreferences = (prefs: typeof preferences) => {
-    localStorage.setItem("cookieConsent", JSON.stringify(prefs));
+    localStorage.setItem(COOKIE_CONSENT_STORAGE_KEY, JSON.stringify(prefs));
+    applyGoogleConsent(prefs);
     setShowBanner(false);
     setShowCustomize(false);
-    
-    // Here you would initialize analytics/marketing scripts based on preferences
-    if (prefs.analytics) {
-      // Initialize analytics (e.g., Google Analytics)
-      console.log("Analytics enabled");
-    }
-    if (prefs.marketing) {
-      // Initialize marketing pixels (e.g., Facebook Pixel)
-      console.log("Marketing enabled");
-    }
   };
 
   const acceptAll = () => {

@@ -48,6 +48,10 @@ export const BUSINESS = {
     ] as const,
   },
   mapUrl: "https://maps.app.goo.gl/UDAAByWq8sRQgraM9",
+  geo: {
+    latitude: 42.646389,
+    longitude: 23.348889,
+  },
   sameAs: [
     "https://www.facebook.com/profile.php?id=61576296615086",
     "https://www.instagram.com/doubleyellowsquashclub/",
@@ -75,6 +79,8 @@ export function getLocalBusinessJsonLd() {
     telephone: BUSINESS.telephoneDisplay,
     email: BUSINESS.email,
     priceRange: BUSINESS.priceRange,
+    currenciesAccepted: "BGN, EUR",
+    paymentAccepted: "Cash, Credit Card, MultiSport, CoolFit",
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS.venue.streetAddress,
@@ -83,7 +89,29 @@ export function getLocalBusinessJsonLd() {
       addressCountry: BUSINESS.venue.addressCountry,
       addressRegion: BUSINESS.venue.addressRegion,
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: BUSINESS.geo.latitude,
+      longitude: BUSINESS.geo.longitude,
+    },
     hasMap: BUSINESS.mapUrl,
+    openingHours: "Mo-Su 07:00-22:00",
+    areaServed: {
+      "@type": "City",
+      name: "Sofia",
+    },
+    amenityFeature: [
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "WSF squash courts",
+        value: true,
+      },
+    ],
+    potentialAction: {
+      "@type": "ReserveAction",
+      target: `${BUSINESS.url}/booking`,
+      name: "Book a squash court",
+    },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

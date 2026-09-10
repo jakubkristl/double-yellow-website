@@ -27,6 +27,7 @@ type CreatePageMetadataInput = {
   description: string;
   image?: string;
   locale?: SiteLocale;
+  robots?: Metadata["robots"];
 };
 
 export const siteRoutes: RouteDefinition[] = [
@@ -68,6 +69,7 @@ export function createPageMetadata({
   description,
   image = DEFAULT_OG_IMAGE,
   locale = "bg",
+  robots,
 }: CreatePageMetadataInput): Metadata {
   const bgPath = getBgPath(path);
   const enPath = getEnPath(path);
@@ -78,6 +80,7 @@ export function createPageMetadata({
   return {
     title,
     description,
+    robots,
     alternates: {
       canonical: canonicalPath,
       languages: {
@@ -92,6 +95,7 @@ export function createPageMetadata({
       url: canonicalUrl,
       siteName: SITE_NAME,
       locale: locale === "en" ? "en_BG" : "bg_BG",
+      alternateLocale: locale === "en" ? ["bg_BG"] : ["en_BG"],
       type: "website",
       images: [
         {

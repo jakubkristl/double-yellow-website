@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const PUBLIC_FILE = /\/[^/]+$/;
+const PUBLIC_FILE = /\.[a-zA-Z0-9]+$/;
 
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
