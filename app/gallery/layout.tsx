@@ -1,22 +1,13 @@
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/gallery",
   title: "Галерия | Double Yellow Squash Club",
   description:
     "Разгледай снимки на реновираните ни скуош кортове, събития, активности и играчи в Double Yellow Squash Club в София.",
-  openGraph: {
-    title: "Галерия | Double Yellow Squash Club",
-    description:
-      "Разгледай снимки на реновираните ни скуош кортове, събития, активности и играчи в Double Yellow Squash Club в София.",
-    url: "https://www.doubleyellowsquash.com/gallery",
-    images: [
-      {
-        url: "https://www.doubleyellowsquash.com/hero/01.jpeg",
-        alt: "Double Yellow Squash Club courts",
-      },
-    ],
-  },
-};
+  image: "/hero/01.jpeg",
+});
 
 export default function GalleryLayout({
   children,

@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {};
   return createPageMetadata({
     path: `/learn/${article.slug}`,
+    locale: "en",
     title: `${article.title} — Double Yellow`,
     description: article.excerpt,
   });
