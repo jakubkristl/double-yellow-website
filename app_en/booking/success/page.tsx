@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import BookingSuccessTracker from "@/components/BookingSuccessTracker";
 import styles from "./styles.module.css";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/booking/success",
+  locale: "en",
   title: "Booking Confirmed | Double Yellow",
   description:
     "Your booking has been confirmed. See you on court at Double Yellow Squash Club.",
-  alternates: { canonical: "/booking/success" },
-};
+  robots: { index: false, follow: false },
+});
 
 type Props = {
   searchParams?: Promise<{

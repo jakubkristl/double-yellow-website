@@ -6,12 +6,6 @@ type Props = {
   bookingId?: string;
 };
 
-declare global {
-  interface Window {
-    gtag_report_booking_complete?: (bookingId?: string) => boolean;
-  }
-}
-
 export default function BookingSuccessTracker({ bookingId }: Props) {
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -39,11 +33,45 @@ export default function BookingSuccessTracker({ bookingId }: Props) {
       return;
     }
 
-    if (typeof window.gtag_report_booking_complete === "function") {
-      window.gtag_report_booking_complete(id);
+    let cancelled = false;
+    let attempts = 0;
+
+    const fire = () => {
+      if (cancelled) {
+        return;
+      }
+
+      if (typeof window.gtag_report_booking_complete !== "function") {
+        if (attempts < 20) {
+          attempts += 1;
+          window.setTimeout(fire, 250);
+        }
+        return;
+      }
+
+      const sent = window.gtag_report_booking_complete(id);
+      if (!sent) {
+        return;
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "booking_complete",
+        booking_id: id,
+        transaction_id: id,
+        value: 1.0,
+        currency: "EUR",
+      });
+
       window.sessionStorage.setItem(dedupeKey, "1");
       window.localStorage.setItem(dedupeKey, "1");
-    }
+    };
+
+    fire();
+
+    return () => {
+      cancelled = true;
+    };
   }, [bookingId]);
 
   return null;
