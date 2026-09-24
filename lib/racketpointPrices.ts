@@ -70,25 +70,27 @@ function effectiveSellPrice(product: PublicCatalogProduct) {
 }
 
 export async function fetchRacketpointPublicCatalog(): Promise<PublicCatalogProduct[]> {
-  const url = `${racketpointBaseUrl()}/api/catalog/public`;
+  const base = racketpointBaseUrl();
 
-  try {
-    const response = await fetch(url, {
-      next: { revalidate: 120, tags: ["racketpoint-prices"] },
-      headers: { Accept: "application/json" },
-    });
-
-    if (!response.ok) {
-      // Fallback for environments that do not yet have /api/catalog/public deployed.
-      const legacy = await fetch(`${racketpointBaseUrl()}/api/products`, {
+  const tryParseProducts = async (url: string): Promise<PublicCatalogProduct[] | null> => {
+    try {
+      const response = await fetch(url, {
         next: { revalidate: 120, tags: ["racketpoint-prices"] },
         headers: { Accept: "application/json" },
       });
-      if (!legacy.ok) {
-        return [];
+      if (!response.ok) {
+        return null;
       }
-      const legacyRows = (await legacy.json()) as Array<Record<string, unknown>>;
-      return legacyRows.map((row) => ({
+      const contentType = response.headers.get("content-type") ?? "";
+      if (!contentType.includes("application/json")) {
+        // SPA rewrite can return 200 HTML for undeployed API routes.
+        return null;
+      }
+      const rows = (await response.json()) as Array<Record<string, unknown>>;
+      if (!Array.isArray(rows)) {
+        return null;
+      }
+      return rows.map((row) => ({
         id: String(row.id ?? ""),
         slug: String(row.slug ?? ""),
         title: String(row.title ?? ""),
@@ -99,16 +101,23 @@ export async function fetchRacketpointPublicCatalog(): Promise<PublicCatalogProd
             : Number(row.discountPrice ?? row.discount_price),
         stock: Number(row.stock ?? 0),
         sourceSku:
-          row.attributes && typeof row.attributes === "object" && typeof (row.attributes as any).sourceSku === "string"
-            ? String((row.attributes as any).sourceSku)
-            : null,
+          row.attributes && typeof row.attributes === "object" && typeof (row.attributes as { sourceSku?: unknown }).sourceSku === "string"
+            ? String((row.attributes as { sourceSku: string }).sourceSku)
+            : typeof row.sourceSku === "string"
+              ? row.sourceSku
+              : null,
       }));
+    } catch {
+      return null;
     }
+  };
 
-    return (await response.json()) as PublicCatalogProduct[];
-  } catch {
-    return [];
-  }
+  // Prefer the cost-free public feed; fall back to /api/products until that route is live.
+  return (
+    (await tryParseProducts(`${base}/api/catalog/public`))
+    ?? (await tryParseProducts(`${base}/api/products`))
+    ?? []
+  );
 }
 
 function applyLivePrice(item: Item, byKey: Map<string, PublicCatalogProduct>): LiveStoreItem {
