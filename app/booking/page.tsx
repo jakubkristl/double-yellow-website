@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function BookingPage() {
   const [isLoading, setIsLoading] = useState(true);
   const embedSrc =
-    "https://sport.bookinggood.net/bg/embed/facility/44/72";
+    "https://sport.bookinggood.net/bg/embed/facility/44/72?theme=dark";
 
   const bookingSteps = [
     {
