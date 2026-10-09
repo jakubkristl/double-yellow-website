@@ -1,8 +1,14 @@
-import { ADS_BOOKING_CONVERSION, GTM_ID } from "@/lib/tracking";
+import {
+  ADS_BOOKING_CONVERSION,
+  ADS_ID,
+  GA_MEASUREMENT_ID,
+  GTM_ID,
+} from "@/lib/tracking";
 
 /**
- * Consent Mode defaults + GTM. Google Ads conversions are not configured on
- * page load; they fire only from BookingSuccessTracker when a booking id exists.
+ * Consent Mode defaults + gtag.js (Ads + GA4) + GTM.
+ * Google Ads booking conversions fire only via
+ * `gtag_report_booking_complete` (success page or embed bridge).
  */
 export default function GoogleTracking() {
   const bootstrap = `
@@ -17,6 +23,8 @@ export default function GoogleTracking() {
       wait_for_update: 500
     });
     gtag('js', new Date());
+    gtag('config', '${ADS_ID}');
+    gtag('config', '${GA_MEASUREMENT_ID}');
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -37,9 +45,15 @@ export default function GoogleTracking() {
   `;
 
   return (
-    <script
-      dangerouslySetInnerHTML={{ __html: bootstrap.replace(/\s+/g, " ").trim() }}
-    />
+    <>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}
+      />
+      <script
+        dangerouslySetInnerHTML={{ __html: bootstrap.replace(/\s+/g, " ").trim() }}
+      />
+    </>
   );
 }
 
