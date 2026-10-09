@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import type { Route } from "next";
 import {
   extractBookingIdFromMessage,
   isBookingGoodOrigin,
@@ -73,7 +74,9 @@ export default function BookingEmbedConversionBridge({
       fired.add(id);
 
       const prefix = localePrefix.replace(/\/$/, "");
-      router.push(`${prefix}/booking/success?booking_id=${encodeURIComponent(id)}`);
+      const successPath =
+        `${prefix}/booking/success?booking_id=${encodeURIComponent(id)}` as Route;
+      router.push(successPath);
       return true;
     };
 
