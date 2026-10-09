@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { isUsableBookingId } from "@/lib/tracking";
 
 type Props = {
   bookingId?: string;
@@ -15,12 +16,7 @@ export default function BookingSuccessTracker({ bookingId }: Props) {
     const id = bookingId?.trim();
 
     // Only fire for explicit booking confirmations carrying a booking id.
-    if (!id) {
-      return;
-    }
-
-    // Avoid polluting production metrics with common QA/test ids.
-    if (/^(qa|test)[-_]/i.test(id)) {
+    if (!isUsableBookingId(id)) {
       return;
     }
 
@@ -61,6 +57,7 @@ export default function BookingSuccessTracker({ bookingId }: Props) {
         transaction_id: id,
         value: 1.0,
         currency: "EUR",
+        source: "booking_success_page",
       });
 
       window.sessionStorage.setItem(dedupeKey, "1");

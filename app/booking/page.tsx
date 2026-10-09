@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import BookingEmbedConversionBridge from "@/components/BookingEmbedConversionBridge";
 
 export default function BookingPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,6 +32,7 @@ export default function BookingPage() {
 
   return (
     <main className="container">
+      <BookingEmbedConversionBridge localePrefix="" />
       <section className="page-hero">
         <h1 className="page-title">Резервации</h1>
         <p style={{ color: "#999", marginTop: "8px" }}>
