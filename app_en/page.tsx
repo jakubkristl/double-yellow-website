@@ -68,6 +68,11 @@ export default function Home() {
 
   const heroSlides: HeroSlide[] = [
     {
+      src: "/events/kids-sunday-cancelled-2026-10-12.png",
+      alt: "Important for parents: no kids squash training this Sunday due to a competition",
+      endsOn: "2026-10-12",
+    },
+    {
       src: "/events/easter-holiday-hours-2026.jpg",
       alt: "Double Yellow Squash Easter holiday hours poster",
       startsOn: "2026-03-20",

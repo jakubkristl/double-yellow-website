@@ -67,6 +67,11 @@ export default function Home() {
 
   const heroSlides: HeroSlide[] = [
     {
+      src: "/events/kids-sunday-cancelled-2026-10-12.png",
+      alt: "Важно за родителите: тази неделя няма детска тренировка по скуош заради състезание",
+      endsOn: "2026-10-12",
+    },
+    {
       src: "/events/easter-holiday-hours-2026.jpg",
       alt: "Плакат за великденското работно време на Double Yellow Squash",
       startsOn: "2026-03-20",
