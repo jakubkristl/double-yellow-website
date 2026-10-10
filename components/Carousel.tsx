@@ -56,7 +56,10 @@ export default function Carousel({
   return (
     <div className="carousel">
       {displayImages.map((src, idx) => {
-        const isPosterSlide = idx === 0 && Boolean(links[idx]);
+        // Announcement posters (/events/…) and linked first slides use contain so text is not cropped.
+        const isPosterSlide =
+          idx === 0 &&
+          (Boolean(links[idx]) || src.startsWith("/events/"));
         const overlay = overlays[idx];
         const imageStyle = {
           objectFit: isPosterSlide ? ("contain" as const) : ("cover" as const),
