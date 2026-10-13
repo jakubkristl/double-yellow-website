@@ -11,6 +11,7 @@ import GoogleTracking, {
 } from "@/components/GoogleTracking";
 import { cookies } from "next/headers";
 import { EVENTS } from "@/lib/events";
+import { isEventArchived } from "@/lib/eventArchive";
 import { getLocalBusinessJsonLd, getWebsiteJsonLd } from "@/lib/business";
 import { SITE_URL } from "@/lib/seo";
 
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
 
 const localBusinessSchema = getLocalBusinessJsonLd();
 
-const eventsSchema = EVENTS.map((e) => ({
+const eventsSchema = EVENTS.filter((e) => !isEventArchived(e.endDate)).map((e) => ({
   "@type": "Event",
   "@context": "https://schema.org",
   name: e.title,

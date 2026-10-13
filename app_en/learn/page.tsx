@@ -63,7 +63,7 @@ export default function LearnPage() {
         <p className="lead">Everything you just read makes a lot more sense when someone is on court showing you in real time.</p>
         <div className="cta-buttons">
           <a
-            href="https://sport.bookinggood.net/bg/embed/facility/44/72"
+            href="/en/booking"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary"

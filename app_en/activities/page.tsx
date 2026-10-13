@@ -26,7 +26,7 @@ const featuredActivities: Activity[] = [
     schedule: "Fridays 18:00–20:00",
     benefit:
       "No partner needed. Show up, get matched, and play. Sofia's most social squash night — all levels welcome, just bring yourself.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=5&time=18:00",
+    bookingUrl: "/en/booking?day=5&time=18:00",
     image: "/activities/comeandplay.jpg",
     alt: "Social Squash Friday night",
     cta: "Join This Friday",
@@ -38,7 +38,7 @@ const featuredActivities: Activity[] = [
     schedule: "Saturdays & Sundays 10:00",
     benefit:
       "Small groups, fun drills, and coach-led development. Great first step for kids, equipment included.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=6&time=10:00",
+    bookingUrl: "/en/booking?day=6&time=10:00",
     image: "/activities/minisquash.jpg",
     alt: "Mini Squash for kids",
     cta: "Book Kids Session",
@@ -51,7 +51,7 @@ const otherActivities: Activity[] = [
     schedule: "Check with reception for current availability",
     benefit:
       "Guided sessions for absolute beginners. First lesson free, trainer and equipment included.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    bookingUrl: "/en/booking",
     image: "/activities/beginners.jpg",
     alt: "Squash for Beginners",
     cta: "Book Beginner Session",
@@ -61,7 +61,7 @@ const otherActivities: Activity[] = [
     schedule: "Check with reception for current availability",
     benefit:
       "Women-only session with a friendly pace and clear coaching support to build confidence quickly.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    bookingUrl: "/en/booking",
     image: "/activities/timeforladies.jpg",
     alt: "Time for Ladies",
     cta: "Book Ladies Session",
@@ -71,7 +71,7 @@ const otherActivities: Activity[] = [
     schedule: "Check with reception for current availability",
     benefit:
       "Play 7 matches in 2 hours, guaranteed. High-energy round-robin format with quick rotations.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    bookingUrl: "/en/booking",
     image: "/activities/magnificent7.jpg",
     alt: "Magnificent 7",
     cta: "Reserve Magnificent 7",
@@ -116,12 +116,7 @@ function ActivityCard({
         <p className="activity-schedule">{activity.schedule}</p>
         <p className="activity-benefit">{activity.benefit}</p>
         {activity.bookingUrl ? (
-          <a
-            href={activity.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
+          <a href={activity.bookingUrl} className="btn btn-primary">
             {activity.cta}
           </a>
         ) : (
@@ -188,7 +183,7 @@ export default function ActivitiesPage() {
           <li>Racket and shoes provided</li>
         </ul>
         <div className="cta-buttons">
-          <a href="https://sport.bookinggood.net/bg/embed/facility/44/72" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+          <a href="/en/booking" className="btn btn-primary">
             Claim Free First Lesson
           </a>
           <a href="/contact" className="btn btn-secondary">

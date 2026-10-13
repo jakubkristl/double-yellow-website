@@ -83,6 +83,19 @@ export default function MembershipPage() {
             {p.valueNote && <div className="membership-value-note">{p.valueNote}</div>}
             <div>{p.fun}</div>
             {p.daytime && <div className="badge">Once per day until 17:00</div>}
+            <div className="cta-buttons" style={{ marginTop: 16 }}>
+              <a
+                href="https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%20want%20a%20membership%20pack%3A%20"
+                className="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ask on WhatsApp
+              </a>
+              <a href="/en/booking" className="btn btn-secondary">
+                Book a court
+              </a>
+            </div>
           </article>
         ))}
       </div>
@@ -97,7 +110,7 @@ export default function MembershipPage() {
         color: "#ddd",
       }}>
         <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
-          <strong style={{ color: "var(--accent)" }}>💳 Physical Cards:</strong> All membership cards are available at the reception desk when you purchase your pack. Bring your ID and come ready to play!
+          <strong style={{ color: "var(--accent)" }}>Physical cards:</strong> Membership cards are issued at reception when you buy a pack. Bring ID and come ready to play. For a single visit, ask at reception or book a court online.
         </p>
       </div>
 

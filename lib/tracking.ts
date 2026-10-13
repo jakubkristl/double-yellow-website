@@ -268,6 +268,36 @@ export function trackMetaBookingSchedule(bookingId: string) {
   });
 }
 
+/**
+ * Intro / lesson lead — Google Ads + GA4 generate_lead + Meta Lead.
+ * No-ops quietly when tags are not ready or marketing consent is off.
+ */
+export function trackLeadConversion(source: string) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "generate_lead",
+    lead_source: source,
+  });
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "generate_lead", {
+      currency: "EUR",
+      value: 1.0,
+      lead_source: source,
+    });
+  }
+
+  trackMetaEvent("Lead", {
+    content_name: source,
+    currency: "EUR",
+    value: 1.0,
+  });
+}
+
 /** Apply Google Consent Mode + Meta Pixel based on cookie preferences. */
 export function applyCookieConsent(prefs: CookieConsentPreferences) {
   applyGoogleConsent(prefs);

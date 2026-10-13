@@ -38,7 +38,16 @@ export default function StorePage() {
           <strong>Налично в клуба</strong> - виж го, пробвай го, играй.
           <br />
           <span style={{ marginTop: "8px", display: "inline-block" }}>
-            Поръчай по имейл{" "}
+            Поръчай онлайн в{" "}
+            <a
+              href="https://www.racketpoint.bg"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#ffcc00", textDecoration: "underline" }}
+            >
+              Racketpoint.bg
+            </a>
+            , по имейл{" "}
             <a href="mailto:jakub@doubleyellowsquash.com" style={{ color: "#ffcc00", textDecoration: "underline" }}>
               jakub@doubleyellowsquash.com
             </a>
@@ -49,7 +58,7 @@ export default function StorePage() {
             >
               0896 754 014
             </a>
-            . Изпращаме с Еконт / Спиди.
+            . Налично и в клуба.
           </span>
         </div>
       </div>

@@ -5,9 +5,6 @@ import { createPageMetadata } from "@/lib/seo";
 import AvailabilityTeaser from "@/components/AvailabilityTeaser";
 import IntroLeadForm from "@/components/IntroLeadForm";
 
-const BOOKING_EMBED_URL =
-  "https://sport.bookinggood.net/bg/embed/facility/44/72";
-
 const WHATSAPP_CTA_URL =
   "https://wa.me/359896754014?text=Здравейте%20Double%20Yellow!%20Искам%20да%20запазя%20първата%20си%20тренировка%20по%20скуош.";
 
@@ -150,12 +147,12 @@ export default function Home() {
           <li>Свързваме те с играчи на твоето ниво</li>
         </ul>
         <div className="urgency-strip" role="status" aria-live="polite">
-          <span>Пиковите часове се изчерпват всеки ден</span>
-          <span>Следващ свободен: днес 19:00</span>
+          <span>Пиковите часове 18:00–21:00 се пълнят бързо</span>
+          <span>Резервирай предварително за вечерна игра</span>
         </div>
         <div className="cta-buttons">
-          <a href="/activities" className="btn btn-primary">
-            Включи се в сесия за начинаещи
+          <a href="/booking" className="btn btn-primary">
+            Резервирай корт
           </a>
           <a href={WHATSAPP_CTA_URL} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
             Пиши в WhatsApp
@@ -261,13 +258,13 @@ export default function Home() {
         </article>
 
         <article className="card availability-card">
-          <h2 className="h2">Бърза резервация, реални свободни часове</h2>
+          <h2 className="h2">Бърза резервация на сайта</h2>
           <p className="lead">
-            Най-натоварените часове са 18:00-21:00. Ако искаш вечерна игра, резервирай предварително.
+            Най-натоварените часове са 18:00-21:00. Резервирай тук, за да видим реалните свободни слотове и да отчетем записа правилно.
           </p>
           <AvailabilityTeaser />
-          <a href={BOOKING_EMBED_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-            Отвори резервациите на живо
+          <a href="/booking" className="btn btn-primary">
+            Виж свободните часове
           </a>
         </article>
       </section>

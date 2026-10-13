@@ -30,6 +30,15 @@ export default function StorePage() {
           <br />
           <span style={{ marginTop: "8px", display: "inline-block" }}>
             Order via email{" "}
+            <a
+              href="https://www.racketpoint.bg"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#ffcc00", textDecoration: "underline" }}
+            >
+              Racketpoint.bg
+            </a>
+            , email{" "}
             <a href="mailto:jakub@doubleyellowsquash.com" style={{ color: "#ffcc00", textDecoration: "underline" }}>
               jakub@doubleyellowsquash.com
             </a>

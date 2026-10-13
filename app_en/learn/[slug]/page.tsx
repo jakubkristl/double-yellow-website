@@ -76,7 +76,7 @@ export default async function ArticlePage({ params }: Props) {
           <h2 className="h2">First lesson free. Trainer and equipment included.</h2>
           <div className="cta-buttons">
             <a
-              href="https://sport.bookinggood.net/bg/embed/facility/44/72"
+              href="/en/booking"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"

@@ -5,9 +5,6 @@ import { createPageMetadata } from "@/lib/seo";
 import AvailabilityTeaser from "@/components/AvailabilityTeaser";
 import IntroLeadForm from "@/components/IntroLeadForm";
 
-const BOOKING_EMBED_URL =
-  "https://sport.bookinggood.net/bg/embed/facility/44/72";
-
 const WHATSAPP_CTA_URL =
   "https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%20want%20to%20book%20my%20first%20squash%20session.";
 
@@ -151,12 +148,12 @@ export default function Home() {
           <li>We match you with players at your level</li>
         </ul>
         <div className="urgency-strip" role="status" aria-live="polite">
-          <span>Peak hours sell out daily</span>
-          <span>Next available: today 19:00</span>
+          <span>Peak hours 18:00–21:00 fill fast</span>
+          <span>Book ahead for evening play</span>
         </div>
         <div className="cta-buttons">
-          <a href="/activities" className="btn btn-primary">
-            Join Beginner Session
+          <a href="/en/booking" className="btn btn-primary">
+            Book a court
           </a>
           <a href={WHATSAPP_CTA_URL} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
             Ask On WhatsApp
@@ -264,13 +261,13 @@ export default function Home() {
         </article>
 
         <article className="card availability-card">
-          <h2 className="h2">Fast booking, real urgency</h2>
+          <h2 className="h2">Book on-site for live availability</h2>
           <p className="lead">
-            Courts are busiest 18:00-21:00. If you want evening play, book ahead.
+            Courts are busiest 18:00-21:00. Book here to see real open slots and so we can attribute the booking correctly.
           </p>
           <AvailabilityTeaser />
-          <a href={BOOKING_EMBED_URL} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-            Open Live Booking
+          <a href="/en/booking" className="btn btn-primary">
+            See open courts
           </a>
         </article>
       </section>

@@ -3,9 +3,9 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/booking",
-  title: "Резервация на скуош корт | Бързо и лесно | Double Yellow",
+  title: "Резервирай скуош корт в София | Double Yellow",
   description:
-    "Резервирай скуош корт в Double Yellow Squash Club в София. Моментално потвърждение, гъвкави часове и премиум кортове.",
+    "Живи свободни часове за скуош в София. Double Yellow — WSF кортове, 07:00–22:00. Резервирай онлайн с моментално потвърждение.",
 });
 
 export default function BookingLayout({
