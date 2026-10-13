@@ -105,10 +105,8 @@ export default async function RootLayout({
 
   return (
     <html lang={activeLang}>
-      <head>
-        <GoogleTracking />
-      </head>
       <body>
+        <GoogleTracking />
         <GoogleTagManagerNoscript />
 
         <a
