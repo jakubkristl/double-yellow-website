@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CookieConsent from "@/components/CookieConsent";
+import MetaPixel from "@/components/MetaPixel";
 import FloatingContactActions from "@/components/FloatingContactActions";
 import GoogleTracking, {
   GoogleTagManagerNoscript,
@@ -144,6 +145,7 @@ export default async function RootLayout({
         <main id="main-content" className="container">{children}</main>
         <Footer />
         <FloatingContactActions />
+        <MetaPixel />
         <CookieConsent />
       </body>
     </html>

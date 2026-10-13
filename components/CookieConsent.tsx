@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
-  applyGoogleConsent,
+  applyCookieConsent,
   COOKIE_CONSENT_STORAGE_KEY,
   type CookieConsentPreferences,
 } from "@/lib/tracking";
@@ -21,7 +21,7 @@ export default function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY);
     if (!consent) {
-      applyGoogleConsent({
+      applyCookieConsent({
         essential: true,
         analytics: false,
         marketing: false,
@@ -33,9 +33,9 @@ export default function CookieConsent() {
     try {
       const saved = JSON.parse(consent) as CookieConsentPreferences;
       setPreferences(saved);
-      applyGoogleConsent(saved);
+      applyCookieConsent(saved);
     } catch {
-      applyGoogleConsent({
+      applyCookieConsent({
         essential: true,
         analytics: false,
         marketing: false,
@@ -46,7 +46,7 @@ export default function CookieConsent() {
 
   const savePreferences = (prefs: typeof preferences) => {
     localStorage.setItem(COOKIE_CONSENT_STORAGE_KEY, JSON.stringify(prefs));
-    applyGoogleConsent(prefs);
+    applyCookieConsent(prefs);
     setShowBanner(false);
     setShowCustomize(false);
   };
