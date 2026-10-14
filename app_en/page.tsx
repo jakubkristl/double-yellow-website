@@ -29,6 +29,7 @@ const WSF_LEVEL_1_COURSE_URL =
   "https://europeansquash.com/event/wsf-level-1-coaching-course/";
 const DOUBLE_YELLOW_OPEN_URL =
   "https://www.rankedin.com/en/tournament/74899/double-yellow-open";
+const RACKETPOINT_URL = "https://www.racketpoint.bg";
 
 function getSofiaDate() {
   const parts = new Intl.DateTimeFormat("en", {
@@ -66,6 +67,20 @@ export default function Home() {
   const today = getSofiaDate();
 
   const heroSlides: HeroSlide[] = [
+    {
+      src: "/events/black-friday-2026.png",
+      alt: "Black Friday at Double Yellow — 10% off club cards at the desk and Unsquashable rackets on racketpoint.bg, 13–16 November 2026",
+      link: RACKETPOINT_URL,
+      linkLabel: "Open racketpoint.bg for Unsquashable rackets at 10% off",
+      overlay: {
+        eyebrow: "Black Friday · 13–16 Nov",
+        title: "10% off club cards & Unsquashable",
+        body: "Cards at the desk (WhatsApp / club). Rackets online at racketpoint.bg.",
+        ctaLabel: "Shop racketpoint.bg",
+      },
+      startsOn: "2026-11-11",
+      endsOn: "2026-11-16",
+    },
     {
       src: "/events/double-yellow-open-2026-10.png",
       alt: "Double Yellow Open — squash tournament on 24–25 October 2026 at Double Yellow Squash Club",
