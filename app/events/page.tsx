@@ -12,6 +12,9 @@ const WSF_LEVEL_1_COURSE_URL =
 const WSF_LEVEL_1_ENTRY_FORM_URL =
   "https://europeansquash.com/wp-content/uploads/2026/03/Entry_Form_Level_1_Bulgaria_2026.pdf";
 const WSF_LEVEL_1_END_DATE = "2026-06-14T23:59:59+02:00";
+const DOUBLE_YELLOW_OPEN_URL =
+  "https://www.rankedin.com/en/tournament/74899/double-yellow-open";
+const DOUBLE_YELLOW_OPEN_END_DATE = "2026-10-26T23:59:59+02:00";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/events",
@@ -24,13 +27,60 @@ export const metadata: Metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function EventsPage() {
+  const isOpenArchived = isEventArchived(DOUBLE_YELLOW_OPEN_END_DATE);
   const isLevel1Archived = isEventArchived(WSF_LEVEL_1_END_DATE);
+  const hasArchivedEvents = isOpenArchived || isLevel1Archived;
 
   return (
     <main>
       <section className="container container--narrow">
         <h1 className="page-title">Събития</h1>
         <p className="subtitle">Еднократни събития, уъркшопи и гостуващи треньори.</p>
+
+        {!isOpenArchived && (
+          <div className={`event-card ${styles.eventCardMidGap}`}>
+            <h2 className={styles.eventHeading}>Double Yellow Open</h2>
+            <Link
+              href={DOUBLE_YELLOW_OPEN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Регистрирай се за Double Yellow Open в RankedIn"
+              className={styles.eventMediaLink}
+            >
+              <OptimizedImage
+                src="/events/double-yellow-open-2026-10.png"
+                alt="Плакат за Double Yellow Open — скуош турнир на 24–25 октомври 2026"
+                width={857}
+                height={830}
+                className={styles.eventMedia}
+                priority
+              />
+            </Link>
+            <p className={styles.eventTextGap}>
+              <strong>Дати:</strong> 24–25 октомври 2026 г.
+            </p>
+            <p className={styles.eventTextGap}>
+              Скуош турнир за всички категории в Double Yellow Squash Club. Два дни
+              състезателна игра, открита регистрация и места за клубни и свободни играчи.
+            </p>
+            <h3 className={styles.eventSubheading}>Ключови детайли</h3>
+            <ul className={styles.eventList}>
+              <li>Локация: Double Yellow Squash Club</li>
+              <li>Краен срок за регистрация: 22 октомври 2026</li>
+              <li>Такса: €25 клубни състезатели / €35 свободни играчи</li>
+            </ul>
+            <div className="actions">
+              <Link
+                href={DOUBLE_YELLOW_OPEN_URL}
+                className="btn btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Регистрирай се в RankedIn
+              </Link>
+            </div>
+          </div>
+        )}
 
         {!isLevel1Archived && (
           <div className={`event-card ${styles.eventCardMidGap}`}>
@@ -127,19 +177,29 @@ export default function EventsPage() {
           </div>
         )}
 
-        {isLevel1Archived && (
+        {hasArchivedEvents && (
           <div className={`event-card ${styles.eventCardMidGap}`}>
             <h2 className={styles.eventHeading}>Архивни събития</h2>
             <p className={styles.eventArchivedNote}>
               Минали събития остават достъпни за справка и възстановяване на контекст.
             </p>
             <ul className={styles.eventArchiveList}>
-              <li className={styles.eventArchiveItem}>
-                <Link href={WSF_LEVEL_1_COURSE_URL} target="_blank" rel="noopener noreferrer">
-                  WSF Level 1 Coaching Course
-                </Link>
-                <span className={styles.eventArchiveMeta}>Завърши на 14 юни 2026</span>
-              </li>
+              {isOpenArchived && (
+                <li className={styles.eventArchiveItem}>
+                  <Link href={DOUBLE_YELLOW_OPEN_URL} target="_blank" rel="noopener noreferrer">
+                    Double Yellow Open
+                  </Link>
+                  <span className={styles.eventArchiveMeta}>Завърши на 26 октомври 2026</span>
+                </li>
+              )}
+              {isLevel1Archived && (
+                <li className={styles.eventArchiveItem}>
+                  <Link href={WSF_LEVEL_1_COURSE_URL} target="_blank" rel="noopener noreferrer">
+                    WSF Level 1 Coaching Course
+                  </Link>
+                  <span className={styles.eventArchiveMeta}>Завърши на 14 юни 2026</span>
+                </li>
+              )}
             </ul>
           </div>
         )}

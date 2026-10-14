@@ -30,6 +30,8 @@ const BNT_ARTICLE_URL =
   "https://bnt.bg/news/chuzhdencite-slovakat-yakob-kristal-koito-razviva-skuosh-v-balgariya-v410712-347134news.html";
 const WSF_LEVEL_1_COURSE_URL =
   "https://europeansquash.com/event/wsf-level-1-coaching-course/";
+const DOUBLE_YELLOW_OPEN_URL =
+  "https://www.rankedin.com/en/tournament/74899/double-yellow-open";
 
 function getSofiaDate() {
   const parts = new Intl.DateTimeFormat("en", {
@@ -67,6 +69,13 @@ export default function Home() {
   const today = getSofiaDate();
 
   const heroSlides: HeroSlide[] = [
+    {
+      src: "/events/double-yellow-open-2026-10.png",
+      alt: "Double Yellow Open — squash tournament on 24–25 October 2026 at Double Yellow Squash Club",
+      link: DOUBLE_YELLOW_OPEN_URL,
+      linkLabel: "Register for Double Yellow Open on RankedIn",
+      endsOn: "2026-10-26",
+    },
     {
       src: "/events/kids-sunday-cancelled-2026-10-12.png",
       alt: "Important for parents: no kids squash training this Sunday due to a competition",
