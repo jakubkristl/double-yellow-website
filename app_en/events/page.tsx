@@ -15,6 +15,11 @@ const WSF_LEVEL_1_END_DATE = "2026-06-14T23:59:59+02:00";
 const DOUBLE_YELLOW_OPEN_URL =
   "https://www.rankedin.com/en/tournament/74899/double-yellow-open";
 const DOUBLE_YELLOW_OPEN_END_DATE = "2026-10-26T23:59:59+02:00";
+const RACKETPOINT_URL = "https://www.racketpoint.bg";
+const BLACK_FRIDAY_START_DATE = "2026-11-11T00:00:00+02:00";
+const BLACK_FRIDAY_END_DATE = "2026-11-16T23:59:59+02:00";
+const BLACK_FRIDAY_WHATSAPP_URL =
+  "https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%27m%20interested%20in%20the%20Black%20Friday%2010%25%20club%20card%20offer.";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/events",
@@ -28,15 +33,77 @@ export const metadata: Metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function EventsPage() {
+  const now = new Date();
+  const isBlackFridayStarted = now >= new Date(BLACK_FRIDAY_START_DATE);
+  const isBlackFridayArchived = isEventArchived(BLACK_FRIDAY_END_DATE, now);
+  const showBlackFriday = isBlackFridayStarted && !isBlackFridayArchived;
   const isOpenArchived = isEventArchived(DOUBLE_YELLOW_OPEN_END_DATE);
   const isLevel1Archived = isEventArchived(WSF_LEVEL_1_END_DATE);
-  const hasArchivedEvents = isOpenArchived || isLevel1Archived;
+  const hasArchivedEvents =
+    isBlackFridayArchived || isOpenArchived || isLevel1Archived;
 
   return (
     <main>
       <section className="container container--narrow">
         <h1 className="page-title">Events</h1>
         <p className="subtitle">One-off events, workshops & guest visits.</p>
+
+        {showBlackFriday && (
+          <div className={`event-card ${styles.eventCardMidGap}`}>
+            <h2 className={styles.eventHeading}>Black Friday</h2>
+            <Link
+              href={RACKETPOINT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open racketpoint.bg for Unsquashable rackets at 10% off"
+              className={styles.eventMediaLink}
+            >
+              <OptimizedImage
+                src="/events/black-friday-2026.png"
+                alt="Black Friday at Double Yellow poster — 10% off club cards and Unsquashable rackets, 13–16 November 2026"
+                width={1024}
+                height={1024}
+                className={styles.eventMedia}
+                priority
+              />
+            </Link>
+            <p className={styles.eventTextGap}>
+              <strong>Dates:</strong> 13–16 November 2026 (soft announce from 11 November).
+            </p>
+            <p className={styles.eventTextGap}>
+              Black Friday at Double Yellow — 10% off club cards at the desk and 10% off
+              Unsquashable rackets on racketpoint.bg. Multisport and court bookings are not
+              discounted.
+            </p>
+            <h3 className={styles.eventSubheading}>Key Details</h3>
+            <ul className={styles.eventList}>
+              <li>Club cards: all packs, new + renew — 10% at the desk</li>
+              <li>Unsquashable rackets: all 13 models on racketpoint.bg</li>
+              <li>Ends: 16 November 2026, 23:59 (Sofia)</li>
+            </ul>
+            <div className="actions">
+              <Link
+                href={RACKETPOINT_URL}
+                className="btn btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Shop racketpoint.bg
+              </Link>
+              <Link
+                href={BLACK_FRIDAY_WHATSAPP_URL}
+                className="btn btn--secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ask about a club card
+              </Link>
+              <Link href="/en/membership" className="btn btn--secondary">
+                See memberships
+              </Link>
+            </div>
+          </div>
+        )}
 
         {!isOpenArchived && (
           <div className={`event-card ${styles.eventCardMidGap}`}>
@@ -186,6 +253,14 @@ export default function EventsPage() {
               Past events stay available for reference and to revisit the details if needed.
             </p>
             <ul className={styles.eventArchiveList}>
+              {isBlackFridayArchived && (
+                <li className={styles.eventArchiveItem}>
+                  <Link href={RACKETPOINT_URL} target="_blank" rel="noopener noreferrer">
+                    Black Friday
+                  </Link>
+                  <span className={styles.eventArchiveMeta}>Ended 16 November 2026</span>
+                </li>
+              )}
               {isOpenArchived && (
                 <li className={styles.eventArchiveItem}>
                   <Link href={DOUBLE_YELLOW_OPEN_URL} target="_blank" rel="noopener noreferrer">

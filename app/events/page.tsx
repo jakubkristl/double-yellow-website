@@ -15,6 +15,11 @@ const WSF_LEVEL_1_END_DATE = "2026-06-14T23:59:59+02:00";
 const DOUBLE_YELLOW_OPEN_URL =
   "https://www.rankedin.com/en/tournament/74899/double-yellow-open";
 const DOUBLE_YELLOW_OPEN_END_DATE = "2026-10-26T23:59:59+02:00";
+const RACKETPOINT_URL = "https://www.racketpoint.bg";
+const BLACK_FRIDAY_START_DATE = "2026-11-11T00:00:00+02:00";
+const BLACK_FRIDAY_END_DATE = "2026-11-16T23:59:59+02:00";
+const BLACK_FRIDAY_WHATSAPP_URL =
+  "https://wa.me/359896754014?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D0%B5%D0%B9%D1%82%D0%B5%20Double%20Yellow!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B2%D0%B0%20%D0%BC%D0%B5%20Black%20Friday%2010%25%20%D0%BD%D0%B0%20%D0%BA%D0%BB%D1%83%D0%B1%D0%BD%D0%B0%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0.";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/events",
@@ -27,15 +32,77 @@ export const metadata: Metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function EventsPage() {
+  const now = new Date();
+  const isBlackFridayStarted = now >= new Date(BLACK_FRIDAY_START_DATE);
+  const isBlackFridayArchived = isEventArchived(BLACK_FRIDAY_END_DATE, now);
+  const showBlackFriday = isBlackFridayStarted && !isBlackFridayArchived;
   const isOpenArchived = isEventArchived(DOUBLE_YELLOW_OPEN_END_DATE);
   const isLevel1Archived = isEventArchived(WSF_LEVEL_1_END_DATE);
-  const hasArchivedEvents = isOpenArchived || isLevel1Archived;
+  const hasArchivedEvents =
+    isBlackFridayArchived || isOpenArchived || isLevel1Archived;
 
   return (
     <main>
       <section className="container container--narrow">
         <h1 className="page-title">Събития</h1>
         <p className="subtitle">Еднократни събития, уъркшопи и гостуващи треньори.</p>
+
+        {showBlackFriday && (
+          <div className={`event-card ${styles.eventCardMidGap}`}>
+            <h2 className={styles.eventHeading}>Black Friday</h2>
+            <Link
+              href={RACKETPOINT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Отвори racketpoint.bg за Unsquashable ракети с 10% отстъпка"
+              className={styles.eventMediaLink}
+            >
+              <OptimizedImage
+                src="/events/black-friday-2026.png"
+                alt="Плакат за Black Friday в Double Yellow — 10% на клубни карти и Unsquashable ракети, 13–16 ноември 2026"
+                width={1024}
+                height={1024}
+                className={styles.eventMedia}
+                priority
+              />
+            </Link>
+            <p className={styles.eventTextGap}>
+              <strong>Дати:</strong> 13–16 ноември 2026 г. (мека анонс от 11 ноември).
+            </p>
+            <p className={styles.eventTextGap}>
+              Black Friday в Double Yellow — 10% на клубни карти на рецепция и 10% на
+              Unsquashable ракети на racketpoint.bg. Без отстъпка на Multisport или
+              резервации на корт.
+            </p>
+            <h3 className={styles.eventSubheading}>Ключови детайли</h3>
+            <ul className={styles.eventList}>
+              <li>Клубни карти: всички пакети, нови и подновяване — 10% на рецепция</li>
+              <li>Unsquashable ракети: всички 13 модела на racketpoint.bg</li>
+              <li>Краен срок: 16 ноември 2026, 23:59 (София)</li>
+            </ul>
+            <div className="actions">
+              <Link
+                href={RACKETPOINT_URL}
+                className="btn btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Поръчай на racketpoint.bg
+              </Link>
+              <Link
+                href={BLACK_FRIDAY_WHATSAPP_URL}
+                className="btn btn--secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Пиши за клубна карта
+              </Link>
+              <Link href="/membership" className="btn btn--secondary">
+                Виж абонаменти
+              </Link>
+            </div>
+          </div>
+        )}
 
         {!isOpenArchived && (
           <div className={`event-card ${styles.eventCardMidGap}`}>
@@ -184,6 +251,14 @@ export default function EventsPage() {
               Минали събития остават достъпни за справка и възстановяване на контекст.
             </p>
             <ul className={styles.eventArchiveList}>
+              {isBlackFridayArchived && (
+                <li className={styles.eventArchiveItem}>
+                  <Link href={RACKETPOINT_URL} target="_blank" rel="noopener noreferrer">
+                    Black Friday
+                  </Link>
+                  <span className={styles.eventArchiveMeta}>Завърши на 16 ноември 2026</span>
+                </li>
+              )}
               {isOpenArchived && (
                 <li className={styles.eventArchiveItem}>
                   <Link href={DOUBLE_YELLOW_OPEN_URL} target="_blank" rel="noopener noreferrer">

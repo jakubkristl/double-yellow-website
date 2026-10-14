@@ -29,6 +29,7 @@ const WSF_LEVEL_1_COURSE_URL =
   "https://europeansquash.com/event/wsf-level-1-coaching-course/";
 const DOUBLE_YELLOW_OPEN_URL =
   "https://www.rankedin.com/en/tournament/74899/double-yellow-open";
+const RACKETPOINT_URL = "https://www.racketpoint.bg";
 
 function getSofiaDate() {
   const parts = new Intl.DateTimeFormat("en", {
@@ -65,6 +66,20 @@ export default function Home() {
   const today = getSofiaDate();
 
   const heroSlides: HeroSlide[] = [
+    {
+      src: "/events/black-friday-2026.png",
+      alt: "Black Friday в Double Yellow — 10% на клубни карти на рецепция и Unsquashable ракети на racketpoint.bg, 13–16 ноември 2026",
+      link: RACKETPOINT_URL,
+      linkLabel: "Отвори racketpoint.bg за Unsquashable ракети с 10% отстъпка",
+      overlay: {
+        eyebrow: "Black Friday · 13–16 ноември",
+        title: "10% на клубни карти и Unsquashable",
+        body: "Карти на рецепция (WhatsApp / клуб). Ракети онлайн на racketpoint.bg.",
+        ctaLabel: "Поръчай на racketpoint.bg",
+      },
+      startsOn: "2026-11-11",
+      endsOn: "2026-11-16",
+    },
     {
       src: "/events/double-yellow-open-2026-10.png",
       alt: "Double Yellow Open — скуош турнир на 24–25 октомври 2026 в Double Yellow Squash Club",
