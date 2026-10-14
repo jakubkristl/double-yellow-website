@@ -60,7 +60,7 @@ function BookingEmbed() {
         width="100%"
         height={780}
         style={{ borderWidth: 0, display: "block", width: "100%", background: "#ffffff" }}
-        loading="lazy"
+        loading="eager"
         onLoad={() => setIsLoading(false)}
       />
     </div>
@@ -93,13 +93,23 @@ export default function BookingPage() {
   return (
     <main className="container">
       <BookingEmbedConversionBridge localePrefix="" />
-      <section className="page-hero">
+      <section className="page-hero" style={{ paddingBottom: 12 }}>
         <h1 className="page-title">Резервирай скуош корт в София</h1>
         <p style={{ color: "#999", marginTop: "8px" }}>
-          Живи свободни часове на Double Yellow. Пиковите слотове 18:00–21:00 се
-          пълнят бързо — резервирай тук на сайта.
+          Свободни часове в реално време в Double Yellow Squash Club. Пиковите
+          слотове 18:00–21:00 се пълнят бързо — резервирай тук на сайта.
         </p>
       </section>
+
+      <Suspense
+        fallback={
+          <div className="card" style={{ minHeight: 200, padding: 24 }}>
+            Зареждане…
+          </div>
+        }
+      >
+        <BookingEmbed />
+      </Suspense>
 
       <section className="booking-guide">
         <h2
@@ -121,7 +131,7 @@ export default function BookingPage() {
       </section>
 
       <p className="muted" style={{ marginTop: "32px", marginBottom: "24px" }}>
-        Предпочитай вградената форма по-долу — така потвърждението се отчита
+        Предпочитай вградената форма по-горе — така потвърждението се отчита
         правилно. Ако не се зареди,{" "}
         <a href={fallbackEmbed} target="_blank" rel="noopener noreferrer">
           отвори резервациите в нов раздел
@@ -151,16 +161,6 @@ export default function BookingPage() {
           резервират отделно — достатъчно е един да направи резервацията.
         </p>
       </div>
-
-      <Suspense
-        fallback={
-          <div className="card" style={{ minHeight: 200, padding: 24 }}>
-            Зареждане…
-          </div>
-        }
-      >
-        <BookingEmbed />
-      </Suspense>
     </main>
   );
 }

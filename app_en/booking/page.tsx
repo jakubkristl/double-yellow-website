@@ -60,7 +60,7 @@ function BookingEmbed() {
         width="100%"
         height={780}
         style={{ borderWidth: 0, display: "block", width: "100%", background: "#ffffff" }}
-        loading="lazy"
+        loading="eager"
         onLoad={() => setIsLoading(false)}
       />
     </div>
@@ -91,13 +91,23 @@ export default function BookingPage() {
   return (
     <main className="container">
       <BookingEmbedConversionBridge localePrefix="/en" />
-      <section className="page-hero">
+      <section className="page-hero" style={{ paddingBottom: 12 }}>
         <h1 className="page-title">Book a squash court in Sofia</h1>
         <p style={{ color: "#999", marginTop: "8px" }}>
-          Live availability at Double Yellow. Peak slots 18:00–21:00 fill fast —
-          book on this page.
+          Real-time free slots at Double Yellow Squash Club. Peak slots
+          18:00–21:00 fill fast — book on this page.
         </p>
       </section>
+
+      <Suspense
+        fallback={
+          <div className="card" style={{ minHeight: 200, padding: 24 }}>
+            Loading…
+          </div>
+        }
+      >
+        <BookingEmbed />
+      </Suspense>
 
       <section className="booking-guide">
         <h2
@@ -119,7 +129,7 @@ export default function BookingPage() {
       </section>
 
       <p className="muted" style={{ marginTop: "32px", marginBottom: "24px" }}>
-        Prefer the embedded form below so confirmation is tracked correctly. If
+        Prefer the embedded form above so confirmation is tracked correctly. If
         it fails to load,{" "}
         <a href={fallbackEmbed} target="_blank" rel="noopener noreferrer">
           open booking in a new tab
@@ -149,16 +159,6 @@ export default function BookingPage() {
           book separately.
         </p>
       </div>
-
-      <Suspense
-        fallback={
-          <div className="card" style={{ minHeight: 200, padding: 24 }}>
-            Loading…
-          </div>
-        }
-      >
-        <BookingEmbed />
-      </Suspense>
     </main>
   );
 }
