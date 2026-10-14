@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
+import MembershipLeadButtons from "@/components/MembershipLeadButtons";
 
 type Pack = {
   name: string;
@@ -83,19 +84,7 @@ export default function MembershipPage() {
             {p.valueNote && <div className="membership-value-note">{p.valueNote}</div>}
             <div>{p.fun}</div>
             {p.daytime && <div className="badge">Once per day until 17:00</div>}
-            <div className="cta-buttons" style={{ marginTop: 16 }}>
-              <a
-                href="https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%20want%20a%20membership%20pack%3A%20"
-                className="btn btn-primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ask on WhatsApp
-              </a>
-              <a href="/en/booking" className="btn btn-secondary">
-                Book a court
-              </a>
-            </div>
+            <MembershipLeadButtons locale="en" packName={p.name} />
           </article>
         ))}
       </div>

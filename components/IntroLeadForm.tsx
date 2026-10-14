@@ -42,10 +42,25 @@ export default function IntroLeadForm({ locale = "bg" }: IntroLeadFormProps) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     trackLeadConversion("intro_lesson_whatsapp");
+
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          source: "intro_lesson_whatsapp",
+          locale,
+        }),
+      });
+    } catch {
+      // WhatsApp path still works if the lead API is unreachable.
+    }
 
     const message = encodeURIComponent(text.whatsappPrefill(name.trim(), email.trim()));
     const url = `${text.whatsappBase}?text=${message}`;
