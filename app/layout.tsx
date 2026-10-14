@@ -4,12 +4,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CookieConsent from "@/components/CookieConsent";
+import MetaPixel from "@/components/MetaPixel";
 import FloatingContactActions from "@/components/FloatingContactActions";
 import GoogleTracking, {
   GoogleTagManagerNoscript,
 } from "@/components/GoogleTracking";
 import { cookies } from "next/headers";
 import { EVENTS } from "@/lib/events";
+import { isEventArchived } from "@/lib/eventArchive";
 import { getLocalBusinessJsonLd, getWebsiteJsonLd } from "@/lib/business";
 import { SITE_URL } from "@/lib/seo";
 
@@ -66,7 +68,7 @@ export const metadata: Metadata = {
 
 const localBusinessSchema = getLocalBusinessJsonLd();
 
-const eventsSchema = EVENTS.map((e) => ({
+const eventsSchema = EVENTS.filter((e) => !isEventArchived(e.endDate)).map((e) => ({
   "@type": "Event",
   "@context": "https://schema.org",
   name: e.title,
@@ -103,10 +105,8 @@ export default async function RootLayout({
 
   return (
     <html lang={activeLang}>
-      <head>
-        <GoogleTracking />
-      </head>
       <body>
+        <GoogleTracking />
         <GoogleTagManagerNoscript />
 
         <a
@@ -144,6 +144,7 @@ export default async function RootLayout({
         <main id="main-content" className="container">{children}</main>
         <Footer />
         <FloatingContactActions />
+        <MetaPixel />
         <CookieConsent />
       </body>
     </html>

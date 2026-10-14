@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
+import MembershipLeadButtons from "@/components/MembershipLeadButtons";
 
 type Pack = {
   name: string;
@@ -83,6 +84,7 @@ export default function MembershipPage() {
             {p.valueNote && <div className="membership-value-note">{p.valueNote}</div>}
             <div>{p.fun}</div>
             {p.daytime && <div className="badge">Веднъж дневно до 17:00</div>}
+            <MembershipLeadButtons locale="bg" packName={p.name} />
           </article>
         ))}
       </div>
@@ -97,7 +99,7 @@ export default function MembershipPage() {
         color: "#ddd",
       }}>
         <p style={{ margin: 0, fontSize: "clamp(14px, 1vw + 12px, 16px)", lineHeight: "1.6" }}>
-          <strong style={{ color: "var(--accent)" }}>💳 Физически карти:</strong> Всички абонаментни карти се получават на рецепция при покупка на пакет. Носи документ за самоличност и ела готов за игра.
+          <strong style={{ color: "var(--accent)" }}>Физически карти:</strong> Всички абонаментни карти се получават на рецепция при покупка на пакет. Носи документ за самоличност и ела готов за игра. Единично посещение — питай на рецепция или резервирай корт онлайн.
         </p>
       </div>
 

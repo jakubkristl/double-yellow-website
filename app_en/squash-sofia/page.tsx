@@ -41,8 +41,13 @@ export default function SquashSofiaPage() {
           <p className="lead"><strong>Can I come alone?</strong> Yes. Join community sessions and we match partners.</p>
           <p className="lead"><strong>Is it hard to start?</strong> Not with a beginner format and coach guidance.</p>
           <div className="urgency-strip">
-            <span>Peak hours are often full</span>
-            <span>Next available: today 19:00</span>
+            <span>Peak hours 18:00–21:00</span>
+            <span>Book ahead for evenings</span>
+          </div>
+          <div className="cta-buttons" style={{ marginTop: 16 }}>
+            <a href="/en/booking" className="btn btn-primary">
+              See open courts
+            </a>
           </div>
         </article>
       </div>

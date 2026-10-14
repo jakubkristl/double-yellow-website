@@ -7,6 +7,7 @@ import {
   extractBookingIdFromMessage,
   isBookingGoodOrigin,
   isUsableBookingId,
+  trackMetaBookingSchedule,
 } from "@/lib/tracking";
 
 type Props = {
@@ -68,6 +69,8 @@ export default function BookingEmbedConversionBridge({
         currency: "EUR",
         source: "booking_embed_bridge",
       });
+
+      trackMetaBookingSchedule(id);
 
       window.sessionStorage.setItem(dedupeKey, "1");
       window.localStorage.setItem(dedupeKey, "1");

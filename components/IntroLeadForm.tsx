@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackLeadConversion } from "@/lib/tracking";
 
 type IntroLeadFormProps = {
   locale?: "bg" | "en";
@@ -8,32 +9,30 @@ type IntroLeadFormProps = {
 
 const copy = {
   bg: {
-    whatsappUrl:
-      "https://wa.me/359896754014?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D0%B5%D0%B9%D1%82%D0%B5%20Double%20Yellow!%20%D0%98%D1%81%D0%BA%D0%B0%D0%BC%20%D0%B4%D0%B0%20%D0%B7%D0%B0%D1%8F%D0%B2%D1%8F%20%D0%BF%D1%8A%D1%80%D0%B2%D0%B8%20%D0%B1%D0%B5%D0%B7%D0%BF%D0%BB%D0%B0%D1%82%D0%B5%D0%BD%20%D1%83%D1%80%D0%BE%D0%BA.%20%D0%A2%D1%80%D0%B5%D0%BD%D1%8C%D0%BE%D1%80%D1%8A%D1%82%20%D0%B8%20%D0%B5%D0%BA%D0%B8%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%D1%82%D0%B0%20%D1%81%D0%B0%20%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8.",
-    subject: "Заявка за безплатен първи урок по скуош",
-    mailBody: (name: string, email: string) =>
-      `Здравейте Double Yellow,\n\nИскам да запазя своя първи безплатен урок.\n\nИме: ${name || "N/A"}\nИмейл: ${email || "N/A"}\n\nРазбирам, че треньорът и екипировката са включени.\n\nБлагодаря!`,
+    whatsappBase: "https://wa.me/359896754014",
+    whatsappPrefill: (name: string, email: string) =>
+      `Здравейте Double Yellow! Искам да заявя първия си безплатен урок. Треньор и екипировка са включени.\n\nИме: ${name || "—"}\nИмейл: ${email || "—"}`,
     kicker: "Безплатен първи урок",
     heading: "Първият урок е безплатен. Треньор и екипировка са включени.",
-    lead: "Остави имейл и ще ти предложим най-удобния първи свободен час.",
+    lead: "Остави име и имейл — продължаваме в WhatsApp, за да ти предложим първи час.",
     namePlaceholder: "Твоето име",
     emailPlaceholder: "Твоят имейл",
-    submit: "Заяви безплатен урок",
-    whatsappCta: "Предпочиташ чат? Пиши в WhatsApp",
+    submit: "Продължи в WhatsApp",
+    bookingCta: "Или резервирай корт директно",
+    done: "Отворихме WhatsApp. Изпрати съобщението, за да запазим часа.",
   },
   en: {
-    whatsappUrl:
-      "https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%20want%20my%20first%20free%20lesson.%20Trainer%20and%20equipment%20included.",
-    subject: "Free Intro Squash Lesson Request",
-    mailBody: (name: string, email: string) =>
-      `Hi Double Yellow,\n\nI want to book my first free lesson.\n\nName: ${name || "N/A"}\nEmail: ${email || "N/A"}\n\nI understand trainer and equipment are included.\n\nThank you!`,
+    whatsappBase: "https://wa.me/359896754014",
+    whatsappPrefill: (name: string, email: string) =>
+      `Hi Double Yellow! I want my first free lesson. Trainer and equipment included.\n\nName: ${name || "—"}\nEmail: ${email || "—"}`,
     kicker: "Free Intro Offer",
     heading: "First lesson is free. Trainer and equipment included.",
-    lead: "Leave your email and we will set up your best first slot.",
+    lead: "Leave your name and email — we continue on WhatsApp to lock your first slot.",
     namePlaceholder: "Your name",
     emailPlaceholder: "Your email",
-    submit: "Claim Free Lesson",
-    whatsappCta: "Prefer chat? Claim on WhatsApp",
+    submit: "Continue on WhatsApp",
+    bookingCta: "Or book a court now",
+    done: "WhatsApp opened. Send the message so we can book your slot.",
   },
 } as const;
 
@@ -41,14 +40,32 @@ export default function IntroLeadForm({ locale = "bg" }: IntroLeadFormProps) {
   const text = copy[locale];
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const subject = encodeURIComponent(text.subject);
-    const body = encodeURIComponent(text.mailBody(name, email));
+    trackLeadConversion("intro_lesson_whatsapp");
 
-    window.location.href = `mailto:jakub@doubleyellowsquash.com?subject=${subject}&body=${body}`;
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          source: "intro_lesson_whatsapp",
+          locale,
+        }),
+      });
+    } catch {
+      // WhatsApp path still works if the lead API is unreachable.
+    }
+
+    const message = encodeURIComponent(text.whatsappPrefill(name.trim(), email.trim()));
+    const url = `${text.whatsappBase}?text=${message}`;
+    setSubmitted(true);
+    window.open(url, "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -64,6 +81,7 @@ export default function IntroLeadForm({ locale = "bg" }: IntroLeadFormProps) {
           placeholder={text.namePlaceholder}
           value={name}
           onChange={(event) => setName(event.target.value)}
+          autoComplete="name"
         />
         <input
           type="email"
@@ -72,14 +90,17 @@ export default function IntroLeadForm({ locale = "bg" }: IntroLeadFormProps) {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           required
+          autoComplete="email"
         />
         <button type="submit" className="btn btn-primary">
           {text.submit}
         </button>
       </form>
 
-      <a href={text.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-link">
-        {text.whatsappCta}
+      {submitted && <p className="muted">{text.done}</p>}
+
+      <a href="/booking" className="inline-link">
+        {text.bookingCta}
       </a>
     </section>
   );

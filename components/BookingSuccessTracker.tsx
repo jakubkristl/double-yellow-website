@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { isUsableBookingId } from "@/lib/tracking";
+import { isUsableBookingId, trackMetaBookingSchedule } from "@/lib/tracking";
 
 type Props = {
   bookingId?: string;
@@ -59,6 +59,8 @@ export default function BookingSuccessTracker({ bookingId }: Props) {
         currency: "EUR",
         source: "booking_success_page",
       });
+
+      trackMetaBookingSchedule(id);
 
       window.sessionStorage.setItem(dedupeKey, "1");
       window.localStorage.setItem(dedupeKey, "1");

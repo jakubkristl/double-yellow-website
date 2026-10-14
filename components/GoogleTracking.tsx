@@ -1,3 +1,4 @@
+import Script from "next/script";
 import {
   ADS_BOOKING_CONVERSION,
   ADS_ID,
@@ -9,6 +10,8 @@ import {
  * Consent Mode defaults + gtag.js (Ads + GA4) + GTM.
  * Google Ads booking conversions fire only via
  * `gtag_report_booking_complete` (success page or embed bridge).
+ *
+ * Uses next/script — raw <script> in React trees crashes Next.js 16 client render.
  */
 export default function GoogleTracking() {
   const bootstrap = `
@@ -46,11 +49,13 @@ export default function GoogleTracking() {
 
   return (
     <>
-      <script
-        async
+      <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}
+        strategy="afterInteractive"
       />
-      <script
+      <Script
+        id="google-tracking-bootstrap"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: bootstrap.replace(/\s+/g, " ").trim() }}
       />
     </>

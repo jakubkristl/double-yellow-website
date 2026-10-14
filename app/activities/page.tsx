@@ -26,7 +26,7 @@ const featuredActivities: Activity[] = [
     schedule: "Петък 18:00-20:00",
     benefit:
       "Не ти трябва партньор. Идваш, намираме ти мач и играеш. Най-социалната скуош вечер в София - всички нива са добре дошли.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=5&time=18:00",
+    bookingUrl: "/booking?day=5&time=18:00",
     image: "/activities/comeandplay.jpg",
     alt: "Social Squash в петък вечер",
     cta: "Включи се този петък",
@@ -38,7 +38,7 @@ const featuredActivities: Activity[] = [
     schedule: "Събота и неделя 10:00",
     benefit:
       "Малки групи, забавни упражнения и развитие с треньор. Отлична първа стъпка за деца, с включена екипировка.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72?day=6&time=10:00",
+    bookingUrl: "/booking?day=6&time=10:00",
     image: "/activities/minisquash.jpg",
     alt: "Mini Squash за деца",
     cta: "Запази детска тренировка",
@@ -51,7 +51,7 @@ const otherActivities: Activity[] = [
     schedule: "Провери на рецепция за актуални часове",
     benefit:
       "Водени сесии за напълно начинаещи. Първият урок е безплатен, с включени треньор и екипировка.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    bookingUrl: "/booking",
     image: "/activities/beginners.jpg",
     alt: "Скуош за начинаещи",
     cta: "Запази сесия за начинаещи",
@@ -61,7 +61,7 @@ const otherActivities: Activity[] = [
     schedule: "Провери на рецепция за актуални часове",
     benefit:
       "Сесия само за жени с приятелско темпо и ясна подкрепа от треньор за бързо изграждане на увереност.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    bookingUrl: "/booking",
     image: "/activities/timeforladies.jpg",
     alt: "Time for Ladies",
     cta: "Запази дамска сесия",
@@ -71,7 +71,7 @@ const otherActivities: Activity[] = [
     schedule: "Провери на рецепция за актуални часове",
     benefit:
       "Изиграй 7 мача за 2 часа - гарантирано. Високоенергиен round-robin формат с бързи ротации.",
-    bookingUrl: "https://sport.bookinggood.net/bg/embed/facility/44/72",
+    bookingUrl: "/booking",
     image: "/activities/magnificent7.jpg",
     alt: "Magnificent 7",
     cta: "Запази Magnificent 7",
@@ -116,12 +116,7 @@ function ActivityCard({
         <p className="activity-schedule">{activity.schedule}</p>
         <p className="activity-benefit">{activity.benefit}</p>
         {activity.bookingUrl ? (
-          <a
-            href={activity.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
+          <a href={activity.bookingUrl} className="btn btn-primary">
             {activity.cta}
           </a>
         ) : (
@@ -188,7 +183,7 @@ export default function ActivitiesPage() {
           <li>Ракета и обувки са осигурени</li>
         </ul>
         <div className="cta-buttons">
-          <a href="https://sport.bookinggood.net/bg/embed/facility/44/72" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+          <a href="/booking" className="btn btn-primary">
             Вземи безплатен първи урок
           </a>
           <a href="/contact" className="btn btn-secondary">
