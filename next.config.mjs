@@ -10,6 +10,12 @@ const nextConfig = {
   turbopack: {
     root: workspaceRoot,
   },
+  // Bypass Worker IMAGES binding — transforms go through /cdn-cgi/image
+  // (OpenNext binding burns CPU/memory on multi-MB carousel assets → CF 1102).
+  images: {
+    loader: "custom",
+    loaderFile: "./image-loader.ts",
+  },
 };
 
 export default nextConfig;

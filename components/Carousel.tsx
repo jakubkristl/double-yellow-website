@@ -53,9 +53,25 @@ export default function Carousel({
   const prev = () => setI((p) => (p - 1 + Math.max(1, displayImages.length)) % Math.max(1, displayImages.length));
   const next = () => setI((p) => (p + 1) % Math.max(1, displayImages.length));
 
+  // Only mount active + neighbors so multi-MB hero assets are not all decoded at once.
+  const len = displayImages.length;
+  const visibleIndexes =
+    len === 0
+      ? []
+      : len === 1
+        ? [0]
+        : Array.from(
+            new Set([
+              (i - 1 + len) % len,
+              i,
+              (i + 1) % len,
+            ])
+          );
+
   return (
     <div className="carousel">
-      {displayImages.map((src, idx) => {
+      {visibleIndexes.map((idx) => {
+        const src = displayImages[idx];
         // Announcement posters (/events/…) and linked first slides use contain so text is not cropped.
         const isPosterSlide =
           idx === 0 &&
@@ -84,7 +100,7 @@ export default function Carousel({
                   alt={displayAlts[idx] || alts[idx] || "Club photo"}
                   fill
                   style={imageStyle}
-                  priority={idx === 0}
+                  priority={idx === i}
                   sizes="100vw"
                 />
               </a>
@@ -94,7 +110,7 @@ export default function Carousel({
                 alt={displayAlts[idx] || alts[idx] || "Club photo"}
                 fill
                 style={imageStyle}
-                priority={idx === 0}
+                priority={idx === i}
                 sizes="100vw"
               />
             )}
