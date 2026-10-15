@@ -16,9 +16,6 @@
       "service": "double-yellow-website"
     }
   ],
-  "images": {
-    "binding": "IMAGES"
-  },
   "observability": {
     "enabled": true
   }
