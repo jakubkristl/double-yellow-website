@@ -1,222 +1,110 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   applyCookieConsent,
   COOKIE_CONSENT_STORAGE_KEY,
+  readStoredCookieConsent,
   type CookieConsentPreferences,
 } from "@/lib/tracking";
 import "./CookieConsent.css";
 
+const DENIED: CookieConsentPreferences = {
+  essential: true,
+  analytics: false,
+  marketing: false,
+};
+
+const ACCEPTED: CookieConsentPreferences = {
+  essential: true,
+  analytics: true,
+  marketing: true,
+};
+
 export default function CookieConsent() {
+  const pathname = usePathname();
+  const english = pathname?.startsWith("/en") ?? false;
   const [showBanner, setShowBanner] = useState(false);
-  const [showCustomize, setShowCustomize] = useState(false);
-  const [preferences, setPreferences] = useState({
-    essential: true, // Always true, cannot be disabled
-    analytics: false,
-    marketing: false,
-  });
 
   useEffect(() => {
-    const consent = localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY);
-    if (!consent) {
-      applyCookieConsent({
-        essential: true,
-        analytics: false,
-        marketing: false,
-      });
-      setTimeout(() => setShowBanner(true), 500);
+    const saved = readStoredCookieConsent();
+    if (!saved) {
+      applyCookieConsent(DENIED);
+      setShowBanner(true);
+      return;
+    }
+    applyCookieConsent(saved);
+  }, []);
+
+  useEffect(() => {
+    if (!showBanner) {
+      document.documentElement.style.removeProperty("--cookie-bar-h");
       return;
     }
 
-    try {
-      const saved = JSON.parse(consent) as CookieConsentPreferences;
-      setPreferences(saved);
-      applyCookieConsent(saved);
-    } catch {
-      applyCookieConsent({
-        essential: true,
-        analytics: false,
-        marketing: false,
-      });
-      setShowBanner(true);
+    const bar = document.querySelector(".cookie-bar");
+    if (!bar) {
+      return;
     }
-  }, []);
 
-  const savePreferences = (prefs: typeof preferences) => {
+    const applyHeight = () => {
+      document.documentElement.style.setProperty(
+        "--cookie-bar-h",
+        `${bar.getBoundingClientRect().height}px`,
+      );
+    };
+
+    applyHeight();
+    const observer = new ResizeObserver(applyHeight);
+    observer.observe(bar);
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--cookie-bar-h");
+    };
+  }, [showBanner]);
+
+  const save = (prefs: CookieConsentPreferences) => {
     localStorage.setItem(COOKIE_CONSENT_STORAGE_KEY, JSON.stringify(prefs));
     applyCookieConsent(prefs);
     setShowBanner(false);
-    setShowCustomize(false);
-  };
-
-  const acceptAll = () => {
-    const allAccepted = {
-      essential: true,
-      analytics: true,
-      marketing: true,
-    };
-    savePreferences(allAccepted);
-  };
-
-  const rejectNonEssential = () => {
-    const essentialOnly = {
-      essential: true,
-      analytics: false,
-      marketing: false,
-    };
-    savePreferences(essentialOnly);
-  };
-
-  const saveCustom = () => {
-    savePreferences(preferences);
   };
 
   if (!showBanner) return null;
 
   return (
-    <div className="cookie-consent-overlay">
-      <div className="cookie-consent-banner">
-        {!showCustomize ? (
-          // Main Banner
-          <div className="cookie-banner-main">
-            <div className="cookie-header">
-              <h3>🍪 Използваме бисквитки / We Use Cookies</h3>
-            </div>
-            
-            <div className="cookie-body">
-              <p>
-                <strong>BG:</strong> Използваме бисквитки за подобряване на функционалността на сайта, 
-                анализ на трафика и показване на персонализирани реклами. Можете да изберете какви 
-                бисквитки да приемете.
-              </p>
-              <p>
-                <strong>EN:</strong> We use cookies to improve website functionality, analyze traffic, 
-                and display personalized ads. You can choose which cookies to accept.
-              </p>
-              
-              <div className="cookie-links">
-                <Link href="/cookies" target="_blank">
-                  Политика за бисквитки / Cookie Policy
-                </Link>
-                {" • "}
-                <Link href="/privacy" target="_blank">
-                  Поверителност / Privacy
-                </Link>
-              </div>
-            </div>
-
-            <div className="cookie-actions">
-              <button 
-                onClick={acceptAll} 
-                className="cookie-btn cookie-btn-primary"
-                aria-label="Accept all cookies"
-              >
-                ✓ Приемам всички / Accept All
-              </button>
-              <button 
-                onClick={rejectNonEssential} 
-                className="cookie-btn cookie-btn-secondary"
-                aria-label="Reject non-essential cookies"
-              >
-                Само задължителни / Essential Only
-              </button>
-              <button 
-                onClick={() => setShowCustomize(true)} 
-                className="cookie-btn cookie-btn-tertiary"
-                aria-label="Customize cookie preferences"
-              >
-                ⚙️ Персонализиране / Customize
-              </button>
-            </div>
-          </div>
+    <div className="cookie-bar" role="region" aria-label="Cookies">
+      <p className="cookie-bar-copy">
+        <span>
+          <strong>BG:</strong> Бисквитки за статистика и реклами. До избор Google
+          етикетите са изключени.
+        </span>{" "}
+        <span>
+          <strong>EN:</strong> Cookies for analytics and ads. Google tags stay off
+          until you choose.
+        </span>{" "}
+        {english ? (
+          <Link href="/en/cookies">Политика / Policy</Link>
         ) : (
-          // Customize Panel
-          <div className="cookie-banner-customize">
-            <div className="cookie-header">
-              <h3>⚙️ Персонализиране / Customize Cookies</h3>
-              <button 
-                onClick={() => setShowCustomize(false)} 
-                className="cookie-close"
-                aria-label="Close customize panel"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="cookie-body">
-              <div className="cookie-option">
-                <div className="cookie-option-header">
-                  <label>
-                    <input 
-                      type="checkbox" 
-                      checked={preferences.essential} 
-                      disabled 
-                    />
-                    <strong>🔐 Задължителни / Essential</strong>
-                  </label>
-                  <span className="cookie-required">Задължителни / Required</span>
-                </div>
-                <p className="cookie-option-desc">
-                  <strong>BG:</strong> Необходими за основното функциониране на сайта (навигация, сигурност).<br />
-                  <strong>EN:</strong> Required for basic site functionality (navigation, security).
-                </p>
-              </div>
-
-              <div className="cookie-option">
-                <div className="cookie-option-header">
-                  <label>
-                    <input 
-                      type="checkbox" 
-                      checked={preferences.analytics}
-                      onChange={(e) => setPreferences({ ...preferences, analytics: e.target.checked })}
-                    />
-                    <strong>📊 Аналитични / Analytics</strong>
-                  </label>
-                </div>
-                <p className="cookie-option-desc">
-                  <strong>BG:</strong> Помагат ни да разберем как посетителите използват сайта (анонимни данни).<br />
-                  <strong>EN:</strong> Help us understand how visitors use the site (anonymous data).
-                </p>
-              </div>
-
-              <div className="cookie-option">
-                <div className="cookie-option-header">
-                  <label>
-                    <input 
-                      type="checkbox" 
-                      checked={preferences.marketing}
-                      onChange={(e) => setPreferences({ ...preferences, marketing: e.target.checked })}
-                    />
-                    <strong>📧 Маркетингови / Marketing</strong>
-                  </label>
-                </div>
-                <p className="cookie-option-desc">
-                  <strong>BG:</strong> Използват се за показване на персонализирани реклами (Facebook Pixel, Meta).<br />
-                  <strong>EN:</strong> Used to display personalized ads (Facebook Pixel, Meta).
-                </p>
-              </div>
-            </div>
-
-            <div className="cookie-actions">
-              <button 
-                onClick={saveCustom} 
-                className="cookie-btn cookie-btn-primary"
-                aria-label="Save custom preferences"
-              >
-                ✓ Запази избора / Save Preferences
-              </button>
-              <button 
-                onClick={() => setShowCustomize(false)} 
-                className="cookie-btn cookie-btn-secondary"
-                aria-label="Cancel customization"
-              >
-                Назад / Back
-              </button>
-            </div>
-          </div>
+          <Link href="/cookies">Политика / Policy</Link>
         )}
+      </p>
+      <div className="cookie-bar-actions">
+        <button
+          type="button"
+          className="cookie-bar-btn cookie-bar-reject"
+          onClick={() => save(DENIED)}
+        >
+          Отхвърлям / Reject
+        </button>
+        <button
+          type="button"
+          className="cookie-bar-btn cookie-bar-accept"
+          onClick={() => save(ACCEPTED)}
+        >
+          Приемам / Accept
+        </button>
       </div>
     </div>
   );

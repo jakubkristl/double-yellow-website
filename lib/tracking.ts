@@ -159,12 +159,16 @@ export function applyGoogleConsent(prefs: CookieConsentPreferences) {
     };
   window.gtag = gtag;
 
+  const ads = prefs.marketing ? "granted" : "denied";
+  const analytics = prefs.analytics ? "granted" : "denied";
+
   gtag("consent", "update", {
-    analytics_storage: prefs.analytics ? "granted" : "denied",
-    ad_storage: prefs.marketing ? "granted" : "denied",
-    ad_user_data: prefs.marketing ? "granted" : "denied",
-    ad_personalization: prefs.marketing ? "granted" : "denied",
+    analytics_storage: analytics,
+    ad_storage: ads,
+    ad_user_data: ads,
+    ad_personalization: ads,
   });
+  gtag("set", "ads_data_redaction", ads !== "granted");
 }
 
 function ensureMetaPixelStub() {
