@@ -204,10 +204,12 @@ function BulgarianContent() {
           <h3>🎛️ Вашият избор</h3>
           <p>При първото посещение на сайта се показва банер за бисквитки, чрез който потребителят може:</p>
           <ul>
-            <li>✅ Да приеме всички бисквитки</li>
+            <li>✅ Да приеме всички бисквитки (статистика и реклами)</li>
             <li>❌ Да откаже незадължителните бисквитки</li>
-            <li>⚙️ Да направи персонализиран избор</li>
           </ul>
+          <p>
+            Изборът се запомня в този браузър. До приемане Google етикетите за реклами и статистика остават изключени.
+          </p>
           <p>
             Потребителят може по всяко време да промени настройките си чрез настройките на браузъра.
           </p>
@@ -423,10 +425,12 @@ function EnglishContent() {
           <h3>🎛️ Your Choice</h3>
           <p>On first visit to the site, a cookie banner is displayed, allowing the user to:</p>
           <ul>
-            <li>✅ Accept all cookies</li>
+            <li>✅ Accept all cookies (analytics and ads)</li>
             <li>❌ Reject non-essential cookies</li>
-            <li>⚙️ Make a personalized choice</li>
           </ul>
+          <p>
+            The choice is remembered in this browser. Until you accept, Google ads and analytics tags stay off.
+          </p>
           <p>
             Users can change their settings at any time through browser settings.
           </p>
