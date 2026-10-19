@@ -14,6 +14,13 @@ import {
  * default (and a stored choice, if any) before it inserts gtag.js or GTM.
  * A separate loader can be preloaded and race ahead of that command.
  *
+ * `page_path` is pinned to "/": the remote AW-17840430561 Google tag has
+ * Ads-created rules that turn page_view on paths starting with /booking,
+ * /about or /contact into Ads conversions (Book appointment, About Us,
+ * Contact Us), and those rules read page_path. GA4 reports use
+ * page_location, which stays real. Booking conversions come only from
+ * gtag_report_booking_complete.
+ *
  * Uses next/script — a raw <script> in a React tree crashes Next.js 16 client render.
  */
 const consentAndTags = `
@@ -48,6 +55,7 @@ const consentAndTags = `
   }
   gtag('set', 'ads_data_redaction', ads !== 'granted');
   gtag('set', 'url_passthrough', true);
+  gtag('set', 'page_path', '/');
   gtag('js', new Date());
   gtag('config', '${ADS_ID}');
   gtag('config', '${GA_MEASUREMENT_ID}');
