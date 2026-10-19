@@ -1,4 +1,3 @@
-export const GTM_ID = "GTM-T7KDHVST";
 export const GA_MEASUREMENT_ID = "G-BQWPYFTG6V";
 export const ADS_ID = "AW-17840430561";
 /** Double Yellow Meta (Facebook) Pixel — Events Manager dataset. */

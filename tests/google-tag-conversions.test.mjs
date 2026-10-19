@@ -7,6 +7,11 @@
 // is answered locally (and recorded), service workers are blocked, and the
 // Cloudflare tag gateway paths (/6ftv/…) are answered locally except for the
 // tag script itself. BookingGood is mocked.
+//
+// In production Cloudflare's Google tag gateway rewrites HTML for browsers,
+// adding a first-party G-BQWPYFTG6V tag at the top of <head>. The page-view
+// conversions depend on it, so local runs inject the same snippet and serve
+// the production /6ftv/ tag script.
 
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
@@ -17,6 +22,12 @@ const BASE_ORIGIN = new URL(BASE_URL).origin;
 const GATEWAY = "/6ftv/";
 const ADS_LABEL = "Vnw5CK6LvOAbEOG7_bpC";
 const PAGE_VIEW_CONVERSION = /^ads_conversion_/;
+const PRODUCTION_ORIGIN = "https://www.doubleyellowsquash.com";
+const GATEWAY_SNIPPET =
+  `<script>(function(w,i,g){w[g]=w[g]||[];if(typeof w[g].push=='function')w[g].push(i)})` +
+  `(window,'G-BQWPYFTG6V','google_tags_first_party');</script><script async src="${GATEWAY}"></script>` +
+  `<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}` +
+  `gtag('js', new Date());gtag('set', 'developer_id.dY2E1Nz', true);</script>`;
 const MEASUREMENT_HOSTS = [
   "*.google-analytics.com",
   "analytics.google.com",
@@ -56,6 +67,7 @@ function recordHit(hits, url, body) {
       en: get("en"),
       label: get("label"),
       oid: get("oid"),
+      gcs: get("gcs"),
       dl: get("dl") ?? get("url"),
     });
   }
@@ -65,6 +77,7 @@ async function newSession({ consent }) {
   const context = await browser.newContext({ serviceWorkers: "block" });
   const hits = [];
   const gtagConversions = [];
+  const scripts = [];
 
   await context.exposeBinding("__recordGtagConversion", (_source, call) => {
     gtagConversions.push(call);
@@ -95,10 +108,21 @@ async function newSession({ consent }) {
   await context.route("**/*", async (route) => {
     const request = route.request();
     const url = new URL(request.url());
+    if (request.resourceType() === "script") scripts.push(url.href);
     if (url.origin === BASE_ORIGIN) {
-      if (url.pathname.startsWith(GATEWAY) && !(url.pathname === GATEWAY && !url.search)) {
+      if (url.pathname.startsWith(GATEWAY)) {
+        if (url.pathname === GATEWAY && !url.search) {
+          if (BASE_ORIGIN === PRODUCTION_ORIGIN) return route.continue();
+          return route.fulfill({ response: await route.fetch({ url: `${PRODUCTION_ORIGIN}${GATEWAY}` }) });
+        }
         recordHit(hits, url, request.postData());
         return route.fulfill({ status: 204, body: "" });
+      }
+      if (request.resourceType() === "document") {
+        const response = await route.fetch();
+        const html = await response.text();
+        if (html.includes(`src="${GATEWAY}"`)) return route.fulfill({ response, body: html });
+        return route.fulfill({ response, body: html.replace("<head>", `<head>${GATEWAY_SNIPPET}`) });
       }
       return route.continue();
     }
@@ -113,8 +137,10 @@ async function newSession({ consent }) {
   });
 
   const page = await context.newPage();
-  return { context, page, hits, gtagConversions };
+  return { context, page, hits, gtagConversions, scripts };
 }
+
+const loadsGtm = (scripts) => scripts.some((src) => new URL(src).pathname === "/gtm.js");
 
 const pageViewConversions = (hits) =>
   hits.filter((h) => PAGE_VIEW_CONVERSION.test(h.en || "") || h.path.includes("/measurement/conversion"));
@@ -134,7 +160,7 @@ async function leave(page) {
 
 for (const consent of ["denied", "granted"]) {
   test(`page loads send no page-view conversions (consent ${consent})`, async () => {
-    const { context, page, hits } = await newSession({ consent });
+    const { context, page, hits, scripts } = await newSession({ consent });
     const paths = ["/booking", "/booking/success", "/about", "/contact", "/en/booking"];
     for (const path of paths) {
       await page.goto(`${BASE_URL}${path}`);
@@ -142,7 +168,11 @@ for (const consent of ["denied", "granted"]) {
     }
     await leave(page);
 
+    assert.ok(scripts.some((src) => src === `${BASE_ORIGIN}${GATEWAY}`), "tag gateway script should load");
+    assert.ok(!loadsGtm(scripts), "GTM must not load: its Google tag ignores the page_path pin");
     assert.deepEqual(pageViewConversions(hits), []);
+    const consentStates = new Set(hits.map((h) => h.gcs).filter(Boolean));
+    assert.deepEqual([...consentStates], [consent === "granted" ? "G111" : "G100"]);
     const seen = new Set(pageViewPaths(hits));
     for (const path of paths) {
       assert.ok(seen.has(path), `Google tag should still send a page_view for ${path}`);
