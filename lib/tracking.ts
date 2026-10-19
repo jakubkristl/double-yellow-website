@@ -18,12 +18,6 @@ export const ADS_BOOKING_CONVERSION_LABEL_UNDEPLOYED = "x2DUCNSS1fMcEOG7_bpC";
 
 export const COOKIE_CONSENT_STORAGE_KEY = "cookieConsent";
 
-export const BOOKING_GOOD_ORIGINS = [
-  "https://sport.bookinggood.net",
-  "https://www.bookinggood.net",
-  "https://bookinggood.net",
-] as const;
-
 export type CookieConsentPreferences = {
   essential: boolean;
   analytics: boolean;
@@ -50,99 +44,35 @@ declare global {
 
 let metaPixelInitialized = false;
 
-export function isBookingGoodOrigin(origin: string): boolean {
-  return (BOOKING_GOOD_ORIGINS as readonly string[]).includes(origin);
-}
-
-export function isUsableBookingId(bookingId: unknown): bookingId is string {
-  if (typeof bookingId !== "string") {
-    return false;
-  }
-  const id = bookingId.trim();
-  if (!id) {
-    return false;
-  }
-  if (/^(qa|test)[-_]/i.test(id)) {
-    return false;
-  }
-  return true;
-}
-
 /**
- * Pull a booking id out of BookingGood (or similar) postMessage payloads.
- * Shapes are defensive — BookingGood's public embed does not document a stable
- * success message today; this accepts common id field names if they add one.
+ * Booking id from BookingGood's documented `bg:booking-created` message, which
+ * the embed posts only after the booking-creation API returned a persisted id.
+ * Matches the checks in https://sport.bookinggood.net/embed/v1/booking-success.js.
+ * Anything else (other types, flat shapes, strings, non-numeric ids) is ignored.
  */
-export function extractBookingIdFromMessage(data: unknown): string | undefined {
-  if (data == null) {
+export function parseBookingGoodBookingCreated(data: unknown): string | undefined {
+  if (!data || typeof data !== "object") {
     return undefined;
   }
-
-  if (typeof data === "string") {
-    try {
-      return extractBookingIdFromMessage(JSON.parse(data));
-    } catch {
-      const trimmed = data.trim();
-      return isUsableBookingId(trimmed) ? trimmed : undefined;
-    }
-  }
-
-  if (typeof data !== "object") {
+  const message = data as Record<string, unknown>;
+  if (
+    message.source !== "bookinggood" ||
+    message.version !== 1 ||
+    message.type !== "bg:booking-created"
+  ) {
     return undefined;
   }
-
-  const record = data as Record<string, unknown>;
-  const nested =
-    record.data && typeof record.data === "object"
-      ? (record.data as Record<string, unknown>)
-      : undefined;
-  const payload =
-    record.payload && typeof record.payload === "object"
-      ? (record.payload as Record<string, unknown>)
-      : undefined;
-  const booking =
-    record.booking && typeof record.booking === "object"
-      ? (record.booking as Record<string, unknown>)
-      : undefined;
-
-  const candidates = [
-    record.booking_id,
-    record.bookingId,
-    record.reservation_id,
-    record.reservationId,
-    record.transaction_id,
-    record.transactionId,
-    record.id,
-    nested?.booking_id,
-    nested?.bookingId,
-    nested?.reservation_id,
-    nested?.reservationId,
-    nested?.id,
-    payload?.booking_id,
-    payload?.bookingId,
-    payload?.reservation_id,
-    payload?.id,
-    booking?.id,
-    booking?.booking_id,
-  ];
-
-  for (const candidate of candidates) {
-    if (isUsableBookingId(candidate)) {
-      return candidate.trim();
-    }
+  const payload = message.payload as Record<string, unknown> | null | undefined;
+  if (
+    !payload ||
+    typeof payload !== "object" ||
+    typeof payload.bookingId !== "string" ||
+    !/^[1-9]\d*$/.test(payload.bookingId) ||
+    typeof payload.redirectUrl !== "string"
+  ) {
+    return undefined;
   }
-
-  const type = String(record.type ?? record.event ?? record.name ?? "").toLowerCase();
-  const looksLikeSuccess =
-    /booking.*(success|complete|created|confirmed)|reservation.*(success|complete|created|confirmed)/.test(
-      type,
-    );
-
-  if (looksLikeSuccess && isUsableBookingId(record.value)) {
-    return record.value.trim();
-  }
-
-  return undefined;
+  return payload.bookingId;
 }
 
 export function applyGoogleConsent(prefs: CookieConsentPreferences) {

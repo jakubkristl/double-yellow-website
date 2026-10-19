@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import BookingSuccessTracker from "@/components/BookingSuccessTracker";
 import styles from "./styles.module.css";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -12,25 +11,9 @@ export const metadata: Metadata = createPageMetadata({
   robots: { index: false, follow: false },
 });
 
-type Props = {
-  searchParams?: Promise<{
-    booking_id?: string;
-    reservation_id?: string;
-    id?: string;
-  }>;
-};
-
-export default async function BookingSuccessPage({ searchParams }: Props) {
-  const resolvedSearchParams = searchParams ? await searchParams : undefined;
-  const bookingId =
-    resolvedSearchParams?.booking_id ??
-    resolvedSearchParams?.reservation_id ??
-    resolvedSearchParams?.id;
-
+export default function BookingSuccessPage() {
   return (
     <section className={`container ${styles.successSection}`}>
-      <BookingSuccessTracker bookingId={bookingId} />
-
       <h1 className="page-title">Booking Confirmed</h1>
       <p className={`lead ${styles.leadSpacing}`}>
         Thank you. Your court is reserved and we look forward to seeing you.
