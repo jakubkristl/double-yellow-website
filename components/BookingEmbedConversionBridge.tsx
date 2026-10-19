@@ -3,10 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Route } from "next";
+import { BOOKING_FACILITY_ORIGIN } from "@/lib/booking";
 import {
-  extractBookingIdFromMessage,
-  isBookingGoodOrigin,
-  isUsableBookingId,
+  parseBookingGoodBookingCreated,
   trackMetaBookingSchedule,
 } from "@/lib/tracking";
 
@@ -15,14 +14,23 @@ type Props = {
   localePrefix?: string;
 };
 
+function isEmbeddedBookingGoodFrame(source: MessageEventSource | null) {
+  if (!source) {
+    return false;
+  }
+  return Array.from(document.querySelectorAll("iframe")).some(
+    (frame) =>
+      frame.contentWindow === source &&
+      new URL(frame.src, window.location.href).origin === BOOKING_FACILITY_ORIGIN,
+  );
+}
+
 /**
- * Listens for BookingGood embed postMessage success signals and fires the
- * same Google Ads conversion used on /booking/success.
- *
- * Today BookingGood's public embed does not reliably post a documented
- * success message (and gtagExternalOnly leaves firing to the parent). This
- * bridge is the parent-side receiver for when that message exists, and also
- * handles direct calls if the embed invokes parent.gtag_report_booking_complete.
+ * The only booking conversion trigger on the site. Fires the Google Ads
+ * conversion when the embedded BookingGood iframe posts `bg:booking-created`
+ * (sent only after a persisted booking; requires `bookingSuccessRedirectUrl`
+ * on the BookingGood facility), then shows the success page.
+ * The success page itself never fires: a URL id is not proof of a booking.
  */
 export default function BookingEmbedConversionBridge({
   localePrefix = "",
@@ -36,10 +44,9 @@ export default function BookingEmbedConversionBridge({
 
     const fired = new Set<string>();
 
-    const markAndFire = (bookingId: string) => {
-      const id = bookingId.trim();
-      if (!isUsableBookingId(id) || fired.has(id)) {
-        return false;
+    const markAndFire = (id: string) => {
+      if (fired.has(id)) {
+        return true;
       }
 
       const dedupeKey = `booking_conversion_fired:${id}`;
@@ -48,16 +55,15 @@ export default function BookingEmbedConversionBridge({
         window.localStorage.getItem(dedupeKey)
       ) {
         fired.add(id);
-        return false;
+        return true;
       }
 
       if (typeof window.gtag_report_booking_complete !== "function") {
         return false;
       }
 
-      const sent = window.gtag_report_booking_complete(id);
-      if (!sent) {
-        return false;
+      if (!window.gtag_report_booking_complete(id)) {
+        return true;
       }
 
       window.dataLayer = window.dataLayer || [];
@@ -84,12 +90,12 @@ export default function BookingEmbedConversionBridge({
     };
 
     const onMessage = (event: MessageEvent) => {
-      if (!isBookingGoodOrigin(event.origin)) {
+      if (event.origin !== BOOKING_FACILITY_ORIGIN) {
         return;
       }
 
-      const bookingId = extractBookingIdFromMessage(event.data);
-      if (!bookingId) {
+      const bookingId = parseBookingGoodBookingCreated(event.data);
+      if (!bookingId || !isEmbeddedBookingGoodFrame(event.source)) {
         return;
       }
 
