@@ -6,9 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import CookieConsent from "@/components/CookieConsent";
 import MetaPixel from "@/components/MetaPixel";
 import FloatingContactActions from "@/components/FloatingContactActions";
-import GoogleTracking, {
-  GoogleTagManagerNoscript,
-} from "@/components/GoogleTracking";
+import GoogleTracking from "@/components/GoogleTracking";
 import { cookies } from "next/headers";
 import { EVENTS } from "@/lib/events";
 import { isEventArchived } from "@/lib/eventArchive";
@@ -107,7 +105,6 @@ export default async function RootLayout({
     <html lang={activeLang}>
       <body>
         <GoogleTracking />
-        <GoogleTagManagerNoscript />
 
         <a
           href="#main-content"
