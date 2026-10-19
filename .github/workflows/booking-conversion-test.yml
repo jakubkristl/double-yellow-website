@@ -1,0 +1,31 @@
+name: Booking conversion test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  conversions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      - run: npm run build
+
+      - name: Run booking conversion test
+        run: |
+          npx next start -p 3000 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3000/booking && break; sleep 1; done
+          npm run test:conversions
