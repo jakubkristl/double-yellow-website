@@ -138,11 +138,11 @@ export default async function RootLayout({
         <Breadcrumbs />
 
         <Navbar />
+        <CookieConsent />
         <main id="main-content" className="container">{children}</main>
         <Footer />
         <FloatingContactActions />
         <MetaPixel />
-        <CookieConsent />
       </body>
     </html>
   );
