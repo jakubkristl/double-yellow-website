@@ -1,5 +1,6 @@
 import BookingEmbedConversionBridge from "@/components/BookingEmbedConversionBridge";
 import BookingEmbedSlot from "@/components/BookingEmbedSlot";
+import FloatingContactActions from "@/components/FloatingContactActions";
 import { getBookingEmbedSrc } from "@/lib/booking";
 
 export default function BookingPage() {
@@ -40,6 +41,8 @@ export default function BookingPage() {
         title="Double Yellow Squash - Резервации"
         loadingLabel="Зареждаме системата за резервации..."
       />
+
+      <FloatingContactActions placement="inline" />
 
       <section className="booking-guide">
         <h2

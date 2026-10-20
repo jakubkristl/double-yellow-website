@@ -81,8 +81,22 @@ html:has(.cookie-bar) .floating-contact-actions {
   bottom: calc(18px + var(--cookie-bar-h, 4.75rem));
 }
 
+/* Booking scrolls the page through a tall schedule. Keep the consent choice
+   in the page flow above that grid so it does not cover court slots. */
+body:has(.booking-embed) .cookie-bar {
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+}
+
 html:has(.cookie-bar) body {
   padding-bottom: var(--cookie-bar-h, 4.75rem);
+}
+
+html:has(.booking-embed) body {
+  padding-bottom: 0;
 }
 
 @media (max-width: 720px) {

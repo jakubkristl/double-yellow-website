@@ -1,9 +1,17 @@
 import PhoneLink from "@/components/PhoneLink";
 import { BUSINESS } from "@/lib/business";
 
-export default function FloatingContactActions() {
+type Props = {
+  /** `inline` sits in the page flow. The fixed pair must not cover the booking grid. */
+  placement?: "fixed" | "inline";
+};
+
+export default function FloatingContactActions({ placement = "fixed" }: Props) {
   return (
-    <div className="floating-contact-actions" aria-label="Quick actions">
+    <div
+      className={placement === "inline" ? "booking-contact-actions" : "floating-contact-actions"}
+      aria-label="Quick actions"
+    >
       <a
         className="floating-action floating-action-primary"
         href={`${BUSINESS.url}/booking`}

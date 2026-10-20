@@ -115,6 +115,12 @@ li {
   z-index: 50;
 }
 
+/* The booking schedule is taller than the screen. Keep the header in the page
+   flow so it does not sit on top of court slots while the customer scrolls. */
+body:has(.booking-embed) .navbar-wrap {
+  position: static;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -399,6 +405,28 @@ li {
 .floating-action:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 2px;
+}
+
+/* On the booking page the same actions sit under the schedule, in the page flow. */
+body:has(.booking-embed) .floating-contact-actions {
+  display: none;
+}
+
+.booking-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 8px;
+}
+
+.booking-contact-actions .floating-action {
+  flex: 1 1 180px;
+}
+
+@media (max-width: 600px) {
+  .booking-contact-actions {
+    flex-wrap: nowrap;
+  }
 }
 
 .beginner-priority {
