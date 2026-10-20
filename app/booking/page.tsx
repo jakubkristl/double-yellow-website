@@ -1,71 +1,6 @@
-"use client";
-
-import { Suspense, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import BookingEmbedConversionBridge from "@/components/BookingEmbedConversionBridge";
+import BookingEmbedSlot from "@/components/BookingEmbedSlot";
 import { getBookingEmbedSrc } from "@/lib/booking";
-
-function BookingEmbed() {
-  const [isLoading, setIsLoading] = useState(true);
-  const searchParams = useSearchParams();
-  const embedSrc = useMemo(
-    () =>
-      getBookingEmbedSrc({
-        day: searchParams.get("day"),
-        time: searchParams.get("time"),
-        theme: "dark",
-      }),
-    [searchParams],
-  );
-
-  return (
-    <div
-      className="card"
-      style={{ padding: 0, position: "relative", minHeight: "780px", background: "#ffffff" }}
-    >
-      {isLoading && (
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#ffffff",
-            zIndex: 10,
-          }}
-        >
-          <div
-            style={{
-              width: "50px",
-              height: "50px",
-              border: "4px solid rgba(255, 204, 0, 0.2)",
-              borderTop: "4px solid var(--accent)",
-              borderRadius: "50%",
-              animation: "spin 1s linear infinite",
-            }}
-          />
-          <p style={{ color: "#666", marginTop: "16px", fontSize: "14px" }}>
-            Зареждаме системата за резервации...
-          </p>
-        </div>
-      )}
-      <iframe
-        title="Double Yellow Squash - Резервации"
-        src={embedSrc}
-        width="100%"
-        height={780}
-        style={{ borderWidth: 0, display: "block", width: "100%", background: "#ffffff" }}
-        loading="eager"
-        onLoad={() => setIsLoading(false)}
-      />
-    </div>
-  );
-}
 
 export default function BookingPage() {
   const bookingSteps = [
@@ -101,15 +36,10 @@ export default function BookingPage() {
         </p>
       </section>
 
-      <Suspense
-        fallback={
-          <div className="card" style={{ minHeight: 200, padding: 24 }}>
-            Зареждане…
-          </div>
-        }
-      >
-        <BookingEmbed />
-      </Suspense>
+      <BookingEmbedSlot
+        title="Double Yellow Squash - Резервации"
+        loadingLabel="Зареждаме системата за резервации..."
+      />
 
       <section className="booking-guide">
         <h2
