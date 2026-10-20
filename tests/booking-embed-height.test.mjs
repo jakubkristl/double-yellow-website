@@ -7,13 +7,13 @@ import {
 } from "../lib/booking-embed-height.ts";
 
 test("fallback height covers the measured BookingGood document", () => {
-  assert.equal(fallbackBookingEmbedHeight(280), 1539);
-  assert.equal(fallbackBookingEmbedHeight(285), 1539);
-  assert.equal(fallbackBookingEmbedHeight(286), 1461);
-  assert.equal(fallbackBookingEmbedHeight(320), 1461);
-  assert.equal(fallbackBookingEmbedHeight(445), 1461);
-  assert.equal(fallbackBookingEmbedHeight(446), 1222);
-  assert.equal(fallbackBookingEmbedHeight(599), 1222);
+  assert.equal(fallbackBookingEmbedHeight(280), 1990);
+  assert.equal(fallbackBookingEmbedHeight(285), 1990);
+  assert.equal(fallbackBookingEmbedHeight(286), 1938);
+  assert.equal(fallbackBookingEmbedHeight(320), 1938);
+  assert.equal(fallbackBookingEmbedHeight(445), 1938);
+  assert.equal(fallbackBookingEmbedHeight(446), 1698);
+  assert.equal(fallbackBookingEmbedHeight(599), 1698);
   assert.equal(fallbackBookingEmbedHeight(600), 1646);
   assert.equal(fallbackBookingEmbedHeight(1118), 1646);
   assert.equal(fallbackBookingEmbedHeight(0), 1646);
@@ -47,9 +47,9 @@ test("posted widget heights are used and booking messages are not", () => {
 test("first-paint CSS uses the same width bands", () => {
   const css = bookingEmbedFrameCss();
   assert.match(css, /height: 1646px/);
-  assert.match(css, /max-width: 599px[\s\S]*height: 1222px/);
-  assert.match(css, /max-width: 445px[\s\S]*height: 1461px/);
-  assert.match(css, /max-width: 285px[\s\S]*height: 1539px/);
+  assert.match(css, /max-width: 599px[\s\S]*height: 1698px/);
+  assert.match(css, /max-width: 445px[\s\S]*height: 1938px/);
+  assert.match(css, /max-width: 285px[\s\S]*height: 1990px/);
   const wide = css.indexOf("max-width: 599px");
   const mid = css.indexOf("max-width: 445px");
   const narrow = css.indexOf("max-width: 285px");

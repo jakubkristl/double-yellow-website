@@ -1,17 +1,18 @@
 /**
  * BookingGood's facility embed does not post its height. These bands are the
- * bottom of the schedule and coaches when the iframe is already tall enough
- * that the document itself does not scroll, plus a buffer so a one-line wrap
- * does not bring the scrollbar back.
+ * bottom of a full day (07:00–21:00) plus the coach list, measured with the
+ * iframe already taller than the document so the document itself does not
+ * scroll. The current day hides hours that have already passed and is
+ * shorter; a later day is the height the iframe has to cover.
  * Measured on https://sport.bookinggood.net/bg/embed/facility/44/72?theme=dark
- * (October 2026): <=285px → 1491, <=445px → 1413, <=599px → 1174, wider → 1598.
+ * (20 October 2026): <=285px → 1942, <=445px → 1890, <=599px → 1650, wider → 1598.
  */
 export const BOOKING_EMBED_HEIGHT_BUFFER = 48;
 
 export const BOOKING_EMBED_HEIGHT_BANDS = [
-  { maxIframeWidth: 285, contentHeight: 1491 },
-  { maxIframeWidth: 445, contentHeight: 1413 },
-  { maxIframeWidth: 599, contentHeight: 1174 },
+  { maxIframeWidth: 285, contentHeight: 1942 },
+  { maxIframeWidth: 445, contentHeight: 1890 },
+  { maxIframeWidth: 599, contentHeight: 1650 },
   { maxIframeWidth: Number.POSITIVE_INFINITY, contentHeight: 1598 },
 ] as const;
 
