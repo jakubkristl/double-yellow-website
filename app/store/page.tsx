@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { CATEGORIES } from "@/data/storeItems";
-import type { Item } from "@/data/storeItems";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
+import { StoreItemPrice } from "@/components/StoreItemPrice";
 
 export default function StorePage() {
   const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
@@ -90,7 +90,7 @@ export default function StorePage() {
                     <div className="store-card-info">
                       <h3 className="store-card-name">{item.name}</h3>
                       <div className="store-card-price">
-                        {new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR" }).format((item as Item).price)}
+                        <StoreItemPrice name={item.name} catalogPrice={item.price} />
                       </div>
                     </div>
                   </div>
