@@ -14,7 +14,7 @@ type Pack = {
   valueNote?: string;
 };
 
-const CARD_FRONT = "/cards/club-card.png";
+const CARD_FRONT = "/cards/front.png";
 const CARD_BACK = "/cards/back.png";
 
 const PACKS: Pack[] = [
@@ -67,8 +67,8 @@ export default function MembershipPage() {
           flexWrap: "wrap",
         }}
       >
-        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Клубна карта Double Yellow" })}>
-          <OptimizedImage src={CARD_FRONT} alt="Клубна карта Double Yellow" width={320} height={202} priority style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
+        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Лице на карта" })}>
+          <OptimizedImage src={CARD_FRONT} alt="Лице на карта" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
         </div>
         <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_BACK, alt: "Гръб на карта" })}>
           <OptimizedImage src={CARD_BACK} alt="Гръб на карта" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
