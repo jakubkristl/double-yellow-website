@@ -14,7 +14,7 @@ type Pack = {
   valueNote?: string;
 };
 
-const CARD_FRONT = "/cards/front.png";
+const CARD_FRONT = "/cards/club-card.png";
 const CARD_BACK = "/cards/back.png";
 
 const PACKS: Pack[] = [
@@ -39,7 +39,7 @@ const PACKS: Pack[] = [
   },
   {
     name: "Daytime Pass",
-    priceEUR: 105,
+    priceEUR: 70,
     fun: "The lunchtime legend bundle. Sneak in a session, return a happier human.",
     daytime: true,
   },
@@ -67,8 +67,8 @@ export default function MembershipPage() {
           flexWrap: "wrap",
         }}
       >
-        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Card Front" })}>
-          <OptimizedImage src={CARD_FRONT} alt="Card Front" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
+        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Double Yellow club card" })}>
+          <OptimizedImage src={CARD_FRONT} alt="Double Yellow club card" width={320} height={202} priority style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
         </div>
         <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_BACK, alt: "Card Back" })}>
           <OptimizedImage src={CARD_BACK} alt="Card Back" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
