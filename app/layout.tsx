@@ -103,6 +103,9 @@ export default async function RootLayout({
 
   return (
     <html lang={activeLang}>
+      <head>
+        <meta name="facebook-domain-verification" content="2ld70sp0oids9dg7q3jwh7va17clno" />
+      </head>
       <body>
         <GoogleTracking />
 
