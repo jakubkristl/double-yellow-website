@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1016" height="640" viewBox="0 0 1016 640" role="img" aria-label="Double Yellow club card">
+  <defs>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#221c0c"/>
+      <stop offset="42%" stop-color="#0c0c0c"/>
+      <stop offset="100%" stop-color="#161208"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="42%" stop-color="#ffcc00"/>
+      <stop offset="100%" stop-color="#a67c00"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="22%" cy="38%" r="42%">
+      <stop offset="0%" stop-color="#ffcc00" stop-opacity="0.28"/>
+      <stop offset="70%" stop-color="#ffcc00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stripe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffcc00" stop-opacity="0"/>
+      <stop offset="18%" stop-color="#ffcc00" stop-opacity="0.85"/>
+      <stop offset="82%" stop-color="#ffcc00" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffcc00" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1016" height="640" rx="46" fill="url(#cardBg)"/>
+  <rect width="1016" height="640" rx="46" fill="url(#glow)"/>
+  <rect x="22" y="22" width="972" height="596" rx="34" fill="none" stroke="url(#gold)" stroke-width="7"/>
+  <rect x="40" y="40" width="936" height="560" rx="26" fill="none" stroke="#ffcc00" stroke-opacity="0.28" stroke-width="2"/>
+  <rect x="72" y="78" width="250" height="10" rx="5" fill="url(#stripe)"/>
+  <circle cx="198" cy="248" r="92" fill="#141414" stroke="url(#gold)" stroke-width="7"/>
+  <circle cx="172" cy="232" r="15" fill="#ffcc00"/>
+  <circle cx="214" cy="232" r="15" fill="#ffcc00"/>
+  <text x="72" y="430" fill="#ffcc00" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="62" font-weight="700" letter-spacing="3">DOUBLE YELLOW</text>
+  <text x="72" y="478" fill="#f5f5f5" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="26" font-weight="600" letter-spacing="6">SQUASH CLUB</text>
+  <circle cx="318" cy="468" r="4" fill="#ffcc00"/>
+  <text x="338" y="478" fill="#f5f5f5" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="26" font-weight="600" letter-spacing="6">SOFIA</text>
+  <rect x="72" y="516" width="248" height="52" rx="26" fill="#ffcc00"/>
+  <text x="196" y="551" text-anchor="middle" fill="#111111" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="3">CLUB CARD</text>
+  <text x="944" y="548" text-anchor="end" fill="#ffcc00" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="18" font-weight="600" letter-spacing="1.5">doubleyellowsquash.com</text>
+</svg>
