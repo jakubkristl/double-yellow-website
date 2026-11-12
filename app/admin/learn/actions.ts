@@ -4,21 +4,27 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase-admin";
-
-async function requireAdmin() {
-  const c = await cookies();
-  if (c.get("dy_admin_session")?.value !== process.env.ADMIN_SECRET) {
-    redirect("/admin/learn");
-  }
-}
+import {
+  ADMIN_COOKIE_NAME,
+  getExpectedAdminToken,
+  requireAdmin,
+  verifyAdminPassword,
+} from "@/lib/admin-auth";
 
 export async function loginAction(formData: FormData) {
   const password = formData.get("password")?.toString() ?? "";
-  if (password !== process.env.ADMIN_SECRET) {
+  const isValid = await verifyAdminPassword(password);
+  if (!isValid) {
     redirect("/admin/learn?error=1");
   }
+
+  const sessionToken = await getExpectedAdminToken();
+  if (!sessionToken) {
+    redirect("/admin/learn?error=1");
+  }
+
   const c = await cookies();
-  c.set("dy_admin_session", password, {
+  c.set(ADMIN_COOKIE_NAME, sessionToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
@@ -30,7 +36,7 @@ export async function loginAction(formData: FormData) {
 
 export async function logoutAction() {
   const c = await cookies();
-  c.delete("dy_admin_session");
+  c.delete(ADMIN_COOKIE_NAME);
   redirect("/admin/learn");
 }
 

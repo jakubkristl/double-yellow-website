@@ -8,6 +8,11 @@ import {
   rejectCommentAction,
   updateTopicStatusAction,
 } from "./actions";
+import {
+  ADMIN_COOKIE_NAME,
+  isMasterAdminConfigured,
+  verifyAdminSession,
+} from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -22,14 +27,20 @@ export default async function AdminLearnPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const { error } = await searchParams;
+  const isConfigured = await isMasterAdminConfigured();
   const c = await cookies();
-  const isAuthenticated =
-    c.get("dy_admin_session")?.value === process.env.ADMIN_SECRET;
+  const sessionToken = c.get(ADMIN_COOKIE_NAME)?.value;
+  const isAuthenticated = await verifyAdminSession(sessionToken);
 
   if (!isAuthenticated) {
     return (
       <main className="container admin-login-page">
         <h1 className="page-title">Admin Login</h1>
+        {!isConfigured && (
+          <p className="admin-error" style={{ color: "#ff6b6b", marginBottom: "16px" }}>
+            Admin access is currently disabled because the admin secret is not configured in the server environment.
+          </p>
+        )}
         {error && <p className="admin-error">Wrong password. Try again.</p>}
         <form action={loginAction} className="learn-panel admin-login-form">
           <label htmlFor="admin-pw" className="learn-panel__title">
@@ -43,9 +54,10 @@ export default async function AdminLearnPage({
             placeholder="Admin password"
             autoFocus
             required
+            disabled={!isConfigured}
           />
           <div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" disabled={!isConfigured}>
               Log in
             </button>
           </div>
