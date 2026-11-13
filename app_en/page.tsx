@@ -4,6 +4,10 @@ import Image from "next/image";
 import { createPageMetadata } from "@/lib/seo";
 import AvailabilityTeaser from "@/components/AvailabilityTeaser";
 import IntroLeadForm from "@/components/IntroLeadForm";
+import {
+  BLACK_WEEKEND_CAROUSEL_ENDS_AT_MS,
+  selectActiveSlides,
+} from "@/lib/heroSlideSchedule";
 
 const WHATSAPP_CTA_URL =
   "https://wa.me/359896754014?text=Hi%20Double%20Yellow!%20I%20want%20to%20book%20my%20first%20squash%20session.";
@@ -21,6 +25,7 @@ type HeroSlide = {
   };
   startsOn?: string;
   endsOn?: string;
+  endsAtMs?: number;
 };
 
 const BNT_ARTICLE_URL =
@@ -29,28 +34,6 @@ const WSF_LEVEL_1_COURSE_URL =
   "https://europeansquash.com/event/wsf-level-1-coaching-course/";
 const DOUBLE_YELLOW_OPEN_URL =
   "https://www.rankedin.com/en/tournament/74899/double-yellow-open";
-const RACKETPOINT_URL = "https://www.racketpoint.bg";
-
-function getSofiaDate() {
-  const parts = new Intl.DateTimeFormat("en", {
-    timeZone: "Europe/Sofia",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(new Date());
-
-  const year = parts.find((part) => part.type === "year")?.value;
-  const month = parts.find((part) => part.type === "month")?.value;
-  const day = parts.find((part) => part.type === "day")?.value;
-
-  return `${year}-${month}-${day}`;
-}
-
-function isSlideActive(slide: HeroSlide, today: string) {
-  if (slide.startsOn && slide.startsOn > today) return false;
-  if (slide.endsOn && slide.endsOn < today) return false;
-  return true;
-}
 
 export const metadata: Metadata = createPageMetadata({
   path: "/",
@@ -64,22 +47,11 @@ export const metadata: Metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function Home() {
-  const today = getSofiaDate();
-
   const heroSlides: HeroSlide[] = [
     {
-      src: "/events/black-friday-2026.png",
-      alt: "Black Friday at Double Yellow — 10% off club cards at the desk and Unsquashable rackets on racketpoint.bg, 13–16 November 2026",
-      link: RACKETPOINT_URL,
-      linkLabel: "Open racketpoint.bg for Unsquashable rackets at 10% off",
-      overlay: {
-        eyebrow: "Black Friday · 13–16 Nov",
-        title: "10% off club cards & Unsquashable",
-        body: "Cards at the desk (WhatsApp / club). Rackets online at racketpoint.bg.",
-        ctaLabel: "Shop racketpoint.bg",
-      },
-      startsOn: "2026-11-11",
-      endsOn: "2026-11-16",
+      src: "/events/black-weekend-2026.jpg",
+      alt: "Black Weekend at Double Yellow — 13–16 November, rackets, coaching, and club cards",
+      endsAtMs: BLACK_WEEKEND_CAROUSEL_ENDS_AT_MS,
     },
     {
       src: "/events/double-yellow-open-2026-10.png",
@@ -132,10 +104,7 @@ export default function Home() {
     },
   ];
 
-  const activeHeroSlides = heroSlides.filter((slide) => isSlideActive(slide, today));
-  const displayHeroSlides = activeHeroSlides.length > 0
-    ? activeHeroSlides
-    : heroSlides.filter((slide) => !slide.endsOn);
+  const displayHeroSlides = selectActiveSlides(heroSlides);
 
   const heroImages = displayHeroSlides.map((slide) => slide.src);
   const heroAlts = displayHeroSlides.map((slide) => slide.alt);
@@ -194,6 +163,7 @@ export default function Home() {
             links={heroLinks}
             linkLabels={heroLinkLabels}
             overlays={heroOverlays}
+            hideAtMs={displayHeroSlides.map((slide) => slide.endsAtMs)}
           />
         </div>
 
