@@ -50,7 +50,7 @@ export const CATEGORIES: Category[] = [
     items: [
       { name: "Unsquashable TOUR-TEC PRO 1.18 Squash String - Yellow - 100M Reel", price: 92.00, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO 1.18 String (Yellow) — 100m Reel.webp" },
       { name: "Unsquashable TOUR-TEC PRO PU Grip - 6 Pack", price: 24.00, image: "/store/products/strings-grips/Unsquashable TOUR-TEC PRO PU Grip.jpg" },
-      { name: "Karakal PU Super Grip", price: 4.20, image: "/store/products/strings-grips/karakal-pu-grip.jpg" },
+      { name: "Karakal PU Super Grip", price: 4.00, image: "/store/products/strings-grips/karakal-pu-grip.jpg" },
     ],
   },
   {
