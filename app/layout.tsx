@@ -8,6 +8,7 @@ import MetaPixel from "@/components/MetaPixel";
 import FloatingContactActions from "@/components/FloatingContactActions";
 import GoogleTracking from "@/components/GoogleTracking";
 import BlackWeekendExpiryScript from "@/components/BlackWeekendExpiryScript";
+import BlackWeekendSaleClock from "@/components/BlackWeekendSaleClock";
 import { cookies } from "next/headers";
 import { EVENTS } from "@/lib/events";
 import { isEventArchived } from "@/lib/eventArchive";
@@ -110,6 +111,7 @@ export default async function RootLayout({
       <body>
         <GoogleTracking />
         <BlackWeekendExpiryScript />
+        <BlackWeekendSaleClock />
 
         <a
           href="#main-content"

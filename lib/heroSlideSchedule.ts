@@ -104,3 +104,57 @@ export function selectActiveSlides<T extends ScheduledSlide>(
   if (active.length > 0) return active;
   return slides.filter((slide) => !slide.endsOn && slide.endsAtMs === undefined);
 }
+
+/**
+ * Shop and membership sale. It ends at the same instant as the Black Weekend
+ * carousel slide. At that millisecond the sale price is gone.
+ */
+export function isBlackWeekendSaleActive(now: Date = new Date()): boolean {
+  return now.getTime() < BLACK_WEEKEND_CAROUSEL_ENDS_AT_MS;
+}
+
+/** 10% off a shelf price, rounded to the nearest cent. */
+export function tenPercentOff(shelfEur: number): number {
+  const cents = Math.round(shelfEur * 100);
+  return Math.round(cents * 0.9) / 100;
+}
+
+/**
+ * Fixed sale prices. These are not a 10% cut.
+ * Y-TEC PRO 120 is an Unsquashable racket, but its sale price is €79, not 10% of €99.
+ */
+export const BLACK_WEEKEND_SPECIAL_OFFERS: Record<string, { shelfEur: number; saleEur: number }> = {
+  "Unsquashable Y-TEC PRO 120": { shelfEur: 99, saleEur: 79 },
+  "Head Radical Junior": { shelfEur: 49, saleEur: 39 },
+};
+
+export type BlackWeekendOffer = {
+  saleEur: number;
+  specialOffer: boolean;
+};
+
+export function blackWeekendStoreOffer(
+  categoryTitle: string,
+  name: string,
+  shelfEur: number,
+  now: Date = new Date(),
+): BlackWeekendOffer | null {
+  if (!isBlackWeekendSaleActive(now)) return null;
+
+  const special = BLACK_WEEKEND_SPECIAL_OFFERS[name];
+  if (special) {
+    return { saleEur: special.saleEur, specialOffer: true };
+  }
+
+  if (categoryTitle === "Rackets" && name.startsWith("Unsquashable ")) {
+    return { saleEur: tenPercentOff(shelfEur), specialOffer: false };
+  }
+
+  return null;
+}
+
+/** 10% off a club-card shelf price during the same window. */
+export function blackWeekendCardSaleEur(shelfEur: number, now: Date = new Date()): number | null {
+  if (!isBlackWeekendSaleActive(now)) return null;
+  return tenPercentOff(shelfEur);
+}
