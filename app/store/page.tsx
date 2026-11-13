@@ -5,6 +5,13 @@ import { CATEGORIES } from "@/data/storeItems";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 import { StoreItemPrice } from "@/components/StoreItemPrice";
+import { blackWeekendStoreOffer } from "@/lib/blackWeekendSale";
+import {
+  BlackWeekendDisclaimer,
+  BlackWeekendOfferTag,
+  BlackWeekendPrices,
+  BlackWeekendSticker,
+} from "@/components/BlackWeekendSale";
 
 export default function StorePage() {
   const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
@@ -60,6 +67,7 @@ export default function StorePage() {
             </a>
             . Налично и в клуба.
           </span>
+          <BlackWeekendDisclaimer locale="bg" />
         </div>
       </div>
 
@@ -82,15 +90,22 @@ export default function StorePage() {
               {cat.items.map((item) => {
                 const imgSrc = (item as any).image ?? iconByCategory[cat.title] ?? "/store/icons/racket.svg";
                 const imgAlt = (item as any).imageAlt ?? item.name;
+                const offer = blackWeekendStoreOffer(cat.title, item.name, item.price);
                 return (
                   <div key={item.name} className="store-card">
                     <div className="store-card-image" style={{ cursor: "pointer" }} onClick={() => setZoomedImg({ src: imgSrc, alt: imgAlt })}>
+                      <BlackWeekendSticker active={offer !== null} />
                       <OptimizedImage src={imgSrc} alt={imgAlt} width={280} height={280} />
                     </div>
                     <div className="store-card-info">
                       <h3 className="store-card-name">{item.name}</h3>
+                      <BlackWeekendOfferTag locale="bg" active={Boolean(offer?.specialOffer)} />
                       <div className="store-card-price">
-                        <StoreItemPrice name={item.name} catalogPrice={item.price} />
+                        {offer ? (
+                          <BlackWeekendPrices shelf={item.price} sale={offer.saleEur} />
+                        ) : (
+                          <StoreItemPrice name={item.name} catalogPrice={item.price} />
+                        )}
                       </div>
                     </div>
                   </div>

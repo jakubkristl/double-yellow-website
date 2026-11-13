@@ -4,6 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import OptimizedImage from "@/components/OptimizedImage";
 import MembershipLeadButtons from "@/components/MembershipLeadButtons";
+import { blackWeekendCardSaleEur, isBlackWeekendSaleActive } from "@/lib/blackWeekendSale";
+import {
+  BlackWeekendDisclaimer,
+  BlackWeekendPrices,
+  BlackWeekendSticker,
+} from "@/components/BlackWeekendSale";
 
 type Pack = {
   name: string;
@@ -47,13 +53,16 @@ const PACKS: Pack[] = [
 
 export default function MembershipPage() {
   const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
-  const fmt = new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR" });
+  const weekend = isBlackWeekendSaleActive();
   
   return (
     <section className="container">
       <div className="membership-header">
         <h1 className="page-title">Membership Packs</h1>
-        <div className="membership-sub">Valid 30 days from purchase</div>
+        <div className="membership-sub">
+          Valid 30 days from purchase
+          <BlackWeekendDisclaimer locale="en" />
+        </div>
       </div>
 
       {/* Shared card preview */}
@@ -67,10 +76,12 @@ export default function MembershipPage() {
           flexWrap: "wrap",
         }}
       >
-        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Card Front" })}>
+        <div className="bw-card-shot" onClick={() => setZoomedImg({ src: CARD_FRONT, alt: "Card Front" })}>
+          <BlackWeekendSticker active={weekend} />
           <OptimizedImage src={CARD_FRONT} alt="Card Front" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
         </div>
-        <div style={{ width: 320, cursor: "pointer" }} onClick={() => setZoomedImg({ src: CARD_BACK, alt: "Card Back" })}>
+        <div className="bw-card-shot" onClick={() => setZoomedImg({ src: CARD_BACK, alt: "Card Back" })}>
+          <BlackWeekendSticker active={weekend} />
           <OptimizedImage src={CARD_BACK} alt="Card Back" width={320} height={200} style={{ borderRadius: 12, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }} />
         </div>
       </div>
@@ -78,9 +89,12 @@ export default function MembershipPage() {
       <div className="price-grid">
         {PACKS.map((p) => (
           <article key={p.name} className={`price-card ${p.tag ? "price-card-convert" : ""}`}>
+            <BlackWeekendSticker active={weekend} pack />
             <h3>{p.name}</h3>
             {p.tag && <div className="membership-tag">{p.tag}</div>}
-            <div className="price">{fmt.format(p.priceEUR)}</div>
+            <div className="price">
+              <BlackWeekendPrices shelf={p.priceEUR} sale={blackWeekendCardSaleEur(p.priceEUR)} />
+            </div>
             {p.valueNote && <div className="membership-value-note">{p.valueNote}</div>}
             <div>{p.fun}</div>
             {p.daytime && <div className="badge">Once per day until 17:00</div>}

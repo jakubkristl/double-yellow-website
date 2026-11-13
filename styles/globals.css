@@ -201,11 +201,27 @@ body:has(.booking-embed) .navbar-wrap {
   pointer-events: auto;
 }
 
-/* Cached pages hide the Black Weekend slide from 08:00 Europe/Sofia on 17 Nov 2026. */
+/* Cached pages hide the Black Weekend slide from 08:00 Europe/Sofia on 17 Nov 2026.
+   Sale prices, stickers, and the stock note leave at that same instant. */
 html[data-black-weekend-ended] .slide[data-carousel-slide="black-weekend"] {
   display: none;
   opacity: 0;
   pointer-events: none;
+}
+
+html[data-black-weekend-ended] .bw-now,
+html[data-black-weekend-ended] .bw-sticker,
+html[data-black-weekend-ended] .bw-offer,
+html[data-black-weekend-ended] .bw-disclaimer {
+  display: none !important;
+}
+
+html[data-black-weekend-ended] .bw-was {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  margin: 0;
 }
 
 html[data-black-weekend-ended] .slide[data-carousel-slide="black-weekend"].active + .slide {
@@ -1169,6 +1185,7 @@ a:hover { color: var(--accent); }
 }
 
 .price-card {
+  position: relative;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -1178,6 +1195,9 @@ a:hover { color: var(--accent); }
   flex-direction: column;
   gap: 14px;
   min-height: 520px; /* consistency with Booking card rhythm */
+}
+.price-card:has(.bw-sticker--pack) h3 {
+  padding-right: 118px;
 }
 .price-card div:not(.price):not(.price-eur):not(.badge) {
   font-size: clamp(16px, 1.2vw + 12px, 20px);
@@ -2029,6 +2049,7 @@ a:hover { color: var(--accent); }
 
 /* Card image container */
 .store-card-image {
+  position: relative;
   background: #0a0a0a;
   display: flex;
   align-items: center;
@@ -2036,6 +2057,82 @@ a:hover { color: var(--accent); }
   height: 280px;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bw-sticker {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 7px 9px;
+  background: #0b0b0b;
+  color: var(--accent, #ffcc00);
+  border: 2px solid var(--accent, #ffcc00);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  transform: rotate(-8deg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.bw-sticker--pack {
+  top: 16px;
+  left: auto;
+  right: 16px;
+}
+
+.bw-card-shot {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.bw-prices {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bw-was {
+  color: #9a9a9a;
+  text-decoration: line-through;
+  font-weight: 650;
+  font-size: 0.86em;
+}
+
+.bw-now {
+  color: var(--accent, #ffcc00);
+  font-weight: 900;
+}
+
+.bw-offer {
+  display: inline-block;
+  width: fit-content;
+  margin: 0;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #111;
+  color: var(--accent, #ffcc00);
+  border: 1px solid var(--accent, #ffcc00);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bw-disclaimer {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-left: 4px solid var(--accent, #ffcc00);
+  background: rgba(255, 204, 0, 0.08);
+  color: #ddd;
+  font-size: 0.95rem;
 }
 
 .store-card-image img {
