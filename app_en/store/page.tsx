@@ -12,7 +12,7 @@ export default function StorePage() {
   const visibleCategories = CATEGORIES.filter((cat) => cat.title !== "Drinks");
 
   // Update this whenever you edit prices/items
-  const lastUpdated = new Date("2026-01-26");
+  const lastUpdated = new Date("2026-11-13");
   const formattedDate = lastUpdated.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
