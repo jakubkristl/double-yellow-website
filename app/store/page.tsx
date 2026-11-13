@@ -21,7 +21,7 @@ export default function StorePage() {
   };
 
   // Update this whenever you edit prices/items
-  const lastUpdated = new Date("2026-01-26");
+  const lastUpdated = new Date("2026-11-13");
   const formattedDate = lastUpdated.toLocaleDateString("bg-BG", {
     year: "numeric",
     month: "long",
