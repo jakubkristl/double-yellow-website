@@ -200,6 +200,18 @@ body:has(.booking-embed) .navbar-wrap {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* Cached pages hide the Black Weekend slide from 08:00 Europe/Sofia on 17 Nov 2026. */
+html[data-black-weekend-ended] .slide[data-carousel-slide="black-weekend"] {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+html[data-black-weekend-ended] .slide[data-carousel-slide="black-weekend"].active + .slide {
+  opacity: 1;
+  pointer-events: auto;
+}
 .slide img { object-fit: cover; }
 
 .carousel-overlay {
