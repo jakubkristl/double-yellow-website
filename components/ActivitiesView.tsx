@@ -28,7 +28,7 @@ const featuredActivities: Activity[] = [
       "Не ти трябва партньор. Идваш, намираме ти мач и играеш. Най-социалната скуош вечер в София - всички нива са добре дошли.",
     bookingUrl: "#club-sessions",
     image: "/activities/comeandplay.jpg",
-    alt: "Social Squash в петък вечер",
+    alt: "Social Squash в четвъртък вечер",
     cta: "Виж свободните места",
     featured: true,
   },

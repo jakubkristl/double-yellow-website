@@ -7,7 +7,7 @@ type Mode = "browse" | "book";
 const copy = {
   bg: {
     title: "Mini squash и Social squash",
-    lead: "Предстоящите сесии от календара на клуба. Цената и свободните места идват от BookingGood. Пълна сесия не може да се резервира.",
+    lead: "Следващата Social squash в четвъртък и следващите Mini squash в събота и неделя. Цената и свободните места идват от BookingGood. Пълна сесия не може да се резервира.",
     book: "Запази място",
     full: "Пълно",
     empty: "В календара няма предстоящи Mini squash или Social squash сесии.",
@@ -18,7 +18,7 @@ const copy = {
   },
   en: {
     title: "Mini squash and Social squash",
-    lead: "Upcoming sessions from the club calendar. Price and places left come from BookingGood. A full session cannot be booked.",
+    lead: "The next Thursday Social squash, and the next Mini squash on Saturday and on Sunday. Price and places left come from BookingGood. A full session cannot be booked.",
     book: "Book a place",
     full: "Full",
     empty: "The calendar has no upcoming Mini squash or Social squash sessions.",
