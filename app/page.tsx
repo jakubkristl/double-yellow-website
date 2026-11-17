@@ -281,9 +281,9 @@ export default function Home() {
           <div>
             <h3>Нямаш партньор? Няма проблем.</h3>
             <p>
-              <strong>Social Squash - всеки петък 18:00-20:00.</strong> Идваш, намираме ти партньор и играеш с наличните хора. Всички нива са добре дошли.
+              <strong>Social squash.</strong> Идваш без партньор и играеш с наличните хора. Свободните вечери и местата са в списъка със сесии.
             </p>
-            <a href="/activities" className="inline-link">Виж петъчния Social Squash →</a>
+            <a href="/activities#club-sessions" className="inline-link">Виж Mini squash и Social squash →</a>
           </div>
           <div>
             <h3>Аматъорски, ама сквош</h3>

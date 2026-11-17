@@ -39,6 +39,7 @@ export default function BookingEmbed({ title, loadingLabel }: Props) {
         day: searchParams.get("day"),
         time: searchParams.get("time"),
         theme: "dark",
+        facility: searchParams.get("facility") === "events" ? "events" : "courts",
       }),
     [searchParams],
   );
