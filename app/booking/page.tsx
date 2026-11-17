@@ -1,6 +1,7 @@
 import BookingEmbedConversionBridge from "@/components/BookingEmbedConversionBridge";
 import BookingEmbedSlot from "@/components/BookingEmbedSlot";
 import ClubSessions, { sessionFacts } from "@/components/ClubSessions";
+import EventsFacilitySchedule from "@/components/EventsFacilitySchedule";
 import FloatingContactActions from "@/components/FloatingContactActions";
 import { getBookingEmbedSrc } from "@/lib/booking";
 import { findClubSession, loadClubSessions } from "@/lib/club-sessions";
@@ -130,16 +131,14 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
             Потвърди {openSession.title} — {facts.when}
           </h2>
         ) : null}
-        <BookingEmbedSlot
-          title={
-            openSession
-              ? `Double Yellow Squash - ${openSession.title}`
-              : events
-                ? "Double Yellow Squash - Сесии"
-                : "Double Yellow Squash - Резервации"
-          }
-          loadingLabel="Зареждаме системата за резервации..."
-        />
+        {events ? (
+          <EventsFacilitySchedule />
+        ) : (
+          <BookingEmbedSlot
+            title="Double Yellow Squash - Резервации"
+            loadingLabel="Зареждаме системата за резервации..."
+          />
+        )}
       </div>
 
       <FloatingContactActions placement="inline" />

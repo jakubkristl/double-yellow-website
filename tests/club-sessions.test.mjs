@@ -1,7 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { getBookingEmbedSrc, getEventSlotBookingHref, getEventsBookingHref } from "../lib/booking.ts";
+import {
+  EVENTS_FACILITY_IFRAME_SRC,
+  getBookingEmbedSrc,
+  getEventSlotBookingHref,
+  getEventsBookingHref,
+} from "../lib/booking.ts";
 import { findClubSession, parseClubSessionsHtml } from "../lib/club-sessions.ts";
 
 const weekHtml = readFileSync(
@@ -170,9 +175,10 @@ test("court booking stays the default embed and events use facility 717", () => 
     getBookingEmbedSrc({ day: "5", time: "18:00", theme: "dark" }),
     "https://sport.bookinggood.net/bg/embed/facility/44/72?theme=dark&day=5&time=18%3A00",
   );
+  assert.equal(getBookingEmbedSrc({ facility: "events", theme: "dark" }), EVENTS_FACILITY_IFRAME_SRC);
   assert.equal(
-    getBookingEmbedSrc({ facility: "events", theme: "dark" }),
-    "https://sport.bookinggood.net/bg/embed/facility/44/717?theme=dark",
+    EVENTS_FACILITY_IFRAME_SRC,
+    "https://sport.bookinggood.net/embed/facility/44/717?lang=en&theme=auto",
   );
   assert.equal(getEventsBookingHref("bg"), "/booking?facility=events#event-calendar");
   assert.equal(getEventsBookingHref("en"), "/en/booking?facility=events#event-calendar");
@@ -202,6 +208,6 @@ test("a bookable session points at that slot in the events booking", () => {
       date: "2026-11-19",
       time: "18:00",
     }),
-    "https://sport.bookinggood.net/bg/embed/facility/44/717?theme=dark&date=2026-11-19&time=18%3A00",
+    "https://sport.bookinggood.net/embed/facility/44/717?lang=en&theme=auto",
   );
 });

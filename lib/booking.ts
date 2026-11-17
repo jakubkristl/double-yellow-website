@@ -1,7 +1,12 @@
 /** Canonical BookingGood facility embed used across the site. */
 export const BOOKING_FACILITY_PATH = "/bg/embed/facility/44/72";
-/** Events product (Mini squash and Social squash), facility item 717. */
-export const BOOKING_EVENTS_PATH = "/bg/embed/facility/44/717";
+/**
+ * Events calendar for Mini squash and Social squash (facility 717).
+ * This is the embed BookingGood gave the club. Do not add a day, a time, or a theme.
+ */
+export const EVENTS_FACILITY_IFRAME_SRC =
+  "https://sport.bookinggood.net/embed/facility/44/717?lang=en&theme=auto";
+export const EVENTS_FACILITY_IFRAME_TITLE = "This facility schedule";
 export const BOOKING_FACILITY_ORIGIN = "https://sport.bookinggood.net";
 
 export type BookingFacility = "courts" | "events";
@@ -26,13 +31,13 @@ export function getSiteBookingHref(query: BookingQuery = {}) {
 
 /** BookingGood iframe/src used by /booking (kept on-site for ads attribution). */
 export function getBookingEmbedSrc(query: BookingQuery = {}) {
+  if (query.facility === "events") return EVENTS_FACILITY_IFRAME_SRC;
   const params = new URLSearchParams();
   params.set("theme", query.theme ?? "dark");
   if (query.day) params.set("day", query.day);
   if (query.date) params.set("date", query.date);
   if (query.time) params.set("time", query.time);
-  const path = query.facility === "events" ? BOOKING_EVENTS_PATH : BOOKING_FACILITY_PATH;
-  return `${BOOKING_FACILITY_ORIGIN}${path}?${params.toString()}`;
+  return `${BOOKING_FACILITY_ORIGIN}${BOOKING_FACILITY_PATH}?${params.toString()}`;
 }
 
 export function getEventsBookingHref(locale: "bg" | "en" = "bg") {
