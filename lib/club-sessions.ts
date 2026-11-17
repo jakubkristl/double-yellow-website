@@ -81,6 +81,37 @@ function addMinutes(start: string, minutes: number): string {
   return `${pad(Math.floor(total / 60) % 24)}:${pad(total % 60)}`;
 }
 
+/** Weekday in Sofia: Sunday 0 through Saturday 6. */
+function sofiaWeekday(isoDate: string): number {
+  const name = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Sofia",
+    weekday: "short",
+  }).format(new Date(`${isoDate}T12:00:00Z`));
+  return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(name);
+}
+
+/**
+ * Real sessions only. Social squash is Thursday. Mini squash is Saturday and Sunday.
+ * Friday on the BookingGood week view is a blank day that copies Thursday, so a
+ * Friday Social squash is never a session and never replaces Thursday.
+ */
+function sessionKind(slot: ClubSession): "social" | "mini-saturday" | "mini-sunday" | null {
+  const weekday = sofiaWeekday(slot.date);
+  if (slot.title === "Social squash") return weekday === 4 ? "social" : null;
+  if (slot.title !== "Mini squash") return null;
+  if (weekday === 6) return "mini-saturday";
+  if (weekday === 0) return "mini-sunday";
+  return null;
+}
+
+/** Still on the list until the session's end time in Sofia. Without an end, the start time is the cutoff. */
+function sessionStillOpen(slot: ClubSession, today: SofiaStamp): boolean {
+  const cutoff = slot.end ?? slot.start;
+  if (slot.date > today.date) return true;
+  if (slot.date < today.date) return false;
+  return cutoff > today.time;
+}
+
 function canonicalTitle(value: string): ClubSessionTitle | null {
   const match = SESSION_TITLES.find((title) => title.toLowerCase() === value.toLowerCase());
   return match ?? null;
@@ -140,15 +171,36 @@ export function parseClubSessionsHtml(html: string, now = new Date()): ClubSessi
       const button = cell[1].match(/<button\b[^>]*>[\s\S]*?<\/button>/i)?.[0];
       if (!date || !button) return;
       const slot = parseSlot(button, date);
-      if (!slot) return;
-      const upcoming =
-        slot.date > today.date || (slot.date === today.date && slot.start >= today.time);
-      if (!upcoming) return;
+      const kind = slot ? sessionKind(slot) : null;
+      if (!slot || !kind || !sessionStillOpen(slot, today)) return;
       slots.push(slot);
     });
   }
 
-  return slots.sort((a, b) => `${a.date}T${a.start}`.localeCompare(`${b.date}T${b.start}`));
+  const nextByKind = new Map<string, ClubSession>();
+  for (const slot of slots) {
+    const kind = sessionKind(slot);
+    if (!kind) continue;
+    const current = nextByKind.get(kind);
+    if (!current || `${slot.date}T${slot.start}` < `${current.date}T${current.start}`) {
+      nextByKind.set(kind, slot);
+    }
+  }
+
+  return [...nextByKind.values()].sort((a, b) =>
+    `${a.date}T${a.start}`.localeCompare(`${b.date}T${b.start}`),
+  );
+}
+
+/** The live session for a booking address, or null when the date and time are not on the calendar. */
+export function findClubSession(
+  slots: ClubSession[],
+  date?: string | null,
+  time?: string | null,
+): ClubSession | null {
+  if (!date || !time) return null;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return null;
+  return slots.find((slot) => slot.date === date && slot.start === time) ?? null;
 }
 
 export async function loadClubSessions(now = new Date()): Promise<ClubSessionsResult> {

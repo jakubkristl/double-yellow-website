@@ -1,8 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { getBookingEmbedSrc, getEventsBookingHref } from "../lib/booking.ts";
-import { parseClubSessionsHtml } from "../lib/club-sessions.ts";
+import { getBookingEmbedSrc, getEventSlotBookingHref, getEventsBookingHref } from "../lib/booking.ts";
+import { findClubSession, parseClubSessionsHtml } from "../lib/club-sessions.ts";
 
 const weekHtml = readFileSync(
   new URL("./fixtures/bookinggood-events-week.html", import.meta.url),
@@ -10,7 +10,7 @@ const weekHtml = readFileSync(
 );
 const duringWeek = new Date("2026-11-17T10:00:00+02:00");
 
-test("public events calendar keeps the four live sessions", () => {
+test("the list shows the next Social squash and the next Saturday and Sunday Mini squash", () => {
   const slots = parseClubSessionsHtml(weekHtml, duringWeek);
   assert.deepEqual(
     slots.map((slot) => ({
@@ -26,15 +26,6 @@ test("public events calendar keeps the four live sessions", () => {
       {
         title: "Social squash",
         date: "2026-11-19",
-        start: "18:00",
-        end: "20:00",
-        placesLeft: 6,
-        priceEur: 10,
-        bookable: true,
-      },
-      {
-        title: "Social squash",
-        date: "2026-11-20",
         start: "18:00",
         end: "20:00",
         placesLeft: 6,
@@ -63,7 +54,57 @@ test("public events calendar keeps the four live sessions", () => {
   );
 });
 
-test("a full session cannot be booked and other titles are ignored", () => {
+test("Friday is a copied blank day and never becomes Social squash", () => {
+  const duringThursday = parseClubSessionsHtml(weekHtml, new Date("2026-11-19T19:00:00+02:00"));
+  assert.deepEqual(
+    duringThursday.map((slot) => slot.date),
+    ["2026-11-19", "2026-11-21", "2026-11-22"],
+  );
+  const afterThursday = parseClubSessionsHtml(weekHtml, new Date("2026-11-19T20:00:00+02:00"));
+  assert.deepEqual(
+    afterThursday.map((slot) => slot.date),
+    ["2026-11-21", "2026-11-22"],
+  );
+  assert.equal(
+    afterThursday.some((slot) => slot.date === "2026-11-20"),
+    false,
+  );
+});
+
+test("the next Social squash is the following Thursday, not Friday", () => {
+  const html = `
+    <table><thead><tr>
+      <th><span>19.11</span></th>
+      <th><span>20.11</span></th>
+      <th><span>26.11</span></th>
+    </tr></thead><tbody><tr>
+      <td><button><span>18:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Social squash</span></button></td>
+      <td><button><span>18:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Social squash</span></button></td>
+      <td><button><span>18:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Social squash</span></button></td>
+    </tr></tbody></table>`;
+  const afterThursday = parseClubSessionsHtml(html, new Date("2026-11-19T20:00:00+02:00"));
+  assert.deepEqual(
+    afterThursday.map((slot) => slot.date),
+    ["2026-11-26"],
+  );
+});
+
+test("a full next session stays listed and cannot be booked", () => {
+  const html = `
+    <table><thead><tr>
+      <th><span>19.11</span></th>
+      <th><span>20.11</span></th>
+    </tr></thead><tbody><tr>
+      <td><button class="slot unavailable"><span>18:00</span> <span>0 своб.</span><span>10€ на човек</span><span>Social squash</span></button></td>
+      <td><button class="slot"><span>18:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Social squash</span></button></td>
+    </tr></tbody></table>`;
+  const slots = parseClubSessionsHtml(html, duringWeek);
+  assert.equal(slots.length, 1);
+  assert.equal(slots[0].date, "2026-11-19");
+  assert.equal(slots[0].bookable, false);
+});
+
+test("a Friday copy and other titles are not listed", () => {
   const html = `
     <table><thead><tr>
       <th><span>20.11</span></th>
@@ -73,16 +114,49 @@ test("a full session cannot be booked and other titles are ignored", () => {
       <td><button><span>10:00</span> <span>4 left</span><span>12€ per person</span><span>Time for Ladies</span></button></td>
     </tr></tbody></table>`;
   const slots = parseClubSessionsHtml(html, duringWeek);
-  assert.equal(slots.length, 1);
-  assert.equal(slots[0].title, "Social squash");
-  assert.equal(slots[0].placesLeft, 0);
-  assert.equal(slots[0].bookable, false);
+  assert.deepEqual(slots, []);
 });
 
-test("sessions that have already started drop off the list", () => {
-  const slots = parseClubSessionsHtml(weekHtml, new Date("2026-11-21T11:30:00+02:00"));
+test("Saturday and Sunday Mini squash roll forward to the same weekday", () => {
+  const html = `
+    <table><thead><tr>
+      <th><span>21.11</span></th>
+      <th><span>22.11</span></th>
+      <th><span>28.11</span></th>
+      <th><span>29.11</span></th>
+    </tr></thead><tbody><tr>
+      <td><button><span>10:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Mini squash</span></button></td>
+      <td><button><span>10:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Mini squash</span></button></td>
+      <td><button><span>10:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Mini squash</span></button></td>
+      <td><button><span>10:00</span> <span>6 своб.</span><span>10€ на човек</span><span>Mini squash</span></button></td>
+    </tr></tbody></table>`;
+  const afterSaturday = parseClubSessionsHtml(html, new Date("2026-11-21T11:00:00+02:00"));
   assert.deepEqual(
-    slots.map((slot) => slot.date),
+    afterSaturday.map((slot) => slot.date),
+    ["2026-11-22", "2026-11-28"],
+  );
+  const afterSunday = parseClubSessionsHtml(html, new Date("2026-11-22T11:00:00+02:00"));
+  assert.deepEqual(
+    afterSunday.map((slot) => slot.date),
+    ["2026-11-28", "2026-11-29"],
+  );
+});
+
+test("a session stays until its end time, then the next one of that kind replaces it", () => {
+  const duringSaturdayMini = parseClubSessionsHtml(
+    weekHtml,
+    new Date("2026-11-21T10:30:00+02:00"),
+  );
+  assert.deepEqual(
+    duringSaturdayMini.map((slot) => slot.date),
+    ["2026-11-21", "2026-11-22"],
+  );
+  const afterSaturdayMini = parseClubSessionsHtml(
+    weekHtml,
+    new Date("2026-11-21T11:30:00+02:00"),
+  );
+  assert.deepEqual(
+    afterSaturdayMini.map((slot) => slot.date),
     ["2026-11-22"],
   );
 });
@@ -102,4 +176,32 @@ test("court booking stays the default embed and events use facility 717", () => 
   );
   assert.equal(getEventsBookingHref("bg"), "/booking?facility=events#event-calendar");
   assert.equal(getEventsBookingHref("en"), "/en/booking?facility=events#event-calendar");
+});
+
+test("a bookable session points at that slot in the events booking", () => {
+  const slots = parseClubSessionsHtml(weekHtml, duringWeek);
+  const social = findClubSession(slots, "2026-11-19", "18:00");
+  const mini = findClubSession(slots, "2026-11-21", "10:00");
+  assert.equal(social?.title, "Social squash");
+  assert.equal(social?.bookable, true);
+  assert.equal(mini?.title, "Mini squash");
+  assert.equal(findClubSession(slots, "2026-11-19", "10:00"), null);
+  assert.equal(findClubSession(slots, "not-a-date", "18:00"), null);
+  assert.equal(
+    getEventSlotBookingHref("bg", social),
+    "/booking?facility=events&date=2026-11-19&time=18%3A00",
+  );
+  assert.equal(
+    getEventSlotBookingHref("en", mini),
+    "/en/booking?facility=events&date=2026-11-21&time=10%3A00",
+  );
+  assert.equal(
+    getBookingEmbedSrc({
+      facility: "events",
+      theme: "dark",
+      date: "2026-11-19",
+      time: "18:00",
+    }),
+    "https://sport.bookinggood.net/bg/embed/facility/44/717?theme=dark&date=2026-11-19&time=18%3A00",
+  );
 });

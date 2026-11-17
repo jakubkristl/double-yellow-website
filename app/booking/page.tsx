@@ -1,37 +1,61 @@
 import BookingEmbedConversionBridge from "@/components/BookingEmbedConversionBridge";
 import BookingEmbedSlot from "@/components/BookingEmbedSlot";
-import ClubSessions from "@/components/ClubSessions";
+import ClubSessions, { sessionFacts } from "@/components/ClubSessions";
 import FloatingContactActions from "@/components/FloatingContactActions";
 import { getBookingEmbedSrc } from "@/lib/booking";
+import { findClubSession, loadClubSessions } from "@/lib/club-sessions";
 
 type BookingPageProps = {
-  searchParams: Promise<{ facility?: string }>;
+  searchParams: Promise<{ facility?: string; date?: string; time?: string }>;
 };
 
 export default async function BookingPage({ searchParams }: BookingPageProps) {
-  const { facility } = await searchParams;
+  const { facility, date, time } = await searchParams;
   const events = facility === "events";
+  const sessions = events ? await loadClubSessions() : null;
+  const requested = sessions ? findClubSession(sessions.slots, date, time) : null;
+  const openSession = requested?.bookable ? requested : null;
+  const facts = openSession ? sessionFacts(openSession, "bg") : null;
   const bookingSteps = events
-    ? [
-        {
-          number: 1,
-          title: "Виж свободните места",
-          description:
-            "Списъкът показва следващите Mini squash и Social squash сесии, цената и колко места остават.",
-        },
-        {
-          number: 2,
-          title: "Избери същата сесия",
-          description:
-            "В календара натисни същия час. Сесия без свободни места не може да се резервира.",
-        },
-        {
-          number: 3,
-          title: "Потвърди едно място",
-          description:
-            "Влизаш в BookingGood както при резервация на корт и потвърждаваш едно място за себе си.",
-        },
-      ]
+    ? openSession && facts
+      ? [
+          {
+            number: 1,
+            title: "Сесията е отворена",
+            description: facts.summary,
+          },
+          {
+            number: 2,
+            title: "Потвърди това място",
+            description:
+              "Календарът отдолу е резервацията на събитията за тази сесия. Натисни същия час, влез в BookingGood и потвърди едно място.",
+          },
+          {
+            number: 3,
+            title: "Пълна сесия не се резервира",
+            description: "Ако свободните места свършат, тази сесия вече няма бутон за резервация.",
+          },
+        ]
+      : [
+          {
+            number: 1,
+            title: "Виж свободните места",
+            description:
+              "Списъкът показва следващите Mini squash и Social squash сесии, цената и колко места остават.",
+          },
+          {
+            number: 2,
+            title: "Отвори тази сесия",
+            description:
+              "Запази място отваря резервацията за избрания ден и час, не целия календар.",
+          },
+          {
+            number: 3,
+            title: "Потвърди едно място",
+            description:
+              "Влизаш в BookingGood както при резервация на корт и потвърждаваш едно място за себе си.",
+          },
+        ]
     : [
         {
           number: 1,
@@ -55,6 +79,8 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
   const fallbackEmbed = getBookingEmbedSrc({
     theme: "dark",
     facility: events ? "events" : "courts",
+    date: openSession?.date,
+    time: openSession?.start,
   });
 
   return (
@@ -62,13 +88,29 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
       <BookingEmbedConversionBridge localePrefix="" />
       <section className="page-hero" style={{ paddingBottom: 12 }}>
         <h1 className="page-title">
-          {events ? "Резервирай Mini squash или Social squash" : "Резервирай скуош корт в София"}
+          {openSession
+            ? openSession.title
+            : events
+              ? "Резервирай Mini squash или Social squash"
+              : "Резервирай скуош корт в София"}
         </h1>
         <p style={{ color: "#999", marginTop: "8px" }}>
-          {events
-            ? "Едно място в сесията. Свободните места са в списъка, а резервацията се потвърждава в календара отдолу."
-            : "Свободни часове в реално време в Double Yellow Squash Club. Пиковите слотове 18:00–21:00 се пълнят бързо — резервирай тук на сайта."}
+          {facts
+            ? `${facts.when}. ${facts.price ? `${facts.price}. ` : ""}${facts.places}.`
+            : events
+              ? "Едно място в сесията. Запази място отваря тази сесия, а не целия календар."
+              : "Свободни часове в реално време в Double Yellow Squash Club. Пиковите слотове 18:00–21:00 се пълнят бързо — резервирай тук на сайта."}
         </p>
+        {requested && !requested.bookable ? (
+          <p style={{ color: "#999", marginTop: "8px" }}>
+            Тази сесия е пълна и не може да се резервира. Избери сесия със свободни места.
+          </p>
+        ) : null}
+        {events && date && time && !requested ? (
+          <p style={{ color: "#999", marginTop: "8px" }}>
+            Тази сесия не е в календара. Показваме само часовете, които BookingGood има.
+          </p>
+        ) : null}
         {events ? (
           <p style={{ marginTop: 12 }}>
             <a href="/booking">Резервирай корт</a>
@@ -80,11 +122,22 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
         )}
       </section>
 
-      {events ? <ClubSessions locale="bg" mode="book" /> : null}
+      {events ? <ClubSessions locale="bg" mode="book" selected={openSession} /> : null}
 
       <div id={events ? "event-calendar" : undefined}>
+        {openSession && facts ? (
+          <h2 className="h2" style={{ marginBottom: 12 }}>
+            Потвърди {openSession.title} — {facts.when}
+          </h2>
+        ) : null}
         <BookingEmbedSlot
-          title={events ? "Double Yellow Squash - Сесии" : "Double Yellow Squash - Резервации"}
+          title={
+            openSession
+              ? `Double Yellow Squash - ${openSession.title}`
+              : events
+                ? "Double Yellow Squash - Сесии"
+                : "Double Yellow Squash - Резервации"
+          }
           loadingLabel="Зареждаме системата за резервации..."
         />
       </div>
@@ -138,8 +191,11 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
             }}
           >
             <strong style={{ color: "var(--accent)" }}>Запазваш едно място:</strong>{" "}
-            Mini squash и Social squash се резервират на човек. Сайтът не създава
-            резервацията. Потвърждаваш я в календара, след като влезеш в BookingGood.
+            {openSession && facts
+              ? `${facts.summary} `
+              : "Mini squash и Social squash се резервират на човек. "}
+            Сайтът не създава резервацията. Потвърждаваш я в календара на събитията, след като
+            влезеш в BookingGood. Пълна сесия не може да се резервира.
           </p>
         </div>
       ) : (
