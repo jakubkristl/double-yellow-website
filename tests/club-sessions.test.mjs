@@ -1,8 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { getBookingEmbedSrc, getEventsBookingHref } from "../lib/booking.ts";
-import { parseClubSessionsHtml } from "../lib/club-sessions.ts";
+import { getBookingEmbedSrc, getEventSlotBookingHref, getEventsBookingHref } from "../lib/booking.ts";
+import { findClubSession, parseClubSessionsHtml } from "../lib/club-sessions.ts";
 
 const weekHtml = readFileSync(
   new URL("./fixtures/bookinggood-events-week.html", import.meta.url),
@@ -102,4 +102,32 @@ test("court booking stays the default embed and events use facility 717", () => 
   );
   assert.equal(getEventsBookingHref("bg"), "/booking?facility=events#event-calendar");
   assert.equal(getEventsBookingHref("en"), "/en/booking?facility=events#event-calendar");
+});
+
+test("a bookable session points at that slot in the events booking", () => {
+  const slots = parseClubSessionsHtml(weekHtml, duringWeek);
+  const social = findClubSession(slots, "2026-11-19", "18:00");
+  const mini = findClubSession(slots, "2026-11-21", "10:00");
+  assert.equal(social?.title, "Social squash");
+  assert.equal(social?.bookable, true);
+  assert.equal(mini?.title, "Mini squash");
+  assert.equal(findClubSession(slots, "2026-11-19", "10:00"), null);
+  assert.equal(findClubSession(slots, "not-a-date", "18:00"), null);
+  assert.equal(
+    getEventSlotBookingHref("bg", social),
+    "/booking?facility=events&date=2026-11-19&time=18%3A00",
+  );
+  assert.equal(
+    getEventSlotBookingHref("en", mini),
+    "/en/booking?facility=events&date=2026-11-21&time=10%3A00",
+  );
+  assert.equal(
+    getBookingEmbedSrc({
+      facility: "events",
+      theme: "dark",
+      date: "2026-11-19",
+      time: "18:00",
+    }),
+    "https://sport.bookinggood.net/bg/embed/facility/44/717?theme=dark&date=2026-11-19&time=18%3A00",
+  );
 });

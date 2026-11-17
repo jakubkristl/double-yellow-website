@@ -151,6 +151,17 @@ export function parseClubSessionsHtml(html: string, now = new Date()): ClubSessi
   return slots.sort((a, b) => `${a.date}T${a.start}`.localeCompare(`${b.date}T${b.start}`));
 }
 
+/** The live session for a booking address, or null when the date and time are not on the calendar. */
+export function findClubSession(
+  slots: ClubSession[],
+  date?: string | null,
+  time?: string | null,
+): ClubSession | null {
+  if (!date || !time) return null;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return null;
+  return slots.find((slot) => slot.date === date && slot.start === time) ?? null;
+}
+
 export async function loadClubSessions(now = new Date()): Promise<ClubSessionsResult> {
   try {
     const response = await fetch(CLUB_EVENTS_EMBED_URL, {

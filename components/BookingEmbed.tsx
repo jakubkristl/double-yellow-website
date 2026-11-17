@@ -33,15 +33,17 @@ export default function BookingEmbed({ title, loadingLabel }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [frameHeight, setFrameHeight] = useState<number | null>(null);
   const searchParams = useSearchParams();
+  const facility = searchParams.get("facility") === "events" ? "events" : "courts";
   const embedSrc = useMemo(
     () =>
       getBookingEmbedSrc({
-        day: searchParams.get("day"),
+        day: facility === "events" ? null : searchParams.get("day"),
+        date: facility === "events" ? searchParams.get("date") : null,
         time: searchParams.get("time"),
         theme: "dark",
-        facility: searchParams.get("facility") === "events" ? "events" : "courts",
+        facility,
       }),
-    [searchParams],
+    [facility, searchParams],
   );
 
   const recheckRef = useRef<(force: boolean) => void>(() => {});

@@ -2896,6 +2896,10 @@ select.learn-input option {
   opacity: 0.72;
 }
 
+.club-session--selected {
+  border-color: var(--accent);
+}
+
 .club-session__title {
   margin: 0;
   font-size: 1.15rem;
